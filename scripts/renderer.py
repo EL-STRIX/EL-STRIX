@@ -261,14 +261,14 @@ class SVGRenderer:
             y += lh
 
             d1 = max(COL - 13 - len(commits), 2)
-            d2 = max(98 - COL - 7 - len(prs), 2)
+            d2 = max(98 - COL - 17 - len(prs), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
                 ("." * d1 + " ", text_dim),
                 (f"{commits} ", text_main),
                 ("| ", text_dim),
-                ("PRs: ", text_key),
+                ("Pull Requests: ", text_key),
                 ("." * d2 + " ", text_dim),
                 (prs, text_main),
             ], y)
