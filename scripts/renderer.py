@@ -279,7 +279,7 @@ class SVGRenderer:
     }}
     .ascii {{
       font-family: {self.font_family};
-      font-size: 10px;
+      font-size: 8px;
       fill: {text_main};
       white-space: pre;
     }}
