@@ -1,4 +1,4 @@
-name: Generate & Update Profile README
+name: EL-STRIX Automation Engine
 
 on:
   schedule:
@@ -7,16 +7,24 @@ on:
   push:
     branches:
       - main
-
+    paths-ignore:
+      - 'README.md'
+      - 'generated/**'
+      - 'assets/**'
+      
 jobs:
-  build:
+  automation-engine:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      pull-requests: write
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -29,14 +37,9 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Generate Banner & Data
+      - name: Execute Automation Engine (Phase 01-07)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_ACTIONS: "true"
         run: |
           python scripts/main.py
-
-      - name: Commit and Push Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "chore: auto-update generated banner & profile data [skip ci]"
-          file_pattern: 'generated/* README.md assets/*'

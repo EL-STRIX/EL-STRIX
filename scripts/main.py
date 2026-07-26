@@ -110,6 +110,19 @@ def run_phase_06():
         logger.critical(f"Unexpected error in Phase 06: {e}", exc_info=True)
         sys.exit(1)
 
+def run_phase_07():
+    """Execute Phase 07: Full Automation Engine."""
+    try:
+        from automation import AutomationEngine
+        engine = AutomationEngine()
+        engine.run()
+    except ELSTRIXError as e:
+        logger.error(f"Phase 07 Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error in Phase 07: {e}", exc_info=True)
+        sys.exit(1)
+
 def main():
     initialize()
     logger.info("EL-STRIX foundation is ready.")
@@ -118,6 +131,7 @@ def main():
     run_phase_04()
     run_phase_05()
     run_phase_06()
+    run_phase_07()
 
 if __name__ == "__main__":
     main()
