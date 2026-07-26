@@ -133,7 +133,7 @@ class SVGRenderer:
             right_svg = ""
             y = 30
             lh = 22
-            DOT_WIDTH = 50
+            DOT_WIDTH = 46
 
             # ── Header ────────────────────────────────────────────
             right_svg += self._render_line([
@@ -236,7 +236,7 @@ class SVGRenderer:
             loc_del = "76,902"
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
-            COL = 34
+            COL = 30
             d1 = max(COL - len("Repos:") - len(repo_cnt) - len(contrib_cnt) - 17, 2)
             d2 = max(COL - len("Stars:") - len(stars) - 1, 2)
             

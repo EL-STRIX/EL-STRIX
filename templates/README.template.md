@@ -1,5 +1,5 @@
 <div align="center">
-# {{ name }}
+ {{ name }}
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/svg/dark.svg" />
