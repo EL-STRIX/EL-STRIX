@@ -41,6 +41,13 @@ ENV/
 .coverage
 htmlcov/
 
-# Local cache
+# Generated output (preserve directory structure via .gitkeep)
 generated/cache/*
-!generated/cache/.gitkeep
+generated/json/*
+generated/stats/*
+generated/svg/*
+generated/temp/*
+!generated/**/.gitkeep
+
+# Environment variables
+.env
