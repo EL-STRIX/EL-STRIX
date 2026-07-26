@@ -131,8 +131,8 @@ class SVGRenderer:
 
             # Right-panel layout constants
             right_svg = ""
-            y = 40
-            lh = 28
+            y = 30
+            lh = 22
             DOT_WIDTH = 50
 
             # ── Header ────────────────────────────────────────────
