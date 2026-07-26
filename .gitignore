@@ -51,3 +51,4 @@ generated/temp/*
 
 # Environment variables
 .env
+generated/logs/*

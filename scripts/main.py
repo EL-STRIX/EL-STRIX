@@ -2,28 +2,49 @@
 
 import sys
 import os
-from github import GitHubClient
-from generator import ProfileGenerator
-from renderer import SVGRenderer
-from utils import logger
 
+# Initialize Foundation
+from paths import PathManager
+from env import EnvManager
+from logger import logger, setup_logger
+from config_loader import ConfigLoader
+from exceptions import ELSTRIXError
+
+def initialize() -> None:
+    """Initialize the EL-STRIX engine foundation."""
+    logger.info("Initializing EL-STRIX foundation...")
+    
+    try:
+        # 1. Ensure all core directories exist
+        PathManager.ensure_directories()
+        logger.debug("Directory structure verified.")
+        
+        # 2. Load and validate environment variables
+        EnvManager.load()
+        username = EnvManager.get_github_username()
+        logger.debug(f"Environment loaded for user: {username}")
+        
+        # 3. Load configuration files
+        configs = ConfigLoader.load_all()
+        settings = configs.get("settings", {})
+        
+        # Re-configure logger if debug mode is enabled in settings
+        if settings.get("debug_mode"):
+            setup_logger(debug_mode=True)
+            logger.debug("Debug mode enabled.")
+            
+        logger.info("Configuration files loaded successfully.")
+        
+    except ELSTRIXError as e:
+        logger.error(f"Initialization Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error during initialization: {e}", exc_info=True)
+        sys.exit(1)
 
 def main():
-    logger.info("Starting EL-STRIX generation workflow...")
-    username = os.getenv("GITHUB_REPOSITORY_OWNER", "EL-STRIX")
-
-    client = GitHubClient()
-    profile = client.get_user_profile(username)
-    repos = client.get_user_repos(username)
-
-    generator = ProfileGenerator(username=username)
-    data = generator.generate_data(profile, repos)
-
-    renderer = SVGRenderer()
-    renderer.render(data)
-
-    logger.info("EL-STRIX generation completed successfully.")
-
+    initialize()
+    logger.info("EL-STRIX foundation is ready. (Generation phases not yet implemented)")
 
 if __name__ == "__main__":
     main()

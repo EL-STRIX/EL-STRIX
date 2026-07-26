@@ -7,7 +7,11 @@ import numpy as np
 from PIL import Image
 
 from logger import logger
-from config import ASSET_ASCII_DIR, ASSET_IMAGE_DIR, ASCII_WIDTH, ASCII_CHARSET
+from paths import PathManager
+from constants import DEFAULT_ASCII_WIDTH as ASCII_WIDTH, DEFAULT_ASCII_CHARSET as ASCII_CHARSET
+
+ASSET_ASCII_DIR = PathManager.ASSET_ASCII_DIR
+ASSET_IMAGE_DIR = PathManager.ASSET_IMAGE_DIR
 
 
 def image_to_ascii(
