@@ -70,11 +70,25 @@ def run_phase_04():
         logger.critical(f"Unexpected error in Phase 04: {e}", exc_info=True)
         sys.exit(1)
 
+def run_phase_05():
+    """Execute Phase 05: SVG Profile Rendering Engine."""
+    try:
+        from renderer import SVGRenderer
+        renderer = SVGRenderer()
+        renderer.render()
+    except ELSTRIXError as e:
+        logger.error(f"Phase 05 Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error in Phase 05: {e}", exc_info=True)
+        sys.exit(1)
+
 def main():
     initialize()
     logger.info("EL-STRIX foundation is ready.")
     run_phase_02()
     run_phase_04()
+    run_phase_05()
 
 if __name__ == "__main__":
     main()
