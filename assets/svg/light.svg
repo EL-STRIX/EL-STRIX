@@ -1,155 +1,28 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1010" width="1200" height="1010">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 762" width="1400" height="762">
     <!-- Background -->
     <rect width="100%" height="100%" fill="#ffffff" rx="12"/>
     
     <style>
         text {
-            font-family: Segoe UI, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+            font-family: Consolas, 'Courier New', monospace;
         }
         .ascii-text { 
             font-family: monospace; 
-            font-size: 12px; 
+            font-size: 11px; 
             fill: #24292f; 
             white-space: pre; 
         }
     </style>
     
-    
-        <defs>
-            <symbol id="icon-company" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M1.5 14.25c0 .138.112.25.25.25H4v-1.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 .75.75v1.25h2.25a.25.25 0 0 0 .25-.25V1.75a.25.25 0 0 0-.25-.25h-8.5a.25.25 0 0 0-.25.25v12.5zM1.75 16A1.75 1.75 0 0 1 0 14.25V1.75C0 .784.784 0 1.75 0h8.5C11.216 0 12 .784 12 1.75v12.5c0 .085-.006.168-.018.25h2.268a.25.25 0 0 0 .25-.25V8.285a.75.75 0 0 1 1.5 0v5.965A1.75 1.75 0 0 1 14.25 16H1.75zM6 13h1.5v3H6v-3zM2.75 4.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75zm.75 2.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5zm0 3a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5zM8 4.5a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75zm.75 2.25a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5zm0 3a.75.75 0 0 0 0 1.5h1.5a.75.75 0 0 0 0-1.5h-1.5z"></path>
-            </symbol>
-            <symbol id="icon-location" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M11.536 3.464a5 5 0 0 1 0 7.072L8 14.07l-3.536-3.535a5 5 0 1 1 7.072-7.072v.001zm1.06 8.132a6.5 6.5 0 1 0-9.192 0l3.535 3.536a1.5 1.5 0 0 0 2.122 0l3.535-3.536zM8 9a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"></path>
-            </symbol>
-            <symbol id="icon-link" viewBox="0 0 16 16">
-                <path fill="currentColor" d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path>
-            </symbol>
-            <symbol id="icon-star" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"></path>
-            </symbol>
-            <symbol id="icon-repo" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.495 2.495 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.486 2.486 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.249.249 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"></path>
-            </symbol>
-            <symbol id="icon-commit" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M11.93 8.5a4.002 4.002 0 0 1-7.86 0H.75a.75.75 0 0 1 0-1.5h3.32a4.002 4.002 0 0 1 7.86 0h3.32a.75.75 0 0 1 0 1.5Zm-1.43-.75a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"></path>
-            </symbol>
-            <symbol id="icon-users" viewBox="0 0 16 16">
-                <path fill="currentColor" d="M2 5.5a3.5 3.5 0 1 1 5.898 2.549 5.508 5.508 0 0 1 3.034 4.084.75.75 0 1 1-1.482.235 4 4 0 0 0-7.9 0 .75.75 0 0 1-1.482-.236A5.507 5.507 0 0 1 3.102 8.05 3.493 3.493 0 0 1 2 5.5ZM11 4a3.001 3.001 0 0 1 2.22 5.018 5.01 5.01 0 0 1 2.56 3.012.75.75 0 0 1-1.41.54 3.5 3.5 0 0 0-1.902-2.203.75.75 0 0 1 .132-1.465A1.5 1.5 0 1 0 11 5.5a.75.75 0 0 1-1.5 0c0-.828.672-1.5 1.5-1.5Z"></path>
-            </symbol>
-        </defs>
-        
-    
     <!-- Left Panel (ASCII Avatar) -->
     <g transform="translate(20, 20)">
         <g class="ascii-text">
-            \n  <text x="0" y="12">################################################################################</text>\n  <text x="0" y="26.4">################################################################################</text>\n  <text x="0" y="40.8">#########%######################################################################</text>\n  <text x="0" y="55.199999999999996">#######%=+%#####################################################################</text>\n  <text x="0" y="69.6">########*-+%####################################################################</text>\n  <text x="0" y="84.0">########%#######################################################################</text>\n  <text x="0" y="98.4">%#########################################%#####################################</text>\n  <text x="0" y="112.80000000000001">*#%#############%%##################%%%%%#*#%####################*##############</text>\n  <text x="0" y="127.20000000000002">:++%%%%%%###################***###%%*=--*-  *%####%##############**#############</text>\n  <text x="0" y="141.60000000000002">-:=**++++#%%%%%%#*##########+---==-:      -=#%####-*############################</text>\n  <text x="0" y="156.00000000000003">::-:::::-*+#%%%%%%%%%%%%%####+-.          -@@%%%%: #############################</text>\n  <text x="0" y="170.40000000000003">:::::---=+*%%@@@%%%%%%%%%%%%%%#+-:--      +@%%%@* #%############################</text>\n  <text x="0" y="184.80000000000004">:::::::-*#%#####@@@%%%%%%%@@@%%@%%%%-     :-@@@% =@%%###########################</text>\n  <text x="0" y="199.20000000000005">:::::---===---=-=+#%%%%%%%@%%%@%%%%%@+-.    -*%=.%%@@%%%########++*#############</text>\n  <text x="0" y="213.60000000000005">::::::::--------=-=*%@%%%%%@%%@@@@@%@@-         -%%%@@@%%#######*+--+###########</text>\n  <text x="0" y="228.00000000000006">::::::::-----===+#+-*###*#%%@@@@@@%%*.          #%%@@@@%%#**#######=-=##########</text>\n  <text x="0" y="242.40000000000006">.::::::::::::--+==---+****##%@%@@%@%            #@%@@@@@@%#***######*-=#########</text>\n  <text x="0" y="256.80000000000007">::::::::::::::-:------+**+*##%%%%%%-            +%%@@%%@@%%%##########**########</text>\n  <text x="0" y="271.20000000000005">..::::::::.....-----=-=++..:=*%@@@%.            -@%@@@%@%%#####*#######**+######</text>\n  <text x="0" y="285.6">...::::::::::. :-------====-:.:=*#*              %@%%%%@%#############*###*#####</text>\n  <text x="0" y="300.0">:.:.:.::::::::...--::----==+*+=-. :.             +@%@@@%%%%%%########**####*####</text>\n  <text x="0" y="314.4">.......:::::::::::-:.:---====++*==.              #%%##%@@%%%%%###*****+*####*###</text>\n  <text x="0" y="328.79999999999995">.... . .:..:::.::::--:-----:--::--.              =@%%*--+*+++*++#*=--==-*###**##</text>\n  <text x="0" y="343.19999999999993">.....   ....:::.::...::::::::::                  =%%##=-:::-====+++=--==+*=*%##%</text>\n  <text x="0" y="357.5999999999999">  ... .. ...... ...                            :#%%#**++=-::-======-=-:-==-=+*+*</text>\n  <text x="0" y="371.9999999999999">  .       ..                                   .:-+#*++=====----------::-=------</text>\n  <text x="0" y="386.39999999999986">  ...      .         .                         +*-.:====-==---------------------</text>\n  <text x="0" y="400.79999999999984">                                                ++=-..:-==--------------:---::-:</text>\n  <text x="0" y="415.1999999999998">             ..                                . ---=-. .---------------:.:--..:</text>\n  <text x="0" y="429.5999999999998">              ..      .       .                -: ------. .--:.::--------:::--:.</text>\n  <text x="0" y="443.9999999999998">                                               .-. -:::--:. .::.::-::---:::::::.</text>\n  <text x="0" y="458.39999999999975">                                                :: .::::::::. .::::::::-::::.:::</text>\n  <text x="0" y="472.7999999999997">                                                .:. ....:..:::::::.:::::::::...:</text>\n  <text x="0" y="487.1999999999997">                                                ...  .. ....:::.....:.::...::.  </text>\n  <text x="0" y="501.5999999999997">                                                   .  .     ....... .......  .  </text>\n  <text x="0" y="515.9999999999997">                                                               .   . .. . ...   </text>\n  <text x="0" y="530.3999999999996">                                                                                </text>\n  <text x="0" y="544.7999999999996">                                                                                </text>\n  <text x="0" y="559.1999999999996">                                                                                </text>\n  <text x="0" y="573.5999999999996">                                                                                </text>\n  <text x="0" y="587.9999999999995">                                                                                </text>\n  <text x="0" y="602.3999999999995">                                                                                </text>\n  <text x="0" y="616.7999999999995">                                                                                </text>\n  <text x="0" y="631.1999999999995">                                                                                </text>\n
+            \n  <text x="0" y="12">################################################################################</text>\n  <text x="0" y="26.4">################################################################################</text>\n  <text x="0" y="40.8">#########%######################################################################</text>\n  <text x="0" y="55.199999999999996">#######%=+%#####################################################################</text>\n  <text x="0" y="69.6">######%#*-*%####################################################################</text>\n  <text x="0" y="84.0">##%%####%%######################################################################</text>\n  <text x="0" y="98.4">%#%####%##%###############################%%#####################%%#############</text>\n  <text x="0" y="112.80000000000001">*#%#%%%%#%%%%###%%##################%%%%%#**%####################*##############</text>\n  <text x="0" y="127.20000000000002">-++%%%%%%%%%%%%%##%#####%%##***###%%*-:-+:  *%####%##############**#############</text>\n  <text x="0" y="141.60000000000002">-:=**=+++%%%%%%%##%%%%%%%%##+--:--:.      -=%%%#%*:*#############%%#############</text>\n  <text x="0" y="156.00000000000003">:--:::::-*+#%%%%%%%%%%%%%%##%*=.          -@@@%%%:.#############################</text>\n  <text x="0" y="170.40000000000003">:::-----=+#%@@@@@%%%%%%%%%%%%%#*+---      +%%%%@+ #%############################</text>\n  <text x="0" y="184.80000000000004">:::::---*#%#*###%@@%%%%%%%@@@@%@@%%%=     .:%@@% +@%%%###########%##############</text>\n  <text x="0" y="199.20000000000005">:::::---=-=-:-=-==*%%%%%@@@%%%@%%%%%@*=.    :+#-.@%@@%%%########+=*#%###########</text>\n  <text x="0" y="213.60000000000005">:::::::---------===*%@%%%%%@%%@@@@@%@%:         -#%%@@@%%########*-:=#%#########</text>\n  <text x="0" y="228.00000000000006">::::::::----===++#+-+#***##%%@@@@@%@+           #%%@@@%%%%**#######+--*#########</text>\n  <text x="0" y="242.40000000000006">.:::::::::-::--===---+***###%%%%%%@%            #@%@@@@@@@%#*#######*==#%#######</text>\n  <text x="0" y="256.80000000000007">::::::::::::::--------=*+=+##%@%%%%:            +%%@@%%@@%%%%##########**#######</text>\n  <text x="0" y="271.20000000000005">.:::::::::::...-----===+=:..-+#@@@%.            -@%@@@@@%#%############**+######</text>\n  <text x="0" y="285.6">:..::::::::::. :-------==++=-..:+**              #@%@%%%%#%%##############*#####</text>\n  <text x="0" y="300.0">:::::.::::::::...:-::--====+***=. ..             +%%%@@@@@@@%%#######**####*####</text>\n  <text x="0" y="314.4">.......:::::::::::--::---=--==++=+:              *%%#*#%@%#%%%##%*+***++####*###</text>\n  <text x="0" y="328.79999999999995">....   ....::::.::::-:--------::::               -@%%#-:-+++++=+#*+--===*####*##</text>\n  <text x="0" y="343.19999999999993">....... ....:::.:::  ..........                .:+%%##==-::-========-:==++=*%#*%</text>\n  <text x="0" y="357.5999999999999">  ... .. .....   .                             .*%%#**+===----=======-:-==--++=+</text>\n  <text x="0" y="371.9999999999999">. ...     ...                                  -::-**+======----=--==--:-==-----</text>\n  <text x="0" y="386.39999999999986">  ....               .                         =#+:.:-======-=---=---=----------</text>\n  <text x="0" y="400.79999999999984">     .                                          -+==:..:-=--------=---=-:---::--</text>\n  <text x="0" y="415.1999999999998">            ...                                : -=-==:. :-=-:-----------.:--:..</text>\n  <text x="0" y="429.5999999999998">              ..      . .                      -- ------:. :-::::--------::::-:.</text>\n  <text x="0" y="443.9999999999998">                                                -: --:::--:. .::::-::---::::::-.</text>\n  <text x="0" y="458.39999999999975">                                                .:  :::::::-:..:::::::::-:::.:::</text>\n  <text x="0" y="472.7999999999997">.                                .              ...  :..::.:::::::.::::::::::...</text>\n  <text x="0" y="487.1999999999997"> .                                              .... .. .. .:.:.....:..:......  </text>\n  <text x="0" y="501.5999999999997">                                                   .        ................ .. </text>\n  <text x="0" y="515.9999999999997">                                                               .   .  . .  ..   </text>\n  <text x="0" y="530.3999999999996">                           .                                                    </text>\n  <text x="0" y="544.7999999999996">                                                                                </text>\n  <text x="0" y="559.1999999999996">                                                                                </text>\n  <text x="0" y="573.5999999999996">                                                                                </text>\n  <text x="0" y="587.9999999999995">                                                                                </text>\n  <text x="0" y="602.3999999999995">                                                                                </text>\n  <text x="0" y="616.7999999999995">                                                                                </text>\n  <text x="0" y="631.1999999999995">                                                                                </text>\n  <text x="0" y="645.5999999999995">                                                                                </text>\n  <text x="0" y="659.9999999999994">                                                                                </text>\n  <text x="0" y="674.3999999999994">                                                    .                           </text>\n  <text x="0" y="688.7999999999994">                                                                                </text>\n  <text x="0" y="703.1999999999994">                                                                                </text>\n  <text x="0" y="717.5999999999993">                                                                                </text>\n  <text x="0" y="731.9999999999993">                                                                                </text>\n  <text x="0" y="746.3999999999993">                                                                    .           </text>\n
         </g>
     </g>
 
     <!-- Right Panel (Profile and Statistics) -->
-    <g transform="translate(620, 0)">
-        
-        <text x="0" y="50" font-size="32" font-weight="bold" fill="#24292f">EL-STRIX</text>
-        <text x="0" y="78" font-size="20" fill="#57606a">@EL-STRIX</text><text x="0" y="114" font-size="16" fill="#24292f">Automated GitHub Profile Engine</text>
-
-            <use href="#icon-location" x="0" y="142" width="16" height="16" fill="#57606a" />
-            <text x="24" y="154" font-size="14" fill="#24292f">Global</text>
-            
-            <use href="#icon-link" x="0" y="166" width="16" height="16" fill="#57606a" />
-            <text x="24" y="178" font-size="14" fill="#24292f">https://github.com/EL-STRIX</text>
-            
-        <text x="0" y="222" font-size="22" font-weight="bold" fill="#24292f">Skills &amp; Technologies</text>
-        <line x1="0" y1="234" x2="560" y2="234" stroke="#57606a" stroke-opacity="0.3" stroke-width="1"/>
-        <text x="0" y="258" font-size="16" font-weight="bold" fill="#0969da">Languages</text>
-
-                <rect x="0" y="264" width="68" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="10" y="282" font-size="13" fill="#24292f">Python</text>
-                
-                <rect x="78" y="264" width="100" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="88" y="282" font-size="13" fill="#24292f">JavaScript</text>
-                
-                <rect x="188" y="264" width="100" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="198" y="282" font-size="13" fill="#24292f">TypeScript</text>
-                <text x="0" y="322" font-size="16" font-weight="bold" fill="#0969da">Frameworks</text>
-
-                <rect x="0" y="328" width="76" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="10" y="346" font-size="13" fill="#24292f">FastAPI</text>
-                
-                <rect x="86" y="328" width="60" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="96" y="346" font-size="13" fill="#24292f">React</text>
-                
-                <rect x="156" y="328" width="76" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="166" y="346" font-size="13" fill="#24292f">Node.js</text>
-                <text x="0" y="386" font-size="16" font-weight="bold" fill="#0969da">Tools</text>
-
-                <rect x="0" y="392" width="44" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="10" y="410" font-size="13" fill="#24292f">Git</text>
-                
-                <rect x="54" y="392" width="132" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="64" y="410" font-size="13" fill="#24292f">GitHub Actions</text>
-                
-                <rect x="196" y="392" width="68" height="26" rx="4" fill="#0969da" fill-opacity="0.1" stroke="#0969da" stroke-opacity="0.3" stroke-width="1"/>
-                <text x="206" y="410" font-size="13" fill="#24292f">Docker</text>
-                
-        <text x="0" y="450" font-size="22" font-weight="bold" fill="#24292f">GitHub Statistics</text>
-        <line x1="0" y1="462" x2="560" y2="462" stroke="#57606a" stroke-opacity="0.3" stroke-width="1"/>
-        
-            <rect x="0" y="486" width="270" height="50" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-repo" x="16" y="503" width="16" height="16" fill="#0969da" />
-            <text x="44" y="515" font-size="14" font-weight="bold" fill="#24292f">Public Repositories</text>
-            <text x="254" y="515" font-size="16" font-weight="bold" fill="#0969da" text-anchor="end">4</text>
-            
-            <rect x="290" y="486" width="270" height="50" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-star" x="306" y="503" width="16" height="16" fill="#0969da" />
-            <text x="334" y="515" font-size="14" font-weight="bold" fill="#24292f">Total Stars</text>
-            <text x="544" y="515" font-size="16" font-weight="bold" fill="#0969da" text-anchor="end">3</text>
-            
-            <rect x="0" y="552" width="270" height="50" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-commit" x="16" y="569" width="16" height="16" fill="#0969da" />
-            <text x="44" y="581" font-size="14" font-weight="bold" fill="#24292f">Total Commits</text>
-            <text x="254" y="581" font-size="16" font-weight="bold" fill="#0969da" text-anchor="end">27</text>
-            
-            <rect x="290" y="552" width="270" height="50" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-users" x="306" y="569" width="16" height="16" fill="#0969da" />
-            <text x="334" y="581" font-size="14" font-weight="bold" fill="#24292f">Followers</text>
-            <text x="544" y="581" font-size="16" font-weight="bold" fill="#0969da" text-anchor="end">5</text>
-            
-        <text x="0" y="638" font-size="22" font-weight="bold" fill="#24292f">Featured Projects</text>
-        <line x1="0" y1="650" x2="560" y2="650" stroke="#57606a" stroke-opacity="0.3" stroke-width="1"/>
-        
-            <rect x="0" y="674" width="560" height="70" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-repo" x="16" y="690" width="16" height="16" fill="#0969da" />
-            <text x="40" y="702" font-size="16" font-weight="bold" fill="#0969da">Faculty-Subject-Allocation</text>
-            <text x="40" y="726" font-size="13" fill="#57606a">Subject Allocation System Academic Year 2025 – 2026  | </text>
-                <circle cx="450" cy="698" r="5" fill="#24292f" fill-opacity="0.5"/>
-                <text x="462" y="702" font-size="12" fill="#57606a">PHP</text>
-                
-            <use href="#icon-star" x="510" y="691" width="14" height="14" fill="#57606a" />
-            <text x="528" y="702" font-size="12" fill="#57606a">2</text>
-            
-            <rect x="0" y="756" width="560" height="70" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-repo" x="16" y="772" width="16" height="16" fill="#0969da" />
-            <text x="40" y="784" font-size="16" font-weight="bold" fill="#0969da">C-GAMES-COLLECTION</text>
-            <text x="40" y="808" font-size="13" fill="#57606a">Modern GTK4 game collection built in C with a polished desktop...</text>
-                <circle cx="450" cy="780" r="5" fill="#24292f" fill-opacity="0.5"/>
-                <text x="462" y="784" font-size="12" fill="#57606a">C</text>
-                
-            <use href="#icon-star" x="510" y="773" width="14" height="14" fill="#57606a" />
-            <text x="528" y="784" font-size="12" fill="#57606a">1</text>
-            
-            <rect x="0" y="838" width="560" height="70" rx="6" fill="#57606a" fill-opacity="0.05" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <use href="#icon-repo" x="16" y="854" width="16" height="16" fill="#0969da" />
-            <text x="40" y="866" font-size="16" font-weight="bold" fill="#0969da">EL-STRIX</text>
-            <text x="40" y="890" font-size="13" fill="#57606a">No description provided.</text>
-                <circle cx="450" cy="862" r="5" fill="#24292f" fill-opacity="0.5"/>
-                <text x="462" y="866" font-size="12" fill="#57606a">Python</text>
-                
-            <use href="#icon-star" x="510" y="855" width="14" height="14" fill="#57606a" />
-            <text x="528" y="866" font-size="12" fill="#57606a">0</text>
-            
-            <line x1="0" y1="960" x2="560" y2="960" stroke="#57606a" stroke-opacity="0.2" stroke-width="1"/>
-            <text x="0" y="980" font-size="12" fill="#57606a">Generated automatically by EL-STRIX Engine • Last Updated: 2026-07-26 12:40 UTC</text>
-            
+    <g transform="translate(490, 0)">
+        <text x="0" y="50" xml:space="preserve" font-size="14"><tspan fill="#24292f">sujay@EL-STRIX </tspan><tspan fill="#57606a">-----------------------------------------------------------------</tspan></text>\n<text x="0" y="74" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">OS: </tspan><tspan fill="#57606a">................ </tspan><tspan fill="#0969da">Windows • Linux • Android</tspan></text>\n<text x="0" y="98" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Tooling: </tspan><tspan fill="#57606a">........... </tspan><tspan fill="#0969da">VS Code • ZBrains IDE • Git</tspan></text>\n<text x="0" y="122" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Programming: </tspan><tspan fill="#57606a">....... </tspan><tspan fill="#0969da">C • C++ • Java • Go • Python • JavaScript • PHP</tspan></text>\n<text x="0" y="146" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Frontend: </tspan><tspan fill="#57606a">.......... </tspan><tspan fill="#0969da">HTML5 • CSS3 • Tailwind CSS • Bootstrap • React • Vanilla JavaScript</tspan></text>\n<text x="0" y="170" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Backend: </tspan><tspan fill="#57606a">........... </tspan><tspan fill="#0969da">Node.js • Express</tspan></text>\n<text x="0" y="194" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Database: </tspan><tspan fill="#57606a">.......... </tspan><tspan fill="#0969da">MySQL</tspan></text>\n<text x="0" y="218" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Tools: </tspan><tspan fill="#57606a">............. </tspan><tspan fill="#0969da">Git • GitHub Actions • Vercel</tspan></text>\n<text x="0" y="242" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Languages: </tspan><tspan fill="#57606a">......... </tspan><tspan fill="#0969da">English • Bengali • Hindi</tspan></text>\n<text x="0" y="290" xml:space="preserve" font-size="14"><tspan fill="#24292f">- Contact </tspan><tspan fill="#57606a">---------------------------------------------------------------------</tspan></text>\n<text x="0" y="314" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Portfolio: </tspan><tspan fill="#57606a">......... </tspan><tspan fill="#0969da">development phase</tspan></text>\n<text x="0" y="338" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">LinkedIn: </tspan><tspan fill="#57606a">.......... </tspan><tspan fill="#0969da">https://www.linkedin.com/in/sujay-paul-684537374/</tspan></text>\n<text x="0" y="362" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">GitHub: </tspan><tspan fill="#57606a">............ </tspan><tspan fill="#0969da">https://github.com/EL-STRIX</tspan></text>\n<text x="0" y="386" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Email: </tspan><tspan fill="#57606a">............. </tspan><tspan fill="#0969da">sujaypaul892@gmail.com</tspan></text>\n<text x="0" y="410" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Location: </tspan><tspan fill="#57606a">.......... </tspan><tspan fill="#0969da">Barasat, Kolkata, West Bengal, India</tspan></text>\n<text x="0" y="458" xml:space="preserve" font-size="14"><tspan fill="#24292f">- Featured Projects </tspan><tspan fill="#57606a">-----------------------------------------------------------</tspan></text>\n<text x="0" y="482" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0969da">🎮 C Games Collection</tspan></text>\n<text x="0" y="506" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0969da">🏦 Finzo Banking System(Development Phase)(auto generate every day through the python code)</tspan></text>\n<text x="0" y="554" xml:space="preserve" font-size="14"><tspan fill="#24292f">- GitHub Stats </tspan><tspan fill="#57606a">----------------------------------------------------------------</tspan></text>\n<text x="0" y="578" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Repos: </tspan><tspan fill="#57606a">.......... </tspan><tspan fill="#b08800">0        </tspan><tspan fill="#57606a">| </tspan><tspan fill="#0550ae">Stars: </tspan><tspan fill="#57606a">.......... </tspan><tspan fill="#b08800">0</tspan></text>\n<text x="0" y="602" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Commits: </tspan><tspan fill="#57606a">........ </tspan><tspan fill="#b08800">0        </tspan><tspan fill="#57606a">| </tspan><tspan fill="#0550ae">Followers: </tspan><tspan fill="#57606a">...... </tspan><tspan fill="#b08800">0</tspan></text>\n<text x="0" y="626" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Contributions: </tspan><tspan fill="#57606a">.. </tspan><tspan fill="#b08800">0        </tspan><tspan fill="#57606a">| </tspan><tspan fill="#0550ae">Pull Requests: </tspan><tspan fill="#57606a">.. </tspan><tspan fill="#b08800">0</tspan></text>\n<text x="0" y="650" xml:space="preserve" font-size="14"><tspan fill="#57606a">. </tspan><tspan fill="#0550ae">Issues: </tspan><tspan fill="#57606a">......... </tspan><tspan fill="#b08800">0        </tspan><tspan fill="#57606a">| </tspan><tspan fill="#0550ae">Releases: </tspan><tspan fill="#57606a">....... </tspan><tspan fill="#b08800">0</tspan></text>\n<text x="0" y="722" xml:space="preserve" font-size="12"><tspan fill="#57606a">Generated Automatically : Updated Every 12 Hours Powered by GitHub Actions Last Updated: 26 Jul 2026</tspan></text>\n
     </g>
 </svg>
