@@ -1,5 +1,5 @@
 <div align="center">
-# EL-STRIX
+ EL-STRIX
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/svg/dark.svg" />
@@ -13,6 +13,6 @@
 
 <div align="center">
 
-Last updated: 2026-07-26 13:58:57 UTC
+Last updated: 2026-07-26 14:19:58 UTC
 
 </div>
