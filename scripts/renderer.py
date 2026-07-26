@@ -79,7 +79,7 @@ class SVGRenderer:
         self,
         parts: list[tuple[str, str]],
         y: int,
-        font_size: int = 14,
+        font_size: int = 15,
     ) -> str:
         """Render a single line of terminal text with multiple colored spans."""
         svg = f'<text x="0" y="{y}" xml:space="preserve" font-size="{font_size}">'
@@ -140,8 +140,8 @@ class SVGRenderer:
 
             # Right-panel layout constants
             right_svg = ""
-            y = 30           # starting y offset
-            lh = 22          # line height
+            y = 35           # starting y offset
+            lh = 24          # line height
             DOT_WIDTH = 60   # character width for dot-alignment
 
             # ── Header ────────────────────────────────────────────
@@ -244,7 +244,7 @@ class SVGRenderer:
                  "Releases",      self.stats.get("releases", {}).get("total_releases", 0)),
             ]
 
-            COL = 28
+            COL = 32
             for k1, v1, k2, v2 in stats_pairs:
                 v1s, v2s = str(v1), str(v2)
                 d1 = max(COL - len(k1) - len(v1s) - 4, 2)
@@ -288,7 +288,7 @@ class SVGRenderer:
     }}
     .ascii {{
       font-family: {self.font_family};
-      font-size: 7px;
+      font-size: 8px;
       fill: {text_main};
       white-space: pre;
     }}
