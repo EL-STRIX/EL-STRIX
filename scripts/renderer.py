@@ -229,7 +229,7 @@ class SVGRenderer:
             private_cnt = str(self.stats.get("repositories", {}).get("private_repository_count", 0))
             stars = str(self.stats.get("stars", {}).get("total_stars", 0))
             commits = str(self.stats.get("commits", {}).get("total_commits", 0))
-            followers = str(self.stats.get("profile", {}).get("total_followers", 0))
+            prs = str(self.stats.get("pull_requests", {}).get("total_pull_requests", 0))
             
             # Retrieve and format LOC dynamically
             loc_stats = self.stats.get("loc", {})
@@ -261,16 +261,16 @@ class SVGRenderer:
             y += lh
 
             d1 = max(COL - 13 - len(commits), 2)
-            d2 = max(98 - COL - 14 - len(followers), 2)
+            d2 = max(98 - COL - 7 - len(prs), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
                 ("." * d1 + " ", text_dim),
                 (f"{commits} ", text_main),
                 ("| ", text_dim),
-                ("Followers: ", text_key),
+                ("PRs: ", text_key),
                 ("." * d2 + " ", text_dim),
-                (followers, text_main),
+                (prs, text_main),
             ], y)
             y += lh
             
