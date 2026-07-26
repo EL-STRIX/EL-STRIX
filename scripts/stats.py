@@ -24,6 +24,9 @@ class StatisticsEngine:
             self.repos_data = []
         self.contrib_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "contributions.json")
         self.loc_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "loc_stats.json")
+        self.pr_data: list[dict[str, Any]] = load_json(PathManager.GENERATED_JSON_DIR / "pull_requests.json")
+        if not isinstance(self.pr_data, list):
+            self.pr_data = []
         self.stats: dict[str, Any] = {}
 
     def process_all(self) -> dict[str, Any]:
@@ -302,12 +305,27 @@ class StatisticsEngine:
         }
 
     def _calculate_pr_stats(self) -> dict[str, Any]:
-        total = self.contrib_data.get("totalPullRequestContributions", 0)
+        total = len(self.pr_data)
+        open_prs = sum(1 for pr in self.pr_data if pr.get("state") == "open")
+        
+        merged_prs = 0
+        for pr in self.pr_data:
+            if pr.get("merged_at"):
+                merged_prs += 1
+            elif pr.get("pull_request", {}).get("merged_at"):
+                merged_prs += 1
+                
+        closed_prs = sum(1 for pr in self.pr_data if pr.get("state") == "closed") - merged_prs
+        
+        # If the REST API search failed or returned 0, fallback to the 1-year GraphQL total
+        if total == 0:
+            total = self.contrib_data.get("totalPullRequestContributions", 0)
+
         return {
             "total_pull_requests": total,
-            "open_pull_requests": 0,
-            "closed_pull_requests": 0,
-            "merged_pull_requests": 0
+            "open_pull_requests": open_prs,
+            "closed_pull_requests": max(0, closed_prs),
+            "merged_pull_requests": merged_prs
         }
 
     def _calculate_featured_projects(self) -> list[dict[str, Any]]:

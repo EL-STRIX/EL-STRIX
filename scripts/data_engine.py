@@ -127,21 +127,38 @@ class DataEngine:
         save_json(pinned, PathManager.GENERATED_JSON_DIR / "pinned_repos.json")
 
     def fetch_pull_requests(self) -> None:
-        """Fetch user's pull requests."""
+        """Fetch user's pull requests and PRs made to user's repositories."""
         logger.info("Fetching pull request data...")
-        # GitHub REST API search for PRs authored by the user
-        prs = self.client.rest_request("GET", f"/search/issues?q=type:pr+author:{self.username}&per_page=100", paginated=True)
-        # The search API returns a dict with 'items' as the list
-        if isinstance(prs, list) and len(prs) > 0 and isinstance(prs[0], dict) and "items" in prs[0]:
-            # If paginated=True aggregated lists of dicts
-            all_items = []
-            for page in prs:
-                all_items.extend(page.get("items", []))
-            save_json(all_items, PathManager.GENERATED_JSON_DIR / "pull_requests.json")
-        elif isinstance(prs, dict):
-            save_json(prs.get("items", []), PathManager.GENERATED_JSON_DIR / "pull_requests.json")
-        else:
-            save_json(prs, PathManager.GENERATED_JSON_DIR / "pull_requests.json")
+        all_prs = {}
+
+        # 1. Fetch all PRs authored by the user via Search API
+        prs_search = self.client.rest_request("GET", f"/search/issues?q=type:pr+author:{self.username}&per_page=100", paginated=True)
+        if isinstance(prs_search, list):
+            for page in prs_search:
+                if isinstance(page, dict) and "items" in page:
+                    for item in page.get("items", []):
+                        all_prs[item.get("html_url")] = item
+        elif isinstance(prs_search, dict) and "items" in prs_search:
+            for item in prs_search.get("items", []):
+                all_prs[item.get("html_url")] = item
+                
+        # 2. Fetch all PRs (including dependabot/others) for all user's repositories
+        repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
+        if repos_file.exists():
+            import json
+            with open(repos_file, "r", encoding="utf-8") as f:
+                repos = json.load(f)
+            for repo in repos:
+                repo_name = repo.get("name")
+                owner = repo.get("owner", {}).get("login")
+                if owner and repo_name:
+                    repo_prs = self.client.rest_request("GET", f"/repos/{owner}/{repo_name}/pulls?state=all&per_page=100", paginated=True)
+                    if isinstance(repo_prs, list):
+                        for pr in repo_prs:
+                            if isinstance(pr, dict):
+                                all_prs[pr.get("html_url")] = pr
+
+        save_json(list(all_prs.values()), PathManager.GENERATED_JSON_DIR / "pull_requests.json")
 
     def fetch_issues(self) -> None:
         """Fetch user's issues."""
