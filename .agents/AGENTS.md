@@ -69,5 +69,5 @@ Welcome to the **EL-STRIX** repository guidelines. This document outlines the ma
 
 ## 📚 6. Documentation Maintenance
 
-- Keep `README.md`, `CHANGELOG.md`, and documentation under `docs/` in sync whenever features or workflow commands are modified.
+- Keep `README.md` and documentation under `docs/` in sync whenever features or workflow commands are modified.
 
