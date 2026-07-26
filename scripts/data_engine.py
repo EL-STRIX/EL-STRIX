@@ -50,9 +50,10 @@ class DataEngine:
         logger.info("Data Engine pipeline completed successfully.")
 
     def fetch_profile(self) -> dict[str, Any]:
-        """Fetch base profile information."""
+        """Fetch base profile information using the authenticated endpoint."""
         logger.info("Fetching profile information...")
-        profile = self.client.rest_request("GET", f"/users/{self.username}")
+        # Use /user (authenticated) to get private repo counts
+        profile = self.client.rest_request("GET", "/user")
         save_json(profile, PathManager.GENERATED_JSON_DIR / "profile.json")
         return profile
 

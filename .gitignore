@@ -52,12 +52,17 @@ ehthumbs.db
 Thumbs.db
 
 # Generated output (preserve directory structure via .gitkeep)
+# Cache and temp are always ignored
 generated/cache/*
-generated/json/*
-generated/stats/*
-generated/svg/*
 generated/temp/*
 generated/logs/*
+
+# JSON data and stats are committed so they persist across CI runs
+# (only ignored locally if you want a clean slate)
+
+# SVG intermediates are ignored (final output goes to assets/svg/)
+generated/svg/*
+
 !generated/**/.gitkeep
 
 # Environment variables

@@ -1,6 +1,7 @@
 """Environment variable loading and validation."""
 
 import os
+from pathlib import Path
 
 from dotenv import load_dotenv
 from exceptions import EnvironmentError
@@ -48,6 +49,23 @@ class EnvManager:
         
     @classmethod
     def get_github_username(cls) -> str:
-        """Get the GitHub username, falling back to 'EL-STRIX' if running locally without it."""
+        """Get the GitHub username from environment or config fallback."""
         cls.load()
-        return os.getenv("GITHUB_REPOSITORY_OWNER") or os.getenv("GITHUB_USERNAME") or "EL-STRIX"
+        username = os.getenv("GITHUB_USERNAME") or os.getenv("GITHUB_REPOSITORY_OWNER")
+        if username:
+            return username
+        
+        # Fallback: try to read from config/profile.json
+        try:
+            import json
+            config_path = Path(__file__).resolve().parent.parent / "config" / "profile.json"
+            if config_path.exists():
+                with open(config_path, "r", encoding="utf-8") as f:
+                    profile = json.load(f)
+                    uname = profile.get("username")
+                    if uname:
+                        return uname
+        except Exception:
+            pass
+        
+        return "EL-STRIX"

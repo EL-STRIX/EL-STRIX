@@ -52,11 +52,11 @@ def run_phase_02():
         engine.run_all()
         logger.info("--- PHASE 02 COMPLETED ---")
     except ELSTRIXError as e:
-        logger.error(f"Phase 02 Failed: {e}")
-        sys.exit(1)
+        logger.warning(f"Phase 02 Skipped: {e}")
+        logger.warning("Renderer will use previously cached statistics if available.")
     except Exception as e:
-        logger.critical(f"Unexpected error in Phase 02: {e}", exc_info=True)
-        sys.exit(1)
+        logger.warning(f"Phase 02 Skipped (unexpected): {e}")
+        logger.warning("Renderer will use previously cached statistics if available.")
 
 def run_phase_03():
     """Execute Phase 03: Statistics Engine."""
@@ -66,11 +66,11 @@ def run_phase_03():
         process_statistics()
         logger.info("--- PHASE 03 COMPLETED ---")
     except ELSTRIXError as e:
-        logger.error(f"Phase 03 Failed: {e}")
-        sys.exit(1)
+        logger.warning(f"Phase 03 Skipped: {e}")
+        logger.warning("Renderer will use previously cached statistics if available.")
     except Exception as e:
-        logger.critical(f"Unexpected error in Phase 03: {e}", exc_info=True)
-        sys.exit(1)
+        logger.warning(f"Phase 03 Skipped (unexpected): {e}")
+        logger.warning("Renderer will use previously cached statistics if available.")
 
 def run_phase_04():
     """Execute Phase 04: Avatar Processing Engine."""

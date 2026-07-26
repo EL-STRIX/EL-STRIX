@@ -23,6 +23,7 @@ class AutomationEngine:
             "generated/json/profile.json",
             "generated/json/repos.json",
             "generated/json/contributions.json",
+            "generated/json/loc_stats.json",
             "generated/stats/processed_statistics.json",
             "generated/avatar/avatar.png"
         ]

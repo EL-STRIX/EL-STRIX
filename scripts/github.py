@@ -106,6 +106,15 @@ class GitHubClient:
                     )
                     data = self._handle_response(response)
                     
+                    if response.status_code == 202:
+                        logger.warning(f"GitHub returned 202 Accepted (processing). Retrying attempt {attempt}/{self.max_retries}...")
+                        time.sleep(2 ** attempt)
+                        if attempt == self.max_retries:
+                            results = None
+                            current_url = None
+                            break
+                        continue
+                    
                     if paginated and isinstance(data, list):
                         results.extend(data)
                         # Check for next page in Link header
