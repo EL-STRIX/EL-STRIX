@@ -18,9 +18,9 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
         
         # New terminal dimensions
-        self.width = 1800
-        self.left_panel_width = 750
-        self.right_panel_width = 1000
+        self.width = 1350
+        self.left_panel_width = 500
+        self.right_panel_width = 850
         self.min_height = 800
         
         try:
@@ -71,7 +71,7 @@ class SVGRenderer:
             logger.error(f"Error reading ASCII SVG content: {e}")
             return ""
 
-    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 18) -> str:
+    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 15) -> str:
         """Render a single line of terminal text with multiple colors."""
         svg = f'<text x="0" y="{current_y}" xml:space="preserve" font-size="{font_size}" class="cli-text">'
         for text, color in parts:
@@ -107,9 +107,9 @@ class SVGRenderer:
             
             right_panel_svg = ""
             current_y = 60
-            line_height = 30
+            line_height = 25
             
-            MAX_LEN = 80
+            MAX_LEN = 75
             
             def render_section_header(title: str):
                 dash_count = MAX_LEN - len(title) - 1
@@ -205,12 +205,12 @@ class SVGRenderer:
             
             for k1, v1, k2, v2 in stats_data:
                 # Format: . Repos: .... 95 | Stars: ............ 342
-                col1_len = 38
+                col1_len = 36
                 dots1_count = col1_len - len(k1) - len(v1) - 4
                 if dots1_count < 2: dots1_count = 2
                 dots1 = "." * dots1_count
                 
-                col2_len = 38
+                col2_len = 36
                 dots2_count = col2_len - len(k2) - len(v2) - 3
                 if dots2_count < 2: dots2_count = 2
                 dots2 = "." * dots2_count
@@ -246,25 +246,25 @@ class SVGRenderer:
     
     <style>
         .cli-text {{
-            font-family: {self.font_family};
+            font-family: monospace;
         }}
         .ascii-text {{ 
             font-family: monospace; 
-            font-size: 16px; 
+            font-size: 12px; 
             fill: {text_main}; 
             white-space: pre; 
         }}
     </style>
     
     <!-- Left Panel (ASCII Avatar) -->
-    <g transform="translate(20, 40)">
+    <g transform="translate(40, 60) scale(1.4, 1.4)">
         <g class="ascii-text">
             {ascii_content}
         </g>
     </g>
 
     <!-- Right Panel (Profile and Statistics) -->
-    <g transform="translate({self.left_panel_width + 60}, 0)">
+    <g transform="translate({self.left_panel_width + 80}, 0)">
         {right_panel_svg}
     </g>
 </svg>'''
