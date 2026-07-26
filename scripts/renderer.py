@@ -23,9 +23,9 @@ class SVGRenderer:
         self.output_dir = output_dir or str(PathManager.ASSET_SVG_DIR)
         ensure_dir(self.output_dir)
 
-        # Terminal dimensions sized for GitHub's ~880px README column.
-        self.width = 1000
-        self.left_panel_width = 300
+        # Terminal dimensions sized for maximum GitHub README width.
+        self.width = 1200
+        self.left_panel_width = 420
         self.font_family = "monospace"
 
         try:
@@ -310,14 +310,14 @@ class SVGRenderer:
   </style>
 
   <!-- Left Panel: ASCII Avatar -->
-  <g transform="translate(15, 20)">
+  <g transform="translate(10, 20)">
     <g class="ascii">
       {ascii_content}
     </g>
   </g>
 
   <!-- Right Panel: Profile Data -->
-  <g transform="translate({right_x}, 0)">
+  <g transform="translate({right_x}, 20)">
     {right_svg}
   </g>
 </svg>'''
