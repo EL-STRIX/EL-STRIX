@@ -106,55 +106,54 @@ class SVGRenderer:
             ascii_content = self._get_ascii_svg_content(mode)
             
             right_panel_svg = ""
-            current_y = 80
-            line_height = 28
+            current_y = 60
+            line_height = 26
             
-            prompt_user = "sujay@EL-STRIX"
-            prompt_char = ":~$ "
+            MAX_LEN = 75
+            
+            def render_section_header(title: str):
+                dash_count = MAX_LEN - len(title) - 1
+                if dash_count < 0: dash_count = 0
+                return self._render_terminal_line([
+                    (f"{title} ", text_val),
+                    ("-" * dash_count, text_dim)
+                ], current_y)
+                
+            def render_dot_line(key: str, val: str):
+                dots_count = MAX_LEN - len(key) - len(val) - 5
+                if dots_count < 2: dots_count = 2
+                dots = "." * dots_count
+                return self._render_terminal_line([
+                    (". ", text_dim),
+                    (f"{key}: ", text_highlight),
+                    (f"{dots} ", text_dim),
+                    (val, text_main)
+                ], current_y)
             
             # Header
-            right_panel_svg += self._render_terminal_line([
-                (prompt_user, text_highlight),
-                (prompt_char, text_main),
-                ("neofetch", text_val)
-            ], current_y)
-            current_y += line_height * 2
+            right_panel_svg += render_section_header("sujay@EL-STRIX")
+            current_y += line_height
             
             # Tech Stack
             tech_stack = [
-                ("OS", "Windows • Linux • Android"),
-                ("Tooling", "VS Code • ZBrains IDE • Git"),
-                ("Programming", "C • C++ • Java • Go • Python • JavaScript • PHP"),
-                ("Frontend", "HTML5 • CSS3 • Tailwind CSS • Bootstrap • React • Vanilla JavaScript"),
-                ("Backend", "Node.js • Express"),
+                ("OS", "Windows, Linux, Android"),
+                ("Tooling", "VS Code, ZBrains IDE, Git"),
+                ("Programming", "C, C++, Java, Go, Python, JavaScript, PHP"),
+                ("Frontend", "HTML5, CSS3, Tailwind, Bootstrap, React, Vanilla JS"),
+                ("Backend", "Node.js, Express"),
                 ("Database", "MySQL"),
-                ("Tools", "Git • GitHub Actions • Vercel"),
-                ("Languages", "English • Bengali • Hindi")
+                ("Tools", "Git, GitHub Actions, Vercel"),
+                ("Languages", "English, Bengali, Hindi")
             ]
             
-            right_panel_svg += self._render_terminal_line([
-                (prompt_user, text_highlight),
-                (prompt_char, text_main),
-                ("cat stack.txt", text_val)
-            ], current_y)
-            current_y += line_height
-            
             for key, val in tech_stack:
-                padded_key = key.ljust(15)
-                right_panel_svg += self._render_terminal_line([
-                    (padded_key, text_key),
-                    (val, text_main)
-                ], current_y)
+                right_panel_svg += render_dot_line(key, val)
                 current_y += line_height
                 
             current_y += line_height
             
             # Contact
-            right_panel_svg += self._render_terminal_line([
-                (prompt_user, text_highlight),
-                (prompt_char, text_main),
-                ("cat contact.txt", text_val)
-            ], current_y)
+            right_panel_svg += render_section_header("- Contact")
             current_y += line_height
             
             contacts = [
@@ -166,43 +165,28 @@ class SVGRenderer:
             ]
             
             for key, val in contacts:
-                padded_key = key.ljust(15)
-                right_panel_svg += self._render_terminal_line([
-                    (padded_key, text_key),
-                    (val, text_main)
-                ], current_y)
+                right_panel_svg += render_dot_line(key, val)
                 current_y += line_height
                 
             current_y += line_height
             
             # Featured Projects
-            right_panel_svg += self._render_terminal_line([
-                (prompt_user, text_highlight),
-                (prompt_char, text_main),
-                ("ls -l featured_projects/", text_val)
-            ], current_y)
+            right_panel_svg += render_section_header("- Featured Projects")
             current_y += line_height
             
             projects = [
-                "🎮 C Games Collection",
-                "🏦 Finzo Banking System(Development Phase)"
+                ("dYZr C Games Collection", "Development"),
+                ("dY? Finzo Banking System", "Development Phase")
             ]
             
-            for proj in projects:
-                right_panel_svg += self._render_terminal_line([
-                    ("-rw-r--r--  1 sujay  sujay  4096 Jul 26 12:00  ", text_dim),
-                    (proj, text_val)
-                ], current_y)
+            for proj, status in projects:
+                right_panel_svg += render_dot_line(proj, status)
                 current_y += line_height
                 
             current_y += line_height
             
             # GitHub Stats
-            right_panel_svg += self._render_terminal_line([
-                (prompt_user, text_highlight),
-                (prompt_char, text_main),
-                ("github-stats", text_val)
-            ], current_y)
+            right_panel_svg += render_section_header("- GitHub Stats")
             current_y += line_height
             
             stats_data = [
@@ -220,49 +204,45 @@ class SVGRenderer:
             ]
             
             for k1, v1, k2, v2 in stats_data:
-                k1_pad = k1.ljust(15)
-                v1_pad = v1.ljust(15)
-                k2_pad = k2.ljust(15)
+                # Format: . Repos: .... 95 | Stars: ............ 342
+                col1_len = 36
+                dots1_count = col1_len - len(k1) - len(v1) - 4
+                if dots1_count < 2: dots1_count = 2
+                dots1 = "." * dots1_count
+                
+                col2_len = 36
+                dots2_count = col2_len - len(k2) - len(v2) - 3
+                if dots2_count < 2: dots2_count = 2
+                dots2 = "." * dots2_count
+                
                 right_panel_svg += self._render_terminal_line([
-                    (k1_pad, text_key),
-                    (v1_pad, text_highlight),
-                    (k2_pad, text_key),
-                    (v2, text_highlight)
+                    (". ", text_dim),
+                    (k1 + " ", text_highlight),
+                    (dots1 + " ", text_dim),
+                    (v1 + " ", text_main),
+                    ("| ", text_dim),
+                    (k2 + " ", text_highlight),
+                    (dots2 + " ", text_dim),
+                    (v2, text_main)
                 ], current_y)
                 current_y += line_height
                 
-            current_y += line_height * 2
+            current_y += line_height
             
             # Generate Footer
             now = datetime.now(UTC).strftime("%d %b %Y")
-            
             right_panel_svg += self._render_terminal_line([
-                (f"sujay@EL-STRIX:~# ", text_highlight),
-                (f"echo 'Updated Every 12 Hours by GitHub Actions. Last Run: {now}'", text_dim)
+                ("Generated Automatically by GitHub Actions. Last Run: " + now, text_dim)
             ], current_y, font_size=14)
             
             final_height = current_y + 40
-            
-            # Terminal Window Bar Colors
-            bar_bg = "#161b22" if mode == "dark" else "#f6f8fa"
-            bar_border = "#30363d" if mode == "dark" else "#d0d7de"
             
             # Master SVG Template
             svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.width} {final_height}" width="{self.width}" height="{final_height}">
     <!-- Background -->
     <rect width="100%" height="100%" fill="{bg}" rx="12"/>
     
-    <!-- Terminal Header Bar -->
-    <path d="M 0 12 Q 0 0 12 0 L {self.width - 12} 0 Q {self.width} 0 {self.width} 12 L {self.width} 40 L 0 40 Z" fill="{bar_bg}"/>
-    <line x1="0" y1="40" x2="{self.width}" y2="40" stroke="{bar_border}" stroke-width="1"/>
-    
-    <!-- Mac OS Buttons -->
-    <circle cx="20" cy="20" r="6" fill="#ff5f56"/>
-    <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
-    <circle cx="60" cy="20" r="6" fill="#27c93f"/>
-    
-    <!-- Terminal Title -->
-    <text x="{self.width // 2}" y="25" fill="{text_dim}" font-family="{self.font_family}" font-size="14" text-anchor="middle">sujay@EL-STRIX : ~</text>
+
     
     <style>
         .cli-text {{
@@ -277,7 +257,7 @@ class SVGRenderer:
     </style>
     
     <!-- Left Panel (ASCII Avatar) -->
-    <g transform="translate(20, 60)">
+    <g transform="translate(20, 40)">
         <g class="ascii-text">
             {ascii_content}
         </g>
