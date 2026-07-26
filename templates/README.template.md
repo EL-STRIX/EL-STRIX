@@ -9,6 +9,5 @@
 </picture>
 
 > {{ bio }}
----
 
 {% include "footer.md" %}
