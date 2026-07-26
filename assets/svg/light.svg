@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg"
-     viewBox="0 0 1900 960"
-     width="1900" height="960">
+     viewBox="0 0 1900 1110"
+     width="1900" height="1110">
 
   <!-- Background -->
   <rect width="100%" height="100%" fill="#ffffff" rx="10"/>
@@ -26,30 +26,30 @@
   </g>
 
   <!-- Right Panel: Profile Data -->
-  <g transform="translate(820, 20)">
-    <text x="0" y="30" xml:space="preserve" font-size="26"><tspan fill="#24292f">sujay@EL-STRIX </tspan><tspan fill="#8b949e">───────────────────────────────────────────────────────────</tspan></text>
-<text x="0" y="66" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🖥️ OS: </tspan><tspan fill="#8b949e">.......................................... </tspan><tspan fill="#24292f">Windows, Linux, Android</tspan></text>
-<text x="0" y="102" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🛠️ Tooling: </tspan><tspan fill="#8b949e">................................... </tspan><tspan fill="#24292f">VS Code, ZBrains IDE, Git</tspan></text>
-<text x="0" y="138" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">💻 Programming: </tspan><tspan fill="#8b949e">........................ </tspan><tspan fill="#24292f">C, C++, Java, Go, Python, JS, PHP</tspan></text>
-<text x="0" y="174" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🎨 Frontend: </tspan><tspan fill="#8b949e">....................... </tspan><tspan fill="#24292f">HTML, CSS, Tailwind, Bootstrap, React</tspan></text>
-<text x="0" y="210" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">⚙️ Backend: </tspan><tspan fill="#8b949e">............................................ </tspan><tspan fill="#24292f">Node.js, Express</tspan></text>
-<text x="0" y="246" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🗄️ Database: </tspan><tspan fill="#8b949e">...................................................... </tspan><tspan fill="#24292f">MySQL</tspan></text>
-<text x="0" y="282" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🔧 Tools: </tspan><tspan fill="#8b949e">.................................... </tspan><tspan fill="#24292f">Git, GitHub Actions, Vercel</tspan></text>
-<text x="0" y="318" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🌐Languages: </tspan><tspan fill="#8b949e">..................................... </tspan><tspan fill="#24292f">English, Bengali, Hindi</tspan></text>
-<text x="0" y="390" xml:space="preserve" font-size="26"><tspan fill="#24292f">- Contact </tspan><tspan fill="#8b949e">────────────────────────────────────────────────────────────────</tspan></text>
-<text x="0" y="426" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🌍 Portfolio: </tspan><tspan fill="#8b949e">.......................................... </tspan><tspan fill="#24292f">development phase</tspan></text>
-<text x="0" y="462" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">💼 LinkedIn: </tspan><tspan fill="#8b949e">.................................................. </tspan><tspan fill="#24292f">Sujay Paul</tspan></text>
-<text x="0" y="498" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🐙 GitHub: </tspan><tspan fill="#8b949e">...................................................... </tspan><tspan fill="#24292f">EL-STRIX</tspan></text>
-<text x="0" y="534" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">✉️ Email: </tspan><tspan fill="#8b949e">........................................ </tspan><tspan fill="#24292f">sujaypaul892@gmail.com</tspan></text>
-<text x="0" y="570" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">📍 Location: </tspan><tspan fill="#8b949e">................................. </tspan><tspan fill="#24292f">Kolkata, West Bengal, India</tspan></text>
-<text x="0" y="642" xml:space="preserve" font-size="26"><tspan fill="#24292f">- Featured Projects </tspan><tspan fill="#8b949e">──────────────────────────────────────────────────────</tspan></text>
-<text x="0" y="678" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🎮 C Games Collection: </tspan><tspan fill="#8b949e">.......................................... </tspan><tspan fill="#24292f">Complete</tspan></text>
-<text x="0" y="714" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🏦 Finzo Banking System: </tspan><tspan fill="#8b949e">............................... </tspan><tspan fill="#24292f">Development Phase</tspan></text>
-<text x="0" y="786" xml:space="preserve" font-size="26"><tspan fill="#24292f">- GitHub Stats </tspan><tspan fill="#8b949e">───────────────────────────────────────────────────────────</tspan></text>
-<text x="0" y="822" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">Repos: </tspan><tspan fill="#8b949e">............... </tspan><tspan fill="#24292f">0 </tspan><tspan fill="#b08800">{Contributed: 0} </tspan><tspan fill="#8b949e">| </tspan><tspan fill="#b08800">Stars: </tspan><tspan fill="#8b949e">....................... </tspan><tspan fill="#24292f">0</tspan></text>
-<text x="0" y="858" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">Commits: </tspan><tspan fill="#8b949e">............................. </tspan><tspan fill="#24292f">0 </tspan><tspan fill="#8b949e">| </tspan><tspan fill="#b08800">Followers: </tspan><tspan fill="#8b949e">................... </tspan><tspan fill="#24292f">0</tspan></text>
-<text x="0" y="894" xml:space="preserve" font-size="26"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">Lines of Code on GitHub:. </tspan><tspan fill="#24292f">446,276 </tspan><tspan fill="#8b949e">( </tspan><tspan fill="#1a7f37">523,178++</tspan><tspan fill="#8b949e">,  </tspan><tspan fill="#cf222e">76,902-- </tspan><tspan fill="#8b949e">) </tspan></text>
-<text x="0" y="930" xml:space="preserve" font-size="18"><tspan fill="#8b949e">🤖 Auto-generated by GitHub Actions: 26 Jul 2026</tspan></text>
+  <g transform="translate(680, 20)">
+    <text x="0" y="30" xml:space="preserve" font-size="30"><tspan fill="#24292f">sujay@EL-STRIX </tspan><tspan fill="#8b949e">────────────────────────────────────────────</tspan></text>
+<text x="0" y="72" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🖥️ OS: </tspan><tspan fill="#8b949e">........................... </tspan><tspan fill="#24292f">Windows, Linux, Android</tspan></text>
+<text x="0" y="114" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🛠️ Tooling: </tspan><tspan fill="#8b949e">.................... </tspan><tspan fill="#24292f">VS Code, ZBrains IDE, Git</tspan></text>
+<text x="0" y="156" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">💻 Programming: </tspan><tspan fill="#8b949e">......... </tspan><tspan fill="#24292f">C, C++, Java, Go, Python, JS, PHP</tspan></text>
+<text x="0" y="198" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🎨 Frontend: </tspan><tspan fill="#8b949e">........ </tspan><tspan fill="#24292f">HTML, CSS, Tailwind, Bootstrap, React</tspan></text>
+<text x="0" y="240" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">⚙️ Backend: </tspan><tspan fill="#8b949e">............................. </tspan><tspan fill="#24292f">Node.js, Express</tspan></text>
+<text x="0" y="282" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🗄️ Database: </tspan><tspan fill="#8b949e">....................................... </tspan><tspan fill="#24292f">MySQL</tspan></text>
+<text x="0" y="324" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🔧 Tools: </tspan><tspan fill="#8b949e">..................... </tspan><tspan fill="#24292f">Git, GitHub Actions, Vercel</tspan></text>
+<text x="0" y="366" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🌐Languages: </tspan><tspan fill="#8b949e">...................... </tspan><tspan fill="#24292f">English, Bengali, Hindi</tspan></text>
+<text x="0" y="450" xml:space="preserve" font-size="30"><tspan fill="#24292f">- Contact </tspan><tspan fill="#8b949e">─────────────────────────────────────────────────</tspan></text>
+<text x="0" y="492" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🌍 Portfolio: </tspan><tspan fill="#8b949e">........................... </tspan><tspan fill="#24292f">development phase</tspan></text>
+<text x="0" y="534" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">💼 LinkedIn: </tspan><tspan fill="#8b949e">................................... </tspan><tspan fill="#24292f">Sujay Paul</tspan></text>
+<text x="0" y="576" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🐙 GitHub: </tspan><tspan fill="#8b949e">....................................... </tspan><tspan fill="#24292f">EL-STRIX</tspan></text>
+<text x="0" y="618" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">✉️ Email: </tspan><tspan fill="#8b949e">......................... </tspan><tspan fill="#24292f">sujaypaul892@gmail.com</tspan></text>
+<text x="0" y="660" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">📍 Location: </tspan><tspan fill="#8b949e">.................. </tspan><tspan fill="#24292f">Kolkata, West Bengal, India</tspan></text>
+<text x="0" y="744" xml:space="preserve" font-size="30"><tspan fill="#24292f">- Featured Projects </tspan><tspan fill="#8b949e">───────────────────────────────────────</tspan></text>
+<text x="0" y="786" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🎮 C Games Collection: </tspan><tspan fill="#8b949e">........................... </tspan><tspan fill="#24292f">Complete</tspan></text>
+<text x="0" y="828" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">🏦 Finzo Banking System: </tspan><tspan fill="#8b949e">................ </tspan><tspan fill="#24292f">Development Phase</tspan></text>
+<text x="0" y="912" xml:space="preserve" font-size="30"><tspan fill="#24292f">- GitHub Stats </tspan><tspan fill="#8b949e">────────────────────────────────────────────</tspan></text>
+<text x="0" y="954" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">Repos: </tspan><tspan fill="#8b949e">....... </tspan><tspan fill="#24292f">0 </tspan><tspan fill="#b08800">{Contributed: 0} </tspan><tspan fill="#8b949e">| </tspan><tspan fill="#b08800">Stars: </tspan><tspan fill="#8b949e">................ </tspan><tspan fill="#24292f">0</tspan></text>
+<text x="0" y="996" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">Commits: </tspan><tspan fill="#8b949e">..................... </tspan><tspan fill="#24292f">0 </tspan><tspan fill="#8b949e">| </tspan><tspan fill="#b08800">Followers: </tspan><tspan fill="#8b949e">............ </tspan><tspan fill="#24292f">0</tspan></text>
+<text x="0" y="1038" xml:space="preserve" font-size="30"><tspan fill="#8b949e">. </tspan><tspan fill="#b08800">Lines of Code on GitHub:. </tspan><tspan fill="#24292f">446,276 </tspan><tspan fill="#8b949e">( </tspan><tspan fill="#1a7f37">523,178++</tspan><tspan fill="#8b949e">,  </tspan><tspan fill="#cf222e">76,902-- </tspan><tspan fill="#8b949e">) </tspan></text>
+<text x="0" y="1080" xml:space="preserve" font-size="22"><tspan fill="#8b949e">🤖 Auto-generated by GitHub Actions: 26 Jul 2026</tspan></text>
 
   </g>
 </svg>
