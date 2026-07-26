@@ -2,6 +2,7 @@
 
 import re
 
+
 def sanitize_filename(filename: str) -> str:
     """Sanitize a string to be used as a filename."""
     # Keep alphanumeric, dashes, underscores, and dots

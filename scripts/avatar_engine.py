@@ -3,21 +3,20 @@ Avatar Processing Engine
 Handles image validation, preprocessing, ASCII matrix generation, and SVG rendering.
 """
 
-import os
-import json
 import hashlib
-from typing import List, Optional, Dict, Any
+import json
 from pathlib import Path
+from typing import Any
 
-from PIL import Image, ImageEnhance
+from config_loader import ConfigLoader
+from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
-from exceptions import ELSTRIXError
-from config_loader import ConfigLoader
+from PIL import Image, ImageEnhance
+
 
 class AvatarProcessingError(ELSTRIXError):
     """Exception raised for errors in the Avatar Processing Engine."""
-    pass
 
 class ImageValidator:
     """Validates the downloaded avatar image."""
@@ -46,13 +45,13 @@ class ImageValidator:
 class ImagePreprocessor:
     """Preprocesses the image for ASCII conversion."""
     
-    def __init__(self, settings: Dict[str, Any]):
+    def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("avatar_preprocessing", {})
         self.contrast = self.config.get("contrast", 1.2)
         self.brightness = self.config.get("brightness", 1.0)
         self.sharpness = self.config.get("sharpness", 1.5)
         
-    def process(self, image_path: Path) -> Optional[Image.Image]:
+    def process(self, image_path: Path) -> Image.Image | None:
         try:
             img = Image.open(image_path).convert("L")  # Grayscale
             
@@ -72,12 +71,12 @@ class ImagePreprocessor:
 class AsciiEngine:
     """Converts a preprocessed image into an ASCII matrix."""
     
-    def __init__(self, settings: Dict[str, Any]):
+    def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("ascii_engine", {})
         self.charset = self.config.get("charset", " .:-=+*#%@")
         self.width = self.config.get("width", 80)
         
-    def generate_matrix(self, img: Image.Image) -> List[List[str]]:
+    def generate_matrix(self, img: Image.Image) -> list[list[str]]:
         """Generate a reusable ASCII matrix."""
         # Calculate height based on font aspect ratio (~0.55 usually)
         aspect_ratio = img.height / img.width
@@ -105,7 +104,7 @@ class AsciiEngine:
 class AvatarSvgRenderer:
     """Renders the ASCII matrix into an SVG file."""
     
-    def __init__(self, theme: Dict[str, Any], settings: Dict[str, Any]):
+    def __init__(self, theme: dict[str, Any], settings: dict[str, Any]):
         self.theme = theme
         self.config = settings.get("svg_engine", {})
         self.font_family = self.config.get("font_family", "monospace")
@@ -113,7 +112,7 @@ class AvatarSvgRenderer:
         self.line_spacing = self.config.get("line_spacing", 1.2)
         self.char_spacing = self.config.get("char_spacing", 0.6)
         
-    def render(self, matrix: List[List[str]], mode: str, output_path: Path) -> bool:
+    def render(self, matrix: list[list[str]], mode: str, output_path: Path) -> bool:
         """Render matrix to SVG based on light or dark mode."""
         colors = self.theme.get(mode, {})
         bg_color = colors.get("background", "#000000" if mode == "dark" else "#ffffff")
@@ -125,10 +124,10 @@ class AvatarSvgRenderer:
         svg_content = [
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width_px} {height_px}" width="{width_px}" height="{height_px}">',
             f'<rect width="100%" height="100%" fill="{bg_color}"/>',
-            f'<style>',
+            '<style>',
             f'  .ascii-text {{ font-family: {self.font_family}; font-size: {self.font_size}px; fill: {text_color}; white-space: pre; }}',
-            f'</style>',
-            f'<g class="ascii-text">'
+            '</style>',
+            '<g class="ascii-text">'
         ]
         
         y_offset = self.font_size
@@ -144,7 +143,7 @@ class AvatarSvgRenderer:
             with open(output_path, "w", encoding="utf-8") as f:
                 f.write("\\n".join(svg_content))
             return True
-        except IOError as e:
+        except OSError as e:
             logger.error(f"Failed to write SVG to {output_path}: {e}")
             return False
 

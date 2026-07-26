@@ -2,10 +2,11 @@
 
 import json
 import time
-from typing import Any, Optional
+from typing import Any
 
-from paths import PathManager
 from exceptions import CacheError
+from paths import PathManager
+
 
 class CacheManager:
     """Manages reading and writing to the file-based cache."""
@@ -22,7 +23,7 @@ class CacheManager:
             raise CacheError("Invalid cache key")
         return str(self.cache_dir / f"{safe_key}.json")
 
-    def get(self, key: str) -> Optional[Any]:
+    def get(self, key: str) -> Any | None:
         """Retrieve a value from the cache if it hasn't expired."""
         filepath = self._get_path(key)
         try:

@@ -2,12 +2,12 @@
 
 import logging
 import sys
-import os
-from logging.handlers import RotatingFileHandler
 from datetime import datetime
+from logging.handlers import RotatingFileHandler
 
-from paths import PathManager
 from constants import DEFAULT_LOG_LEVEL
+from paths import PathManager
+
 
 # ANSI Color Codes
 class Colors:

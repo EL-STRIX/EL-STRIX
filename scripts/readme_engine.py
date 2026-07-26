@@ -1,18 +1,16 @@
 """README Template Generation Engine."""
 
-import os
-from datetime import datetime, timezone
-from pathlib import Path
-from typing import Any, Dict
+from datetime import UTC, datetime
+from typing import Any
 
 import jinja2
-
-from logger import logger
-from paths import PathManager
 from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
+from logger import logger
+from paths import PathManager
+from projects import format_featured, select_featured
 from utils.json_helpers import load_json
-from projects import select_featured, format_featured
+
 
 class ReadmeEngine:
     """Core engine for generating the README.md from templates and data."""
@@ -27,7 +25,7 @@ class ReadmeEngine:
         )
         self.readme_path = PathManager.ROOT_DIR / "README.md"
         
-    def _prepare_data(self) -> Dict[str, Any]:
+    def _prepare_data(self) -> dict[str, Any]:
         """Gather all necessary data for the templates."""
         logger.debug("Loading configuration and statistical data for README generation.")
         
@@ -59,7 +57,7 @@ class ReadmeEngine:
                 featured_repos = format_featured(selected)
                 
             # Timestamp
-            last_updated = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+            last_updated = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
 
             # Prepare context dictionary
             context = {

@@ -1,10 +1,10 @@
 """Banner and content data generator module."""
 
-from typing import Any, Dict
-from pathlib import Path
+from typing import Any
+
 from logger import logger
-from utils.json_helpers import load_json, save_json
 from paths import PathManager
+from utils.json_helpers import load_json, save_json
 
 
 class ProfileGenerator:
@@ -13,7 +13,7 @@ class ProfileGenerator:
     def __init__(self, username: str = "EL-STRIX"):
         self.username = username
 
-    def generate_data(self) -> Dict[str, Any]:
+    def generate_data(self) -> dict[str, Any]:
         """Process raw user data into structured data for rendering, using Phase 03 statistics."""
         stats_path = PathManager.GENERATED_STATS_DIR / "processed_statistics.json"
         stats = load_json(stats_path)

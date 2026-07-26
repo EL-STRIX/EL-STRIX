@@ -1,15 +1,16 @@
 """Main entry point for EL-STRIX profile and banner updates."""
 
 import sys
-import os
+
+from config_loader import ConfigLoader
+from data_engine import DataEngine
+from env import EnvManager
+from exceptions import ELSTRIXError
+from logger import logger, setup_logger
 
 # Initialize Foundation
 from paths import PathManager
-from env import EnvManager
-from logger import logger, setup_logger
-from config_loader import ConfigLoader
-from exceptions import ELSTRIXError
-from data_engine import DataEngine
+
 
 def initialize() -> None:
     """Initialize the EL-STRIX engine foundation."""

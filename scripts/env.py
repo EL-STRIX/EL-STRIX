@@ -1,11 +1,11 @@
 """Environment variable loading and validation."""
 
 import os
-from typing import Optional
-from dotenv import load_dotenv
 
-from paths import PathManager
+from dotenv import load_dotenv
 from exceptions import EnvironmentError
+from paths import PathManager
+
 
 class EnvManager:
     """Manages environment variables securely."""
@@ -24,7 +24,7 @@ class EnvManager:
             cls._loaded = True
 
     @classmethod
-    def get(cls, key: str, default: Optional[str] = None) -> Optional[str]:
+    def get(cls, key: str, default: str | None = None) -> str | None:
         """Get an environment variable."""
         cls.load()
         return os.getenv(key, default)

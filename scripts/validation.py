@@ -1,10 +1,10 @@
 """Reusable validation utilities."""
 
-import os
+from typing import Any
 from urllib.parse import urlparse
-from typing import Any, Dict
 
 from exceptions import ValidationError
+
 
 class Validator:
     """Provides methods for validating common data structures."""
@@ -29,7 +29,7 @@ class Validator:
         return username.replace("-", "").isalnum()
 
     @staticmethod
-    def validate_json_schema(data: Dict[str, Any], required_keys: list[str], filename: str = "JSON") -> None:
+    def validate_json_schema(data: dict[str, Any], required_keys: list[str], filename: str = "JSON") -> None:
         """Ensure a dictionary contains required keys."""
         if not isinstance(data, dict):
             raise ValidationError(f"{filename} must be a dictionary.")

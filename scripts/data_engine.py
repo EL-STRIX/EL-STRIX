@@ -1,13 +1,13 @@
 """Centralized Data Engine for fetching and storing GitHub data."""
 
-import json
-from typing import Any, Dict
+from typing import Any
 
 from env import EnvManager
-from logger import logger
 from github import GitHubClient
+from logger import logger
 from paths import PathManager
 from utils.json_helpers import save_json
+
 
 class DataEngine:
     """Orchestrates the fetching of all raw data from GitHub and saving it to structured JSON."""
@@ -46,7 +46,7 @@ class DataEngine:
         
         logger.info("Data Engine pipeline completed successfully.")
 
-    def fetch_profile(self) -> Dict[str, Any]:
+    def fetch_profile(self) -> dict[str, Any]:
         """Fetch base profile information."""
         logger.info("Fetching profile information...")
         profile = self.client.rest_request("GET", f"/users/{self.username}")

@@ -1,17 +1,18 @@
 """Production-ready GitHub API Client for REST and GraphQL."""
 
 import time
-import requests
-from typing import Any, Dict, Optional, List, Union
+from pathlib import Path
+from typing import Any
 from urllib.parse import urljoin
 
-from env import EnvManager
-from logger import logger
-from exceptions import GitHubAPIError, RateLimitError
+import requests
 from cache_manager import CacheManager
+from env import EnvManager
+from exceptions import GitHubAPIError, RateLimitError
+from logger import logger
 from paths import PathManager
 from utils.file_helpers import ensure_dir
-from pathlib import Path
+
 
 class GitHubClient:
     """Robust client for GitHub REST and GraphQL APIs with retry, caching, and rate limit handling."""
@@ -70,14 +71,14 @@ class GitHubClient:
         except requests.JSONDecodeError:
             raise GitHubAPIError("Failed to parse JSON response from GitHub")
 
-    def rest_request(self, method: str, endpoint: str, params: Optional[Dict] = None, paginated: bool = False, use_cache: bool = True) -> Any:
+    def rest_request(self, method: str, endpoint: str, params: dict | None = None, paginated: bool = False, use_cache: bool = True) -> Any:
         """Execute a REST API request with automatic retries, pagination, and caching."""
         if not endpoint.startswith("http"):
             url = urljoin(self.BASE_URL, endpoint)
         else:
             url = endpoint
             
-        cache_key = f"rest_{method}_{endpoint.replace('/', '_')}_{str(params)}"
+        cache_key = f"rest_{method}_{endpoint.replace('/', '_')}_{params!s}"
         if use_cache and method.upper() == "GET":
             cached = self.cache.get(cache_key)
             if cached is not None:
@@ -135,7 +136,7 @@ class GitHubClient:
             
         return results
 
-    def graphql_request(self, query: str, variables: Optional[Dict] = None, use_cache: bool = True) -> Dict[str, Any]:
+    def graphql_request(self, query: str, variables: dict | None = None, use_cache: bool = True) -> dict[str, Any]:
         """Execute a GraphQL API query with caching and retries."""
         cache_key = f"graphql_{hash(query)}_{hash(str(variables))}"
         if use_cache:
@@ -145,7 +146,7 @@ class GitHubClient:
                 return cached
                 
         logger.debug("Executing GraphQL query")
-        payload: Dict[str, Any] = {"query": query}
+        payload: dict[str, Any] = {"query": query}
         if variables:
             payload["variables"] = variables
             
@@ -190,8 +191,7 @@ class GitHubClient:
             response.raise_for_status()
             
             with open(save_path, "wb") as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    f.write(chunk)
+                f.writelines(response.iter_content(chunk_size=8192))
                     
             logger.info("Avatar downloaded successfully.")
             return save_path

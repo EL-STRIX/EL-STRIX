@@ -1,9 +1,7 @@
 """GitHub Statistics Engine for EL-STRIX."""
 
-import json
-from datetime import datetime, timezone
-from pathlib import Path
-from typing import Any, Dict, List, Optional
+from datetime import UTC, datetime
+from typing import Any
 
 from logger import logger
 from paths import PathManager
@@ -20,14 +18,14 @@ class StatisticsEngine:
 
     def __init__(self) -> None:
         """Initialize the StatisticsEngine and load raw data."""
-        self.profile_data: Dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "profile.json")
-        self.repos_data: List[Dict[str, Any]] = load_json(PathManager.GENERATED_JSON_DIR / "repos.json")
+        self.profile_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "profile.json")
+        self.repos_data: list[dict[str, Any]] = load_json(PathManager.GENERATED_JSON_DIR / "repos.json")
         if not isinstance(self.repos_data, list):
             self.repos_data = []
-        self.contrib_data: Dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "contributions.json")
-        self.stats: Dict[str, Any] = {}
+        self.contrib_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "contributions.json")
+        self.stats: dict[str, Any] = {}
 
-    def process_all(self) -> Dict[str, Any]:
+    def process_all(self) -> dict[str, Any]:
         """Execute the complete data processing pipeline."""
         logger.info("StatisticsEngine: Processing started.")
         start_time = datetime.now()
@@ -86,7 +84,7 @@ class StatisticsEngine:
             repo["forks_count"] = repo.get("forks_count", 0)
             repo["size"] = repo.get("size", 0)
 
-    def _parse_date(self, date_str: Optional[str]) -> Optional[datetime]:
+    def _parse_date(self, date_str: str | None) -> datetime | None:
         """Parse ISO 8601 date string to datetime object."""
         if not date_str:
             return None
@@ -95,7 +93,7 @@ class StatisticsEngine:
         except ValueError:
             return None
 
-    def _calculate_profile_stats(self) -> Dict[str, Any]:
+    def _calculate_profile_stats(self) -> dict[str, Any]:
         """Calculate profile-level statistics."""
         created_at_str = self.profile_data.get("created_at")
         created_date = self._parse_date(created_at_str)
@@ -103,7 +101,7 @@ class StatisticsEngine:
         days_since_creation = 0
         account_age_years = 0.0
         if created_date:
-            delta = datetime.now(timezone.utc) - created_date
+            delta = datetime.now(UTC) - created_date
             days_since_creation = delta.days
             account_age_years = round(days_since_creation / 365.25, 2)
 
@@ -116,7 +114,7 @@ class StatisticsEngine:
             "account_age_years": account_age_years,
         }
 
-    def _calculate_repo_stats(self) -> Dict[str, Any]:
+    def _calculate_repo_stats(self) -> dict[str, Any]:
         """Calculate repository-level statistics."""
         total = len(self.repos_data)
         public = sum(1 for r in self.repos_data if not r.get("private"))
@@ -125,7 +123,7 @@ class StatisticsEngine:
         forked = sum(1 for r in self.repos_data if r.get("fork"))
         original = total - forked
         
-        now = datetime.now(timezone.utc)
+        now = datetime.now(UTC)
         active = 0
         for r in self.repos_data:
             updated = self._parse_date(r.get("pushed_at") or r.get("updated_at"))
@@ -143,7 +141,7 @@ class StatisticsEngine:
             "repository_growth": total,
         }
 
-    def _calculate_star_stats(self) -> Dict[str, Any]:
+    def _calculate_star_stats(self) -> dict[str, Any]:
         """Calculate star-level statistics."""
         if not self.repos_data:
             return {"total_stars": 0, "average_stars": 0.0}
@@ -164,7 +162,7 @@ class StatisticsEngine:
             "star_distribution": self._bucket_distribution(stars)
         }
 
-    def _bucket_distribution(self, values: List[int]) -> Dict[str, int]:
+    def _bucket_distribution(self, values: list[int]) -> dict[str, int]:
         """Create a generic bucketed distribution."""
         dist = {"0": 0, "1-10": 0, "11-50": 0, "51-100": 0, "100+": 0}
         for v in values:
@@ -180,7 +178,7 @@ class StatisticsEngine:
                 dist["100+"] += 1
         return dist
 
-    def _calculate_fork_stats(self) -> Dict[str, Any]:
+    def _calculate_fork_stats(self) -> dict[str, Any]:
         """Calculate fork statistics."""
         if not self.repos_data:
             return {"total_forks": 0}
@@ -199,7 +197,7 @@ class StatisticsEngine:
             "repository_fork_rankings": [{"repository": k, "forks": v} for k, v in sorted_repos]
         }
 
-    def _calculate_commit_stats(self) -> Dict[str, Any]:
+    def _calculate_commit_stats(self) -> dict[str, Any]:
         """Calculate commit statistics."""
         return {
             "total_commits": self.contrib_data.get("totalCommitContributions", 0),
@@ -209,7 +207,7 @@ class StatisticsEngine:
             "commit_timeline": []
         }
 
-    def _calculate_contribution_stats(self) -> Dict[str, Any]:
+    def _calculate_contribution_stats(self) -> dict[str, Any]:
         """Calculate generalized contribution stats."""
         calendar = self.contrib_data.get("contributionCalendar", {})
         total = calendar.get("totalContributions", 0)
@@ -221,9 +219,9 @@ class StatisticsEngine:
             "yearly_contributions": total
         }
 
-    def _calculate_language_stats(self) -> Dict[str, Any]:
+    def _calculate_language_stats(self) -> dict[str, Any]:
         """Calculate language usage."""
-        lang_bytes: Dict[str, int] = {}
+        lang_bytes: dict[str, int] = {}
         for r in self.repos_data:
             if r.get("fork"): continue
             lang = r.get("language")
@@ -245,14 +243,14 @@ class StatisticsEngine:
             "language_ranking": [{"language": k, "bytes": v, "percentage": percentages.get(k)} for k, v in sorted_langs]
         }
 
-    def _calculate_repo_activity(self) -> Dict[str, Any]:
+    def _calculate_repo_activity(self) -> dict[str, Any]:
         """Calculate repository activity timing."""
         valid_repos = [r for r in self.repos_data if not r.get("fork") and r.get("created_at") and r.get("pushed_at")]
         if not valid_repos:
             return {}
 
-        sorted_by_recent = sorted(valid_repos, key=lambda x: self._parse_date(x["pushed_at"]) or datetime.min.replace(tzinfo=timezone.utc), reverse=True)
-        sorted_by_created = sorted(valid_repos, key=lambda x: self._parse_date(x["created_at"]) or datetime.min.replace(tzinfo=timezone.utc))
+        sorted_by_recent = sorted(valid_repos, key=lambda x: self._parse_date(x["pushed_at"]) or datetime.min.replace(tzinfo=UTC), reverse=True)
+        sorted_by_created = sorted(valid_repos, key=lambda x: self._parse_date(x["created_at"]) or datetime.min.replace(tzinfo=UTC))
         
         return {
             "most_recently_updated_repository": sorted_by_recent[0].get("name") if sorted_by_recent else None,
@@ -262,7 +260,7 @@ class StatisticsEngine:
             "least_active_repository": None,
         }
 
-    def _calculate_release_stats(self) -> Dict[str, Any]:
+    def _calculate_release_stats(self) -> dict[str, Any]:
         return {
             "total_releases": 0,
             "latest_release": None,
@@ -270,7 +268,7 @@ class StatisticsEngine:
             "repository_release_count": {}
         }
 
-    def _calculate_issue_stats(self) -> Dict[str, Any]:
+    def _calculate_issue_stats(self) -> dict[str, Any]:
         total = self.contrib_data.get("totalIssueContributions", 0)
         return {
             "total_issues": total,
@@ -279,7 +277,7 @@ class StatisticsEngine:
             "issue_ratio": 0.0
         }
 
-    def _calculate_pr_stats(self) -> Dict[str, Any]:
+    def _calculate_pr_stats(self) -> dict[str, Any]:
         total = self.contrib_data.get("totalPullRequestContributions", 0)
         return {
             "total_pull_requests": total,
@@ -288,7 +286,7 @@ class StatisticsEngine:
             "merged_pull_requests": 0
         }
 
-    def _calculate_featured_projects(self) -> List[Dict[str, Any]]:
+    def _calculate_featured_projects(self) -> list[dict[str, Any]]:
         """Rank repositories for featuring."""
         rankings = []
         for r in self.repos_data:
@@ -306,7 +304,7 @@ class StatisticsEngine:
         
         return sorted(rankings, key=lambda x: x["score"], reverse=True)
 
-    def _calculate_trends(self) -> Dict[str, Any]:
+    def _calculate_trends(self) -> dict[str, Any]:
         return {
             "repository_growth": [],
             "star_growth": [],
@@ -314,7 +312,7 @@ class StatisticsEngine:
             "commit_trend": []
         }
 
-    def _generate_recent_activity(self) -> Dict[str, Any]:
+    def _generate_recent_activity(self) -> dict[str, Any]:
         return {
             "latest_commit": None,
             "latest_repository": self._calculate_repo_activity().get("recently_created_repository"),
@@ -322,7 +320,7 @@ class StatisticsEngine:
             "latest_update": self._calculate_repo_activity().get("most_recently_updated_repository")
         }
 
-    def _generate_profile_summary(self) -> Dict[str, Any]:
+    def _generate_profile_summary(self) -> dict[str, Any]:
         return {
             "repository_summary": f"Creator of {self._calculate_repo_stats().get('original_repository_count', 0)} repositories.",
             "language_summary": f"Primary language is {self._calculate_language_stats().get('most_used_language', 'Unknown')}.",
@@ -337,7 +335,7 @@ class StatisticsEngine:
         logger.info(f"StatisticsEngine: Saved processed statistics to {output_file}")
 
 
-def process_statistics() -> Dict[str, Any]:
+def process_statistics() -> dict[str, Any]:
     """Helper function to run the statistics engine."""
     engine = StatisticsEngine()
     return engine.process_all()

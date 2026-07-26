@@ -1,19 +1,19 @@
 """SVG Banner renderer module for EL-STRIX."""
 
-import os
 import json
-from datetime import datetime, timezone
-from typing import Any, Dict, Tuple, Optional
-from utils import ensure_dir
+import os
+from datetime import UTC, datetime
+
+from config_loader import ConfigLoader
 from logger import logger
 from paths import PathManager
-from config_loader import ConfigLoader
-from exceptions import ELSTRIXError
+from utils import ensure_dir
+
 
 class SVGRenderer:
     """Complete SVG Profile Rendering Engine (Phase 05)."""
 
-    def __init__(self, output_dir: Optional[str] = None):
+    def __init__(self, output_dir: str | None = None):
         self.output_dir = output_dir or str(PathManager.GENERATED_SVG_DIR)
         ensure_dir(self.output_dir)
         
@@ -47,7 +47,7 @@ class SVGRenderer:
 
         self.font_family = "Segoe UI, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
 
-    def _get_theme_colors(self, mode: str) -> Dict[str, str]:
+    def _get_theme_colors(self, mode: str) -> dict[str, str]:
         """Fetch theme colors from config or use intelligent defaults."""
         if mode in self.theme_config:
             return self.theme_config[mode]
@@ -109,7 +109,7 @@ class SVGRenderer:
         </defs>
         """
 
-    def _render_profile_info(self, colors: Dict[str, str], current_y: int) -> Tuple[str, int]:
+    def _render_profile_info(self, colors: dict[str, str], current_y: int) -> tuple[str, int]:
         """Render the top header including bio and links."""
         name = self.profile.get("name", "Unknown")
         username = self.profile.get("username", "")
@@ -158,7 +158,7 @@ class SVGRenderer:
             
         return svg, current_y + 20
 
-    def _render_skills(self, colors: Dict[str, str], current_y: int) -> Tuple[str, int]:
+    def _render_skills(self, colors: dict[str, str], current_y: int) -> tuple[str, int]:
         """Render the dynamic skills layout."""
         if not any(self.skills.values()):
             return "", current_y
@@ -193,7 +193,7 @@ class SVGRenderer:
             
         return svg, current_y
 
-    def _render_stats(self, colors: Dict[str, str], current_y: int) -> Tuple[str, int]:
+    def _render_stats(self, colors: dict[str, str], current_y: int) -> tuple[str, int]:
         """Render the key GitHub statistics in a grid."""
         if not self.stats:
             return "", current_y
@@ -232,7 +232,7 @@ class SVGRenderer:
         rows = len(stats_data) // 2 + (1 if len(stats_data) % 2 else 0)
         return svg, current_y + (rows * (box_height + 16)) + 20
 
-    def _render_featured_projects(self, colors: Dict[str, str], current_y: int) -> Tuple[str, int]:
+    def _render_featured_projects(self, colors: dict[str, str], current_y: int) -> tuple[str, int]:
         """Render featured projects if they exist."""
         projects = self.stats.get("featured_projects", [])
         if not projects:
@@ -303,7 +303,7 @@ class SVGRenderer:
             right_panel_svg += fp_svg
             
             # Generate Footer
-            now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
+            now = datetime.now(UTC).strftime("%Y-%m-%d %H:%M UTC")
             footer_y = max(current_y + 40, self.min_height - 40)
             
             right_panel_svg += f"""

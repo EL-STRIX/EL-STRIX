@@ -1,15 +1,15 @@
 """Featured projects selection module."""
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
 from logger import logger
 
 
 def select_featured(
-    repos: List[Dict[str, Any]],
+    repos: list[dict[str, Any]],
     max_count: int = 6,
-    pinned: Optional[List[str]] = None,
-) -> List[Dict[str, Any]]:
+    pinned: list[str] | None = None,
+) -> list[dict[str, Any]]:
     """Select the top featured repositories for display.
 
     Selection priority:
@@ -44,7 +44,7 @@ def select_featured(
     return result
 
 
-def format_featured(repos: List[Dict[str, Any]]) -> List[Dict[str, str]]:
+def format_featured(repos: list[dict[str, Any]]) -> list[dict[str, str]]:
     """Normalise featured repo data for template consumption.
 
     Args:
@@ -53,7 +53,7 @@ def format_featured(repos: List[Dict[str, Any]]) -> List[Dict[str, str]]:
     Returns:
         Simplified list of dicts with name, description, url, language, and stars.
     """
-    formatted: List[Dict[str, str]] = []
+    formatted: list[dict[str, str]] = []
     for repo in repos:
         formatted.append({
             "name": repo.get("name", ""),

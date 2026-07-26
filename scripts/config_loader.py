@@ -1,16 +1,17 @@
 """Centralized JSON configuration loader."""
 
 import json
-from typing import Any, Dict
+from typing import Any
 
-from paths import PathManager
 from exceptions import ConfigurationError
+from paths import PathManager
+
 
 class ConfigLoader:
     """Loads and validates JSON configuration files."""
 
     @staticmethod
-    def load_json(filename: str) -> Dict[str, Any]:
+    def load_json(filename: str) -> dict[str, Any]:
         """Load a JSON configuration file from the config directory."""
         filepath = PathManager.get_config_file(filename)
         if not filepath.exists():
@@ -28,7 +29,7 @@ class ConfigLoader:
             raise ConfigurationError(f"Failed to read {filename}: {e}")
 
     @classmethod
-    def load_all(cls) -> Dict[str, Dict[str, Any]]:
+    def load_all(cls) -> dict[str, dict[str, Any]]:
         """Load all core configuration files."""
         return {
             "profile": cls.load_json("profile.json"),

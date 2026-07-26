@@ -1,7 +1,9 @@
 """Dynamic path management for the EL-STRIX engine."""
 
 from pathlib import Path
+
 from exceptions import PathError
+
 
 class PathManager:
     """Centralized path manager handling dynamic absolute paths."""

@@ -2,12 +2,12 @@
 
 import os
 import subprocess
-from datetime import datetime, timezone
-from typing import List, Tuple
+from datetime import UTC, datetime
 
+from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
-from exceptions import ELSTRIXError
+
 
 class AutomationEngine:
     """Handles git operations, change detection, and automated commits."""
@@ -27,7 +27,7 @@ class AutomationEngine:
             "generated/avatar/avatar.png"
         ]
 
-    def _run_git(self, args: List[str]) -> Tuple[bool, str]:
+    def _run_git(self, args: list[str]) -> tuple[bool, str]:
         """Execute a git command and return its success status and stdout."""
         cmd = ["git"] + args
         try:
@@ -47,7 +47,7 @@ class AutomationEngine:
         except FileNotFoundError:
             raise ELSTRIXError("Git is not installed or not found in system path.")
 
-    def _detect_changes(self) -> List[str]:
+    def _detect_changes(self) -> list[str]:
         """Detect modified, added, or deleted files."""
         # Add all tracked files explicitly so untracked new files are staged
         # We only want to track changes in our specific files
@@ -64,9 +64,9 @@ class AutomationEngine:
             
         return changed_files
 
-    def _generate_commit_message(self, changed_files: List[str]) -> str:
+    def _generate_commit_message(self, changed_files: list[str]) -> str:
         """Generate a meaningful commit message based on changed files."""
-        timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+        timestamp = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
         
         updates = []
         if "README.md" in changed_files:
