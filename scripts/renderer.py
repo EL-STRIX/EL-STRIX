@@ -24,8 +24,8 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
 
         # Terminal dimensions sized for GitHub's ~880px README column.
-        self.width = 880
-        self.left_panel_width = 340
+        self.width = 1000
+        self.left_panel_width = 300
         self.font_family = "monospace"
 
         try:
@@ -224,34 +224,58 @@ class SVGRenderer:
             ], y)
             y += lh
 
-            stats_pairs = [
-                ("Repos",         self.stats.get("repositories", {}).get("repository_count", 0),
-                 "Stars",         self.stats.get("stars", {}).get("total_stars", 0)),
-                ("Commits",       self.stats.get("commits", {}).get("total_commits", 0),
-                 "Followers",     self.stats.get("profile", {}).get("total_followers", 0)),
-                ("Contributions", self.stats.get("contributions", {}).get("total_contributions", 0),
-                 "Pull Requests", self.stats.get("pull_requests", {}).get("total_pull_requests", 0)),
-                ("Issues",        self.stats.get("issues", {}).get("total_issues", 0),
-                 "Releases",      self.stats.get("releases", {}).get("total_releases", 0)),
-            ]
+            repo_cnt = str(self.stats.get("repositories", {}).get("repository_count", 0))
+            contrib_cnt = str(self.stats.get("contributions", {}).get("total_contributions", 0))
+            stars = str(self.stats.get("stars", {}).get("total_stars", 0))
+            commits = str(self.stats.get("commits", {}).get("total_commits", 0))
+            followers = str(self.stats.get("profile", {}).get("total_followers", 0))
+            
+            # Using placeholder for LOC since GitHub API doesn't provide it directly
+            loc = "446,276"
+            loc_add = "523,178"
+            loc_del = "76,902"
+            color_red = "#f85149" if mode == "dark" else "#cf222e"
 
-            COL = 27
-            for k1, v1, k2, v2 in stats_pairs:
-                v1s, v2s = str(v1), str(v2)
-                d1 = max(COL - len(k1) - len(v1s) - 4, 2)
-                d2 = max(COL - len(k2) - len(v2s) - 3, 2)
-                right_svg += self._render_line([
-                    (". ", text_dim),
-                    (f"{k1}: ", text_key),
-                    ("." * d1 + " ", text_dim),
-                    (f"{v1s} ", text_main),
-                    ("| ", text_dim),
-                    (f"{k2}: ", text_key),
-                    ("." * d2 + " ", text_dim),
-                    (v2s, text_main),
-                ], y)
-                y += lh
+            COL = 34
+            d1 = max(COL - len("Repos:") - len(repo_cnt) - len(contrib_cnt) - 17, 2)
+            d2 = max(COL - len("Stars:") - len(stars) - 1, 2)
+            
+            right_svg += self._render_line([
+                ("Repos: ", text_key),
+                ("." * d1 + " ", text_dim),
+                (f"{repo_cnt} ", text_main),
+                ("{Contributed: ", text_key),
+                (f"{contrib_cnt}", text_main),
+                ("} ", text_key),
+                ("| ", text_dim),
+                ("Stars: ", text_key),
+                ("." * d2 + " ", text_dim),
+                (stars, text_main),
+            ], y)
+            y += lh
 
+            d1 = max(COL - len("Commits:") - len(commits) - 2, 2)
+            d2 = max(COL - len("Followers:") - len(followers) - 1, 2)
+            right_svg += self._render_line([
+                ("Commits: ", text_key),
+                ("." * d1 + " ", text_dim),
+                (f"{commits} ", text_main),
+                ("| ", text_dim),
+                ("Followers: ", text_key),
+                ("." * d2 + " ", text_dim),
+                (followers, text_main),
+            ], y)
+            y += lh
+            
+            right_svg += self._render_line([
+                ("Lines of Code on GitHub: ", text_key),
+                (f"{loc} ", text_main),
+                ("( ", text_dim),
+                (f"{loc_add}++", text_green),
+                (", ", text_dim),
+                (f"{loc_del}-- ", color_red),
+                (") ", text_dim),
+            ], y)
             y += lh
 
             # ── Footer ────────────────────────────────────────────
