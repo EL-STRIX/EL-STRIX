@@ -233,13 +233,9 @@ class SVGRenderer:
             
             # Retrieve and format LOC dynamically
             loc_stats = self.stats.get("loc", {})
-            additions = loc_stats.get("additions", 0)
-            deletions = loc_stats.get("deletions", 0)
             total_loc = loc_stats.get("total_lines", 0)
             
             loc = f"{total_loc:,}"
-            loc_add = f"{additions:,}"
-            loc_del = f"{deletions:,}"
             
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
@@ -274,17 +270,12 @@ class SVGRenderer:
             ], y)
             y += lh
             
-            d3 = max(98 - 40 - len(loc) - len(loc_add) - len(loc_del), 2)
+            d3 = max(98 - 27 - len(loc), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Lines of Code on GitHub: ", text_key),
                 ("." * d3 + " ", text_dim),
                 (f"{loc} ", text_main),
-                ("( ", text_dim),
-                (f"{loc_add}++", text_green),
-                (",  ", text_dim),
-                (f"{loc_del}-- ", color_red),
-                (")", text_dim),
             ], y)
             y += lh
 

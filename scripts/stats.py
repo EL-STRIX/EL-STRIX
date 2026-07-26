@@ -228,22 +228,15 @@ class StatisticsEngine:
         }
 
     def _calculate_loc_stats(self) -> dict[str, Any]:
-        """Calculate lines of code additions and deletions."""
-        additions = 0
-        deletions = 0
+        """Calculate lines of code stats based on actual physical file counts."""
+        total_lines = 0
         
         if self.loc_data and isinstance(self.loc_data, dict):
             for repo_name, data in self.loc_data.items():
-                weeks = data.get("weeks", [])
-                for week in weeks:
-                    additions += week.get("a", 0)
-                    deletions += week.get("d", 0)
+                total_lines += data.get("total_lines", 0)
                     
         return {
-            "additions": additions,
-            "deletions": deletions,
-            "total": additions - deletions,
-            "total_lines": additions + deletions
+            "total_lines": total_lines,
         }
 
     def _calculate_language_stats(self) -> dict[str, Any]:
