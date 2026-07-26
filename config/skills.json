@@ -1,5 +1,0 @@
-{
-  "languages": ["Python", "JavaScript", "TypeScript"],
-  "frameworks": ["FastAPI", "React", "Node.js"],
-  "tools": ["Git", "GitHub Actions", "Docker"]
-}

@@ -32,9 +32,5 @@ class ConfigLoader:
     def load_all(cls) -> dict[str, dict[str, Any]]:
         """Load all core configuration files."""
         return {
-            "profile": cls.load_json("profile.json"),
-            "skills": cls.load_json("skills.json"),
-            "social": cls.load_json("social.json"),
-            "theme": cls.load_json("theme.json"),
-            "settings": cls.load_json("settings.json"),
+            "profile": cls.load_json("profile.json")
         }

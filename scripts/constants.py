@@ -17,9 +17,5 @@ DEFAULT_REQUEST_TIMEOUT = 15
 
 # Configuration Files
 CONFIG_FILES = [
-    "profile.json",
-    "skills.json",
-    "social.json",
-    "theme.json",
-    "settings.json"
+    "profile.json"
 ]

@@ -1,8 +1,0 @@
-{
-  "update_interval_hours": 24,
-  "cache_enabled": true,
-  "cache_ttl_seconds": 3600,
-  "request_timeout_seconds": 15,
-  "debug_mode": false,
-  "log_level": "INFO"
-}

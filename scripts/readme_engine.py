@@ -32,10 +32,6 @@ class ReadmeEngine:
             # Load configs
             configs = ConfigLoader.load_all()
             profile_cfg = configs.get("profile", {})
-            skills_cfg = configs.get("skills", {})
-            social_cfg = configs.get("social", {})
-            settings_cfg = configs.get("settings", {})
-            theme_cfg = configs.get("theme", {})
             
             # Load stats
             stats_path = PathManager.GENERATED_STATS_DIR / "processed_statistics.json"
@@ -81,14 +77,8 @@ class ReadmeEngine:
                 # Featured Projects
                 "featured_repos": featured_repos,
                 
-                # Skills & Socials
-                "skills": skills_cfg,
-                "social": social_cfg,
-                
                 # Additional context
                 "last_updated": last_updated,
-                "settings": settings_cfg,
-                "theme": theme_cfg,
             }
             
             return context
