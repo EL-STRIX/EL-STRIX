@@ -20,7 +20,6 @@ class PathManager:
     ASSET_IMAGE_DIR: Path = ASSETS_DIR / "image"
     ASSET_ASCII_DIR: Path = ASSETS_DIR / "ascii"
     ASSET_SVG_DIR: Path = ASSETS_DIR / "svg"
-    ASSET_TEMPLATE_DIR: Path = ASSETS_DIR / "template"
 
     # Generated sub-directories
     GENERATED_CACHE_DIR: Path = GENERATED_DIR / "cache"
@@ -46,7 +45,6 @@ class PathManager:
             cls.ASSET_IMAGE_DIR,
             cls.ASSET_ASCII_DIR,
             cls.ASSET_SVG_DIR,
-            cls.ASSET_TEMPLATE_DIR,
             cls.GENERATED_CACHE_DIR,
             cls.GENERATED_JSON_DIR,
             cls.GENERATED_STATS_DIR,
