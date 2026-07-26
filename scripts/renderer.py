@@ -24,8 +24,8 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
 
         # Terminal dimensions sized for maximum GitHub README width.
-        self.width = 1400
-        self.left_panel_width = 600
+        self.width = 1900
+        self.left_panel_width = 800
         self.font_family = "monospace"
 
         try:
@@ -78,7 +78,7 @@ class SVGRenderer:
         self,
         parts: list[tuple[str, str]],
         y: int,
-        font_size: int = 18,
+        font_size: int = 26,
     ) -> str:
         """Render a single line of terminal text with multiple colored spans."""
         svg = f'<text x="0" y="{y}" xml:space="preserve" font-size="{font_size}">'
@@ -132,30 +132,30 @@ class SVGRenderer:
             # Right-panel layout constants
             right_svg = ""
             y = 30
-            lh = 22
+            lh = 36
             DOT_WIDTH = 46
 
             # ── Header ────────────────────────────────────────────
             right_svg += self._render_line([
                 ("sujay@EL-STRIX ", text_main),
-                (self._dashes("sujay@EL-STRIX ", 60), text_dim),
+                (self._dashes("sujay@EL-STRIX ", 75), text_dim),
             ], y)
             y += lh
 
             # ── Tech Stack ────────────────────────────────────────
             tech_stack = [
-                ("OS",          "Windows, Linux, Android"),
-                ("Tooling",     "VS Code, ZBrains IDE, Git"),
-                ("Programming", "C, C++, Java, Go, Python, JS, PHP"),
-                ("Frontend",    "HTML, CSS, Tailwind, Bootstrap, React"),
-                ("Backend",     "Node.js, Express"),
-                ("Database",    "MySQL"),
-                ("Tools",       "Git, GitHub Actions, Vercel"),
-                ("Languages",   "English, Bengali, Hindi"),
+                ("🖥️ OS",          "Windows, Linux, Android"),
+                ("🛠️ Tooling",     "VS Code, ZBrains IDE, Git"),
+                ("💻 Programming", "C, C++, Java, Go, Python, JS, PHP"),
+                ("🎨 Frontend",    "HTML, CSS, Tailwind, Bootstrap, React"),
+                ("⚙️ Backend",     "Node.js, Express"),
+                ("🗄️ Database",    "MySQL"),
+                ("🔧 Tools",       "Git, GitHub Actions, Vercel"),
+                ("🌐Languages",   "English, Bengali, Hindi"),
             ]
 
             for key, val in tech_stack:
-                dots = self._dots(key, val, DOT_WIDTH)
+                dots = self._dots(key, val, 75)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
@@ -169,20 +169,20 @@ class SVGRenderer:
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
                 ("- Contact ", text_main),
-                (self._dashes("- Contact ", 60), text_dim),
+                (self._dashes("- Contact ", 75), text_dim),
             ], y)
             y += lh
 
             contacts = [
-                ("Portfolio", "development phase"),
-                ("LinkedIn",  "linkedin.com/in/sujay-paul"),
-                ("GitHub",    "github.com/EL-STRIX"),
-                ("Email",     "sujaypaul892@gmail.com"),
-                ("Location",  "Kolkata, West Bengal, India"),
+                ("🌍 Portfolio", "development phase"),
+                ("💼 LinkedIn",  "Sujay Paul"),
+                ("🐙 GitHub",    "EL-STRIX"),
+                ("✉️ Email",     "sujaypaul892@gmail.com"),
+                ("📍 Location",  "Kolkata, West Bengal, India"),
             ]
 
             for key, val in contacts:
-                dots = self._dots(key, val, DOT_WIDTH)
+                dots = self._dots(key, val, 75)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
@@ -196,17 +196,17 @@ class SVGRenderer:
             # ── Featured Projects ─────────────────────────────────
             right_svg += self._render_line([
                 ("- Featured Projects ", text_main),
-                (self._dashes("- Featured Projects ", 60), text_dim),
+                (self._dashes("- Featured Projects ", 75), text_dim),
             ], y)
             y += lh
 
             projects = [
-                ("C Games Collection",   "Complete"),
-                ("Finzo Banking System",  "Development Phase"),
+                ("🎮 C Games Collection",   "Complete"),
+                ("🏦 Finzo Banking System",  "Development Phase"),
             ]
 
             for name, status in projects:
-                dots = self._dots(name, status, DOT_WIDTH)
+                dots = self._dots(name, status, 75)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{name}: ", text_key),
@@ -220,15 +220,15 @@ class SVGRenderer:
             # ── GitHub Stats ──────────────────────────────────────
             right_svg += self._render_line([
                 ("- GitHub Stats ", text_main),
-                (self._dashes("- GitHub Stats ", 60), text_dim),
+                (self._dashes("- GitHub Stats ", 75), text_dim),
             ], y)
             y += lh
 
-            repo_cnt = str(self.stats.get("repositories", {}).get("repository_count", 0))
-            contrib_cnt = str(self.stats.get("contributions", {}).get("total_contributions", 0))
-            stars = str(self.stats.get("stars", {}).get("total_stars", 0))
-            commits = str(self.stats.get("commits", {}).get("total_commits", 0))
-            followers = str(self.stats.get("profile", {}).get("total_followers", 0))
+            repo_cnt = str(self.stats.get("📦 Repositories", {}).get("repository_count", 0))
+            contrib_cnt = str(self.stats.get("🔥Contributions", {}).get("total_contributions", 0))
+            stars = str(self.stats.get("⭐ Stars", {}).get("total_stars", 0))
+            commits = str(self.stats.get("📝 Commits", {}).get("total_commits", 0))
+            followers = str(self.stats.get("👥 Followers", {}).get("total_followers", 0))
             
             # Using placeholder for LOC since GitHub API doesn't provide it directly
             loc = "446,276"
@@ -236,11 +236,12 @@ class SVGRenderer:
             loc_del = "76,902"
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
-            COL = 30
+            COL = 40
             d1 = max(COL - len("Repos:") - len(repo_cnt) - len(contrib_cnt) - 17, 2)
-            d2 = max(COL - len("Stars:") - len(stars) - 1, 2)
+            d2 = max(75 - COL - len("Stars:") - len(stars) - 5, 2)
             
             right_svg += self._render_line([
+                (". ", text_dim),
                 ("Repos: ", text_key),
                 ("." * d1 + " ", text_dim),
                 (f"{repo_cnt} ", text_main),
@@ -253,8 +254,9 @@ class SVGRenderer:
             y += lh
 
             d1 = max(COL - len("Commits:") - len(commits) - 2, 2)
-            d2 = max(COL - len("Followers:") - len(followers) - 1, 2)
+            d2 = max(75 - COL - len("Followers:") - len(followers) - 5, 2)
             right_svg += self._render_line([
+                (". ", text_dim),
                 ("Commits: ", text_key),
                 ("." * d1 + " ", text_dim),
                 (f"{commits} ", text_main),
@@ -266,11 +268,12 @@ class SVGRenderer:
             y += lh
             
             right_svg += self._render_line([
-                ("Lines of Code on GitHub: ", text_key),
+                (". ", text_dim),
+                ("Lines of Code on GitHub:. ", text_key),
                 (f"{loc} ", text_main),
                 ("( ", text_dim),
                 (f"{loc_add}++", text_green),
-                (", ", text_dim),
+                (",  ", text_dim),
                 (f"{loc_del}-- ", color_red),
                 (") ", text_dim),
             ], y)
@@ -279,8 +282,8 @@ class SVGRenderer:
             # ── Footer ────────────────────────────────────────────
             now = datetime.now(UTC).strftime("%d %b %Y")
             right_svg += self._render_line([
-                (f"Auto-generated by GitHub Actions: {now}", text_dim),
-            ], y, font_size=14)
+                (f"🤖 Auto-generated by GitHub Actions: {now}", text_dim),
+            ], y, font_size=18)
 
             final_height = max(y + 30, 500)
 
@@ -301,7 +304,7 @@ class SVGRenderer:
     }}
     .ascii {{
       font-family: {self.font_family};
-      font-size: 8px;
+      font-size: 14px;
       fill: {text_main};
       white-space: pre;
     }}
