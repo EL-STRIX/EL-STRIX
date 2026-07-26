@@ -221,7 +221,7 @@ class SVGRenderer:
             stats_svg = ""
             stats_svg += self._render_line([
                 ("- GitHub Stats ", text_main),
-                (self._dashes("- GitHub Stats ", 94), text_dim),
+                (self._dashes("- GitHub Stats ", 98), text_dim),
             ], y)
             y += lh
 
@@ -237,9 +237,9 @@ class SVGRenderer:
             loc_del = "76,902"
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
-            COL = 47
+            COL = 49
             d1 = max(COL - 27 - len(repo_cnt) - len(contrib_cnt), 2)
-            d2 = max(94 - COL - 10 - len(stars), 2)
+            d2 = max(98 - COL - 10 - len(stars), 2)
             
             stats_svg += self._render_line([
                 (". ", text_dim),
@@ -255,7 +255,7 @@ class SVGRenderer:
             y += lh
 
             d1 = max(COL - 13 - len(commits), 2)
-            d2 = max(94 - COL - 14 - len(followers), 2)
+            d2 = max(98 - COL - 14 - len(followers), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
@@ -268,7 +268,7 @@ class SVGRenderer:
             ], y)
             y += lh
             
-            d3 = max(94 - 40 - len(loc) - len(loc_add) - len(loc_del), 2)
+            d3 = max(98 - 40 - len(loc) - len(loc_add) - len(loc_del), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Lines of Code on GitHub: ", text_key),
