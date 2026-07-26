@@ -72,18 +72,18 @@
     ]
   },
   "commits": {
-    "total_commits": 58,
+    "total_commits": 140,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 141,
+    "total_contributions": 153,
     "daily_contributions": {},
     "weekly_contributions": {},
     "monthly_contributions": {},
-    "yearly_contributions": 141
+    "yearly_contributions": 153
   },
   "loc": {
     "additions": 0,
