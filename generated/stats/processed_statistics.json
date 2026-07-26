@@ -104,24 +104,23 @@
     ]
   },
   "commits": {
-    "total_commits": 151,
+    "total_commits": 152,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 164,
+    "total_contributions": 165,
     "daily_contributions": {},
     "weekly_contributions": {},
     "monthly_contributions": {},
-    "yearly_contributions": 164
+    "yearly_contributions": 165
   },
   "loc": {
-    "additions": 567291,
-    "deletions": 393751,
-    "total": 173540,
-    "total_lines": 961042
+    "additions": 167309,
+    "deletions": 0,
+    "total": 167309
   },
   "languages": {
     "languages_used": 6,
