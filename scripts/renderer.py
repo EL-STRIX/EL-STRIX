@@ -137,8 +137,8 @@ class SVGRenderer:
 
             # ── Header ────────────────────────────────────────────
             right_svg += self._render_line([
-                ("sujay@EL-STRIX ", text_green),
-                (self._dashes("sujay@EL-STRIX"), text_dim),
+                ("sujay@EL-STRIX ", text_main),
+                (self._dashes("sujay@EL-STRIX ", 60), text_dim),
             ], y)
             y += lh
 
@@ -168,8 +168,8 @@ class SVGRenderer:
 
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
-                ("- Contact ", text_val),
-                (self._dashes("- Contact"), text_dim),
+                ("- Contact ", text_main),
+                (self._dashes("- Contact ", 60), text_dim),
             ], y)
             y += lh
 
@@ -195,8 +195,8 @@ class SVGRenderer:
 
             # ── Featured Projects ─────────────────────────────────
             right_svg += self._render_line([
-                ("- Featured Projects ", text_val),
-                (self._dashes("- Featured Projects"), text_dim),
+                ("- Featured Projects ", text_main),
+                (self._dashes("- Featured Projects ", 60), text_dim),
             ], y)
             y += lh
 
@@ -219,8 +219,8 @@ class SVGRenderer:
 
             # ── GitHub Stats ──────────────────────────────────────
             right_svg += self._render_line([
-                ("- GitHub Stats ", text_val),
-                (self._dashes("- GitHub Stats"), text_dim),
+                ("- GitHub Stats ", text_main),
+                (self._dashes("- GitHub Stats ", 60), text_dim),
             ], y)
             y += lh
 
@@ -244,9 +244,7 @@ class SVGRenderer:
                 ("Repos: ", text_key),
                 ("." * d1 + " ", text_dim),
                 (f"{repo_cnt} ", text_main),
-                ("{Contributed: ", text_key),
-                (f"{contrib_cnt}", text_main),
-                ("} ", text_key),
+                (f"{{Contributed: {contrib_cnt}}} ", text_key),
                 ("| ", text_dim),
                 ("Stars: ", text_key),
                 ("." * d2 + " ", text_dim),
