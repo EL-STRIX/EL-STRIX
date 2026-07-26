@@ -38,6 +38,7 @@ ENV/
 
 # Testing & Coverage
 .pytest_cache/
+.ruff_cache/
 .coverage
 htmlcov/
 
