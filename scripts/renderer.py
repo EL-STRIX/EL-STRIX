@@ -218,9 +218,10 @@ class SVGRenderer:
             y += lh
 
             # ── GitHub Stats ──────────────────────────────────────
-            right_svg += self._render_line([
+            stats_svg = ""
+            stats_svg += self._render_line([
                 ("- GitHub Stats ", text_main),
-                (self._dashes("- GitHub Stats ", 60), text_dim),
+                (self._dashes("- GitHub Stats ", 94), text_dim),
             ], y)
             y += lh
 
@@ -236,11 +237,11 @@ class SVGRenderer:
             loc_del = "76,902"
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
-            COL = 36
+            COL = 47
             d1 = max(COL - 27 - len(repo_cnt) - len(contrib_cnt), 2)
-            d2 = max(50 - COL - len(stars), 2)
+            d2 = max(94 - COL - 10 - len(stars), 2)
             
-            right_svg += self._render_line([
+            stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Repos: ", text_key),
                 ("." * d1 + " ", text_dim),
@@ -254,8 +255,8 @@ class SVGRenderer:
             y += lh
 
             d1 = max(COL - 13 - len(commits), 2)
-            d2 = max(46 - COL - len(followers), 2)
-            right_svg += self._render_line([
+            d2 = max(94 - COL - 14 - len(followers), 2)
+            stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
                 ("." * d1 + " ", text_dim),
@@ -267,7 +268,7 @@ class SVGRenderer:
             ], y)
             y += lh
             
-            right_svg += self._render_line([
+            stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Lines of Code on GitHub:. ", text_key),
                 (f"{loc} ", text_main),
@@ -315,6 +316,11 @@ class SVGRenderer:
   <!-- Right Panel: Profile Data -->
   <g transform="translate({right_x}, 20)">
     {right_svg}
+  </g>
+
+  <!-- Full Width Panel: GitHub Stats -->
+  <g transform="translate(20, 20)">
+    {stats_svg}
   </g>
 </svg>'''
 
