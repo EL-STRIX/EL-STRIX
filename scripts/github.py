@@ -11,6 +11,7 @@ from exceptions import GitHubAPIError, RateLimitError
 from cache_manager import CacheManager
 from paths import PathManager
 from utils.file_helpers import ensure_dir
+from pathlib import Path
 
 class GitHubClient:
     """Robust client for GitHub REST and GraphQL APIs with retry, caching, and rate limit handling."""
@@ -144,7 +145,7 @@ class GitHubClient:
                 return cached
                 
         logger.debug("Executing GraphQL query")
-        payload = {"query": query}
+        payload: Dict[str, Any] = {"query": query}
         if variables:
             payload["variables"] = variables
             
@@ -178,7 +179,7 @@ class GitHubClient:
                 
         raise GitHubAPIError("Unexpected error during GraphQL request")
 
-    def download_avatar(self, url: str) -> PathManager.ASSET_IMAGE_DIR:
+    def download_avatar(self, url: str) -> Path:
         """Download and cache the user's avatar image."""
         ensure_dir(PathManager.ASSET_IMAGE_DIR)
         save_path = PathManager.ASSET_IMAGE_DIR / "avatar.png"

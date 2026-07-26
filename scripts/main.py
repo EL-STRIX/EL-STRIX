@@ -57,10 +57,24 @@ def run_phase_02():
         logger.critical(f"Unexpected error in Phase 02: {e}", exc_info=True)
         sys.exit(1)
 
+def run_phase_04():
+    """Execute Phase 04: Avatar Processing Engine."""
+    try:
+        from avatar_engine import AvatarPipeline
+        pipeline = AvatarPipeline()
+        pipeline.run()
+    except ELSTRIXError as e:
+        logger.error(f"Phase 04 Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error in Phase 04: {e}", exc_info=True)
+        sys.exit(1)
+
 def main():
     initialize()
     logger.info("EL-STRIX foundation is ready.")
     run_phase_02()
+    run_phase_04()
 
 if __name__ == "__main__":
     main()
