@@ -1,0 +1,201 @@
+"""Centralized Data Engine for fetching and storing GitHub data."""
+
+import json
+from typing import Any, Dict
+
+from env import EnvManager
+from logger import logger
+from github import GitHubClient
+from paths import PathManager
+from utils.json_helpers import save_json
+
+class DataEngine:
+    """Orchestrates the fetching of all raw data from GitHub and saving it to structured JSON."""
+
+    def __init__(self):
+        self.client = GitHubClient()
+        self.username = EnvManager.get_github_username()
+
+    def run_all(self):
+        """Execute the full data collection pipeline."""
+        logger.info(f"Starting Data Engine pipeline for {self.username}")
+        
+        # 1. Profile and Avatar
+        profile = self.fetch_profile()
+        if profile.get("avatar_url"):
+            self.download_avatar(profile["avatar_url"])
+            
+        # 2. Repositories
+        self.fetch_repositories()
+        
+        # 3. Contributions & Statistics
+        self.fetch_contributions()
+        
+        # 4. Pinned Repositories
+        self.fetch_pinned_repositories()
+        
+        # 5. Pull Requests and Issues
+        self.fetch_pull_requests()
+        self.fetch_issues()
+        
+        # 6. Releases
+        self.fetch_releases()
+        
+        # 7. Recent Activity (Events)
+        self.fetch_recent_activity()
+        
+        logger.info("Data Engine pipeline completed successfully.")
+
+    def fetch_profile(self) -> Dict[str, Any]:
+        """Fetch base profile information."""
+        logger.info("Fetching profile information...")
+        profile = self.client.rest_request("GET", f"/users/{self.username}")
+        save_json(profile, PathManager.GENERATED_JSON_DIR / "profile.json")
+        return profile
+
+    def download_avatar(self, avatar_url: str) -> None:
+        """Download the user's avatar."""
+        self.client.download_avatar(avatar_url)
+
+    def fetch_repositories(self) -> None:
+        """Fetch all repositories for the user."""
+        logger.info("Fetching repositories...")
+        repos = self.client.rest_request("GET", f"/users/{self.username}/repos?per_page=100", paginated=True)
+        save_json(repos, PathManager.GENERATED_JSON_DIR / "repos.json")
+
+    def fetch_contributions(self) -> None:
+        """Fetch contribution graphs and statistics via GraphQL."""
+        logger.info("Fetching contribution data...")
+        query = """
+        query($username: String!) {
+          user(login: $username) {
+            contributionsCollection {
+              contributionCalendar {
+                totalContributions
+                weeks {
+                  contributionDays {
+                    contributionCount
+                    date
+                  }
+                }
+              }
+              totalCommitContributions
+              totalIssueContributions
+              totalPullRequestContributions
+              totalPullRequestReviewContributions
+              restrictedContributionsCount
+            }
+          }
+        }
+        """
+        data = self.client.graphql_request(query, {"username": self.username})
+        # Extract just the contributions collection
+        contribs = data.get("user", {}).get("contributionsCollection", {})
+        save_json(contribs, PathManager.GENERATED_JSON_DIR / "contributions.json")
+
+    def fetch_pinned_repositories(self) -> None:
+        """Fetch pinned repositories via GraphQL."""
+        logger.info("Fetching pinned repositories...")
+        query = """
+        query($username: String!) {
+          user(login: $username) {
+            pinnedItems(first: 6, types: REPOSITORY) {
+              nodes {
+                ... on Repository {
+                  name
+                  description
+                  url
+                  stargazerCount
+                  forkCount
+                  primaryLanguage {
+                    name
+                    color
+                  }
+                }
+              }
+            }
+          }
+        }
+        """
+        data = self.client.graphql_request(query, {"username": self.username})
+        pinned = data.get("user", {}).get("pinnedItems", {}).get("nodes", [])
+        save_json(pinned, PathManager.GENERATED_JSON_DIR / "pinned_repos.json")
+
+    def fetch_pull_requests(self) -> None:
+        """Fetch user's pull requests."""
+        logger.info("Fetching pull request data...")
+        # GitHub REST API search for PRs authored by the user
+        prs = self.client.rest_request("GET", f"/search/issues?q=type:pr+author:{self.username}&per_page=100", paginated=True)
+        # The search API returns a dict with 'items' as the list
+        if isinstance(prs, list) and len(prs) > 0 and isinstance(prs[0], dict) and "items" in prs[0]:
+            # If paginated=True aggregated lists of dicts
+            all_items = []
+            for page in prs:
+                all_items.extend(page.get("items", []))
+            save_json(all_items, PathManager.GENERATED_JSON_DIR / "pull_requests.json")
+        elif isinstance(prs, dict):
+            save_json(prs.get("items", []), PathManager.GENERATED_JSON_DIR / "pull_requests.json")
+        else:
+            save_json(prs, PathManager.GENERATED_JSON_DIR / "pull_requests.json")
+
+    def fetch_issues(self) -> None:
+        """Fetch user's issues."""
+        logger.info("Fetching issue data...")
+        issues = self.client.rest_request("GET", f"/search/issues?q=type:issue+author:{self.username}&per_page=100", paginated=True)
+        
+        if isinstance(issues, list) and len(issues) > 0 and isinstance(issues[0], dict) and "items" in issues[0]:
+            all_items = []
+            for page in issues:
+                all_items.extend(page.get("items", []))
+            save_json(all_items, PathManager.GENERATED_JSON_DIR / "issues.json")
+        elif isinstance(issues, dict):
+            save_json(issues.get("items", []), PathManager.GENERATED_JSON_DIR / "issues.json")
+        else:
+            save_json(issues, PathManager.GENERATED_JSON_DIR / "issues.json")
+
+    def fetch_releases(self) -> None:
+        """Fetch releases for user's repositories via GraphQL."""
+        logger.info("Fetching release data...")
+        query = """
+        query($username: String!) {
+          user(login: $username) {
+            repositories(first: 100, ownerAffiliations: OWNER, orderBy: {field: PUSHED_AT, direction: DESC}) {
+              nodes {
+                name
+                releases(first: 10, orderBy: {field: CREATED_AT, direction: DESC}) {
+                  nodes {
+                    name
+                    tagName
+                    publishedAt
+                    url
+                  }
+                }
+              }
+            }
+          }
+        }
+        """
+        data = self.client.graphql_request(query, {"username": self.username})
+        repos = data.get("user", {}).get("repositories", {}).get("nodes", [])
+        
+        # Flatten releases
+        all_releases = {}
+        for repo in repos:
+            repo_releases = repo.get("releases", {}).get("nodes", [])
+            if repo_releases:
+                all_releases[repo["name"]] = repo_releases
+                
+        save_json(all_releases, PathManager.GENERATED_JSON_DIR / "releases.json")
+
+    def fetch_recent_activity(self) -> None:
+        """Fetch recent events from the user."""
+        logger.info("Fetching recent activity...")
+        events = self.client.rest_request("GET", f"/users/{self.username}/events/public?per_page=100", paginated=True)
+        # Limit to the most recent 100 events to prevent massive JSON files
+        save_json(events[:100] if isinstance(events, list) else events, PathManager.GENERATED_JSON_DIR / "activity.json")
+
+if __name__ == "__main__":
+    from logger import setup_logger
+    setup_logger(debug_mode=True)
+    engine = DataEngine()
+    engine.run_all()

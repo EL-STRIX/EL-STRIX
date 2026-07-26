@@ -23,3 +23,11 @@ class CacheError(ELSTRIXError):
 class PathError(ELSTRIXError):
     """Raised when required paths or directories are inaccessible or invalid."""
     pass
+
+class GitHubAPIError(ELSTRIXError):
+    """Raised when GitHub API requests fail."""
+    pass
+
+class RateLimitError(GitHubAPIError):
+    """Raised when GitHub API rate limit is exceeded."""
+    pass

@@ -9,6 +9,7 @@ from env import EnvManager
 from logger import logger, setup_logger
 from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
+from data_engine import DataEngine
 
 def initialize() -> None:
     """Initialize the EL-STRIX engine foundation."""
@@ -42,9 +43,24 @@ def initialize() -> None:
         logger.critical(f"Unexpected error during initialization: {e}", exc_info=True)
         sys.exit(1)
 
+def run_phase_02():
+    """Execute Phase 02: GitHub Data Engine."""
+    try:
+        logger.info("--- PHASE 02: GITHUB DATA ENGINE ---")
+        engine = DataEngine()
+        engine.run_all()
+        logger.info("--- PHASE 02 COMPLETED ---")
+    except ELSTRIXError as e:
+        logger.error(f"Phase 02 Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error in Phase 02: {e}", exc_info=True)
+        sys.exit(1)
+
 def main():
     initialize()
-    logger.info("EL-STRIX foundation is ready. (Generation phases not yet implemented)")
+    logger.info("EL-STRIX foundation is ready.")
+    run_phase_02()
 
 if __name__ == "__main__":
     main()
