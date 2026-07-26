@@ -29,7 +29,6 @@ def test_path_manager_directories(tmp_path, monkeypatch):
     monkeypatch.setattr(PathManager, "ASSET_IMAGE_DIR", tmp_path / "assets/image")
     monkeypatch.setattr(PathManager, "ASSET_ASCII_DIR", tmp_path / "assets/ascii")
     monkeypatch.setattr(PathManager, "ASSET_SVG_DIR", tmp_path / "assets/svg")
-    monkeypatch.setattr(PathManager, "ASSET_TEMPLATE_DIR", tmp_path / "assets/template")
     monkeypatch.setattr(PathManager, "TEMPLATES_DIR", tmp_path / "templates")
 
     PathManager.ensure_directories()
