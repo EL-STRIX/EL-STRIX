@@ -288,21 +288,9 @@ class StatisticsEngine:
 
     def _calculate_featured_projects(self) -> list[dict[str, Any]]:
         """Rank repositories for featuring."""
-        rankings = []
-        for r in self.repos_data:
-            if r.get("fork"):
-                continue
-            stars = r.get("stargazers_count", 0)
-            forks = r.get("forks_count", 0)
-            size = r.get("size", 0)
-            score = (stars * 10) + (forks * 5) + (size * 0.01)
-            rankings.append({
-                "repository": r.get("name"),
-                "score": round(score, 2),
-                "metrics": {"stars": stars, "forks": forks, "size": size}
-            })
-        
-        return sorted(rankings, key=lambda x: x["score"], reverse=True)
+        from projects import select_featured, format_featured
+        selected = select_featured(self.repos_data, max_count=6)
+        return format_featured(selected)
 
     def _calculate_trends(self) -> dict[str, Any]:
         return {

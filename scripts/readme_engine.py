@@ -8,7 +8,6 @@ from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
-from projects import format_featured, select_featured
 from utils.json_helpers import load_json
 
 
@@ -47,14 +46,8 @@ class ReadmeEngine:
             fork_stats = stats.get("forks", {})
             lang_stats = stats.get("languages", {})
             
-            # Load featured projects
-            repos_path = PathManager.GENERATED_JSON_DIR / "repos.json"
-            repos_data = load_json(repos_path)
-            
-            featured_repos = []
-            if isinstance(repos_data, list) and repos_data:
-                selected = select_featured(repos_data, max_count=6)
-                featured_repos = format_featured(selected)
+            # Load featured projects from stats payload (Pre-computed in Phase 03)
+            featured_repos = stats.get("featured_projects", [])
                 
             # Timestamp
             last_updated = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")

@@ -14,7 +14,7 @@ class SVGRenderer:
     """Complete SVG Profile Rendering Engine (Phase 05)."""
 
     def __init__(self, output_dir: str | None = None):
-        self.output_dir = output_dir or str(PathManager.GENERATED_SVG_DIR)
+        self.output_dir = output_dir or str(PathManager.ASSET_SVG_DIR)
         ensure_dir(self.output_dir)
         
         self.width = 1200
