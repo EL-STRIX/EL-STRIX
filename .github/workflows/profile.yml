@@ -36,7 +36,7 @@ jobs:
           python scripts/main.py
 
       - name: Commit and Push Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v7
         with:
           commit_message: "chore: auto-update generated banner & profile data [skip ci]"
           file_pattern: 'generated/* README.md assets/*'
