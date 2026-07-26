@@ -24,9 +24,8 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
 
         # Terminal dimensions sized for GitHub's ~880px README column.
-        # This prevents GitHub from downscaling the SVG.
         self.width = 880
-        self.left_panel_width = 340
+        self.left_panel_width = 280
         self.font_family = "monospace"
 
         try:
@@ -79,7 +78,7 @@ class SVGRenderer:
         self,
         parts: list[tuple[str, str]],
         y: int,
-        font_size: int = 15,
+        font_size: int = 18,
     ) -> str:
         """Render a single line of terminal text with multiple colored spans."""
         svg = f'<text x="0" y="{y}" xml:space="preserve" font-size="{font_size}">'
@@ -89,12 +88,8 @@ class SVGRenderer:
         svg += '</text>\n'
         return svg
 
-    # ------------------------------------------------------------------
-    # Layout helpers
-    # ------------------------------------------------------------------
-
     @staticmethod
-    def _dots(key: str, val: str, total: int = 60) -> str:
+    def _dots(key: str, val: str, total: int = 50) -> str:
         """Return a dot-padded string that right-aligns val at column total."""
         n = total - len(key) - len(val) - 5
         if n < 2:
@@ -102,16 +97,12 @@ class SVGRenderer:
         return "." * n
 
     @staticmethod
-    def _dashes(title: str, total: int = 60) -> str:
+    def _dashes(title: str, total: int = 50) -> str:
         """Return dashes to fill the rest of a section header line."""
         n = total - len(title) - 1
         if n < 0:
             n = 0
         return "\u2500" * n
-
-    # ------------------------------------------------------------------
-    # Main render
-    # ------------------------------------------------------------------
 
     def render(self) -> None:
         """Execute the dynamic layout engine and render SVGs."""
@@ -125,9 +116,9 @@ class SVGRenderer:
                 bg = "#0d1117"
                 text_main = "#c9d1d9"
                 text_dim = "#4d5566"
-                text_key = "#e3b341"   # Gold / Orange
-                text_val = "#79c0ff"   # Blue
-                text_green = "#7ee787"  # Green for header
+                text_key = "#e3b341"
+                text_val = "#79c0ff"
+                text_green = "#7ee787"
             else:
                 bg = "#ffffff"
                 text_main = "#24292f"
@@ -140,9 +131,9 @@ class SVGRenderer:
 
             # Right-panel layout constants
             right_svg = ""
-            y = 35           # starting y offset
-            lh = 24          # line height
-            DOT_WIDTH = 60   # character width for dot-alignment
+            y = 40
+            lh = 28
+            DOT_WIDTH = 50
 
             # ── Header ────────────────────────────────────────────
             right_svg += self._render_line([
@@ -156,7 +147,7 @@ class SVGRenderer:
                 ("OS",          "Windows, Linux, Android"),
                 ("Tooling",     "VS Code, ZBrains IDE, Git"),
                 ("Programming", "C, C++, Java, Go, Python, JS, PHP"),
-                ("Frontend",    "HTML5, CSS3, Tailwind, Bootstrap, React"),
+                ("Frontend",    "HTML, CSS, Tailwind, Bootstrap, React"),
                 ("Backend",     "Node.js, Express"),
                 ("Database",    "MySQL"),
                 ("Tools",       "Git, GitHub Actions, Vercel"),
@@ -173,7 +164,7 @@ class SVGRenderer:
                 ], y)
                 y += lh
 
-            y += lh  # section gap
+            y += lh
 
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
@@ -184,10 +175,10 @@ class SVGRenderer:
 
             contacts = [
                 ("Portfolio", "development phase"),
-                ("LinkedIn",  "linkedin.com/in/sujay-paul-684537374"),
+                ("LinkedIn",  "linkedin.com/in/sujay-paul"),
                 ("GitHub",    "github.com/EL-STRIX"),
                 ("Email",     "sujaypaul892@gmail.com"),
-                ("Location",  "Barasat, Kolkata, West Bengal, India"),
+                ("Location",  "Kolkata, West Bengal, India"),
             ]
 
             for key, val in contacts:
@@ -210,8 +201,8 @@ class SVGRenderer:
             y += lh
 
             projects = [
-                ("C Games Collection",    "Complete"),
-                ("Finzo Banking System",   "Development Phase"),
+                ("C Games Collection",   "Complete"),
+                ("Finzo Banking System",  "Development Phase"),
             ]
 
             for name, status in projects:
@@ -244,7 +235,7 @@ class SVGRenderer:
                  "Releases",      self.stats.get("releases", {}).get("total_releases", 0)),
             ]
 
-            COL = 32
+            COL = 27
             for k1, v1, k2, v2 in stats_pairs:
                 v1s, v2s = str(v1), str(v2)
                 d1 = max(COL - len(k1) - len(v1s) - 4, 2)
@@ -266,13 +257,13 @@ class SVGRenderer:
             # ── Footer ────────────────────────────────────────────
             now = datetime.now(UTC).strftime("%d %b %Y")
             right_svg += self._render_line([
-                (f"Generated by GitHub Actions. Last Run: {now}", text_dim),
-            ], y, font_size=12)
+                (f"Auto-generated by GitHub Actions: {now}", text_dim),
+            ], y, font_size=14)
 
             final_height = max(y + 30, 500)
 
             # ── Compose final SVG ─────────────────────────────────
-            right_x = self.left_panel_width + 30
+            right_x = self.left_panel_width + 20
 
             svg = f'''<svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 {self.width} {final_height}"
@@ -288,7 +279,7 @@ class SVGRenderer:
     }}
     .ascii {{
       font-family: {self.font_family};
-      font-size: 8px;
+      font-size: 10px;
       fill: {text_main};
       white-space: pre;
     }}
