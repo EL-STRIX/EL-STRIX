@@ -24,8 +24,8 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
 
         # Terminal dimensions sized for maximum GitHub README width.
-        self.width = 1200
-        self.left_panel_width = 420
+        self.width = 1400
+        self.left_panel_width = 600
         self.font_family = "monospace"
 
         try:
