@@ -245,7 +245,7 @@ class SVGRenderer:
 
             COL = 49
             d1 = max(COL - 23 - len(repo_cnt) - len(private_cnt), 2)
-            d2 = max(98 - COL - 10 - len(stars), 2)
+            d2 = max(98 - COL - 17 - len(stars), 2)
             
             stats_svg += self._render_line([
                 (". ", text_dim),
@@ -254,7 +254,7 @@ class SVGRenderer:
                 (f"{repo_cnt} ", text_main),
                 (f"{{Private: {private_cnt}}} ", text_key),
                 ("| ", text_dim),
-                ("Stars: ", text_key),
+                ("Stars Earned: ", text_key),
                 ("." * d2 + " ", text_dim),
                 (stars, text_main),
             ], y)
