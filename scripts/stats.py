@@ -23,6 +23,7 @@ class StatisticsEngine:
         if not isinstance(self.repos_data, list):
             self.repos_data = []
         self.contrib_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "contributions.json")
+        self.loc_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "loc_stats.json")
         self.stats: dict[str, Any] = {}
 
     def process_all(self) -> dict[str, Any]:
@@ -45,6 +46,7 @@ class StatisticsEngine:
             "forks": self._calculate_fork_stats(),
             "commits": self._calculate_commit_stats(),
             "contributions": self._calculate_contribution_stats(),
+            "loc": self._calculate_loc_stats(),
             "languages": self._calculate_language_stats(),
             "activity": self._calculate_repo_activity(),
             "releases": self._calculate_release_stats(),
@@ -217,6 +219,25 @@ class StatisticsEngine:
             "weekly_contributions": {},
             "monthly_contributions": {},
             "yearly_contributions": total
+        }
+
+    def _calculate_loc_stats(self) -> dict[str, Any]:
+        """Calculate lines of code additions and deletions."""
+        additions = 0
+        deletions = 0
+        
+        if self.loc_data and isinstance(self.loc_data, dict):
+            for repo_name, data in self.loc_data.items():
+                weeks = data.get("weeks", [])
+                for week in weeks:
+                    additions += week.get("a", 0)
+                    deletions += week.get("d", 0)
+                    
+        return {
+            "additions": additions,
+            "deletions": deletions,
+            "total": additions - deletions,
+            "total_lines": additions + deletions
         }
 
     def _calculate_language_stats(self) -> dict[str, Any]:

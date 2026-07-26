@@ -225,20 +225,26 @@ class SVGRenderer:
             ], y)
             y += lh
 
-            repo_cnt = str(self.stats.get("📦 Repositories", {}).get("repository_count", 0))
-            contrib_cnt = str(self.stats.get("🔥Contributions", {}).get("total_contributions", 0))
-            stars = str(self.stats.get("⭐ Stars", {}).get("total_stars", 0))
-            commits = str(self.stats.get("📝 Commits", {}).get("total_commits", 0))
-            followers = str(self.stats.get("👥 Followers", {}).get("total_followers", 0))
+            repo_cnt = str(self.stats.get("repositories", {}).get("repository_count", 0))
+            private_cnt = str(self.stats.get("repositories", {}).get("private_repository_count", 0))
+            stars = str(self.stats.get("stars", {}).get("total_stars", 0))
+            commits = str(self.stats.get("commits", {}).get("total_commits", 0))
+            followers = str(self.stats.get("profile", {}).get("total_followers", 0))
             
-            # Using placeholder for LOC since GitHub API doesn't provide it directly
-            loc = "446,276"
-            loc_add = "523,178"
-            loc_del = "76,902"
+            # Retrieve and format LOC dynamically
+            loc_stats = self.stats.get("loc", {})
+            additions = loc_stats.get("additions", 0)
+            deletions = loc_stats.get("deletions", 0)
+            total_loc = loc_stats.get("total_lines", 0)
+            
+            loc = f"{total_loc:,}"
+            loc_add = f"{additions:,}"
+            loc_del = f"{deletions:,}"
+            
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
             COL = 49
-            d1 = max(COL - 27 - len(repo_cnt) - len(contrib_cnt), 2)
+            d1 = max(COL - 23 - len(repo_cnt) - len(private_cnt), 2)
             d2 = max(98 - COL - 10 - len(stars), 2)
             
             stats_svg += self._render_line([
@@ -246,7 +252,7 @@ class SVGRenderer:
                 ("Repos: ", text_key),
                 ("." * d1 + " ", text_dim),
                 (f"{repo_cnt} ", text_main),
-                (f"{{Contributed: {contrib_cnt}}} ", text_key),
+                (f"{{Private: {private_cnt}}} ", text_key),
                 ("| ", text_dim),
                 ("Stars: ", text_key),
                 ("." * d2 + " ", text_dim),

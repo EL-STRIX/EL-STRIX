@@ -2,7 +2,7 @@ name: EL-STRIX Automation Engine
 
 on:
   schedule:
-    - cron: '0 */12 * * *' # Run every 12 hours
+    - cron: '0 0 * * *' # Run every 24 hours at midnight UTC
   workflow_dispatch:
   push:
     branches:
@@ -43,3 +43,10 @@ jobs:
           GITHUB_ACTIONS: "true"
         run: |
           python scripts/main.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/svg/ generated/
+          git diff --quiet && git diff --staged --quiet || (git commit -m "chore: Update GitHub Stats & SVGs" && git push)

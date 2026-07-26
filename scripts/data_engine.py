@@ -41,7 +41,10 @@ class DataEngine:
         # 6. Releases
         self.fetch_releases()
         
-        # 7. Recent Activity (Events)
+        # 7. Lines of Code Stats
+        self.fetch_loc_stats()
+        
+        # 8. Recent Activity (Events)
         self.fetch_recent_activity()
         
         logger.info("Data Engine pipeline completed successfully.")
@@ -58,9 +61,10 @@ class DataEngine:
         self.client.download_avatar(avatar_url)
 
     def fetch_repositories(self) -> None:
-        """Fetch all repositories for the user."""
+        """Fetch all repositories for the user, including private ones if the token has access."""
         logger.info("Fetching repositories...")
-        repos = self.client.rest_request("GET", f"/users/{self.username}/repos?per_page=100", paginated=True)
+        # Use /user/repos instead of /users/{username}/repos to get private repositories for the authenticated user
+        repos = self.client.rest_request("GET", "/user/repos?type=owner&per_page=100", paginated=True)
         save_json(repos, PathManager.GENERATED_JSON_DIR / "repos.json")
 
     def fetch_contributions(self) -> None:
@@ -186,6 +190,42 @@ class DataEngine:
                 all_releases[repo["name"]] = repo_releases
                 
         save_json(all_releases, PathManager.GENERATED_JSON_DIR / "releases.json")
+
+    def fetch_loc_stats(self) -> None:
+        """Fetch contributor stats for LOC calculation."""
+        logger.info("Fetching Lines of Code (LOC) statistics...")
+        repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
+        
+        loc_stats = {}
+        if repos_file.exists():
+            import json
+            with open(repos_file, "r", encoding="utf-8") as f:
+                repos = json.load(f)
+                
+            for repo in repos:
+                # Skip forks to avoid taking credit for huge copied codebases
+                if repo.get("fork"): continue
+                repo_name = repo.get("name")
+                owner = repo.get("owner", {}).get("login")
+                if not owner or not repo_name: continue
+                
+                # Fetch contributor stats
+                endpoint = f"/repos/{owner}/{repo_name}/stats/contributors"
+                try:
+                    stats = self.client.rest_request("GET", endpoint, use_cache=True)
+                    if isinstance(stats, list):
+                        for contributor in stats:
+                            author = contributor.get("author") or {}
+                            if author.get("login") == self.username:
+                                loc_stats[repo_name] = {
+                                    "total_commits": contributor.get("total", 0),
+                                    "weeks": contributor.get("weeks", [])
+                                }
+                                break
+                except Exception as e:
+                    logger.warning(f"Could not fetch LOC for {repo_name}: {e}")
+                    
+        save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
 
     def fetch_recent_activity(self) -> None:
         """Fetch recent events from the user."""
