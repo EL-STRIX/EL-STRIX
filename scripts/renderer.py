@@ -18,9 +18,9 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
         
         # New terminal dimensions
-        self.width = 1350
-        self.left_panel_width = 500
-        self.right_panel_width = 850
+        self.width = 1800
+        self.left_panel_width = 750
+        self.right_panel_width = 1000
         self.min_height = 800
         
         try:
@@ -71,7 +71,7 @@ class SVGRenderer:
             logger.error(f"Error reading ASCII SVG content: {e}")
             return ""
 
-    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 15) -> str:
+    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 18) -> str:
         """Render a single line of terminal text with multiple colors."""
         svg = f'<text x="0" y="{current_y}" xml:space="preserve" font-size="{font_size}" class="cli-text">'
         for text, color in parts:
@@ -107,9 +107,9 @@ class SVGRenderer:
             
             right_panel_svg = ""
             current_y = 60
-            line_height = 25
+            line_height = 30
             
-            MAX_LEN = 75
+            MAX_LEN = 80
             
             def render_section_header(title: str):
                 dash_count = MAX_LEN - len(title) - 1
@@ -264,7 +264,7 @@ class SVGRenderer:
     </g>
 
     <!-- Right Panel (Profile and Statistics) -->
-    <g transform="translate({self.left_panel_width + 80}, 0)">
+    <g transform="translate({self.left_panel_width + 120}, 0)">
         {right_panel_svg}
     </g>
 </svg>'''
