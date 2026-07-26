@@ -18,9 +18,9 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
         
         # New terminal dimensions
-        self.width = 1400
-        self.left_panel_width = 450
-        self.right_panel_width = 900
+        self.width = 1800
+        self.left_panel_width = 750
+        self.right_panel_width = 1000
         self.min_height = 800
         
         try:
@@ -71,7 +71,7 @@ class SVGRenderer:
             logger.error(f"Error reading ASCII SVG content: {e}")
             return ""
 
-    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 16) -> str:
+    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 18) -> str:
         """Render a single line of terminal text with multiple colors."""
         svg = f'<text x="0" y="{current_y}" xml:space="preserve" font-size="{font_size}" class="cli-text">'
         for text, color in parts:
@@ -107,9 +107,9 @@ class SVGRenderer:
             
             right_panel_svg = ""
             current_y = 60
-            line_height = 26
+            line_height = 30
             
-            MAX_LEN = 75
+            MAX_LEN = 80
             
             def render_section_header(title: str):
                 dash_count = MAX_LEN - len(title) - 1
@@ -205,12 +205,12 @@ class SVGRenderer:
             
             for k1, v1, k2, v2 in stats_data:
                 # Format: . Repos: .... 95 | Stars: ............ 342
-                col1_len = 36
+                col1_len = 38
                 dots1_count = col1_len - len(k1) - len(v1) - 4
                 if dots1_count < 2: dots1_count = 2
                 dots1 = "." * dots1_count
                 
-                col2_len = 36
+                col2_len = 38
                 dots2_count = col2_len - len(k2) - len(v2) - 3
                 if dots2_count < 2: dots2_count = 2
                 dots2 = "." * dots2_count
@@ -250,7 +250,7 @@ class SVGRenderer:
         }}
         .ascii-text {{ 
             font-family: monospace; 
-            font-size: 13px; 
+            font-size: 16px; 
             fill: {text_main}; 
             white-space: pre; 
         }}
@@ -264,7 +264,7 @@ class SVGRenderer:
     </g>
 
     <!-- Right Panel (Profile and Statistics) -->
-    <g transform="translate({self.left_panel_width + 40}, 0)">
+    <g transform="translate({self.left_panel_width + 60}, 0)">
         {right_panel_svg}
     </g>
 </svg>'''
