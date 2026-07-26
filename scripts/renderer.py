@@ -25,7 +25,7 @@ class SVGRenderer:
 
         # Terminal dimensions sized for GitHub's ~880px README column.
         self.width = 880
-        self.left_panel_width = 280
+        self.left_panel_width = 340
         self.font_family = "monospace"
 
         try:
