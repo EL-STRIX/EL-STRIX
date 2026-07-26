@@ -24,7 +24,7 @@ class SVGRenderer:
         ensure_dir(self.output_dir)
 
         # Terminal dimensions sized for maximum GitHub README width.
-        self.width = 1900
+        self.width = 1850
         self.left_panel_width = 660
         self.font_family = "monospace"
 
@@ -78,7 +78,7 @@ class SVGRenderer:
         self,
         parts: list[tuple[str, str]],
         y: int,
-        font_size: int = 30,
+        font_size: int = 32,
     ) -> str:
         """Render a single line of terminal text with multiple colored spans."""
         svg = f'<text x="0" y="{y}" xml:space="preserve" font-size="{font_size}">'
@@ -99,7 +99,7 @@ class SVGRenderer:
     @staticmethod
     def _dashes(title: str, total: int = 50) -> str:
         """Return dashes to fill the rest of a section header line."""
-        n = total - len(title) - 1
+        n = total - len(title)
         if n < 0:
             n = 0
         return "\u2500" * n
@@ -132,7 +132,7 @@ class SVGRenderer:
             # Right-panel layout constants
             right_svg = ""
             y = 30
-            lh = 42
+            lh = 46
             DOT_WIDTH = 46
 
             # ── Header ────────────────────────────────────────────
@@ -236,9 +236,9 @@ class SVGRenderer:
             loc_del = "76,902"
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
-            COL = 32
-            d1 = max(COL - len("Repos:") - len(repo_cnt) - len(contrib_cnt) - 17, 2)
-            d2 = max(60 - COL - len("Stars:") - len(stars) - 5, 2)
+            COL = 36
+            d1 = max(COL - 27 - len(repo_cnt) - len(contrib_cnt), 2)
+            d2 = max(50 - COL - len(stars), 2)
             
             right_svg += self._render_line([
                 (". ", text_dim),
@@ -253,8 +253,8 @@ class SVGRenderer:
             ], y)
             y += lh
 
-            d1 = max(COL - len("Commits:") - len(commits) - 2, 2)
-            d2 = max(60 - COL - len("Followers:") - len(followers) - 5, 2)
+            d1 = max(COL - 13 - len(commits), 2)
+            d2 = max(46 - COL - len(followers), 2)
             right_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
@@ -275,7 +275,7 @@ class SVGRenderer:
                 (f"{loc_add}++", text_green),
                 (",  ", text_dim),
                 (f"{loc_del}-- ", color_red),
-                (") ", text_dim),
+                (")", text_dim),
             ], y)
             y += lh
 
