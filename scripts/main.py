@@ -57,6 +57,20 @@ def run_phase_02():
         logger.critical(f"Unexpected error in Phase 02: {e}", exc_info=True)
         sys.exit(1)
 
+def run_phase_03():
+    """Execute Phase 03: Statistics Engine."""
+    try:
+        from stats import process_statistics
+        logger.info("--- PHASE 03: STATISTICS ENGINE ---")
+        process_statistics()
+        logger.info("--- PHASE 03 COMPLETED ---")
+    except ELSTRIXError as e:
+        logger.error(f"Phase 03 Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error in Phase 03: {e}", exc_info=True)
+        sys.exit(1)
+
 def run_phase_04():
     """Execute Phase 04: Avatar Processing Engine."""
     try:
@@ -83,12 +97,27 @@ def run_phase_05():
         logger.critical(f"Unexpected error in Phase 05: {e}", exc_info=True)
         sys.exit(1)
 
+def run_phase_06():
+    """Execute Phase 06: README Generator Engine."""
+    try:
+        from readme_engine import ReadmeEngine
+        engine = ReadmeEngine()
+        engine.run()
+    except ELSTRIXError as e:
+        logger.error(f"Phase 06 Failed: {e}")
+        sys.exit(1)
+    except Exception as e:
+        logger.critical(f"Unexpected error in Phase 06: {e}", exc_info=True)
+        sys.exit(1)
+
 def main():
     initialize()
     logger.info("EL-STRIX foundation is ready.")
     run_phase_02()
+    run_phase_03()
     run_phase_04()
     run_phase_05()
+    run_phase_06()
 
 if __name__ == "__main__":
     main()
