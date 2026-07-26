@@ -1,42 +1,89 @@
 {
   "profile": {
-    "total_public_repositories": 0,
-    "total_followers": 0,
-    "total_following": 0,
-    "profile_creation_date": null,
-    "days_since_account_creation": 0,
-    "account_age_years": 0.0
+    "total_public_repositories": 4,
+    "total_followers": 6,
+    "total_following": 12,
+    "profile_creation_date": "2025-03-21T15:07:47Z",
+    "days_since_account_creation": 492,
+    "account_age_years": 1.35
   },
   "repositories": {
-    "repository_count": 0,
-    "public_repository_count": 0,
+    "repository_count": 4,
+    "public_repository_count": 4,
     "private_repository_count": 0,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 0,
-    "active_repository_count": 0,
-    "repository_growth": 0
+    "original_repository_count": 4,
+    "active_repository_count": 4,
+    "repository_growth": 4
   },
   "stars": {
-    "total_stars": 0,
-    "average_stars": 0.0
+    "total_stars": 3,
+    "average_stars": 0.75,
+    "most_starred_repository": "Faculty-Subject-Allocation",
+    "least_starred_repository": "LUMINA",
+    "star_ranking": [
+      {
+        "repository": "Faculty-Subject-Allocation",
+        "stars": 2
+      },
+      {
+        "repository": "C-GAMES-COLLECTION",
+        "stars": 1
+      },
+      {
+        "repository": "EL-STRIX",
+        "stars": 0
+      },
+      {
+        "repository": "LUMINA",
+        "stars": 0
+      }
+    ],
+    "star_distribution": {
+      "0": 2,
+      "1-10": 2,
+      "11-50": 0,
+      "51-100": 0,
+      "100+": 0
+    }
   },
   "forks": {
-    "total_forks": 0
+    "total_forks": 2,
+    "average_forks": 0.5,
+    "most_forked_repository": "Faculty-Subject-Allocation",
+    "repository_fork_rankings": [
+      {
+        "repository": "Faculty-Subject-Allocation",
+        "forks": 2
+      },
+      {
+        "repository": "C-GAMES-COLLECTION",
+        "forks": 0
+      },
+      {
+        "repository": "EL-STRIX",
+        "forks": 0
+      },
+      {
+        "repository": "LUMINA",
+        "forks": 0
+      }
+    ]
   },
   "commits": {
-    "total_commits": 0,
+    "total_commits": 58,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 0,
+    "total_contributions": 141,
     "daily_contributions": {},
     "weekly_contributions": {},
     "monthly_contributions": {},
-    "yearly_contributions": 0
+    "yearly_contributions": 141
   },
   "loc": {
     "additions": 0,
@@ -45,13 +92,45 @@
     "total_lines": 0
   },
   "languages": {
-    "languages_used": 0,
-    "total_bytes": 0,
-    "most_used_language": null,
-    "percentage_per_language": {},
-    "language_ranking": []
+    "languages_used": 4,
+    "total_bytes": 7616512,
+    "most_used_language": "HTML",
+    "percentage_per_language": {
+      "HTML": 36.03,
+      "PHP": 30.55,
+      "C": 27.59,
+      "Python": 5.83
+    },
+    "language_ranking": [
+      {
+        "language": "HTML",
+        "bytes": 2744320,
+        "percentage": 36.03
+      },
+      {
+        "language": "PHP",
+        "bytes": 2326528,
+        "percentage": 30.55
+      },
+      {
+        "language": "C",
+        "bytes": 2101248,
+        "percentage": 27.59
+      },
+      {
+        "language": "Python",
+        "bytes": 444416,
+        "percentage": 5.83
+      }
+    ]
   },
-  "activity": {},
+  "activity": {
+    "most_recently_updated_repository": "EL-STRIX",
+    "recently_created_repository": "EL-STRIX",
+    "oldest_repository": "Faculty-Subject-Allocation",
+    "most_active_repository": null,
+    "least_active_repository": null
+  },
   "releases": {
     "total_releases": 0,
     "latest_release": null,
@@ -65,12 +144,41 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 0,
+    "total_pull_requests": 2,
     "open_pull_requests": 0,
     "closed_pull_requests": 0,
     "merged_pull_requests": 0
   },
-  "featured_projects": [],
+  "featured_projects": [
+    {
+      "name": "Faculty-Subject-Allocation",
+      "description": "Subject Allocation System Academic Year 2025 – 2026  | ",
+      "url": "https://github.com/EL-STRIX/Faculty-Subject-Allocation",
+      "language": "PHP",
+      "stars": "2"
+    },
+    {
+      "name": "C-GAMES-COLLECTION",
+      "description": "Modern GTK4 game collection built in C with a polished desktop experience.",
+      "url": "https://github.com/EL-STRIX/C-GAMES-COLLECTION",
+      "language": "C",
+      "stars": "1"
+    },
+    {
+      "name": "EL-STRIX",
+      "description": "No description provided.",
+      "url": "https://github.com/EL-STRIX/EL-STRIX",
+      "language": "Python",
+      "stars": "0"
+    },
+    {
+      "name": "LUMINA",
+      "description": "Discover Your Next Great Read. Demo Project.",
+      "url": "https://github.com/EL-STRIX/LUMINA",
+      "language": "HTML",
+      "stars": "0"
+    }
+  ],
   "trends": {
     "repository_growth": [],
     "star_growth": [],
@@ -79,14 +187,14 @@
   },
   "recent_activity": {
     "latest_commit": null,
-    "latest_repository": null,
+    "latest_repository": "EL-STRIX",
     "latest_release": null,
-    "latest_update": null
+    "latest_update": "EL-STRIX"
   },
   "summary": {
-    "repository_summary": "Creator of 0 repositories.",
-    "language_summary": "Primary language is None.",
-    "activity_summary": "Most recently working on None.",
-    "community_summary": "Received 0 stars across all projects."
+    "repository_summary": "Creator of 4 repositories.",
+    "language_summary": "Primary language is HTML.",
+    "activity_summary": "Most recently working on EL-STRIX.",
+    "community_summary": "Received 3 stars across all projects."
   }
 }
