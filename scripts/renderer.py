@@ -71,9 +71,9 @@ class SVGRenderer:
             logger.error(f"Error reading ASCII SVG content: {e}")
             return ""
 
-    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 14) -> str:
+    def _render_terminal_line(self, parts: list[tuple[str, str]], current_y: int, font_size: int = 16) -> str:
         """Render a single line of terminal text with multiple colors."""
-        svg = f'<text x="0" y="{current_y}" xml:space="preserve" font-size="{font_size}">'
+        svg = f'<text x="0" y="{current_y}" xml:space="preserve" font-size="{font_size}" class="cli-text">'
         for text, color in parts:
             escaped_text = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
             svg += f'<tspan fill="{color}">{escaped_text}</tspan>'
@@ -106,15 +106,19 @@ class SVGRenderer:
             ascii_content = self._get_ascii_svg_content(mode)
             
             right_panel_svg = ""
-            current_y = 50
-            line_height = 24
+            current_y = 80
+            line_height = 28
+            
+            prompt_user = "sujay@EL-STRIX"
+            prompt_char = ":~$ "
             
             # Header
             right_panel_svg += self._render_terminal_line([
-                ("sujay@EL-STRIX ", text_main),
-                ("-" * 65, text_dim)
+                (prompt_user, text_highlight),
+                (prompt_char, text_main),
+                ("neofetch", text_val)
             ], current_y)
-            current_y += line_height
+            current_y += line_height * 2
             
             # Tech Stack
             tech_stack = [
@@ -128,13 +132,18 @@ class SVGRenderer:
                 ("Languages", "English • Bengali • Hindi")
             ]
             
+            right_panel_svg += self._render_terminal_line([
+                (prompt_user, text_highlight),
+                (prompt_char, text_main),
+                ("cat stack.txt", text_val)
+            ], current_y)
+            current_y += line_height
+            
             for key, val in tech_stack:
-                dots = "." * (18 - len(key))
+                padded_key = key.ljust(15)
                 right_panel_svg += self._render_terminal_line([
-                    (". ", text_dim),
-                    (key + ": ", text_key),
-                    (dots + " ", text_dim),
-                    (val, text_val)
+                    (padded_key, text_key),
+                    (val, text_main)
                 ], current_y)
                 current_y += line_height
                 
@@ -142,8 +151,9 @@ class SVGRenderer:
             
             # Contact
             right_panel_svg += self._render_terminal_line([
-                ("- Contact ", text_main),
-                ("-" * 69, text_dim)
+                (prompt_user, text_highlight),
+                (prompt_char, text_main),
+                ("cat contact.txt", text_val)
             ], current_y)
             current_y += line_height
             
@@ -156,12 +166,10 @@ class SVGRenderer:
             ]
             
             for key, val in contacts:
-                dots = "." * (18 - len(key))
+                padded_key = key.ljust(15)
                 right_panel_svg += self._render_terminal_line([
-                    (". ", text_dim),
-                    (key + ": ", text_key),
-                    (dots + " ", text_dim),
-                    (val, text_val)
+                    (padded_key, text_key),
+                    (val, text_main)
                 ], current_y)
                 current_y += line_height
                 
@@ -169,19 +177,20 @@ class SVGRenderer:
             
             # Featured Projects
             right_panel_svg += self._render_terminal_line([
-                ("- Featured Projects ", text_main),
-                ("-" * 59, text_dim)
+                (prompt_user, text_highlight),
+                (prompt_char, text_main),
+                ("ls -l featured_projects/", text_val)
             ], current_y)
             current_y += line_height
             
             projects = [
                 "🎮 C Games Collection",
-                "🏦 Finzo Banking System(Development Phase)(auto generate every day through the python code)"
+                "🏦 Finzo Banking System(Development Phase)"
             ]
             
             for proj in projects:
                 right_panel_svg += self._render_terminal_line([
-                    (". ", text_dim),
+                    ("-rw-r--r--  1 sujay  sujay  4096 Jul 26 12:00  ", text_dim),
                     (proj, text_val)
                 ], current_y)
                 current_y += line_height
@@ -190,8 +199,9 @@ class SVGRenderer:
             
             # GitHub Stats
             right_panel_svg += self._render_terminal_line([
-                ("- GitHub Stats ", text_main),
-                ("-" * 64, text_dim)
+                (prompt_user, text_highlight),
+                (prompt_char, text_main),
+                ("github-stats", text_val)
             ], current_y)
             current_y += line_height
             
@@ -210,17 +220,13 @@ class SVGRenderer:
             ]
             
             for k1, v1, k2, v2 in stats_data:
-                dots1 = "." * (16 - len(k1))
-                dots2 = "." * (16 - len(k2))
-                val1_pad = v1.ljust(8)
+                k1_pad = k1.ljust(15)
+                v1_pad = v1.ljust(15)
+                k2_pad = k2.ljust(15)
                 right_panel_svg += self._render_terminal_line([
-                    (". ", text_dim),
-                    (k1 + " ", text_key),
-                    (dots1 + " ", text_dim),
-                    (val1_pad + " ", text_highlight),
-                    ("| ", text_dim),
-                    (k2 + " ", text_key),
-                    (dots2 + " ", text_dim),
+                    (k1_pad, text_key),
+                    (v1_pad, text_highlight),
+                    (k2_pad, text_key),
                     (v2, text_highlight)
                 ], current_y)
                 current_y += line_height
@@ -231,30 +237,47 @@ class SVGRenderer:
             now = datetime.now(UTC).strftime("%d %b %Y")
             
             right_panel_svg += self._render_terminal_line([
-                (f"Generated Automatically : Updated Every 12 Hours Powered by GitHub Actions Last Updated: {now}", text_dim)
-            ], current_y, font_size=12)
+                (f"sujay@EL-STRIX:~# ", text_highlight),
+                (f"echo 'Updated Every 12 Hours by GitHub Actions. Last Run: {now}'", text_dim)
+            ], current_y, font_size=14)
             
             final_height = current_y + 40
+            
+            # Terminal Window Bar Colors
+            bar_bg = "#161b22" if mode == "dark" else "#f6f8fa"
+            bar_border = "#30363d" if mode == "dark" else "#d0d7de"
             
             # Master SVG Template
             svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {self.width} {final_height}" width="{self.width}" height="{final_height}">
     <!-- Background -->
     <rect width="100%" height="100%" fill="{bg}" rx="12"/>
     
+    <!-- Terminal Header Bar -->
+    <path d="M 0 12 Q 0 0 12 0 L {self.width - 12} 0 Q {self.width} 0 {self.width} 12 L {self.width} 40 L 0 40 Z" fill="{bar_bg}"/>
+    <line x1="0" y1="40" x2="{self.width}" y2="40" stroke="{bar_border}" stroke-width="1"/>
+    
+    <!-- Mac OS Buttons -->
+    <circle cx="20" cy="20" r="6" fill="#ff5f56"/>
+    <circle cx="40" cy="20" r="6" fill="#ffbd2e"/>
+    <circle cx="60" cy="20" r="6" fill="#27c93f"/>
+    
+    <!-- Terminal Title -->
+    <text x="{self.width // 2}" y="25" fill="{text_dim}" font-family="{self.font_family}" font-size="14" text-anchor="middle">sujay@EL-STRIX : ~</text>
+    
     <style>
-        text {{
+        .cli-text {{
             font-family: {self.font_family};
         }}
         .ascii-text {{ 
             font-family: monospace; 
-            font-size: 11px; 
+            font-size: 13px; 
             fill: {text_main}; 
             white-space: pre; 
         }}
     </style>
     
     <!-- Left Panel (ASCII Avatar) -->
-    <g transform="translate(20, 20)">
+    <g transform="translate(20, 60)">
         <g class="ascii-text">
             {ascii_content}
         </g>
