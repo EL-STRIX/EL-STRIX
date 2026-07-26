@@ -1,7 +1,10 @@
 """Banner and content data generator module."""
 
 from typing import Any, Dict
-from utils import logger, save_json
+from pathlib import Path
+from logger import logger
+from utils.json_helpers import load_json, save_json
+from paths import PathManager
 
 
 class ProfileGenerator:
@@ -10,22 +13,27 @@ class ProfileGenerator:
     def __init__(self, username: str = "EL-STRIX"):
         self.username = username
 
-    def generate_data(self, profile_info: Dict[str, Any], repos: list) -> Dict[str, Any]:
-        """Process raw user data into structured data for rendering."""
-        total_stars = sum(repo.get("stargazers_count", 0) for repo in repos if isinstance(repo, dict))
-        total_forks = sum(repo.get("forks_count", 0) for repo in repos if isinstance(repo, dict))
+    def generate_data(self) -> Dict[str, Any]:
+        """Process raw user data into structured data for rendering, using Phase 03 statistics."""
+        stats_path = PathManager.GENERATED_STATS_DIR / "processed_statistics.json"
+        stats = load_json(stats_path)
+
+        profile_stats = stats.get("profile", {})
+        star_stats = stats.get("stars", {})
+        fork_stats = stats.get("forks", {})
 
         data = {
             "username": self.username,
-            "name": profile_info.get("name", self.username),
-            "bio": profile_info.get("bio", "GitHub Profile & Dynamic Banner Engine"),
-            "public_repos": profile_info.get("public_repos", len(repos)),
-            "followers": profile_info.get("followers", 0),
-            "following": profile_info.get("following", 0),
-            "total_stars": total_stars,
-            "total_forks": total_forks,
+            "name": self.username, # Should be updated if bio/name are added to stats
+            "bio": "GitHub Profile & Dynamic Banner Engine",
+            "public_repos": profile_stats.get("total_public_repositories", 0),
+            "followers": profile_stats.get("total_followers", 0),
+            "following": profile_stats.get("total_following", 0),
+            "total_stars": star_stats.get("total_stars", 0),
+            "total_forks": fork_stats.get("total_forks", 0),
         }
 
-        save_json(data, "generated/data/profile.json")
-        logger.info(f"Generated profile data for {self.username}")
+        output_path = PathManager.GENERATED_JSON_DIR / "profile_render_data.json"
+        save_json(data, output_path)
+        logger.info(f"Generated profile data for {self.username} using processed stats")
         return data
