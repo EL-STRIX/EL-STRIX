@@ -268,9 +268,11 @@ class SVGRenderer:
             ], y)
             y += lh
             
+            d3 = max(94 - 40 - len(loc) - len(loc_add) - len(loc_del), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
-                ("Lines of Code on GitHub:. ", text_key),
+                ("Lines of Code on GitHub: ", text_key),
+                ("." * d3 + " ", text_dim),
                 (f"{loc} ", text_main),
                 ("( ", text_dim),
                 (f"{loc_add}++", text_green),
