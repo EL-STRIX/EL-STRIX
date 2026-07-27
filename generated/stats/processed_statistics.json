@@ -104,64 +104,64 @@
     ]
   },
   "commits": {
-    "total_commits": 152,
+    "total_commits": 162,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 165,
+    "total_contributions": 175,
     "daily_contributions": {},
     "weekly_contributions": {},
     "monthly_contributions": {},
-    "yearly_contributions": 165
+    "yearly_contributions": 175
   },
   "loc": {
     "total_lines": 0
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 43161600,
+    "total_bytes": 43294720,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 45.54,
-      "Dart": 23.41,
-      "JavaScript": 19.75,
-      "PHP": 5.39,
-      "C": 4.87,
-      "Python": 1.03
+      "HTML": 45.43,
+      "Dart": 23.34,
+      "JavaScript": 19.69,
+      "PHP": 5.37,
+      "C": 4.85,
+      "Python": 1.31
     },
     "language_ranking": [
       {
         "language": "HTML",
-        "bytes": 19657728,
-        "percentage": 45.54
+        "bytes": 19670016,
+        "percentage": 45.43
       },
       {
         "language": "Dart",
         "bytes": 10105856,
-        "percentage": 23.41
+        "percentage": 23.34
       },
       {
         "language": "JavaScript",
         "bytes": 8525824,
-        "percentage": 19.75
+        "percentage": 19.69
       },
       {
         "language": "PHP",
         "bytes": 2326528,
-        "percentage": 5.39
+        "percentage": 5.37
       },
       {
         "language": "C",
         "bytes": 2101248,
-        "percentage": 4.87
+        "percentage": 4.85
       },
       {
         "language": "Python",
-        "bytes": 444416,
-        "percentage": 1.03
+        "bytes": 565248,
+        "percentage": 1.31
       }
     ]
   },
@@ -185,10 +185,10 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 23,
-    "open_pull_requests": 0,
-    "closed_pull_requests": 1,
-    "merged_pull_requests": 22
+    "total_pull_requests": 38,
+    "open_pull_requests": 1,
+    "closed_pull_requests": 5,
+    "merged_pull_requests": 32
   },
   "featured_projects": [
     {
