@@ -115,8 +115,12 @@ class GitHubClient:
                             break
                         continue
                     
-                    if paginated and isinstance(data, list):
-                        results.extend(data)
+                    if paginated:
+                        if isinstance(data, list):
+                            results.extend(data)
+                        else:
+                            results.append(data)
+                            
                         # Check for next page in Link header
                         if "next" in response.links:
                             current_url = response.links["next"]["url"]

@@ -76,7 +76,7 @@ class AsciiEngine:
         self.charset = self.config.get("charset", " .:-=+*#%@")
         self.width = self.config.get("width", 80)
         
-    def generate_matrix(self, img: Image.Image, invert: bool = False) -> list[list[str]]:
+    def generate_matrix(self, img: Image.Image) -> list[list[str]]:
         """Generate a reusable ASCII matrix."""
         # Calculate height based on font aspect ratio (~0.55 usually)
         aspect_ratio = img.height / img.width
@@ -90,23 +90,39 @@ class AsciiEngine:
         char_count = len(self.charset)
         matrix = []
         
+        # 1. Detect Background Brightness by sampling the 4 corners
+        corners = [
+            pixels[0],                                           # Top-left
+            pixels[self.width - 1],                              # Top-right
+            pixels[(height - 1) * self.width],                   # Bottom-left
+            pixels[(height - 1) * self.width + (self.width - 1)] # Bottom-right
+        ]
+        bg_val = sum(corners) / 4.0
+        
+        # 2. Determine Image Type & Dynamic Mapping
+        is_bright_bg = bg_val > 127
+        
         for i in range(height):
             row = []
             for j in range(self.width):
                 pixel_val = pixels[i * self.width + j]
                 
-                if invert:
-                    # Treat background (bright pixels) as pure white to ensure it becomes empty space
-                    if pixel_val > 140:
+                if is_bright_bg:
+                    # Case: Dark Subject on Bright Background
+                    # Force background to be pure white (empty space)
+                    if pixel_val >= bg_val - 25:
                         pixel_val = 255
                     
-                    # Normal map: 0->0, 255->9
-                    char_idx = int((pixel_val / 255.0) * (char_count - 1))
-                    
-                    # Invert index so Dark (0) becomes Dense (9), and Bright (255) becomes Empty (0)
-                    char_idx = (char_count - 1) - char_idx
+                    # Mapping: Dark (0) -> Dense (9), Bright (255) -> Empty (0)
+                    raw_idx = int((pixel_val / 255.0) * (char_count - 1))
+                    char_idx = (char_count - 1) - raw_idx
                 else:
-                    # Normal mapping for dark mode: Dark -> Empty, Bright -> Dense
+                    # Case: Bright Subject on Dark Background
+                    # Force background to be pure black (empty space)
+                    if pixel_val <= bg_val + 25:
+                        pixel_val = 0
+                        
+                    # Mapping: Dark (0) -> Empty (0), Bright (255) -> Dense (9)
                     char_idx = int((pixel_val / 255.0) * (char_count - 1))
                     
                 row.append(self.charset[char_idx])
@@ -212,14 +228,13 @@ class AvatarPipeline:
             return
             
         # 2. Ascii Matrix
-        matrix_dark = self.ascii_engine.generate_matrix(img, invert=False)
-        matrix_light = self.ascii_engine.generate_matrix(img, invert=True)
+        matrix = self.ascii_engine.generate_matrix(img)
         
-        # Save matrix (dark as default for cache/debug)
+        # Save matrix
         matrix_path = PathManager.ASSET_ASCII_DIR / "matrix.json"
         try:
             with open(matrix_path, "w", encoding="utf-8") as f:
-                json.dump(matrix_dark, f)
+                json.dump(matrix, f)
             logger.info(f"ASCII matrix saved to {matrix_path}")
         except Exception as e:
             logger.error(f"Failed to save ASCII matrix: {e}")
@@ -231,8 +246,8 @@ class AvatarPipeline:
         light_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_light.svg"
         dark_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_dark.svg"
         
-        success_light = self.svg_renderer.render(matrix_light, "light", light_svg_path)
-        success_dark = self.svg_renderer.render(matrix_dark, "dark", dark_svg_path)
+        success_light = self.svg_renderer.render(matrix, "light", light_svg_path)
+        success_dark = self.svg_renderer.render(matrix, "dark", dark_svg_path)
         
         if success_light and success_dark:
             logger.info("Avatar SVGs generated successfully.")

@@ -121,8 +121,9 @@ class StatisticsEngine:
 
     def _calculate_repo_stats(self) -> dict[str, Any]:
         """Calculate repository-level statistics."""
-        public = self.profile_data.get("public_repos", sum(1 for r in self.repos_data if not r.get("private")))
-        private = self.profile_data.get("total_private_repos") or sum(1 for r in self.repos_data if r.get("private"))
+        # Calculate exactly based on the fully paginated repositories fetched
+        public = sum(1 for r in self.repos_data if not r.get("private"))
+        private = sum(1 for r in self.repos_data if r.get("private"))
         total = public + private
         
         archived = sum(1 for r in self.repos_data if r.get("archived"))
@@ -205,10 +206,11 @@ class StatisticsEngine:
 
     def _calculate_commit_stats(self) -> dict[str, Any]:
         """Calculate commit statistics."""
-        public_commits = self.contrib_data.get("totalCommitContributions", 0)
-        private_commits = self.contrib_data.get("restrictedContributionsCount", 0)
+        # Use exact totalCommitContributions. Adding restrictedContributionsCount is flawed 
+        # as it includes private PRs and issues, not just private commits.
+        total_commits = self.contrib_data.get("totalCommitContributions", 0)
         return {
-            "total_commits": public_commits + private_commits,
+            "total_commits": total_commits,
             "recent_commits": 0,
             "commit_frequency": 0.0,
             "commits_per_repository": {},
