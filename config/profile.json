@@ -51,6 +51,14 @@
     {
       "name": "Finzo Banking System",
       "status": "Development Phase"
+    },
+    {
+      "name": "Smart Parking System",
+      "status": "Development Phase"
+    },
+    {
+      "name": "Smart Doctor Appointment System",
+      "status": "Planning Phase"
     }
   ]
 }

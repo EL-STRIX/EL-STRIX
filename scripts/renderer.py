@@ -184,12 +184,14 @@ class SVGRenderer:
                 ], y)
                 y += lh
 
-            y += lh
+            # Ensure Y coordinate is safely below the left ASCII avatar before full width panels
+            y = max(y, 680)
 
             # ── Featured Projects ─────────────────────────────────
-            right_svg += self._render_line([
+            stats_svg = ""
+            stats_svg += self._render_line([
                 ("- Featured Projects ", text_main),
-                (self._dashes("- Featured Projects ", 60), text_dim),
+                (self._dashes("- Featured Projects ", 98), text_dim),
             ], y)
             y += lh
 
@@ -197,8 +199,8 @@ class SVGRenderer:
             for proj in projects:
                 name = proj.get("name", "")
                 status = proj.get("status", "")
-                dots = self._dots(name, status, 60)
-                right_svg += self._render_line([
+                dots = self._dots(name, status, 98)
+                stats_svg += self._render_line([
                     (". ", text_dim),
                     (f"{name}: ", text_key),
                     (f"{dots} ", text_dim),
@@ -209,7 +211,6 @@ class SVGRenderer:
             y += lh
 
             # ── GitHub Stats ──────────────────────────────────────
-            stats_svg = ""
             stats_svg += self._render_line([
                 ("- GitHub Stats ", text_main),
                 (self._dashes("- GitHub Stats ", 98), text_dim),
