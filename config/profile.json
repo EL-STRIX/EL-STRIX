@@ -16,15 +16,15 @@
     },
     {
       "name": "Tooling",
-      "value": "VS Code, ZBrains IDE, Git"
+      "value": "VS Code, ZBrains IDE"
     },
     {
       "name": "Programming",
-      "value": "C, C++, Java, Go, Python, JS, PHP"
+      "value": "C, C++, Java, Go, Rust, Python, JS, PHP"
     },
     {
       "name": "Frontend",
-      "value": "HTML, CSS, Tailwind, Bootstrap, React"
+      "value": "HTML, CSS, JS, Tailwind, Bootstrap, React"
     },
     {
       "name": "Backend",
