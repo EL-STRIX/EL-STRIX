@@ -136,25 +136,18 @@ class SVGRenderer:
             DOT_WIDTH = 46
 
             # ── Header ────────────────────────────────────────────
+            header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
             right_svg += self._render_line([
-                ("sujay@EL-STRIX ", text_main),
-                (self._dashes("sujay@EL-STRIX ", 60), text_dim),
+                (header_text, text_main),
+                (self._dashes(header_text, 60), text_dim),
             ], y)
             y += lh
 
             # ── Tech Stack ────────────────────────────────────────
-            tech_stack = [
-                ("OS",          "Windows, Linux, Android"),
-                ("Tooling",     "VS Code, ZBrains IDE, Git"),
-                ("Programming", "C, C++, Java, Go, Python, JS, PHP"),
-                ("Frontend",    "HTML, CSS, Tailwind, Bootstrap, React"),
-                ("Backend",     "Node.js, Express"),
-                ("Database",    "MySQL"),
-                ("Tools",       "Git, GitHub Actions, Vercel"),
-                ("Languages",   "English, Bengali, Hindi"),
-            ]
-
-            for key, val in tech_stack:
+            tech_stack = self.profile.get("tech_stack", [])
+            for item in tech_stack:
+                key = item.get("name", "")
+                val = item.get("value", "")
                 dots = self._dots(key, val, 60)
                 right_svg += self._render_line([
                     (". ", text_dim),
@@ -174,11 +167,11 @@ class SVGRenderer:
             y += lh
 
             contacts = [
-                ("Portfolio", "development phase"),
-                ("LinkedIn",  "Sujay Paul"),
-                ("GitHub",    "EL-STRIX"),
-                ("Email",     "sujaypaul892@gmail.com"),
-                ("Location",  "Kolkata, West Bengal, India"),
+                ("Portfolio", self.profile.get("portfolio", "")),
+                ("LinkedIn",  self.profile.get("linkedin", "")),
+                ("GitHub",    self.profile.get("username", "")),
+                ("Email",     self.profile.get("email", "")),
+                ("Location",  self.profile.get("location", "")),
             ]
 
             for key, val in contacts:
@@ -200,12 +193,10 @@ class SVGRenderer:
             ], y)
             y += lh
 
-            projects = [
-                ("C Games Collection",   "Complete"),
-                ("Finzo Banking System",  "Development Phase"),
-            ]
-
-            for name, status in projects:
+            projects = self.profile.get("featured_projects", [])
+            for proj in projects:
+                name = proj.get("name", "")
+                status = proj.get("status", "")
                 dots = self._dots(name, status, 60)
                 right_svg += self._render_line([
                     (". ", text_dim),

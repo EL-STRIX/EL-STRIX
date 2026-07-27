@@ -1,9 +1,56 @@
 {
   "username": "EL-STRIX",
   "name": "EL-STRIX",
+  "terminal_header": "sujay@EL-STRIX",
   "bio": "Automated GitHub Profile Engine",
-  "location": "Global",
+  "location": "Kolkata, West Bengal, India",
   "company": "",
   "website": "https://github.com/EL-STRIX",
-  "email": ""
+  "email": "sujaypaul892@gmail.com",
+  "linkedin": "Sujay Paul",
+  "portfolio": "development phase",
+  "tech_stack": [
+    {
+      "name": "OS",
+      "value": "Windows, Linux, Android"
+    },
+    {
+      "name": "Tooling",
+      "value": "VS Code, ZBrains IDE, Git"
+    },
+    {
+      "name": "Programming",
+      "value": "C, C++, Java, Go, Python, JS, PHP"
+    },
+    {
+      "name": "Frontend",
+      "value": "HTML, CSS, Tailwind, Bootstrap, React"
+    },
+    {
+      "name": "Backend",
+      "value": "Node.js, Express"
+    },
+    {
+      "name": "Database",
+      "value": "MySQL"
+    },
+    {
+      "name": "Tools",
+      "value": "Git, GitHub Actions, Vercel"
+    },
+    {
+      "name": "Languages",
+      "value": "English, Bengali, Hindi"
+    }
+  ],
+  "featured_projects": [
+    {
+      "name": "C Games Collection",
+      "status": "Complete"
+    },
+    {
+      "name": "Finzo Banking System",
+      "status": "Development Phase"
+    }
+  ]
 }
