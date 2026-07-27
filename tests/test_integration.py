@@ -43,15 +43,19 @@ def test_config_loader_missing_file(tmp_path, monkeypatch):
     with pytest.raises(ConfigurationError):
         ConfigLoader.load_json("nonexistent.json")
 
-def test_env_manager_missing_vars(monkeypatch):
+def test_env_manager_missing_vars(tmp_path, monkeypatch):
     """Test EnvManager validation logic."""
     monkeypatch.delenv("GITHUB_TOKEN", raising=False)
+    monkeypatch.delenv("GH_TOKEN", raising=False)
+    monkeypatch.setattr(EnvManager, "load", classmethod(lambda cls: None))
+    monkeypatch.setattr(EnvManager, "_loaded", False)
     monkeypatch.setenv("GITHUB_REPOSITORY", "user/repo")
     
-    # Should not raise if we provide an override
+    # When no valid GitHub token is configured, the manager should raise.
     with pytest.raises(Exception):
         EnvManager.get_github_token()
 
     # But we can set it and it should pass
     monkeypatch.setenv("GITHUB_TOKEN", "fake_token")
     assert EnvManager.get_github_token() == "fake_token"
+

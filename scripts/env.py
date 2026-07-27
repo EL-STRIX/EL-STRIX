@@ -39,11 +39,23 @@ class EnvManager:
         return val
 
     @classmethod
+    def _is_placeholder_token(cls, token: str | None) -> bool:
+        """Detect placeholder or invalid token values from environment or config."""
+        if not token:
+            return True
+        normalized = token.strip()
+        placeholder_values = {
+            "", "****", "******", "null", "none", "<token>", "<gh_token>", "<github_token>",
+            "token", "TOKEN", "YOUR_TOKEN_HERE"
+        }
+        return normalized in placeholder_values or normalized.startswith("<") or normalized.endswith(">")
+
+    @classmethod
     def get_github_token(cls) -> str:
         """Get the GitHub token from standard environment variables."""
         cls.load()
         token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
-        if not token:
+        if cls._is_placeholder_token(token):
             raise EnvironmentError("GitHub token is missing. Please set GH_TOKEN or GITHUB_TOKEN.")
         return token
         

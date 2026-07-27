@@ -14,8 +14,9 @@ from exceptions import GitHubAPIError
 def test_github_client_init(mock_token):
     """Test client initialization and headers."""
     client = GitHubClient()
-    assert client.headers["Authorization"] == "Bearer fake_token"
+    assert client.headers["Authorization"] == "token fake_token"
     assert client.headers["Accept"] == "application/vnd.github.v3+json"
+    assert client.headers["User-Agent"] == "EL-STRIX-Profile-Engine"
 
 @patch("github.EnvManager.get_github_token", return_value="fake_token")
 def test_github_rest_request_success(mock_token, mocker):
@@ -48,6 +49,7 @@ def test_github_rest_request_failure(mock_token, mocker):
         client.rest_request("GET", "/user", use_cache=False)
     
     assert "403" in str(exc.value)
+
 
 
 

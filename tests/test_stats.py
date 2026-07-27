@@ -18,7 +18,9 @@ def mock_engine(mocker):
             {"name": "repo2", "stargazers_count": 50, "forks_count": 10, "fork": True, "size": 512, "language": "Python"},
             {"name": "repo3", "stargazers_count": 10, "forks_count": 2, "private": True, "size": 2048, "language": "JavaScript"}
         ],
-        {"totalCommitContributions": 500, "totalIssueContributions": 50, "contributionCalendar": {"totalContributions": 1000}}
+        {"totalCommitContributions": 500, "totalIssueContributions": 50, "contributionCalendar": {"totalContributions": 1000}},
+        {"repo1": {"total_lines": 1024}},
+        [{"state": "open", "merged_at": None}, {"state": "closed", "pull_request": {"merged_at": None}}]
     ])
     return StatisticsEngine()
 
@@ -47,3 +49,4 @@ def test_calculate_language_stats(mock_engine):
     stats = mock_engine._calculate_language_stats()
     assert stats["languages_used"] == 2
     assert stats["most_used_language"] == "JavaScript" # repo3 (2048 * 1024) > repo1 (1024 * 1024)
+

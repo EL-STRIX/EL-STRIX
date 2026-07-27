@@ -23,9 +23,10 @@ class GitHubClient:
     def __init__(self):
         self.token = EnvManager.get_github_token()
         self.headers = {
-            "Authorization": f"Bearer {self.token}",
+            "Authorization": f"token {self.token}",
             "Accept": "application/vnd.github.v3+json",
-            "X-GitHub-Api-Version": "2022-11-28"
+            "X-GitHub-Api-Version": "2022-11-28",
+            "User-Agent": "EL-STRIX-Profile-Engine"
         }
         # TTL: 1 hour for standard cache
         self.cache = CacheManager(ttl_seconds=3600)
@@ -211,3 +212,4 @@ class GitHubClient:
         except requests.RequestException as e:
             logger.error(f"Failed to download avatar: {e}")
             raise GitHubAPIError(f"Avatar download failed: {e}")
+
