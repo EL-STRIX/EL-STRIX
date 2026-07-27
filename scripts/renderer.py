@@ -119,6 +119,7 @@ class SVGRenderer:
                 text_key = "#e3b341"
                 text_val = "#79c0ff"
                 text_green = "#7ee787"
+                ascii_color = text_main
             else:
                 bg = "#ffffff"
                 text_main = "#24292f"
@@ -126,6 +127,7 @@ class SVGRenderer:
                 text_key = "#b08800"
                 text_val = "#0969da"
                 text_green = "#1a7f37"
+                ascii_color = text_main
 
             ascii_content = self._get_ascii_svg_content(mode)
 
@@ -292,7 +294,7 @@ class SVGRenderer:
     .ascii {{
       font-family: {self.font_family};
       font-size: 15px;
-      fill: {text_main};
+      fill: {ascii_color};
       white-space: pre;
     }}
   </style>
