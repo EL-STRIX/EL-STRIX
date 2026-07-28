@@ -7,6 +7,4 @@
   <img alt="EL-STRIX Profile Banner" src="assets/svg/dark.svg" width="100%" />
 </picture>
 
- {{ bio }}
-
 {% include "footer.md" %}
