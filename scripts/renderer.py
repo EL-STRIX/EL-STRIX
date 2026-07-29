@@ -252,7 +252,7 @@ class SVGRenderer:
             y += lh
 
             d1 = max(COL - 31 - len(commits) - len(contributions), 2)
-            d2 = max(98 - COL - 17 - len(prs), 2)
+            d2 = max(98 - COL - 18 - len(prs), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
@@ -269,8 +269,8 @@ class SVGRenderer:
             current_streak = str(self.stats.get("contributions", {}).get("current_streak", 0))
             longest_streak = str(self.stats.get("contributions", {}).get("longest_streak", 0))
             
-            d3 = max(COL - 25 - len(current_streak) - len(longest_streak), 2)
-            d4 = max(98 - COL - 17 - len(loc), 2)
+            d3 = max(COL - 32 - len(current_streak) - len(longest_streak), 2)
+            d4 = max(98 - COL - 19 - len(loc), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Current Streak: ", text_key),
