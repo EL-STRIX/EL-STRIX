@@ -53,7 +53,16 @@ class ImagePreprocessor:
         
     def process(self, image_path: Path) -> Image.Image | None:
         try:
-            img = Image.open(image_path).convert("L")  # Grayscale
+            img = Image.open(image_path)
+            
+            # Composite over white background to handle transparency correctly
+            if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
+                img = img.convert('RGBA')
+                bg = Image.new('RGBA', img.size, (255, 255, 255, 255))
+                bg.paste(img, mask=img.split()[3])
+                img = bg
+                
+            img = img.convert("L")  # Grayscale
             
             # Enhancements
             if self.contrast != 1.0:
@@ -136,6 +145,7 @@ class AvatarSvgRenderer:
     def __init__(self, theme: dict[str, Any], settings: dict[str, Any]):
         self.theme = theme
         self.config = settings.get("svg_engine", {})
+        self.ascii_config = settings.get("ascii_engine", {})
         self.font_family = self.config.get("font_family", "monospace")
         self.font_size = self.config.get("font_size", 12)
         self.line_spacing = self.config.get("line_spacing", 1.2)
@@ -159,8 +169,16 @@ class AvatarSvgRenderer:
             '<g class="ascii-text">'
         ]
         
+        # For dark mode, invert the characters so the polarity of the image is preserved
+        charset = self.ascii_config.get("charset", " .:-=+*#%@")
+        if mode == "dark":
+            char_map = {c: charset[len(charset) - 1 - i] for i, c in enumerate(charset)}
+            processed_matrix = [[char_map.get(c, c) for c in row] for row in matrix]
+        else:
+            processed_matrix = matrix
+        
         y_offset = self.font_size
-        for row in matrix:
+        for row in processed_matrix:
             line_str = "".join(row).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
             svg_content.append(f'  <text x="0" y="{y_offset}">{line_str}</text>')
             y_offset += self.font_size * self.line_spacing

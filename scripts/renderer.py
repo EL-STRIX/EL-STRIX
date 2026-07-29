@@ -302,7 +302,7 @@ class SVGRenderer:
     }}
     .ascii {{
       font-family: {self.font_family};
-      font-size: 15px;
+      font-size: 12px;
       fill: {ascii_color};
       white-space: pre;
     }}
