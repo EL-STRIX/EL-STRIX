@@ -227,10 +227,15 @@ class StatisticsEngine:
         longest_streak = 0
         max_daily = 0
         
-        # Flatten days
+        # Flatten days and ignore future days
+        from datetime import datetime, UTC
+        today_str = datetime.now(UTC).strftime("%Y-%m-%d")
+        
         days = []
         for week in weeks:
-            days.extend(week.get("contributionDays", []))
+            for day in week.get("contributionDays", []):
+                if day.get("date", "") <= today_str:
+                    days.append(day)
             
         temp_streak = 0
         for day in days:
@@ -253,10 +258,8 @@ class StatisticsEngine:
                 temp_current += 1
             else:
                 # If it's today and count is 0, we still might have a streak up to yesterday.
-                # But to be simple, if it's 0, the streak breaks. 
-                # Let's check if it's the very last day (today) that is 0.
                 if day == days[-1] and count == 0:
-                    continue # Streak might be intact if yesterday had contributions
+                    continue
                 break
         current_streak = temp_current
 
