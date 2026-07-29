@@ -343,16 +343,13 @@ class StatisticsEngine:
         total = self.contrib_data.get("totalPullRequestContributions", 0)
         
         username = self.profile_data.get("login")
-        now = datetime.now(UTC)
         
-        # Filter PRs to match the contribution graph (last 365 days + authored by user)
+        # Filter PRs to only those authored by the user (since self.pr_data contains dependabot PRs etc.)
+        # We no longer filter by 365 days since the contribution data is now all-time.
         filtered_prs = []
         for pr in self.pr_data:
             author = pr.get("user", {}).get("login")
-            if author != username:
-                continue
-            created_at = self._parse_date(pr.get("created_at"))
-            if created_at and (now - created_at).days <= 365:
+            if author == username:
                 filtered_prs.append(pr)
         
         open_prs = sum(1 for pr in filtered_prs if pr.get("state") == "open")

@@ -69,34 +69,89 @@ class DataEngine:
         save_json(repos, PathManager.GENERATED_JSON_DIR / "repos.json")
 
     def fetch_contributions(self) -> None:
-        """Fetch contribution graphs and statistics via GraphQL."""
-        logger.info("Fetching contribution data...")
-        query = """
-        query($username: String!) {
-          user(login: $username) {
-            contributionsCollection {
-              contributionCalendar {
-                totalContributions
-                weeks {
-                  contributionDays {
-                    contributionCount
-                    date
+        """Fetch all-time contribution graphs and statistics via GraphQL."""
+        logger.info("Fetching all-time contribution data...")
+        
+        # Load profile to get account creation date
+        profile_file = PathManager.GENERATED_JSON_DIR / "profile.json"
+        created_at_str = None
+        if profile_file.exists():
+            import json
+            with open(profile_file, "r", encoding="utf-8") as f:
+                profile_data = json.load(f)
+                created_at_str = profile_data.get("created_at")
+                
+        from datetime import datetime, UTC
+        if not created_at_str:
+            created_at_str = datetime.now(UTC).isoformat()
+            
+        try:
+            created_date = datetime.fromisoformat(created_at_str.replace("Z", "+00:00"))
+        except ValueError:
+            created_date = datetime.now(UTC)
+            
+        current_year = datetime.now(UTC).year
+        start_year = created_date.year
+        
+        unified_contribs = {
+            "contributionCalendar": {
+                "totalContributions": 0,
+                "weeks": []
+            },
+            "totalCommitContributions": 0,
+            "totalIssueContributions": 0,
+            "totalPullRequestContributions": 0,
+            "totalPullRequestReviewContributions": 0,
+            "restrictedContributionsCount": 0
+        }
+        
+        for year in range(start_year, current_year + 1):
+            from_date = f"{year}-01-01T00:00:00Z"
+            to_date = f"{year}-12-31T23:59:59Z"
+            
+            query = """
+            query($username: String!, $from: DateTime!, $to: DateTime!) {
+              user(login: $username) {
+                contributionsCollection(from: $from, to: $to) {
+                  contributionCalendar {
+                    totalContributions
+                    weeks {
+                      contributionDays {
+                        contributionCount
+                        date
+                      }
+                    }
                   }
+                  totalCommitContributions
+                  totalIssueContributions
+                  totalPullRequestContributions
+                  totalPullRequestReviewContributions
+                  restrictedContributionsCount
                 }
               }
-              totalCommitContributions
-              totalIssueContributions
-              totalPullRequestContributions
-              totalPullRequestReviewContributions
-              restrictedContributionsCount
             }
-          }
-        }
-        """
-        data = self.client.graphql_request(query, {"username": self.username})
-        # Extract just the contributions collection
-        contribs = data.get("user", {}).get("contributionsCollection", {})
-        save_json(contribs, PathManager.GENERATED_JSON_DIR / "contributions.json")
+            """
+            try:
+                data = self.client.graphql_request(query, {"username": self.username, "from": from_date, "to": to_date})
+                contribs = data.get("user", {}).get("contributionsCollection", {})
+                
+                cal = contribs.get("contributionCalendar", {})
+                unified_contribs["contributionCalendar"]["totalContributions"] += cal.get("totalContributions", 0)
+                unified_contribs["contributionCalendar"]["weeks"].extend(cal.get("weeks", []))
+                
+                unified_contribs["totalCommitContributions"] += contribs.get("totalCommitContributions", 0)
+                unified_contribs["totalIssueContributions"] += contribs.get("totalIssueContributions", 0)
+                unified_contribs["totalPullRequestContributions"] += contribs.get("totalPullRequestContributions", 0)
+                unified_contribs["totalPullRequestReviewContributions"] += contribs.get("totalPullRequestReviewContributions", 0)
+                unified_contribs["restrictedContributionsCount"] += contribs.get("restrictedContributionsCount", 0)
+            except Exception as e:
+                logger.error(f"Failed to fetch contributions for year {year}: {e}")
+                
+        # Sort weeks to ensure streak calculations are correct across year boundaries
+        weeks = unified_contribs["contributionCalendar"]["weeks"]
+        weeks.sort(key=lambda w: w.get("contributionDays", [{"date": ""}])[0].get("date", ""))
+        
+        save_json(unified_contribs, PathManager.GENERATED_JSON_DIR / "contributions.json")
 
     def fetch_pinned_repositories(self) -> None:
         """Fetch pinned repositories via GraphQL."""
