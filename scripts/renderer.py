@@ -49,30 +49,34 @@ class SVGRenderer:
             logger.warning("Processed statistics not found. Rendering with empty stats.")
             self.stats = {}
 
-    def _get_ascii_svg_content(self, mode: str) -> str:
-        """Extract the <g class='ascii-text'> content from the generated avatar SVG."""
+    def _get_ascii_svg_content(self, mode: str) -> tuple[str, float]:
+        """Extract the <g class='ascii-text'> content from the generated avatar SVG, and its height."""
         ascii_path = PathManager.GENERATED_SVG_DIR / f"avatar_{mode}.svg"
         if not ascii_path.exists():
             logger.warning(f"ASCII SVG not found at {ascii_path}. Panel will be empty.")
-            return ""
+            return "", 0.0
 
         try:
             with open(ascii_path, "r", encoding="utf-8") as f:
                 content = f.read()
 
+            import re
+            match = re.search(r'height="([0-9.]+)"', content)
+            height = float(match.group(1)) if match else 0.0
+
             start_tag = '<g class="ascii-text">'
             start_idx = content.find(start_tag)
             if start_idx == -1:
-                return ""
+                return "", height
 
             end_idx = content.find('</g>', start_idx)
             if end_idx == -1:
-                return ""
+                return "", height
 
-            return content[start_idx + len(start_tag):end_idx]
+            return content[start_idx + len(start_tag):end_idx], height
         except Exception as e:
             logger.error(f"Error reading ASCII SVG content: {e}")
-            return ""
+            return "", 0.0
 
     def _render_line(
         self,
@@ -129,7 +133,7 @@ class SVGRenderer:
                 text_green = "#1a7f37"
                 ascii_color = text_main
 
-            ascii_content = self._get_ascii_svg_content(mode)
+            ascii_content, ascii_height = self._get_ascii_svg_content(mode)
 
             # Right-panel layout constants
             right_svg = ""
@@ -283,7 +287,7 @@ class SVGRenderer:
             y += lh
 
             # (Removed footer)
-            final_height = max(y + 30, 500)
+            final_height = max(y + 30, int(ascii_height) + 40, 500)
 
             # ── Compose final SVG ─────────────────────────────────
             right_x = self.left_panel_width + 20
