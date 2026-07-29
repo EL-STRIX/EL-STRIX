@@ -1,6 +1,7 @@
 {
   "C-GAMES-COLLECTION": {
     "total_commits": 156,
+    "total_lines": 110227,
     "weeks": [
       {
         "w": 1763856000,
@@ -222,6 +223,7 @@
   },
   "EL-STRIX": {
     "total_commits": 91,
+    "total_lines": 26540,
     "weeks": [
       {
         "w": 1785024000,
@@ -233,6 +235,7 @@
   },
   "Faculty-Subject-Allocation": {
     "total_commits": 25,
+    "total_lines": 5945,
     "weeks": [
       {
         "w": 1775347200,
@@ -340,6 +343,7 @@
   },
   "Finzo": {
     "total_commits": 949,
+    "total_lines": 372488,
     "weeks": [
       {
         "w": 1775347200,
@@ -447,6 +451,7 @@
   },
   "LUMINA": {
     "total_commits": 25,
+    "total_lines": 7968,
     "weeks": [
       {
         "w": 1783209600,
@@ -476,6 +481,7 @@
   },
   "Portfolio": {
     "total_commits": 8,
+    "total_lines": 14117,
     "weeks": [
       {
         "w": 1773532800,
@@ -601,6 +607,7 @@
   },
   "Slotara": {
     "total_commits": 100,
+    "total_lines": 57184,
     "weeks": [
       {
         "w": 1772928000,
