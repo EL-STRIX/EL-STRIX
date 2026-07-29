@@ -53,16 +53,7 @@ class ImagePreprocessor:
         
     def process(self, image_path: Path) -> Image.Image | None:
         try:
-            img = Image.open(image_path)
-            
-            # Composite over white background to handle transparency correctly
-            if img.mode in ('RGBA', 'LA') or (img.mode == 'P' and 'transparency' in img.info):
-                img = img.convert('RGBA')
-                bg = Image.new('RGBA', img.size, (255, 255, 255, 255))
-                bg.paste(img, mask=img.split()[3])
-                img = bg
-                
-            img = img.convert("L")  # Grayscale
+            img = Image.open(image_path).convert('RGBA')
             
             # Enhancements
             if self.contrast != 1.0:
@@ -85,9 +76,8 @@ class AsciiEngine:
         self.charset = self.config.get("charset", " .:-=+*#%@")
         self.width = self.config.get("width", 80)
         
-    def generate_matrix(self, img: Image.Image) -> list[list[str]]:
-        """Generate a reusable ASCII matrix."""
-        # Calculate height based on font aspect ratio (~0.55 usually)
+    def generate_matrix(self, img: Image.Image, mode: str) -> list[list[str]]:
+        """Generate a theme-aware ASCII matrix."""
         aspect_ratio = img.height / img.width
         font_aspect_correction = self.config.get("font_aspect_correction", 0.55)
         height = int(self.width * aspect_ratio * font_aspect_correction)
@@ -99,41 +89,42 @@ class AsciiEngine:
         char_count = len(self.charset)
         matrix = []
         
-        # 1. Detect Background Brightness by sampling the 4 corners
+        # 1. Detect Background Brightness from 4 corners
         corners = [
-            pixels[0],                                           # Top-left
-            pixels[self.width - 1],                              # Top-right
-            pixels[(height - 1) * self.width],                   # Bottom-left
-            pixels[(height - 1) * self.width + (self.width - 1)] # Bottom-right
+            pixels[0], pixels[self.width - 1],
+            pixels[(height - 1) * self.width], pixels[(height - 1) * self.width + (self.width - 1)]
         ]
-        bg_val = sum(corners) / 4.0
         
-        # 2. Determine Image Type & Dynamic Mapping
-        is_bright_bg = bg_val > 127
-        
+        opaque_corners = [c for c in corners if c[3] > 128]
+        if opaque_corners:
+            bg_lum = sum((0.299*c[0] + 0.587*c[1] + 0.114*c[2]) for c in opaque_corners) / len(opaque_corners)
+        else:
+            bg_lum = None
+            
         for i in range(height):
             row = []
             for j in range(self.width):
-                pixel_val = pixels[i * self.width + j]
+                r, g, b, a = pixels[i * self.width + j]
+                lum = 0.299*r + 0.587*g + 0.114*b
                 
-                if is_bright_bg:
-                    # Case: Dark Subject on Bright Background
-                    # Force background to be pure white (empty space)
-                    if pixel_val >= bg_val - 5:
-                        pixel_val = 255
-                    
-                    # Mapping: Dark (0) -> Dense (9), Bright (255) -> Empty (0)
-                    raw_idx = int((pixel_val / 255.0) * (char_count - 1))
-                    char_idx = (char_count - 1) - raw_idx
-                else:
-                    # Case: Bright Subject on Dark Background
-                    # Force background to be pure black (empty space)
-                    if pixel_val <= bg_val + 5:
-                        pixel_val = 0
+                is_bg = False
+                if a < 128:
+                    is_bg = True
+                elif bg_lum is not None:
+                    if bg_lum > 127 and lum >= bg_lum - 15:
+                        is_bg = True
+                    elif bg_lum <= 127 and lum <= bg_lum + 15:
+                        is_bg = True
                         
-                    # Mapping: Dark (0) -> Empty (0), Bright (255) -> Dense (9)
-                    char_idx = int((pixel_val / 255.0) * (char_count - 1))
-                    
+                if is_bg:
+                    char_idx = 0
+                else:
+                    if mode == "light":
+                        char_idx = int(((255 - lum) / 255.0) * (char_count - 1))
+                    else:
+                        char_idx = int((lum / 255.0) * (char_count - 1))
+                        
+                char_idx = max(0, min(char_count - 1, char_idx))
                 row.append(self.charset[char_idx])
             matrix.append(row)
             
@@ -237,17 +228,18 @@ class AvatarPipeline:
             logger.error("Avatar preprocessing failed.")
             return
             
-        # 2. Ascii Matrix
-        matrix = self.ascii_engine.generate_matrix(img)
+        # 2. Ascii Matrix (Theme Aware)
+        matrix_light = self.ascii_engine.generate_matrix(img, "light")
+        matrix_dark = self.ascii_engine.generate_matrix(img, "dark")
         
-        # Save matrix
+        # Save matrices
         matrix_path = PathManager.ASSET_ASCII_DIR / "matrix.json"
         try:
             with open(matrix_path, "w", encoding="utf-8") as f:
-                json.dump(matrix, f)
-            logger.info(f"ASCII matrix saved to {matrix_path}")
+                json.dump({"light": matrix_light, "dark": matrix_dark}, f)
+            logger.info(f"ASCII matrices saved to {matrix_path}")
         except Exception as e:
-            logger.error(f"Failed to save ASCII matrix: {e}")
+            logger.error(f"Failed to save ASCII matrices: {e}")
             return
             
         # 3. SVG Rendering
@@ -256,8 +248,8 @@ class AvatarPipeline:
         light_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_light.svg"
         dark_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_dark.svg"
         
-        success_light = self.svg_renderer.render(matrix, "light", light_svg_path)
-        success_dark = self.svg_renderer.render(matrix, "dark", dark_svg_path)
+        success_light = self.svg_renderer.render(matrix_light, "light", light_svg_path)
+        success_dark = self.svg_renderer.render(matrix_dark, "dark", dark_svg_path)
         
         if success_light and success_dark:
             logger.info("Avatar SVGs generated successfully.")
