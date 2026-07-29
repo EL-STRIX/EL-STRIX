@@ -96,12 +96,12 @@
     ]
   },
   "commits": {
-    "total_commits": 504,
+    "total_commits": 511,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
       "C-GAMES-COLLECTION": 156,
-      "EL-STRIX": 91,
+      "EL-STRIX": 108,
       "Faculty-Subject-Allocation": 25,
       "Finzo": 949,
       "LUMINA": 25,
@@ -111,57 +111,57 @@
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 539,
+    "total_contributions": 546,
     "max_daily_contributions": 80,
     "current_streak": 7,
     "longest_streak": 7,
-    "yearly_contributions": 539
+    "yearly_contributions": 546
   },
   "loc": {
-    "total_lines": 594469
+    "total_lines": 606077
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 43194368,
+    "total_bytes": 43446272,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 45.55,
-      "Dart": 23.44,
-      "JavaScript": 19.17,
-      "PHP": 5.4,
-      "C": 4.97,
-      "Python": 1.46
+      "HTML": 45.29,
+      "Dart": 23.31,
+      "JavaScript": 19.06,
+      "PHP": 5.37,
+      "C": 4.94,
+      "Python": 2.03
     },
     "language_ranking": [
       {
         "language": "HTML",
         "bytes": 19675136,
-        "percentage": 45.55
+        "percentage": 45.29
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 23.44
+        "percentage": 23.31
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 19.17
+        "percentage": 19.06
       },
       {
         "language": "PHP",
         "bytes": 2332672,
-        "percentage": 5.4
+        "percentage": 5.37
       },
       {
         "language": "C",
         "bytes": 2148352,
-        "percentage": 4.97
+        "percentage": 4.94
       },
       {
         "language": "Python",
-        "bytes": 631808,
-        "percentage": 1.46
+        "bytes": 883712,
+        "percentage": 2.03
       }
     ]
   },
@@ -580,7 +580,7 @@
       },
       {
         "date": "2026-07-26",
-        "commits": 204
+        "commits": 211
       },
       {
         "date": "2026-08-02",
