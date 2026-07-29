@@ -1,6 +1,3 @@
-<div align="center">
- {{ name }}
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/svg/dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="assets/svg/light.svg" />
