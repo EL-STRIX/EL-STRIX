@@ -20,12 +20,17 @@ class AutomationEngine:
             "assets/svg/light.svg",
             "assets/svg/dark.svg",
             "assets/ascii/matrix.json",
+            "assets/image/avatar.png",
             "generated/json/profile.json",
             "generated/json/repos.json",
             "generated/json/contributions.json",
             "generated/json/loc_stats.json",
-            "generated/stats/processed_statistics.json",
-            "generated/avatar/avatar.png"
+            "generated/json/pinned_repos.json",
+            "generated/json/pull_requests.json",
+            "generated/json/issues.json",
+            "generated/json/releases.json",
+            "generated/json/activity.json",
+            "generated/stats/processed_statistics.json"
         ]
 
     def _run_git(self, args: list[str]) -> tuple[bool, str]:
