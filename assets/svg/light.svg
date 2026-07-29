@@ -12,7 +12,7 @@
     }
     .ascii {
       font-family: monospace;
-      font-size: 15px;
+      font-size: 12px;
       fill: #24292f;
       white-space: pre;
     }
