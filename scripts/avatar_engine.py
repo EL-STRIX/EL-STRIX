@@ -1,10 +1,11 @@
 """
 Avatar Processing Engine
-Handles image validation, preprocessing, ASCII matrix generation, and SVG rendering.
+Handles image validation, professional preprocessing, ASCII matrix generation, and SVG rendering.
 """
 
 import hashlib
 import json
+import math
 from pathlib import Path
 from typing import Any
 
@@ -12,8 +13,7 @@ from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
-from PIL import Image, ImageEnhance
-
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageStat
 
 class AvatarProcessingError(ELSTRIXError):
     """Exception raised for errors in the Avatar Processing Engine."""
@@ -33,8 +33,6 @@ class ImageValidator:
             
         try:
             with Image.open(image_path) as img:
-                # Some web formats might be missing the format attribute when opened via stream in previous phases
-                # But it's generally safe. Let's just check if it can be verified.
                 img.verify()
                 return True
                 
@@ -43,120 +41,217 @@ class ImageValidator:
             return False
 
 class ImagePreprocessor:
-    """Preprocesses the image for ASCII conversion."""
+    """Professional preprocessing pipeline for Computer Vision ASCII optimization."""
     
     def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("avatar_preprocessing", {})
-        self.contrast = self.config.get("contrast", 1.2)
-        self.brightness = self.config.get("brightness", 1.0)
-        self.sharpness = self.config.get("sharpness", 1.5)
         
-    def process(self, image_path: Path) -> Image.Image | None:
-        try:
-            img = Image.open(image_path).convert('RGBA')
+    def _apply_gamma(self, img: Image.Image, gamma: float = 1.0) -> Image.Image:
+        """Apply non-linear gamma scaling."""
+        inv_gamma = 1.0 / gamma
+        table = [int((i / 255.0) ** inv_gamma * 255) for i in range(256)]
+        
+        if img.mode == 'L':
+            return img.point(table)
+        elif img.mode == 'RGB':
+            r, g, b = img.split()
+            return Image.merge('RGB', (r.point(table), g.point(table), b.point(table)))
+        elif img.mode == 'RGBA':
+            r, g, b, a = img.split()
+            return Image.merge('RGBA', (r.point(table), g.point(table), b.point(table), a))
+        return img
+        
+    def _extract_subject_mask(self, img: Image.Image) -> Image.Image:
+        """Create a mask isolating the subject from the background."""
+        # 1. Use existing alpha channel if present
+        if img.mode in ('RGBA', 'LA'):
+            mask = img.split()[-1]
+        else:
+            mask = Image.new('L', img.size, 255)
             
-            # Enhancements
-            if self.contrast != 1.0:
-                img = ImageEnhance.Contrast(img).enhance(self.contrast)
-            if self.brightness != 1.0:
-                img = ImageEnhance.Brightness(img).enhance(self.brightness)
-            if self.sharpness != 1.0:
-                img = ImageEnhance.Sharpness(img).enhance(self.sharpness)
+        # 2. Detect flat color backgrounds from corners
+        w, h = img.size
+        pixels = img.convert('RGB').load()
+        corners = [pixels[0, 0], pixels[w-1, 0], pixels[0, h-1], pixels[w-1, h-1]]
+        
+        def color_dist(c1, c2):
+            return math.sqrt(sum((a - b) ** 2 for a, b in zip(c1, c2)))
+            
+        # If corners are similar, it's likely a solid background
+        if all(color_dist(corners[0], c) < 15 for c in corners[1:]):
+            bg_color = corners[0]
+            new_mask = Image.new('L', img.size, 255)
+            new_pixels = new_mask.load()
+            
+            for y in range(h):
+                for x in range(w):
+                    if color_dist(pixels[x, y], bg_color) < 25:
+                        new_pixels[x, y] = 0
+                        
+            # Combine alpha mask and detected solid background mask safely
+            mask_data = list(mask.getdata())
+            new_mask_data = list(new_mask.getdata())
+            combined = [min(m1, m2) for m1, m2 in zip(mask_data, new_mask_data)]
+            mask.putdata(combined)
+            
+        return mask
+        
+    def process(self, image_path: Path) -> dict[str, Image.Image] | None:
+        try:
+            img = Image.open(image_path)
+            
+            # 1. EXIF correction
+            img = ImageOps.exif_transpose(img)
+            
+            # 2. Alpha handling & Background separation
+            mask = self._extract_subject_mask(img)
+            img = img.convert('RGBA')
+            
+            # Extract subject RGB onto a solid background for processing
+            subject_rgb = Image.new('RGB', img.size, (255, 255, 255))
+            subject_rgb.paste(img, mask=mask)
+            
+            # 3 & 4. Auto contrast & Histogram Equalization (Local Contrast)
+            # Equalize the luminance while preserving color
+            hsv = subject_rgb.convert('HSV')
+            h, s, v = hsv.split()
+            
+            # Smart equalization on Value channel
+            v_eq = ImageOps.equalize(v)
+            # Blend equalized with original to avoid aggressive artifacts (CLAHE approximation)
+            v = Image.blend(v, v_eq, alpha=0.6)
+            
+            hsv = Image.merge('HSV', (h, s, v))
+            subject_rgb = hsv.convert('RGB')
+            
+            # 5. Gamma correction & Adaptive brightness
+            stat = ImageStat.Stat(subject_rgb.convert('L'), mask=mask)
+            mean_lum = stat.mean[0] # Luminance of subject
+            
+            target_lum = 128
+            if mean_lum > 0:
+                gamma = math.log(target_lum / 255.0) / math.log(mean_lum / 255.0)
+                # Keep gamma within reasonable bounds to prevent blowout
+                gamma = max(0.5, min(2.0, gamma))
+                subject_rgb = self._apply_gamma(subject_rgb, gamma)
                 
-            return img
+            # 6. Noise reduction & Adaptive sharpening
+            subject_rgb = subject_rgb.filter(ImageFilter.MedianFilter(size=3))
+            subject_rgb = subject_rgb.filter(ImageFilter.UnsharpMask(radius=2, percent=150, threshold=3))
+            
+            # 7. Edge Enhancement for structural preservation
+            edges = subject_rgb.convert('L').filter(ImageFilter.FIND_EDGES)
+            # Dilate edges slightly so structural lines are highly pronounced
+            edges = edges.filter(ImageFilter.MaxFilter(3))
+            
+            return {
+                "rgb": subject_rgb,
+                "mask": mask,
+                "edges": edges
+            }
         except Exception as e:
-            logger.error(f"Preprocessing failed: {e}")
+            logger.error(f"Professional preprocessing failed: {e}")
             return None
 
 class AsciiEngine:
-    """Converts a preprocessed image into an ASCII matrix."""
+    """Professional ASCII Matrix Generation with structural edge-mapping."""
     
     def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("ascii_engine", {})
-        self.charset = self.config.get("charset", " .:-=+*#%@")
-        self.width = self.config.get("width", 80)
+        # Professional 70-character density ramp (calibrated for standard monospace rendering)
+        self.charset = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+        self.char_count = len(self.charset)
+        self.width = self.config.get("width", 85)
         
-    def generate_matrix(self, img: Image.Image, mode: str) -> list[list[str]]:
-        """Generate a theme-aware ASCII matrix."""
-        aspect_ratio = img.height / img.width
-        font_aspect_correction = self.config.get("font_aspect_correction", 0.55)
+    def get_perceptual_luminance(self, r: int, g: int, b: int) -> float:
+        """Calculate human-perceptual luminance using weighted Euclidean distance."""
+        return math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2)
+        
+    def generate_matrix(self, processed_data: dict[str, Image.Image]) -> list[list[str]]:
+        """Generate ONE master ASCII matrix compatible with both Light and Dark modes."""
+        rgb_img = processed_data["rgb"]
+        mask_img = processed_data["mask"]
+        edges_img = processed_data["edges"]
+        
+        # 1. Font Aspect Ratio Calibration (standard monospace aspect ratio is ~0.5)
+        aspect_ratio = rgb_img.height / rgb_img.width
+        font_aspect_correction = self.config.get("font_aspect_correction", 0.5)
         height = int(self.width * aspect_ratio * font_aspect_correction)
         
         resample_filter = Image.Resampling.LANCZOS
-        img_resized = img.resize((self.width, height), resample_filter)
-        pixels = list(img_resized.getdata())  # type: ignore
+        rgb_resized = rgb_img.resize((self.width, height), resample_filter)
+        mask_resized = mask_img.resize((self.width, height), resample_filter)
+        edges_resized = edges_img.resize((self.width, height), resample_filter)
         
-        char_count = len(self.charset)
+        rgb_pixels = list(rgb_resized.getdata())
+        mask_pixels = list(mask_resized.getdata())
+        edges_pixels = list(edges_resized.getdata())
+        
         matrix = []
         
-        # 1. Detect Background Brightness from 4 corners
-        corners = [
-            pixels[0], pixels[self.width - 1],
-            pixels[(height - 1) * self.width], pixels[(height - 1) * self.width + (self.width - 1)]
-        ]
-        
-        opaque_corners = [c for c in corners if c[3] > 128]
-        if opaque_corners:
-            bg_lum = sum((0.299*c[0] + 0.587*c[1] + 0.114*c[2]) for c in opaque_corners) / len(opaque_corners)
-        else:
-            bg_lum = None
-            
         for i in range(height):
             row = []
             for j in range(self.width):
-                r, g, b, a = pixels[i * self.width + j]
-                lum = 0.299*r + 0.587*g + 0.114*b
+                idx = i * self.width + j
+                r, g, b = rgb_pixels[idx]
+                m = mask_pixels[idx]
+                e = edges_pixels[idx]
                 
-                is_bg = False
-                if a < 128:
-                    is_bg = True
-                elif bg_lum is not None:
-                    if bg_lum > 127 and lum >= bg_lum - 15:
-                        is_bg = True
-                    elif bg_lum <= 127 and lum <= bg_lum + 15:
-                        is_bg = True
-                        
-                if is_bg:
-                    char_idx = 0
+                if m < 128:
+                    # Transparent Background -> Space (sparsest character)
+                    char_idx = self.char_count - 1
                 else:
-                    if mode == "light":
-                        char_idx = int(((255 - lum) / 255.0) * (char_count - 1))
-                    else:
-                        char_idx = int((lum / 255.0) * (char_count - 1))
-                        # Ensure the dark parts of the subject (like a dark shirt at the bottom) 
-                        # do not map to empty space (0) so they don't vanish into the black background.
-                        char_idx = max(2, char_idx)
+                    lum = self.get_perceptual_luminance(r, g, b)
+                    
+                    # Normalize lum to 0-1
+                    norm_lum = lum / 255.0
+                    edge_w = e / 255.0
+                    
+                    # Base density: darker pixels = more density. We use non-linear gamma 
+                    # to push midtones (like skin) to be sparser so the outline is prominent.
+                    gamma_lum = norm_lum ** 0.6 
+                    base_density = 1.0 - gamma_lum 
+                    
+                    # Boost density using edges to preserve facial outlines and hair
+                    final_density = base_density * 0.4 + edge_w * 0.6
+                    
+                    # Force very dark shadows (eyes, dark hair) to remain dense regardless of edge
+                    if norm_lum < 0.2:
+                        final_density = max(final_density, 0.7)
                         
-                char_idx = max(0, min(char_count - 1, char_idx))
+                    # Map to character index (0 is densest, char_count-1 is sparsest)
+                    char_idx = int((1.0 - final_density) * (self.char_count - 1))
+                    char_idx = max(0, min(self.char_count - 1, char_idx))
+                    
                 row.append(self.charset[char_idx])
             matrix.append(row)
             
         return matrix
 
 class AvatarSvgRenderer:
-    """Renders the ASCII matrix into an SVG file."""
+    """Renders the single master ASCII matrix into an SVG file."""
     
     def __init__(self, theme: dict[str, Any], settings: dict[str, Any]):
         self.theme = theme
         self.config = settings.get("svg_engine", {})
-        self.ascii_config = settings.get("ascii_engine", {})
-        self.font_family = self.config.get("font_family", "monospace")
-        self.font_size = self.config.get("font_size", 12)
+        self.font_family = self.config.get("font_family", "Consolas, 'Courier New', monospace")
+        self.font_size = self.config.get("font_size", 10)
         self.line_spacing = self.config.get("line_spacing", 1.2)
         self.char_spacing = self.config.get("char_spacing", 0.6)
         
     def render(self, matrix: list[list[str]], mode: str, output_path: Path) -> bool:
-        """Render matrix to SVG based on light or dark mode."""
+        """Render matrix to SVG based on light or dark mode theme colors."""
         colors = self.theme.get(mode, {})
-        bg_color = colors.get("background", "#000000" if mode == "dark" else "#ffffff")
-        text_color = colors.get("text", "#ffffff" if mode == "dark" else "#000000")
+        # Optimize contrast for GitHub themes
+        bg_color = colors.get("background", "#0d1117" if mode == "dark" else "#ffffff")
+        text_color = colors.get("text", "#c9d1d9" if mode == "dark" else "#24292f")
         
         height_px = len(matrix) * self.font_size * self.line_spacing
         width_px = len(matrix[0]) * self.font_size * self.char_spacing
         
         svg_content = [
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width_px} {height_px}" width="{width_px}" height="{height_px}">',
-            f'<rect width="100%" height="100%" fill="{bg_color}"/>',
+            f'<rect width="100%" height="100%" fill="{bg_color}" rx="8"/>',
             '<style>',
             f'  .ascii-text {{ font-family: {self.font_family}; font-size: {self.font_size}px; fill: {text_color}; white-space: pre; }}',
             '</style>',
@@ -174,14 +269,14 @@ class AvatarSvgRenderer:
         
         try:
             with open(output_path, "w", encoding="utf-8") as f:
-                f.write("\n".join(svg_content))
+                f.write("\\n".join(svg_content))
             return True
         except OSError as e:
             logger.error(f"Failed to write SVG to {output_path}: {e}")
             return False
 
 class AvatarPipeline:
-    """Orchestrator for the Avatar Processing Engine."""
+    """Orchestrator for the Advanced Avatar Processing Engine."""
     
     def __init__(self):
         self.configs = ConfigLoader.load_all()
@@ -223,26 +318,25 @@ class AvatarPipeline:
                 logger.info("--- PHASE 04 COMPLETED ---")
                 return
                 
-        logger.info("Avatar changes detected. Processing new avatar...")
+        logger.info("Avatar changes detected. Processing new avatar with advanced CV pipeline...")
         
-        # 1. Preprocess
-        img = self.preprocessor.process(avatar_path)
-        if not img:
+        # 1. Professional Preprocess
+        processed_data = self.preprocessor.process(avatar_path)
+        if not processed_data:
             logger.error("Avatar preprocessing failed.")
             return
             
-        # 2. Ascii Matrix (Theme Aware)
-        matrix_light = self.ascii_engine.generate_matrix(img, "light")
-        matrix_dark = self.ascii_engine.generate_matrix(img, "dark")
+        # 2. Master Ascii Matrix
+        master_matrix = self.ascii_engine.generate_matrix(processed_data)
         
-        # Save matrices
+        # Save matrix
         matrix_path = PathManager.ASSET_ASCII_DIR / "matrix.json"
         try:
             with open(matrix_path, "w", encoding="utf-8") as f:
-                json.dump({"light": matrix_light, "dark": matrix_dark}, f)
-            logger.info(f"ASCII matrices saved to {matrix_path}")
+                json.dump(master_matrix, f)
+            logger.info(f"Master ASCII matrix saved to {matrix_path}")
         except Exception as e:
-            logger.error(f"Failed to save ASCII matrices: {e}")
+            logger.error(f"Failed to save ASCII matrix: {e}")
             return
             
         # 3. SVG Rendering
@@ -251,12 +345,11 @@ class AvatarPipeline:
         light_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_light.svg"
         dark_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_dark.svg"
         
-        success_light = self.svg_renderer.render(matrix_light, "light", light_svg_path)
-        success_dark = self.svg_renderer.render(matrix_dark, "dark", dark_svg_path)
+        success_light = self.svg_renderer.render(master_matrix, "light", light_svg_path)
+        success_dark = self.svg_renderer.render(master_matrix, "dark", dark_svg_path)
         
         if success_light and success_dark:
             logger.info("Avatar SVGs generated successfully.")
-            # Update cache hash
             with open(cache_file, "w") as f:
                 f.write(current_hash)
         else:
