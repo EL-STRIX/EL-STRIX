@@ -177,10 +177,10 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 59,
+    "total_pull_requests": 38,
     "open_pull_requests": 1,
-    "closed_pull_requests": 16,
-    "merged_pull_requests": 42
+    "closed_pull_requests": 5,
+    "merged_pull_requests": 32
   },
   "featured_projects": [
     {
