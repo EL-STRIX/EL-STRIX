@@ -96,18 +96,18 @@
     ]
   },
   "commits": {
-    "total_commits": 484,
+    "total_commits": 486,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 518,
+    "total_contributions": 521,
     "max_daily_contributions": 80,
-    "current_streak": 8,
+    "current_streak": 0,
     "longest_streak": 8,
-    "yearly_contributions": 518
+    "yearly_contributions": 521
   },
   "loc": {
     "total_lines": 0
@@ -179,8 +179,8 @@
   "pull_requests": {
     "total_pull_requests": 23,
     "open_pull_requests": 0,
-    "closed_pull_requests": 1,
-    "merged_pull_requests": 22
+    "closed_pull_requests": 12,
+    "merged_pull_requests": 32
   },
   "featured_projects": [
     {
