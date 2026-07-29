@@ -123,6 +123,9 @@ class AsciiEngine:
                         char_idx = int(((255 - lum) / 255.0) * (char_count - 1))
                     else:
                         char_idx = int((lum / 255.0) * (char_count - 1))
+                        # Ensure the dark parts of the subject (like a dark shirt at the bottom) 
+                        # do not map to empty space (0) so they don't vanish into the black background.
+                        char_idx = max(2, char_idx)
                         
                 char_idx = max(0, min(char_count - 1, char_idx))
                 row.append(self.charset[char_idx])
