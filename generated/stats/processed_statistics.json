@@ -105,8 +105,8 @@
   "contributions": {
     "total_contributions": 521,
     "max_daily_contributions": 80,
-    "current_streak": 0,
-    "longest_streak": 8,
+    "current_streak": 7,
+    "longest_streak": 7,
     "yearly_contributions": 521
   },
   "loc": {
