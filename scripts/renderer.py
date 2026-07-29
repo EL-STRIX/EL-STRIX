@@ -159,7 +159,6 @@ class SVGRenderer:
                 ], y)
                 y += lh
 
-            y += lh
 
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
@@ -210,7 +209,6 @@ class SVGRenderer:
                 ], y)
                 y += lh
 
-            y += lh
 
             # ── GitHub Stats ──────────────────────────────────────
             stats_svg += self._render_line([
