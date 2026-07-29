@@ -2,26 +2,26 @@
   "profile": {
     "total_public_repositories": 4,
     "total_followers": 6,
-    "total_following": 12,
+    "total_following": 13,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 494,
-    "account_age_years": 1.35
+    "days_since_account_creation": 495,
+    "account_age_years": 1.36
   },
   "repositories": {
-    "repository_count": 8,
+    "repository_count": 7,
     "public_repository_count": 4,
-    "private_repository_count": 4,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 8,
-    "active_repository_count": 5,
-    "repository_growth": 8
+    "original_repository_count": 7,
+    "active_repository_count": 7,
+    "repository_growth": 7
   },
   "stars": {
     "total_stars": 3,
-    "average_stars": 0.38,
+    "average_stars": 0.43,
     "most_starred_repository": "Faculty-Subject-Allocation",
-    "least_starred_repository": "Slotara-User-App",
+    "least_starred_repository": "Slotara",
     "star_ranking": [
       {
         "repository": "Faculty-Subject-Allocation",
@@ -48,16 +48,12 @@
         "stars": 0
       },
       {
-        "repository": "Sloatara-Admin-Panel",
-        "stars": 0
-      },
-      {
-        "repository": "Slotara-User-App",
+        "repository": "Slotara",
         "stars": 0
       }
     ],
     "star_distribution": {
-      "0": 6,
+      "0": 5,
       "1-10": 2,
       "11-50": 0,
       "51-100": 0,
@@ -66,7 +62,7 @@
   },
   "forks": {
     "total_forks": 2,
-    "average_forks": 0.25,
+    "average_forks": 0.29,
     "most_forked_repository": "Faculty-Subject-Allocation",
     "repository_fork_rankings": [
       {
@@ -94,81 +90,77 @@
         "forks": 0
       },
       {
-        "repository": "Sloatara-Admin-Panel",
-        "forks": 0
-      },
-      {
-        "repository": "Slotara-User-App",
+        "repository": "Slotara",
         "forks": 0
       }
     ]
   },
   "commits": {
-    "total_commits": 92,
+    "total_commits": 299,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 175,
+    "total_contributions": 516,
     "daily_contributions": {},
     "weekly_contributions": {},
     "monthly_contributions": {},
-    "yearly_contributions": 175
+    "yearly_contributions": 516
   },
   "loc": {
     "total_lines": 0
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 43294720,
+    "total_bytes": 43236352,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 45.43,
-      "Dart": 23.34,
-      "JavaScript": 19.69,
-      "PHP": 5.37,
-      "C": 4.85,
-      "Python": 1.31
+      "HTML": 45.51,
+      "Dart": 23.42,
+      "JavaScript": 19.15,
+      "PHP": 5.39,
+      "C": 4.97,
+      "Python": 1.57
     },
     "language_ranking": [
       {
         "language": "HTML",
-        "bytes": 19670016,
-        "percentage": 45.43
+        "bytes": 19675136,
+        "percentage": 45.51
       },
       {
         "language": "Dart",
-        "bytes": 10105856,
-        "percentage": 23.34
+        "bytes": 10126336,
+        "percentage": 23.42
       },
       {
         "language": "JavaScript",
-        "bytes": 8525824,
-        "percentage": 19.69
+        "bytes": 8280064,
+        "percentage": 19.15
       },
       {
         "language": "PHP",
-        "bytes": 2326528,
-        "percentage": 5.37
+        "bytes": 2329600,
+        "percentage": 5.39
       },
       {
         "language": "C",
-        "bytes": 2101248,
-        "percentage": 4.85
+        "bytes": 2148352,
+        "percentage": 4.97
       },
       {
         "language": "Python",
-        "bytes": 565248,
-        "percentage": 1.31
+        "bytes": 676864,
+        "percentage": 1.57
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
-    "recently_created_repository": "EL-STRIX",
-    "oldest_repository": "Slotara-User-App",
+    "most_recently_updated_repository": "Faculty-Subject-Allocation",
+    "recently_created_repository": "Slotara",
+    "oldest_repository": "Portfolio",
     "most_active_repository": null,
     "least_active_repository": null
   },
@@ -185,10 +177,10 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 38,
+    "total_pull_requests": 59,
     "open_pull_requests": 1,
-    "closed_pull_requests": 5,
-    "merged_pull_requests": 32
+    "closed_pull_requests": 16,
+    "merged_pull_requests": 42
   },
   "featured_projects": [
     {
@@ -242,14 +234,14 @@
   },
   "recent_activity": {
     "latest_commit": null,
-    "latest_repository": "EL-STRIX",
+    "latest_repository": "Slotara",
     "latest_release": null,
-    "latest_update": "EL-STRIX"
+    "latest_update": "Faculty-Subject-Allocation"
   },
   "summary": {
-    "repository_summary": "Creator of 8 repositories.",
+    "repository_summary": "Creator of 7 repositories.",
     "language_summary": "Primary language is HTML.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on Faculty-Subject-Allocation.",
     "community_summary": "Received 3 stars across all projects."
   }
 }
