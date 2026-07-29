@@ -206,9 +206,9 @@ class StatisticsEngine:
 
     def _calculate_commit_stats(self) -> dict[str, Any]:
         """Calculate commit statistics."""
-        # Use exact totalCommitContributions. Adding restrictedContributionsCount is flawed 
-        # as it includes private PRs and issues, not just private commits.
-        total_commits = self.contrib_data.get("totalCommitContributions", 0)
+        # Include restrictedContributionsCount (private contributions) to accurately reflect the 
+        # total shown on the user's GitHub contributions graph.
+        total_commits = self.contrib_data.get("totalCommitContributions", 0) + self.contrib_data.get("restrictedContributionsCount", 0)
         return {
             "total_commits": total_commits,
             "recent_commits": 0,
@@ -218,14 +218,53 @@ class StatisticsEngine:
         }
 
     def _calculate_contribution_stats(self) -> dict[str, Any]:
-        """Calculate generalized contribution stats."""
+        """Calculate generalized contribution stats including streaks."""
         calendar = self.contrib_data.get("contributionCalendar", {})
         total = calendar.get("totalContributions", 0)
+        
+        weeks = calendar.get("weeks", [])
+        current_streak = 0
+        longest_streak = 0
+        max_daily = 0
+        
+        # Flatten days
+        days = []
+        for week in weeks:
+            days.extend(week.get("contributionDays", []))
+            
+        temp_streak = 0
+        for day in days:
+            count = day.get("contributionCount", 0)
+            if count > max_daily:
+                max_daily = count
+                
+            if count > 0:
+                temp_streak += 1
+                if temp_streak > longest_streak:
+                    longest_streak = temp_streak
+            else:
+                temp_streak = 0
+                
+        # Current streak: calculate from the end
+        temp_current = 0
+        for day in reversed(days):
+            count = day.get("contributionCount", 0)
+            if count > 0:
+                temp_current += 1
+            else:
+                # If it's today and count is 0, we still might have a streak up to yesterday.
+                # But to be simple, if it's 0, the streak breaks. 
+                # Let's check if it's the very last day (today) that is 0.
+                if day == days[-1] and count == 0:
+                    continue # Streak might be intact if yesterday had contributions
+                break
+        current_streak = temp_current
+
         return {
             "total_contributions": total,
-            "daily_contributions": {},
-            "weekly_contributions": {},
-            "monthly_contributions": {},
+            "max_daily_contributions": max_daily,
+            "current_streak": current_streak,
+            "longest_streak": longest_streak,
             "yearly_contributions": total
         }
 
@@ -300,7 +339,9 @@ class StatisticsEngine:
         }
 
     def _calculate_pr_stats(self) -> dict[str, Any]:
-        total = len(self.pr_data)
+        # Use GraphQL contributions graph total for pull requests to match the graph precisely.
+        total = self.contrib_data.get("totalPullRequestContributions", 0)
+        
         open_prs = sum(1 for pr in self.pr_data if pr.get("state") == "open")
         
         merged_prs = 0
@@ -311,10 +352,6 @@ class StatisticsEngine:
                 merged_prs += 1
                 
         closed_prs = sum(1 for pr in self.pr_data if pr.get("state") == "closed") - merged_prs
-        
-        # If the REST API search failed or returned 0, fallback to the 1-year GraphQL total
-        if total == 0:
-            total = self.contrib_data.get("totalPullRequestContributions", 0)
 
         return {
             "total_pull_requests": total,
