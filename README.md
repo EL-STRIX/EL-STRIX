@@ -1,6 +1,3 @@
-<div align="center">
- EL-STRIX
-
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/svg/dark.svg" />
   <source media="(prefers-color-scheme: light)" srcset="assets/svg/light.svg" />
@@ -11,6 +8,6 @@
 
 <div align="center">
 
-Last updated: 2026-07-29 20:47:41 UTC
+Last updated: 2026-07-29 20:58:07 UTC
 
 </div>
