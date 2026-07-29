@@ -339,18 +339,16 @@ class StatisticsEngine:
         }
 
     def _calculate_pr_stats(self) -> dict[str, Any]:
-        # Use GraphQL contributions graph total for pull requests to match the graph precisely.
-        total = self.contrib_data.get("totalPullRequestContributions", 0)
-        
         username = self.profile_data.get("login")
         
-        # Filter PRs to only those authored by the user (since self.pr_data contains dependabot PRs etc.)
-        # We no longer filter by 365 days since the contribution data is now all-time.
+        # Filter PRs to only those authored by the user
         filtered_prs = []
         for pr in self.pr_data:
             author = pr.get("user", {}).get("login")
             if author == username:
                 filtered_prs.append(pr)
+                
+        total = len(filtered_prs)
         
         open_prs = sum(1 for pr in filtered_prs if pr.get("state") == "open")
         
