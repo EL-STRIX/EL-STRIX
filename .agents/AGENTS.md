@@ -9,11 +9,15 @@ Welcome to the **EL-STRIX** repository guidelines. This document outlines the ma
 **EL-STRIX** is an automated engine designed to generate dynamic GitHub banners, stat cards, and profile README updates.
 
 ### Core Modules (`scripts/`)
-- `main.py`: Entry point orchestrating pipeline execution.
-- `github.py`: API wrapper for GitHub REST and GraphQL requests with error handling and caching.
-- `generator.py`: Data processor transforming raw API metrics into structured JSON outputs.
-- `renderer.py`: Graphics engine rendering theme-aware light/dark SVG graphics.
-- `utils.py`: Standard logging, directory structure enforcement, and filesystem utilities.
+- `main.py`: Entry point orchestrating the entire automated pipeline execution.
+- `github.py`: Robust API wrapper for GitHub REST and GraphQL requests with error handling, rate limiting, and caching.
+- `data_engine.py`: Orchestrates the fetching of all raw data from GitHub (commits, PRs, issues) and saves it to structured JSON.
+- `stats.py`: Core statistics engine that processes raw JSON data into a single source of truth for all numerical values.
+- `avatar_engine.py`: Handles image preprocessing, ASCII matrix generation, and dynamic avatar SVG rendering.
+- `renderer.py`: Graphics engine rendering theme-aware light/dark SVG graphics for statistics and profile cards.
+- `readme_engine.py`: Dynamic template processor that updates the README.md with live metrics.
+- `automation.py`: Handles Git tracking, detecting file changes, and automated commits/pushes.
+- `utils/`: Core utilities directory including JSON helpers, filesystem enforcement, logging, and environment management.
 
 ---
 
