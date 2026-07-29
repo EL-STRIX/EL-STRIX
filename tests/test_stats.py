@@ -20,7 +20,9 @@ def mock_engine(mocker):
         ],
         {"totalCommitContributions": 500, "totalIssueContributions": 50, "contributionCalendar": {"totalContributions": 1000}},
         {"repo1": {"total_lines": 1024}},
-        [{"state": "open", "merged_at": None}, {"state": "closed", "pull_request": {"merged_at": None}}]
+        [{"state": "open", "merged_at": None}, {"state": "closed", "pull_request": {"merged_at": None}}],
+        {}, # releases.json
+        []  # issues.json
     ])
     return StatisticsEngine()
 

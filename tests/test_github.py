@@ -28,7 +28,7 @@ def test_github_rest_request_success(mock_token, mocker):
     
     mocker.patch("requests.Session.request", return_value=mock_response)
     
-    data = client.rest_request("GET", "/user")
+    data = client.rest_request("GET", "/user", use_cache=False)
     assert data["login"] == "test_user"
 
 @patch("github.EnvManager.get_github_token", return_value="fake_token")
