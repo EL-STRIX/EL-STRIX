@@ -260,15 +260,19 @@ class StatisticsEngine:
         longest_streak = 0
         max_daily = 0
         
-        # Flatten days and ignore future days
+        # Flatten days, deduplicate by date, and ignore future days
         from datetime import datetime, UTC
-        today_str = datetime.now(UTC).strftime("%Y-%m-%d")
+        today_str = self.contrib_data.get("github_today", datetime.now(UTC).strftime("%Y-%m-%d"))
         
-        days = []
+        unique_days = {}
         for week in weeks:
             for day in week.get("contributionDays", []):
-                if day.get("date", "") <= today_str:
-                    days.append(day)
+                d = day.get("date", "")
+                if d and d <= today_str:
+                    unique_days[d] = day
+                    
+        # Sort chronologically
+        days = [unique_days[k] for k in sorted(unique_days.keys())]
             
         temp_streak = 0
         for day in days:
@@ -291,7 +295,7 @@ class StatisticsEngine:
                 temp_current += 1
             else:
                 # If it's today and count is 0, we still might have a streak up to yesterday.
-                if day == days[-1] and count == 0:
+                if day.get("date") == today_str and count == 0:
                     continue
                 break
         current_streak = temp_current

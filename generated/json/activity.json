@@ -1,5 +1,83 @@
 [
   {
+    "id": "16161473986",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 38466627547,
+      "ref": "refs/heads/main",
+      "head": "1d114812fd3d014b45ca3a95738797878d908a7c",
+      "before": "03e3ef092183d7ed183dbe7b3e20270723d777fe"
+    },
+    "public": true,
+    "created_at": "2026-07-29T21:18:46Z"
+  },
+  {
+    "id": "16160966580",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 38466115481,
+      "ref": "refs/heads/main",
+      "head": "ed9beaf5af5b6683192853ac386a2e3222099fe4",
+      "before": "9f3b5a533b8c1628b226177b56eafbecfb343fe7"
+    },
+    "public": true,
+    "created_at": "2026-07-29T21:08:32Z"
+  },
+  {
+    "id": "16160698374",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 38465844846,
+      "ref": "refs/heads/main",
+      "head": "739cf4c7bf1e0bc4d9d69e96a5bdd6509f30a2a9",
+      "before": "0dae637c3ea01b605a5cec30409980ceba863b17"
+    },
+    "public": true,
+    "created_at": "2026-07-29T21:03:15Z"
+  },
+  {
     "id": "16160449951",
     "type": "PushEvent",
     "actor": {
@@ -804,31 +882,6 @@
     "created_at": "2026-07-29T18:42:31Z"
   },
   {
-    "id": "16152854854",
-    "type": "DeleteEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1268290391,
-      "name": "EL-STRIX/C-GAMES-COLLECTION",
-      "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION"
-    },
-    "payload": {
-      "ref": "refactor/game-header-helper-4568477328343022366",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/refactor/game-header-helper-4568477328343022366",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2026-07-29T18:42:27Z"
-  },
-  {
     "id": "16152854943",
     "type": "DeleteEvent",
     "actor": {
@@ -848,6 +901,31 @@
       "ref": "test-load-css-valid-13643913448772280751",
       "ref_type": "branch",
       "full_ref": "refs/heads/test-load-css-valid-13643913448772280751",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-07-29T18:42:27Z"
+  },
+  {
+    "id": "16152854854",
+    "type": "DeleteEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1268290391,
+      "name": "EL-STRIX/C-GAMES-COLLECTION",
+      "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION"
+    },
+    "payload": {
+      "ref": "refactor/game-header-helper-4568477328343022366",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/refactor/game-header-helper-4568477328343022366",
       "pusher_type": "user"
     },
     "public": true,
@@ -3099,104 +3177,5 @@
     },
     "public": true,
     "created_at": "2026-07-29T11:25:04Z"
-  },
-  {
-    "id": "12470198585",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1268290391,
-      "name": "EL-STRIX/C-GAMES-COLLECTION",
-      "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION"
-    },
-    "payload": {
-      "action": "opened",
-      "number": 9,
-      "pull_request": {
-        "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION/pulls/9",
-        "id": 4159912130,
-        "number": 9,
-        "head": {
-          "ref": "test-return-to-launcher-7280919375952553877",
-          "sha": "1ab654cdf24d5d63e5cef448d6e392a1c1a24d0b",
-          "repo": {
-            "id": 1268290391,
-            "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION",
-            "name": "C-GAMES-COLLECTION"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "d257ce6ff2a4743907a136e5a296bcdbeccddcb5",
-          "repo": {
-            "id": 1268290391,
-            "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION",
-            "name": "C-GAMES-COLLECTION"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2026-07-29T11:22:38Z"
-  },
-  {
-    "id": "16117667115",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1268290391,
-      "name": "EL-STRIX/C-GAMES-COLLECTION",
-      "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION"
-    },
-    "payload": {
-      "ref": "test-return-to-launcher-7280919375952553877",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/test-return-to-launcher-7280919375952553877",
-      "master_branch": "main",
-      "description": "Modern GTK4 game collection built in C with a polished desktop experience.",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2026-07-29T11:22:36Z"
-  },
-  {
-    "id": "16116989129",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1268290391,
-      "name": "EL-STRIX/C-GAMES-COLLECTION",
-      "url": "https://api.github.com/repos/EL-STRIX/C-GAMES-COLLECTION"
-    },
-    "payload": {
-      "repository_id": 1268290391,
-      "push_id": 38421808156,
-      "ref": "refs/heads/main",
-      "head": "d257ce6ff2a4743907a136e5a296bcdbeccddcb5",
-      "before": "934fcfeda0a00d5e717188734e771c5a73bbe335"
-    },
-    "public": true,
-    "created_at": "2026-07-29T11:14:09Z"
   }
 ]

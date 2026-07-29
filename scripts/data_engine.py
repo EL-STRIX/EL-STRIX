@@ -105,6 +105,30 @@ class DataEngine:
             "restrictedContributionsCount": 0
         }
         
+        # Get GitHub's official 'today' date to ensure streak timezone accuracy
+        today_query = """
+        query($username: String!) {
+          user(login: $username) {
+            contributionsCollection {
+              contributionCalendar {
+                weeks {
+                  contributionDays {
+                    date
+                  }
+                }
+              }
+            }
+          }
+        }
+        """
+        try:
+            today_data = self.client.graphql_request(today_query, {"username": self.username})
+            today_str = today_data["user"]["contributionsCollection"]["contributionCalendar"]["weeks"][-1]["contributionDays"][-1]["date"]
+            unified_contribs["github_today"] = today_str
+        except Exception as e:
+            logger.warning(f"Failed to fetch github_today, falling back to local UTC: {e}")
+            unified_contribs["github_today"] = datetime.now(UTC).strftime("%Y-%m-%d")
+        
         for year in range(start_year, current_year + 1):
             from_date = f"{year}-01-01T00:00:00Z"
             to_date = f"{year}-12-31T23:59:59Z"

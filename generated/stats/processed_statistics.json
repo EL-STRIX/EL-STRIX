@@ -96,12 +96,11 @@
     ]
   },
   "commits": {
-    "total_commits": 517,
+    "total_commits": 519,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
       "C-GAMES-COLLECTION": 156,
-      "EL-STRIX": 108,
       "Faculty-Subject-Allocation": 25,
       "Finzo": 949,
       "LUMINA": 25,
@@ -111,14 +110,14 @@
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 552,
+    "total_contributions": 554,
     "max_daily_contributions": 80,
-    "current_streak": 7,
-    "longest_streak": 7,
-    "yearly_contributions": 552
+    "current_streak": 8,
+    "longest_streak": 8,
+    "yearly_contributions": 554
   },
   "loc": {
-    "total_lines": 606077
+    "total_lines": 567929
   },
   "languages": {
     "languages_used": 6,
@@ -580,7 +579,7 @@
       },
       {
         "date": "2026-07-26",
-        "commits": 217
+        "commits": 219
       },
       {
         "date": "2026-08-02",

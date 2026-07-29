@@ -62,39 +62,9 @@ class ImagePreprocessor:
         return img
         
     def _extract_subject_mask(self, img: Image.Image) -> Image.Image:
-        """Create a mask isolating the subject from the background."""
-        # 1. Use existing alpha channel if present
-        if img.mode in ('RGBA', 'LA'):
-            mask = img.split()[-1]
-        else:
-            mask = Image.new('L', img.size, 255)
-            
-        # 2. Detect flat color backgrounds from corners
-        w, h = img.size
-        pixels = img.convert('RGB').load()
-        corners = [pixels[0, 0], pixels[w-1, 0], pixels[0, h-1], pixels[w-1, h-1]]
-        
-        def color_dist(c1, c2):
-            return math.sqrt(sum((a - b) ** 2 for a, b in zip(c1, c2)))
-            
-        # If corners are similar, it's likely a solid background
-        if all(color_dist(corners[0], c) < 15 for c in corners[1:]):
-            bg_color = corners[0]
-            new_mask = Image.new('L', img.size, 255)
-            new_pixels = new_mask.load()
-            
-            for y in range(h):
-                for x in range(w):
-                    if color_dist(pixels[x, y], bg_color) < 25:
-                        new_pixels[x, y] = 0
-                        
-            # Combine alpha mask and detected solid background mask safely
-            mask_data = list(mask.getdata())
-            new_mask_data = list(new_mask.getdata())
-            combined = [min(m1, m2) for m1, m2 in zip(mask_data, new_mask_data)]
-            mask.putdata(combined)
-            
-        return mask
+        """Create a mask isolating the subject from the background using rembg."""
+        import rembg
+        return rembg.remove(img, only_mask=True)
         
     def process(self, image_path: Path) -> dict[str, Image.Image] | None:
         try:
@@ -106,6 +76,29 @@ class ImagePreprocessor:
             # 2. Alpha handling & Background separation
             mask = self._extract_subject_mask(img)
             img = img.convert('RGBA')
+            
+            # Crop to subject bounding box to remove empty space
+            bbox = mask.getbbox()
+            if bbox:
+                img = img.crop(bbox)
+                mask = mask.crop(bbox)
+                
+                # Add dynamic padding (15% on each side) to create the 70-80% subject size
+                w, h = img.size
+                pad_w = int(w * 0.15)
+                pad_h = int(h * 0.15)
+                
+                new_w = w + 2 * pad_w
+                new_h = h + 2 * pad_h
+                
+                padded_img = Image.new('RGBA', (new_w, new_h), (255, 255, 255, 0))
+                padded_mask = Image.new('L', (new_w, new_h), 0)
+                
+                padded_img.paste(img, (pad_w, pad_h))
+                padded_mask.paste(mask, (pad_w, pad_h))
+                
+                img = padded_img
+                mask = padded_mask
             
             # Extract subject RGB onto a solid background for processing
             subject_rgb = Image.new('RGB', img.size, (255, 255, 255))
@@ -158,8 +151,8 @@ class AsciiEngine:
     
     def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("ascii_engine", {})
-        # Professional 70-character density ramp (calibrated for standard monospace rendering)
-        self.charset = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~<>i!lI;:,\"^`'. "
+        # Clean, recognizable 10-character density ramp
+        self.charset = "@%#*+=-:. "
         self.char_count = len(self.charset)
         self.width = self.config.get("width", 85)
         
@@ -207,17 +200,16 @@ class AsciiEngine:
                     norm_lum = lum / 255.0
                     edge_w = e / 255.0
                     
-                    # Base density: darker pixels = more density. We use non-linear gamma 
-                    # to push midtones (like skin) to be sparser so the outline is prominent.
-                    gamma_lum = norm_lum ** 0.6 
+                    # Clean contrast curve to keep face recognizable and avoid noise
+                    gamma_lum = norm_lum ** 0.8
                     base_density = 1.0 - gamma_lum 
                     
-                    # Boost density using edges to preserve facial outlines and hair
-                    final_density = base_density * 0.4 + edge_w * 0.6
+                    # Blend edge detection for clear facial features
+                    final_density = base_density * 0.5 + edge_w * 0.5
                     
-                    # Force very dark shadows (eyes, dark hair) to remain dense regardless of edge
-                    if norm_lum < 0.2:
-                        final_density = max(final_density, 0.7)
+                    # Force eyes and dark hair to remain dense
+                    if norm_lum < 0.25:
+                        final_density = max(final_density, 0.8)
                         
                     # Map to character index (0 is densest, char_count-1 is sparsest)
                     char_idx = int((1.0 - final_density) * (self.char_count - 1))
