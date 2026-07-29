@@ -8,7 +8,7 @@
   "website": "https://github.com/EL-STRIX",
   "email": "sujaypaul892@gmail.com",
   "linkedin": "Sujay Paul",
-  "portfolio": "development phase",
+  "portfolio": "Coming Soon",
   "tech_stack": [
     {
       "name": "OS",
@@ -36,11 +36,15 @@
     },
     {
       "name": "Tools",
-      "value": "Git, GitHub Actions, Vercel"
+      "value": "Git, GitHub Actions, Vercel, CI/CD"
     },
     {
       "name": "Languages",
       "value": "English, Bengali, Hindi"
+    },
+    {
+      "name": "Status",
+      "value": "Open to Internship & Freelancing"
     }
   ],
   "featured_projects": [
