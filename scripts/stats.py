@@ -27,6 +27,10 @@ class StatisticsEngine:
         self.pr_data: list[dict[str, Any]] = load_json(PathManager.GENERATED_JSON_DIR / "pull_requests.json")
         if not isinstance(self.pr_data, list):
             self.pr_data = []
+        self.releases_data: dict[str, Any] = load_json(PathManager.GENERATED_JSON_DIR / "releases.json")
+        self.issues_data: list[dict[str, Any]] = load_json(PathManager.GENERATED_JSON_DIR / "issues.json")
+        if not isinstance(self.issues_data, list):
+            self.issues_data = []
         self.stats: dict[str, Any] = {}
 
     def process_all(self) -> dict[str, Any]:
@@ -209,12 +213,41 @@ class StatisticsEngine:
         # Include restrictedContributionsCount (private contributions) to accurately reflect the 
         # total shown on the user's GitHub contributions graph.
         total_commits = self.contrib_data.get("totalCommitContributions", 0) + self.contrib_data.get("restrictedContributionsCount", 0)
+        
+        # Calculate recent commits (last 30 days) from the contribution calendar
+        calendar = self.contrib_data.get("contributionCalendar", {})
+        weeks = calendar.get("weeks", [])
+        
+        from datetime import datetime, timedelta, UTC
+        thirty_days_ago = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d")
+        today_str = datetime.now(UTC).strftime("%Y-%m-%d")
+        
+        recent_commits = 0
+        timeline = []
+        
+        for week in weeks[-6:]:  # Look at the last 6 weeks
+            for day in week.get("contributionDays", []):
+                date_str = day.get("date", "")
+                if date_str >= thirty_days_ago and date_str <= today_str:
+                    count = day.get("contributionCount", 0)
+                    recent_commits += count
+                    timeline.append({"date": date_str, "commits": count})
+                    
+        frequency = round(recent_commits / 30, 2)
+        
+        commits_per_repo = {}
+        if self.loc_data and isinstance(self.loc_data, dict):
+            for repo, data in self.loc_data.items():
+                c = data.get("total_commits", 0)
+                if c > 0:
+                    commits_per_repo[repo] = c
+                    
         return {
             "total_commits": total_commits,
-            "recent_commits": 0,
-            "commit_frequency": 0.0,
-            "commits_per_repository": {},
-            "commit_timeline": []
+            "recent_commits": recent_commits,
+            "commit_frequency": frequency,
+            "commits_per_repository": commits_per_repo,
+            "commit_timeline": timeline
         }
 
     def _calculate_contribution_stats(self) -> dict[str, Any]:
@@ -325,20 +358,57 @@ class StatisticsEngine:
         }
 
     def _calculate_release_stats(self) -> dict[str, Any]:
+        total_releases = 0
+        latest_release_date = None
+        latest_release_name = None
+        repo_release_count = {}
+        
+        for repo_name, releases in self.releases_data.items():
+            count = len(releases)
+            if count > 0:
+                total_releases += count
+                repo_release_count[repo_name] = count
+                
+                # Check for latest release
+                for release in releases:
+                    pub_date = self._parse_date(release.get("publishedAt"))
+                    if pub_date:
+                        if not latest_release_date or pub_date > latest_release_date:
+                            latest_release_date = pub_date
+                            latest_release_name = release.get("name") or release.get("tagName")
+                            
         return {
-            "total_releases": 0,
-            "latest_release": None,
-            "release_frequency": 0.0,
-            "repository_release_count": {}
+            "total_releases": total_releases,
+            "latest_release": latest_release_name,
+            "release_frequency": 0.0, # Could be calculated if needed
+            "repository_release_count": repo_release_count
         }
 
     def _calculate_issue_stats(self) -> dict[str, Any]:
-        total = self.contrib_data.get("totalIssueContributions", 0)
+        # Filter to ensure we only count actual issues, not PRs (Search API sometimes mixes them if not careful)
+        # We explicitly searched `type:issue`, so they should all be issues.
+        total_issues = len(self.issues_data)
+        open_issues = sum(1 for issue in self.issues_data if issue.get("state") == "open")
+        closed_issues = sum(1 for issue in self.issues_data if issue.get("state") == "closed")
+        
+        # If the search API limit was hit (1000), total might be capped.
+        # Fallback to totalIssueContributions from GraphQL if it's larger.
+        graphql_total = self.contrib_data.get("totalIssueContributions", 0)
+        if graphql_total > total_issues:
+            total_issues = graphql_total
+            # We can't know the exact open/closed split for the missing ones, 
+            # but we can scale closed_issues to match the new total if we assume the fetched ones are a representative sample.
+            # However, since we sorted by updated_desc, open issues are usually active/recent and fully fetched.
+            # We will just pad closed_issues.
+            closed_issues = total_issues - open_issues
+            
+        ratio = round((closed_issues / total_issues) * 100, 2) if total_issues > 0 else 0.0
+
         return {
-            "total_issues": total,
-            "open_issues": sum(r.get("open_issues_count", 0) for r in self.repos_data),
-            "closed_issues": 0,
-            "issue_ratio": 0.0
+            "total_issues": total_issues,
+            "open_issues": open_issues,
+            "closed_issues": closed_issues,
+            "issue_ratio": ratio
         }
 
     def _calculate_pr_stats(self) -> dict[str, Any]:
@@ -378,11 +448,30 @@ class StatisticsEngine:
         return format_featured(selected)
 
     def _calculate_trends(self) -> dict[str, Any]:
+        # Repository growth trend
+        repos_by_year = {}
+        for r in self.repos_data:
+            created = self._parse_date(r.get("created_at"))
+            if created:
+                year = str(created.year)
+                repos_by_year[year] = repos_by_year.get(year, 0) + 1
+                
+        repo_growth = [{"year": k, "count": v} for k, v in sorted(repos_by_year.items())]
+        
+        # Commit trend from calendar
+        commit_trend = []
+        calendar = self.contrib_data.get("contributionCalendar", {})
+        for week in calendar.get("weeks", []):
+            if week.get("contributionDays"):
+                first_day = week["contributionDays"][0].get("date")
+                weekly_total = sum(d.get("contributionCount", 0) for d in week["contributionDays"])
+                commit_trend.append({"date": first_day, "commits": weekly_total})
+                
         return {
-            "repository_growth": [],
-            "star_growth": [],
+            "repository_growth": repo_growth,
+            "star_growth": [], # Hard to track historically without specific API
             "activity_trend": [],
-            "commit_trend": []
+            "commit_trend": commit_trend
         }
 
     def _generate_recent_activity(self) -> dict[str, Any]:

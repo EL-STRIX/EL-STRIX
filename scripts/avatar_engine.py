@@ -119,7 +119,7 @@ class AsciiEngine:
                 if is_bright_bg:
                     # Case: Dark Subject on Bright Background
                     # Force background to be pure white (empty space)
-                    if pixel_val >= bg_val - 25:
+                    if pixel_val >= bg_val - 5:
                         pixel_val = 255
                     
                     # Mapping: Dark (0) -> Dense (9), Bright (255) -> Empty (0)
@@ -128,7 +128,7 @@ class AsciiEngine:
                 else:
                     # Case: Bright Subject on Dark Background
                     # Force background to be pure black (empty space)
-                    if pixel_val <= bg_val + 25:
+                    if pixel_val <= bg_val + 5:
                         pixel_val = 0
                         
                     # Mapping: Dark (0) -> Empty (0), Bright (255) -> Dense (9)

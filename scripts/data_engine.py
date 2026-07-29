@@ -186,8 +186,8 @@ class DataEngine:
         logger.info("Fetching pull request data...")
         all_prs = {}
 
-        # 1. Fetch all PRs authored by the user via Search API
-        prs_search = self.client.rest_request("GET", f"/search/issues?q=type:pr+author:{self.username}&per_page=100", paginated=True)
+        # 1. Fetch all PRs authored by the user via Search API (sort by updated to get most recent if hitting 1000 limit)
+        prs_search = self.client.rest_request("GET", f"/search/issues?q=type:pr+author:{self.username}&sort=updated&order=desc&per_page=100", paginated=True)
         if isinstance(prs_search, list):
             for page in prs_search:
                 if isinstance(page, dict) and "items" in page:
@@ -218,7 +218,7 @@ class DataEngine:
     def fetch_issues(self) -> None:
         """Fetch user's issues."""
         logger.info("Fetching issue data...")
-        issues = self.client.rest_request("GET", f"/search/issues?q=type:issue+author:{self.username}&per_page=100", paginated=True)
+        issues = self.client.rest_request("GET", f"/search/issues?q=type:issue+author:{self.username}&sort=updated&order=desc&per_page=100", paginated=True)
         
         if isinstance(issues, list) and len(issues) > 0 and isinstance(issues[0], dict) and "items" in issues[0]:
             all_items = []
@@ -231,15 +231,19 @@ class DataEngine:
             save_json(issues, PathManager.GENERATED_JSON_DIR / "issues.json")
 
     def fetch_releases(self) -> None:
-        """Fetch releases for user's repositories via GraphQL."""
+        """Fetch releases for user's repositories via GraphQL with pagination."""
         logger.info("Fetching release data...")
         query = """
-        query($username: String!) {
+        query($username: String!, $cursor: String) {
           user(login: $username) {
-            repositories(first: 100, ownerAffiliations: OWNER, orderBy: {field: PUSHED_AT, direction: DESC}) {
+            repositories(first: 100, after: $cursor, ownerAffiliations: OWNER, orderBy: {field: PUSHED_AT, direction: DESC}) {
+              pageInfo {
+                hasNextPage
+                endCursor
+              }
               nodes {
                 name
-                releases(first: 10, orderBy: {field: CREATED_AT, direction: DESC}) {
+                releases(first: 100, orderBy: {field: CREATED_AT, direction: DESC}) {
                   nodes {
                     name
                     tagName
@@ -252,15 +256,30 @@ class DataEngine:
           }
         }
         """
-        data = self.client.graphql_request(query, {"username": self.username})
-        repos = data.get("user", {}).get("repositories", {}).get("nodes", [])
-        
-        # Flatten releases
         all_releases = {}
-        for repo in repos:
-            repo_releases = repo.get("releases", {}).get("nodes", [])
-            if repo_releases:
-                all_releases[repo["name"]] = repo_releases
+        has_next_page = True
+        cursor = None
+        
+        while has_next_page:
+            variables = {"username": self.username}
+            if cursor:
+                variables["cursor"] = cursor
+                
+            data = self.client.graphql_request(query, variables)
+            repos_data = data.get("user", {}).get("repositories", {})
+            repos = repos_data.get("nodes", [])
+            
+            for repo in repos:
+                repo_releases = repo.get("releases", {}).get("nodes", [])
+                if repo_releases:
+                    # If this repo was fetched in a previous page, extend it, though they should be distinct repos
+                    if repo["name"] not in all_releases:
+                        all_releases[repo["name"]] = []
+                    all_releases[repo["name"]].extend(repo_releases)
+                    
+            page_info = repos_data.get("pageInfo", {})
+            has_next_page = page_info.get("hasNextPage", False)
+            cursor = page_info.get("endCursor")
                 
         save_json(all_releases, PathManager.GENERATED_JSON_DIR / "releases.json")
 
@@ -290,9 +309,12 @@ class DataEngine:
                         for contributor in stats:
                             author = contributor.get("author") or {}
                             if author.get("login") == self.username:
+                                weeks = contributor.get("weeks", [])
+                                total_lines = sum(w.get("a", 0) for w in weeks)
                                 loc_stats[repo_name] = {
                                     "total_commits": contributor.get("total", 0),
-                                    "weeks": contributor.get("weeks", [])
+                                    "total_lines": total_lines,
+                                    "weeks": weeks
                                 }
                                 break
                 except Exception as e:
