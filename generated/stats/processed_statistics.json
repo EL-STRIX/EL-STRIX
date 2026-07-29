@@ -1,7 +1,7 @@
 {
   "profile": {
     "total_public_repositories": 4,
-    "total_followers": 6,
+    "total_followers": 7,
     "total_following": 13,
     "profile_creation_date": "2025-03-21T15:07:47Z",
     "days_since_account_creation": 495,
@@ -96,54 +96,54 @@
     ]
   },
   "commits": {
-    "total_commits": 486,
+    "total_commits": 492,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {},
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 521,
+    "total_contributions": 527,
     "max_daily_contributions": 80,
     "current_streak": 7,
     "longest_streak": 7,
-    "yearly_contributions": 521
+    "yearly_contributions": 527
   },
   "loc": {
     "total_lines": 0
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 43236352,
+    "total_bytes": 43194368,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 45.51,
-      "Dart": 23.42,
-      "JavaScript": 19.15,
-      "PHP": 5.39,
+      "HTML": 45.55,
+      "Dart": 23.44,
+      "JavaScript": 19.17,
+      "PHP": 5.4,
       "C": 4.97,
-      "Python": 1.57
+      "Python": 1.46
     },
     "language_ranking": [
       {
         "language": "HTML",
         "bytes": 19675136,
-        "percentage": 45.51
+        "percentage": 45.55
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 23.42
+        "percentage": 23.44
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 19.15
+        "percentage": 19.17
       },
       {
         "language": "PHP",
-        "bytes": 2329600,
-        "percentage": 5.39
+        "bytes": 2332672,
+        "percentage": 5.4
       },
       {
         "language": "C",
@@ -152,13 +152,13 @@
       },
       {
         "language": "Python",
-        "bytes": 676864,
-        "percentage": 1.57
+        "bytes": 631808,
+        "percentage": 1.46
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "Faculty-Subject-Allocation",
+    "most_recently_updated_repository": "EL-STRIX",
     "recently_created_repository": "Slotara",
     "oldest_repository": "Portfolio",
     "most_active_repository": null,
@@ -177,10 +177,10 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 23,
+    "total_pull_requests": 44,
     "open_pull_requests": 0,
-    "closed_pull_requests": 1,
-    "merged_pull_requests": 22
+    "closed_pull_requests": 12,
+    "merged_pull_requests": 32
   },
   "featured_projects": [
     {
@@ -236,12 +236,12 @@
     "latest_commit": null,
     "latest_repository": "Slotara",
     "latest_release": null,
-    "latest_update": "Faculty-Subject-Allocation"
+    "latest_update": "EL-STRIX"
   },
   "summary": {
     "repository_summary": "Creator of 7 repositories.",
     "language_summary": "Primary language is HTML.",
-    "activity_summary": "Most recently working on Faculty-Subject-Allocation.",
+    "activity_summary": "Most recently working on EL-STRIX.",
     "community_summary": "Received 3 stars across all projects."
   }
 }
