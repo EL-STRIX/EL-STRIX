@@ -1,22 +1,23 @@
-# Automation Guide
+# ⚙️ Automation Guide
 
-**EL-STRIX** utilizes GitHub Actions for continuous automation, dynamic banner updates, linting, and security audits.
+**EL-STRIX** runs completely hands-off once configured. It utilizes GitHub Actions to continuously update your profile statistics, render new banners, and commit those changes directly back to the repository.
 
-## Workflows Overview
+## 🔄 Active Workflows
 
-- **Profile Update (`.github/workflows/profile.yml`)**:
-  - Automatically fetches updated GitHub profile statistics and re-generates dynamic banner assets (`light.svg`, `dark.svg`).
-  - Runs on a scheduled cron job (every 12 hours) and on manual dispatch.
+Currently, the engine relies on a single, powerful workflow to handle everything.
 
-- **Linter (`.github/workflows/lint.yml`)**:
-  - Automatically checks Python, Markdown, and YAML file formatting on push and PR.
+### Profile Update (`.github/workflows/profile.yml`)
+This is the core automation script. 
+- **What it does**: It spins up an Ubuntu runner, installs the necessary Python dependencies, and executes the entire EL-STRIX generation pipeline (`scripts/main.py`). After generating the new assets (`light.svg`, `dark.svg`), it automatically commits and pushes the updated graphics and `README.md` to your repository.
+- **When it runs**: 
+  - Automatically runs every 24 hours (at midnight UTC) via a cron job.
+  - Automatically runs whenever you push changes to the `main` branch (excluding documentation changes).
+  - Can be triggered manually at any time via the GitHub Actions tab (`workflow_dispatch`).
 
-- **Security Scanning (`.github/workflows/security.yml`)**:
-  - Runs GitHub CodeQL analysis for Python vulnerability scanning.
+## 🔐 Required Environment Secrets
 
-- **Release Automation (`.github/workflows/release.yml`)**:
-  - Automatically creates GitHub releases when new `v*` tags are pushed.
+To allow the automation to fetch statistics and push changes back to your repository, you need to provide a token.
 
-## Environment Secrets
+- **`EL_STRIX_TOKEN`**: You must create a classic Personal Access Token (PAT) with `repo` and `workflow` permissions and save it in your repository secrets as `EL_STRIX_TOKEN`. This token allows the engine to securely fetch your latest commit data across all your repositories and push the generated SVGs back to this repo.
 
-- `GH_TOKEN` or `GITHUB_TOKEN`: Read/Write access token for fetching statistics and committing generated assets back to the repo.
+If `EL_STRIX_TOKEN` is not found, the workflow will gracefully fall back to the default `GITHUB_TOKEN`, though this may limit its ability to fetch data from your private repositories depending on your settings.
