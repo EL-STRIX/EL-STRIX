@@ -342,16 +342,29 @@ class StatisticsEngine:
         # Use GraphQL contributions graph total for pull requests to match the graph precisely.
         total = self.contrib_data.get("totalPullRequestContributions", 0)
         
-        open_prs = sum(1 for pr in self.pr_data if pr.get("state") == "open")
+        username = self.profile_data.get("login")
+        now = datetime.now(UTC)
+        
+        # Filter PRs to match the contribution graph (last 365 days + authored by user)
+        filtered_prs = []
+        for pr in self.pr_data:
+            author = pr.get("user", {}).get("login")
+            if author != username:
+                continue
+            created_at = self._parse_date(pr.get("created_at"))
+            if created_at and (now - created_at).days <= 365:
+                filtered_prs.append(pr)
+        
+        open_prs = sum(1 for pr in filtered_prs if pr.get("state") == "open")
         
         merged_prs = 0
-        for pr in self.pr_data:
+        for pr in filtered_prs:
             if pr.get("merged_at"):
                 merged_prs += 1
             elif pr.get("pull_request", {}).get("merged_at"):
                 merged_prs += 1
                 
-        closed_prs = sum(1 for pr in self.pr_data if pr.get("state") == "closed") - merged_prs
+        closed_prs = sum(1 for pr in filtered_prs if pr.get("state") == "closed") - merged_prs
 
         return {
             "total_pull_requests": total,
