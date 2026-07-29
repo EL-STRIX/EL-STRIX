@@ -169,16 +169,8 @@ class AvatarSvgRenderer:
             '<g class="ascii-text">'
         ]
         
-        # For dark mode, invert the characters so the polarity of the image is preserved
-        charset = self.ascii_config.get("charset", " .:-=+*#%@")
-        if mode == "dark":
-            char_map = {c: charset[len(charset) - 1 - i] for i, c in enumerate(charset)}
-            processed_matrix = [[char_map.get(c, c) for c in row] for row in matrix]
-        else:
-            processed_matrix = matrix
-        
         y_offset = self.font_size
-        for row in processed_matrix:
+        for row in matrix:
             line_str = "".join(row).replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
             svg_content.append(f'  <text x="0" y="{y_offset}">{line_str}</text>')
             y_offset += self.font_size * self.line_spacing
