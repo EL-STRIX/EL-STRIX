@@ -26,7 +26,7 @@ class SVGRenderer:
         # Terminal dimensions sized for maximum GitHub README width.
         self.width = 1780
         self.left_panel_width = 740
-        self.font_family = "monospace"
+        self.font_family = "Consolas, 'Courier New', monospace"
 
         try:
             self.configs = ConfigLoader.load_all()
@@ -83,13 +83,28 @@ class SVGRenderer:
         parts: list[tuple[str, str]],
         y: int,
         font_size: int = 32,
+        right_align_index: int = -1,
+        right_x: int = 0
     ) -> str:
         """Render a single line of terminal text with multiple colored spans."""
-        svg = f'<text x="0" y="{y}" xml:space="preserve" font-size="{font_size}">'
-        for text, color in parts:
-            esc = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-            svg += f'<tspan fill="{color}">{esc}</tspan>'
-        svg += '</text>\n'
+        svg = ""
+        left_parts = parts[:right_align_index] if right_align_index != -1 else parts
+        if left_parts:
+            svg += f'<text x="0" y="{y}" xml:space="preserve" font-size="{font_size}">'
+            for text, color in left_parts:
+                esc = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                svg += f'<tspan fill="{color}">{esc}</tspan>'
+            svg += '</text>\n'
+            
+        if right_align_index != -1 and right_x > 0:
+            right_parts = parts[right_align_index:]
+            svg += f'<text x="{right_x}" y="{y}" text-anchor="end" xml:space="preserve" font-size="{font_size}">'
+            for text, color in right_parts:
+                text = text.rstrip()
+                esc = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+                svg += f'<tspan fill="{color}">{esc}</tspan>'
+            svg += '</text>\n'
+            
         return svg
 
     @staticmethod
@@ -146,7 +161,7 @@ class SVGRenderer:
             right_svg += self._render_line([
                 (header_text, text_main),
                 (self._dashes(header_text, 52), text_dim),
-            ], y)
+            ], y, right_align_index=1, right_x=930)
             y += lh
 
             # ── Tech Stack ────────────────────────────────────────
@@ -160,7 +175,7 @@ class SVGRenderer:
                     (f"{key}: ", text_key),
                     (f"{dots} ", text_dim),
                     (val, text_main),
-                ], y)
+                ], y, right_align_index=3, right_x=930)
                 y += lh
 
 
@@ -168,7 +183,7 @@ class SVGRenderer:
             right_svg += self._render_line([
                 ("- Contact ", text_main),
                 (self._dashes("- Contact ", 52), text_dim),
-            ], y)
+            ], y, right_align_index=1, right_x=930)
             y += lh
 
             contacts = [
@@ -186,7 +201,7 @@ class SVGRenderer:
                     (f"{key}: ", text_key),
                     (f"{dots} ", text_dim),
                     (val, text_main),
-                ], y)
+                ], y, right_align_index=3, right_x=930)
                 y += lh
 
             # Ensure Y coordinate is safely below the left ASCII avatar before full width panels
@@ -197,7 +212,7 @@ class SVGRenderer:
             stats_svg += self._render_line([
                 ("- Featured Projects ", text_main),
                 (self._dashes("- Featured Projects ", 98), text_dim),
-            ], y)
+            ], y, right_align_index=1, right_x=1720)
             y += lh
 
             projects = self.profile.get("featured_projects", [])
@@ -210,7 +225,7 @@ class SVGRenderer:
                     (f"{name}: ", text_key),
                     (f"{dots} ", text_dim),
                     (status, text_main),
-                ], y)
+                ], y, right_align_index=3, right_x=1720)
                 y += lh
 
 
@@ -218,7 +233,7 @@ class SVGRenderer:
             stats_svg += self._render_line([
                 ("- GitHub Stats ", text_main),
                 (self._dashes("- GitHub Stats ", 98), text_dim),
-            ], y)
+            ], y, right_align_index=1, right_x=1720)
             y += lh
 
             repo_cnt = str(self.stats.get("repositories", {}).get("repository_count", 0))
@@ -250,7 +265,7 @@ class SVGRenderer:
                 ("Stars Earned: ", text_key),
                 ("." * d2 + " ", text_dim),
                 (stars, text_main),
-            ], y)
+            ], y, right_align_index=8, right_x=1720)
             y += lh
 
             d1 = max(COL - 31 - len(commits) - len(contributions), 2)
@@ -265,7 +280,7 @@ class SVGRenderer:
                 ("Pull Requests: ", text_key),
                 ("." * d2 + " ", text_dim),
                 (prs, text_main),
-            ], y)
+            ], y, right_align_index=8, right_x=1720)
             y += lh
             
             current_streak = str(self.stats.get("contributions", {}).get("current_streak", 0))
@@ -283,7 +298,7 @@ class SVGRenderer:
                 ("Lines of Code: ", text_key),
                 ("." * d4 + " ", text_dim),
                 (f"{loc} ", text_main),
-            ], y)
+            ], y, right_align_index=8, right_x=1720)
             y += lh
 
             # (Removed footer)
