@@ -1,5 +1,7 @@
 """Production-ready GitHub API Client for REST and GraphQL."""
 
+import hashlib
+import os
 import time
 from pathlib import Path
 from typing import Any
@@ -28,8 +30,9 @@ class GitHubClient:
             "X-GitHub-Api-Version": "2022-11-28",
             "User-Agent": "EL-STRIX-Profile-Engine"
         }
-        # TTL: 1 hour for standard cache
-        self.cache = CacheManager(ttl_seconds=3600)
+        # TTL: 1 hour for standard cache, 0 for GitHub Actions to force fresh data
+        ttl = 0 if os.environ.get("GITHUB_ACTIONS") == "true" else 3600
+        self.cache = CacheManager(ttl_seconds=ttl)
         self.session = requests.Session()
         self.session.headers.update(self.headers)
         self.max_retries = 3
@@ -152,7 +155,9 @@ class GitHubClient:
 
     def graphql_request(self, query: str, variables: dict | None = None, use_cache: bool = True) -> dict[str, Any]:
         """Execute a GraphQL API query with caching and retries."""
-        cache_key = f"graphql_{hash(query)}_{hash(str(variables))}"
+        query_hash = hashlib.md5(query.encode('utf-8')).hexdigest()
+        var_hash = hashlib.md5(str(variables).encode('utf-8')).hexdigest()
+        cache_key = f"graphql_{query_hash}_{var_hash}"
         if use_cache:
             cached = self.cache.get(cache_key)
             if cached is not None:
