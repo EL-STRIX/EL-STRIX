@@ -160,7 +160,7 @@ class SVGRenderer:
             header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
             right_svg += self._render_line([
                 (header_text, text_main),
-                (self._dashes(header_text, 56), text_dim),
+                (self._dashes(header_text, 58), text_dim),
             ], y)
             y += lh
 
@@ -169,7 +169,7 @@ class SVGRenderer:
             for item in tech_stack:
                 key = item.get("name", "")
                 val = item.get("value", "")
-                dots = self._dots(key, val, 56)
+                dots = self._dots(key, val, 58)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
@@ -182,7 +182,7 @@ class SVGRenderer:
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
                 ("- Contact ", text_main),
-                (self._dashes("- Contact ", 56), text_dim),
+                (self._dashes("- Contact ", 58), text_dim),
             ], y)
             y += lh
 
@@ -195,7 +195,7 @@ class SVGRenderer:
             ]
 
             for key, val in contacts:
-                dots = self._dots(key, val, 56)
+                dots = self._dots(key, val, 58)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
@@ -252,8 +252,8 @@ class SVGRenderer:
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
             COL = 49
-            d1 = max(COL - 23 - len(repo_cnt) - len(private_cnt), 2)
-            d2 = max(98 - COL - 17 - len(stars), 2)
+            d1 = max(25 - len(repo_cnt) - len(private_cnt), 2)
+            d2 = max(33 - len(stars), 2)
             
             stats_svg += self._render_line([
                 (". ", text_dim),
@@ -268,8 +268,8 @@ class SVGRenderer:
             ], y)
             y += lh
 
-            d1 = max(COL - 31 - len(commits) - len(contributions), 2)
-            d2 = max(98 - COL - 18 - len(prs), 2)
+            d1 = max(17 - len(commits) - len(contributions), 2)
+            d2 = max(32 - len(prs), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Commits: ", text_key),
@@ -286,8 +286,8 @@ class SVGRenderer:
             current_streak = str(self.stats.get("contributions", {}).get("current_streak", 0))
             longest_streak = str(self.stats.get("contributions", {}).get("longest_streak", 0))
             
-            d3 = max(COL - 32 - len(current_streak) - len(longest_streak), 2)
-            d4 = max(98 - COL - 19 - len(loc), 2)
+            d3 = max(16 - len(current_streak) - len(longest_streak), 2)
+            d4 = max(32 - len(loc), 2)
             stats_svg += self._render_line([
                 (". ", text_dim),
                 ("Current Streak: ", text_key),
@@ -297,7 +297,7 @@ class SVGRenderer:
                 ("| ", text_dim),
                 ("Lines of Code: ", text_key),
                 ("." * d4 + " ", text_dim),
-                (f"{loc} ", text_main),
+                (loc, text_main),
             ], y)
             y += lh
 
@@ -305,7 +305,7 @@ class SVGRenderer:
             final_height = max(y + 30, int(ascii_height) + 40, 500)
 
             # ── Compose final SVG ─────────────────────────────────
-            right_x = self.left_panel_width + 15
+            right_x = 720
 
             svg = f'''<svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 {self.width} {final_height}"
