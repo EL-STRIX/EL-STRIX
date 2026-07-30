@@ -45,8 +45,10 @@ class ReadmeEngine:
             # Load featured projects from stats payload (Pre-computed in Phase 03)
             featured_repos = stats.get("featured_projects", [])
                 
-            # Timestamp
-            last_updated = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
+            # Timestamp in IST (UTC+5:30)
+            from datetime import timedelta
+            ist_time = datetime.now(UTC) + timedelta(hours=5, minutes=30)
+            last_updated = ist_time.strftime("%Y-%m-%d %H:%M:%S IST")
 
             # Prepare context dictionary
             context = {
