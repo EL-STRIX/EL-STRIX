@@ -16,6 +16,9 @@ class AutomationEngine:
         self.cwd = str(PathManager.ROOT_DIR)
         self.branch = branch
         self.files_to_track = [
+            "config/profile.json",
+            "config/settings.json",
+            "config/theme.json",
             "README.md",
             "assets/svg/light.svg",
             "assets/svg/dark.svg",
