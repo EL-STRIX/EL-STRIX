@@ -221,18 +221,6 @@
       }
     ]
   },
-  "EL-STRIX": {
-    "total_commits": 117,
-    "total_lines": 40554,
-    "weeks": [
-      {
-        "w": 1785024000,
-        "a": 40554,
-        "d": 9658,
-        "c": 117
-      }
-    ]
-  },
   "Faculty-Subject-Allocation": {
     "total_commits": 25,
     "total_lines": 5945,

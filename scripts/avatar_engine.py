@@ -227,7 +227,7 @@ class AvatarSvgRenderer:
         self.theme = theme
         self.config = settings.get("svg_engine", {})
         self.font_family = self.config.get("font_family", "Consolas, 'Courier New', monospace")
-        self.font_size = self.config.get("font_size", 10)
+        self.font_size = self.config.get("font_size", 14)
         self.line_spacing = self.config.get("line_spacing", 1.2)
         self.char_spacing = self.config.get("char_spacing", 0.6)
         

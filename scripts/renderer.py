@@ -25,7 +25,7 @@ class SVGRenderer:
 
         # Terminal dimensions sized for maximum GitHub README width.
         self.width = 1780
-        self.left_panel_width = 660
+        self.left_panel_width = 740
         self.font_family = "monospace"
 
         try:
@@ -145,7 +145,7 @@ class SVGRenderer:
             header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
             right_svg += self._render_line([
                 (header_text, text_main),
-                (self._dashes(header_text, 60), text_dim),
+                (self._dashes(header_text, 52), text_dim),
             ], y)
             y += lh
 
@@ -154,7 +154,7 @@ class SVGRenderer:
             for item in tech_stack:
                 key = item.get("name", "")
                 val = item.get("value", "")
-                dots = self._dots(key, val, 60)
+                dots = self._dots(key, val, 52)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
@@ -167,7 +167,7 @@ class SVGRenderer:
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
                 ("- Contact ", text_main),
-                (self._dashes("- Contact ", 60), text_dim),
+                (self._dashes("- Contact ", 52), text_dim),
             ], y)
             y += lh
 
@@ -180,7 +180,7 @@ class SVGRenderer:
             ]
 
             for key, val in contacts:
-                dots = self._dots(key, val, 60)
+                dots = self._dots(key, val, 52)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
@@ -190,7 +190,7 @@ class SVGRenderer:
                 y += lh
 
             # Ensure Y coordinate is safely below the left ASCII avatar before full width panels
-            y = max(y, 680)
+            y = max(y, int(ascii_height) + 40)
 
             # ── Featured Projects ─────────────────────────────────
             stats_svg = ""
@@ -306,7 +306,7 @@ class SVGRenderer:
     }}
     .ascii {{
       font-family: {self.font_family};
-      font-size: 12px;
+      font-size: 14px;
       fill: {ascii_color};
       white-space: pre;
     }}
