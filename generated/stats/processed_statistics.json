@@ -4,7 +4,7 @@
     "total_followers": 7,
     "total_following": 13,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 495,
+    "days_since_account_creation": 496,
     "account_age_years": 1.36
   },
   "repositories": {
@@ -96,11 +96,12 @@
     ]
   },
   "commits": {
-    "total_commits": 519,
+    "total_commits": 520,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
       "C-GAMES-COLLECTION": 156,
+      "EL-STRIX": 117,
       "Faculty-Subject-Allocation": 25,
       "Finzo": 949,
       "LUMINA": 25,
@@ -110,47 +111,47 @@
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 554,
+    "total_contributions": 555,
     "max_daily_contributions": 80,
     "current_streak": 8,
     "longest_streak": 8,
-    "yearly_contributions": 554
+    "yearly_contributions": 555
   },
   "loc": {
-    "total_lines": 567929
+    "total_lines": 608483
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 43446272,
+    "total_bytes": 43510784,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 45.29,
-      "Dart": 23.31,
-      "JavaScript": 19.06,
-      "PHP": 5.37,
+      "HTML": 45.22,
+      "Dart": 23.27,
+      "JavaScript": 19.03,
+      "PHP": 5.36,
       "C": 4.94,
-      "Python": 2.03
+      "Python": 2.18
     },
     "language_ranking": [
       {
         "language": "HTML",
         "bytes": 19675136,
-        "percentage": 45.29
+        "percentage": 45.22
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 23.31
+        "percentage": 23.27
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 19.06
+        "percentage": 19.03
       },
       {
         "language": "PHP",
         "bytes": 2332672,
-        "percentage": 5.37
+        "percentage": 5.36
       },
       {
         "language": "C",
@@ -159,8 +160,8 @@
       },
       {
         "language": "Python",
-        "bytes": 883712,
-        "percentage": 2.03
+        "bytes": 948224,
+        "percentage": 2.18
       }
     ]
   },
@@ -579,7 +580,7 @@
       },
       {
         "date": "2026-07-26",
-        "commits": 219
+        "commits": 220
       },
       {
         "date": "2026-08-02",

@@ -83,10 +83,10 @@ class ImagePreprocessor:
                 img = img.crop(bbox)
                 mask = mask.crop(bbox)
                 
-                # Add dynamic padding (15% on each side) to create the 70-80% subject size
+                # Add minimal dynamic padding (2% on each side) to maximize subject size without overlap
                 w, h = img.size
-                pad_w = int(w * 0.15)
-                pad_h = int(h * 0.15)
+                pad_w = int(w * 0.02)
+                pad_h = int(h * 0.02)
                 
                 new_w = w + 2 * pad_w
                 new_h = h + 2 * pad_h
