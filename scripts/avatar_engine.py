@@ -7,7 +7,7 @@ import hashlib
 import json
 import math
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
@@ -64,7 +64,7 @@ class ImagePreprocessor:
     def _extract_subject_mask(self, img: Image.Image) -> Image.Image:
         """Create a mask isolating the subject from the background using rembg."""
         import rembg
-        return rembg.remove(img, only_mask=True)
+        return cast(Image.Image, rembg.remove(img, only_mask=True))
         
     def process(self, image_path: Path) -> dict[str, Image.Image] | None:
         try:
@@ -176,9 +176,9 @@ class AsciiEngine:
         mask_resized = mask_img.resize((self.width, height), resample_filter)
         edges_resized = edges_img.resize((self.width, height), resample_filter)
         
-        rgb_pixels = list(rgb_resized.getdata())
-        mask_pixels = list(mask_resized.getdata())
-        edges_pixels = list(edges_resized.getdata())
+        rgb_pixels = list(rgb_resized.getdata())  # type: ignore
+        mask_pixels = list(mask_resized.getdata())  # type: ignore
+        edges_pixels = list(edges_resized.getdata())  # type: ignore
         
         matrix = []
         
