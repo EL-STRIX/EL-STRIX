@@ -101,6 +101,7 @@
     "commit_frequency": 0.0,
     "commits_per_repository": {
       "C-GAMES-COLLECTION": 156,
+      "EL-STRIX": 126,
       "Faculty-Subject-Allocation": 25,
       "Finzo": 949,
       "LUMINA": 25,
@@ -117,7 +118,7 @@
     "yearly_contributions": 563
   },
   "loc": {
-    "total_lines": 567929
+    "total_lines": 609018
   },
   "languages": {
     "languages_used": 6,
