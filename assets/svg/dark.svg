@@ -26,62 +26,37 @@
   </g>
 
   <!-- Right Panel: Profile Data -->
-  <g transform="translate(760, 20)">
-    <text x="0" y="30" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">sujay@EL-STRIX </tspan></text>
-<text x="930" y="30" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#4d5566">─────────────────────────────────────</tspan></text>
-<text x="0" y="76" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">OS: </tspan><tspan fill="#4d5566">...................... </tspan></text>
-<text x="930" y="76" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Windows, Linux, Android</tspan></text>
-<text x="0" y="122" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Tooling: </tspan><tspan fill="#4d5566">.................... </tspan></text>
-<text x="930" y="122" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">VS Code, ZBrains IDE</tspan></text>
-<text x="0" y="168" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Programming: </tspan><tspan fill="#4d5566">.. </tspan></text>
-<text x="930" y="168" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">C, C++, Java, Go, Rust, Python, JS, PHP</tspan></text>
-<text x="0" y="214" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Frontend: </tspan><tspan fill="#4d5566">.. </tspan></text>
-<text x="930" y="214" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">HTML, CSS, JS, Tailwind, Bootstrap, React</tspan></text>
-<text x="0" y="260" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Backend: </tspan><tspan fill="#4d5566">........................ </tspan></text>
-<text x="930" y="260" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Node.js, Express</tspan></text>
-<text x="0" y="306" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Database: </tspan><tspan fill="#4d5566">.................................. </tspan></text>
-<text x="930" y="306" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">MySQL</tspan></text>
-<text x="0" y="352" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">DevOps: </tspan><tspan fill="#4d5566">....... </tspan></text>
-<text x="930" y="352" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Git, GitHub Actions, Vercel, CI/CD</tspan></text>
-<text x="0" y="398" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Languages: </tspan><tspan fill="#4d5566">............... </tspan></text>
-<text x="930" y="398" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">English, Bengali, Hindi</tspan></text>
-<text x="0" y="444" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Status: </tspan><tspan fill="#4d5566">......... </tspan></text>
-<text x="930" y="444" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Open to Internship &amp; Freelancing</tspan></text>
-<text x="0" y="490" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">- Contact </tspan></text>
-<text x="930" y="490" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#4d5566">──────────────────────────────────────────</tspan></text>
-<text x="0" y="536" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Portfolio: </tspan><tspan fill="#4d5566">........................... </tspan></text>
-<text x="930" y="536" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Coming Soon</tspan></text>
-<text x="0" y="582" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">LinkedIn: </tspan><tspan fill="#4d5566">............................. </tspan></text>
-<text x="930" y="582" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Sujay Paul</tspan></text>
-<text x="0" y="628" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">GitHub: </tspan><tspan fill="#4d5566">................................. </tspan></text>
-<text x="930" y="628" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">EL-STRIX</tspan></text>
-<text x="0" y="674" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Email: </tspan><tspan fill="#4d5566">.................... </tspan></text>
-<text x="930" y="674" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">sujaypaul892@gmail.com</tspan></text>
-<text x="0" y="720" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Location: </tspan><tspan fill="#4d5566">............ </tspan></text>
-<text x="930" y="720" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Kolkata, West Bengal, India</tspan></text>
+  <g transform="translate(755, 20)">
+    <text x="0" y="30" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">sujay@EL-STRIX </tspan><tspan fill="#4d5566">─────────────────────────────────────────</tspan></text>
+<text x="0" y="76" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">OS: </tspan><tspan fill="#4d5566">.......................... </tspan><tspan fill="#c9d1d9">Windows, Linux, Android</tspan></text>
+<text x="0" y="122" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Tooling: </tspan><tspan fill="#4d5566">........................ </tspan><tspan fill="#c9d1d9">VS Code, ZBrains IDE</tspan></text>
+<text x="0" y="168" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Programming: </tspan><tspan fill="#4d5566">.. </tspan><tspan fill="#c9d1d9">C, C++, Java, Go, Rust, Python, JS, PHP</tspan></text>
+<text x="0" y="214" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Frontend: </tspan><tspan fill="#4d5566">.. </tspan><tspan fill="#c9d1d9">HTML, CSS, JS, Tailwind, Bootstrap, React</tspan></text>
+<text x="0" y="260" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Backend: </tspan><tspan fill="#4d5566">............................ </tspan><tspan fill="#c9d1d9">Node.js, Express</tspan></text>
+<text x="0" y="306" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Database: </tspan><tspan fill="#4d5566">...................................... </tspan><tspan fill="#c9d1d9">MySQL</tspan></text>
+<text x="0" y="352" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">DevOps: </tspan><tspan fill="#4d5566">........... </tspan><tspan fill="#c9d1d9">Git, GitHub Actions, Vercel, CI/CD</tspan></text>
+<text x="0" y="398" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Languages: </tspan><tspan fill="#4d5566">................... </tspan><tspan fill="#c9d1d9">English, Bengali, Hindi</tspan></text>
+<text x="0" y="444" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Status: </tspan><tspan fill="#4d5566">............. </tspan><tspan fill="#c9d1d9">Open to Internship &amp; Freelancing</tspan></text>
+<text x="0" y="490" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">- Contact </tspan><tspan fill="#4d5566">──────────────────────────────────────────────</tspan></text>
+<text x="0" y="536" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Portfolio: </tspan><tspan fill="#4d5566">............................... </tspan><tspan fill="#c9d1d9">Coming Soon</tspan></text>
+<text x="0" y="582" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">LinkedIn: </tspan><tspan fill="#4d5566">................................. </tspan><tspan fill="#c9d1d9">Sujay Paul</tspan></text>
+<text x="0" y="628" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">GitHub: </tspan><tspan fill="#4d5566">..................................... </tspan><tspan fill="#c9d1d9">EL-STRIX</tspan></text>
+<text x="0" y="674" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Email: </tspan><tspan fill="#4d5566">........................ </tspan><tspan fill="#c9d1d9">sujaypaul892@gmail.com</tspan></text>
+<text x="0" y="720" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Location: </tspan><tspan fill="#4d5566">................ </tspan><tspan fill="#c9d1d9">Kolkata, West Bengal, India</tspan></text>
 
   </g>
 
   <!-- Full Width Panel: GitHub Stats -->
   <g transform="translate(20, 20)">
-    <text x="0" y="766" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">- Featured Projects </tspan></text>
-<text x="1720" y="766" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#4d5566">──────────────────────────────────────────────────────────────────────────────</tspan></text>
-<text x="0" y="812" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">C Games Collection: </tspan><tspan fill="#4d5566">................................................................... </tspan></text>
-<text x="1720" y="812" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Complete</tspan></text>
-<text x="0" y="858" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Finzo Banking System: </tspan><tspan fill="#4d5566">........................................................ </tspan></text>
-<text x="1720" y="858" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Development Phase</tspan></text>
-<text x="0" y="904" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Smart Parking System: </tspan><tspan fill="#4d5566">........................................................ </tspan></text>
-<text x="1720" y="904" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Development Phase</tspan></text>
-<text x="0" y="950" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Smart Doctor Appointment System: </tspan><tspan fill="#4d5566">................................................ </tspan></text>
-<text x="1720" y="950" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">Planning Phase</tspan></text>
-<text x="0" y="996" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">- GitHub Stats </tspan></text>
-<text x="1720" y="996" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#4d5566">───────────────────────────────────────────────────────────────────────────────────</tspan></text>
-<text x="0" y="1042" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Repos: </tspan><tspan fill="#4d5566">........................ </tspan><tspan fill="#c9d1d9">7 </tspan><tspan fill="#e3b341">{Private: 3} </tspan><tspan fill="#4d5566">| </tspan><tspan fill="#e3b341">Stars Earned: </tspan><tspan fill="#4d5566">............................... </tspan></text>
-<text x="1720" y="1042" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">3</tspan></text>
-<text x="0" y="1088" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Commits: </tspan><tspan fill="#4d5566">............ </tspan><tspan fill="#c9d1d9">522 </tspan><tspan fill="#e3b341">{Contributions: 557} </tspan><tspan fill="#4d5566">| </tspan><tspan fill="#e3b341">Pull Requests: </tspan><tspan fill="#4d5566">............................. </tspan></text>
-<text x="1720" y="1088" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">44</tspan></text>
-<text x="0" y="1134" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Current Streak: </tspan><tspan fill="#4d5566">............... </tspan><tspan fill="#c9d1d9">9 </tspan><tspan fill="#e3b341">{Longest: 9} </tspan><tspan fill="#4d5566">| </tspan><tspan fill="#e3b341">Lines of Code: </tspan><tspan fill="#4d5566">....................... </tspan></text>
-<text x="1720" y="1134" text-anchor="end" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">567,929</tspan></text>
+    <text x="0" y="766" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">- Featured Projects </tspan><tspan fill="#4d5566">──────────────────────────────────────────────────────────────────────────────</tspan></text>
+<text x="0" y="812" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">C Games Collection: </tspan><tspan fill="#4d5566">................................................................... </tspan><tspan fill="#c9d1d9">Complete</tspan></text>
+<text x="0" y="858" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Finzo Banking System: </tspan><tspan fill="#4d5566">........................................................ </tspan><tspan fill="#c9d1d9">Development Phase</tspan></text>
+<text x="0" y="904" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Smart Parking System: </tspan><tspan fill="#4d5566">........................................................ </tspan><tspan fill="#c9d1d9">Development Phase</tspan></text>
+<text x="0" y="950" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Smart Doctor Appointment System: </tspan><tspan fill="#4d5566">................................................ </tspan><tspan fill="#c9d1d9">Planning Phase</tspan></text>
+<text x="0" y="996" xml:space="preserve" font-size="32"><tspan fill="#c9d1d9">- GitHub Stats </tspan><tspan fill="#4d5566">───────────────────────────────────────────────────────────────────────────────────</tspan></text>
+<text x="0" y="1042" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Repos: </tspan><tspan fill="#4d5566">........................ </tspan><tspan fill="#c9d1d9">7 </tspan><tspan fill="#e3b341">{Private: 3} </tspan><tspan fill="#4d5566">| </tspan><tspan fill="#e3b341">Stars Earned: </tspan><tspan fill="#4d5566">............................... </tspan><tspan fill="#c9d1d9">3</tspan></text>
+<text x="0" y="1088" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Commits: </tspan><tspan fill="#4d5566">............ </tspan><tspan fill="#c9d1d9">522 </tspan><tspan fill="#e3b341">{Contributions: 557} </tspan><tspan fill="#4d5566">| </tspan><tspan fill="#e3b341">Pull Requests: </tspan><tspan fill="#4d5566">............................. </tspan><tspan fill="#c9d1d9">44</tspan></text>
+<text x="0" y="1134" xml:space="preserve" font-size="32"><tspan fill="#4d5566">. </tspan><tspan fill="#e3b341">Current Streak: </tspan><tspan fill="#4d5566">............... </tspan><tspan fill="#c9d1d9">9 </tspan><tspan fill="#e3b341">{Longest: 9} </tspan><tspan fill="#4d5566">| </tspan><tspan fill="#e3b341">Lines of Code: </tspan><tspan fill="#4d5566">....................... </tspan><tspan fill="#c9d1d9">567,929 </tspan></text>
 
   </g>
 </svg>

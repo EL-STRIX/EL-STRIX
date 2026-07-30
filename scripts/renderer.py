@@ -160,8 +160,8 @@ class SVGRenderer:
             header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
             right_svg += self._render_line([
                 (header_text, text_main),
-                (self._dashes(header_text, 52), text_dim),
-            ], y, right_align_index=1, right_x=930)
+                (self._dashes(header_text, 56), text_dim),
+            ], y)
             y += lh
 
             # ── Tech Stack ────────────────────────────────────────
@@ -169,21 +169,21 @@ class SVGRenderer:
             for item in tech_stack:
                 key = item.get("name", "")
                 val = item.get("value", "")
-                dots = self._dots(key, val, 52)
+                dots = self._dots(key, val, 56)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
                     (f"{dots} ", text_dim),
                     (val, text_main),
-                ], y, right_align_index=3, right_x=930)
+                ], y)
                 y += lh
 
 
             # ── Contact ───────────────────────────────────────────
             right_svg += self._render_line([
                 ("- Contact ", text_main),
-                (self._dashes("- Contact ", 52), text_dim),
-            ], y, right_align_index=1, right_x=930)
+                (self._dashes("- Contact ", 56), text_dim),
+            ], y)
             y += lh
 
             contacts = [
@@ -195,13 +195,13 @@ class SVGRenderer:
             ]
 
             for key, val in contacts:
-                dots = self._dots(key, val, 52)
+                dots = self._dots(key, val, 56)
                 right_svg += self._render_line([
                     (". ", text_dim),
                     (f"{key}: ", text_key),
                     (f"{dots} ", text_dim),
                     (val, text_main),
-                ], y, right_align_index=3, right_x=930)
+                ], y)
                 y += lh
 
             # Ensure Y coordinate is safely below the left ASCII avatar before full width panels
@@ -212,7 +212,7 @@ class SVGRenderer:
             stats_svg += self._render_line([
                 ("- Featured Projects ", text_main),
                 (self._dashes("- Featured Projects ", 98), text_dim),
-            ], y, right_align_index=1, right_x=1720)
+            ], y)
             y += lh
 
             projects = self.profile.get("featured_projects", [])
@@ -225,7 +225,7 @@ class SVGRenderer:
                     (f"{name}: ", text_key),
                     (f"{dots} ", text_dim),
                     (status, text_main),
-                ], y, right_align_index=3, right_x=1720)
+                ], y)
                 y += lh
 
 
@@ -233,7 +233,7 @@ class SVGRenderer:
             stats_svg += self._render_line([
                 ("- GitHub Stats ", text_main),
                 (self._dashes("- GitHub Stats ", 98), text_dim),
-            ], y, right_align_index=1, right_x=1720)
+            ], y)
             y += lh
 
             repo_cnt = str(self.stats.get("repositories", {}).get("repository_count", 0))
@@ -265,7 +265,7 @@ class SVGRenderer:
                 ("Stars Earned: ", text_key),
                 ("." * d2 + " ", text_dim),
                 (stars, text_main),
-            ], y, right_align_index=8, right_x=1720)
+            ], y)
             y += lh
 
             d1 = max(COL - 31 - len(commits) - len(contributions), 2)
@@ -280,7 +280,7 @@ class SVGRenderer:
                 ("Pull Requests: ", text_key),
                 ("." * d2 + " ", text_dim),
                 (prs, text_main),
-            ], y, right_align_index=8, right_x=1720)
+            ], y)
             y += lh
             
             current_streak = str(self.stats.get("contributions", {}).get("current_streak", 0))
@@ -298,14 +298,14 @@ class SVGRenderer:
                 ("Lines of Code: ", text_key),
                 ("." * d4 + " ", text_dim),
                 (f"{loc} ", text_main),
-            ], y, right_align_index=8, right_x=1720)
+            ], y)
             y += lh
 
             # (Removed footer)
             final_height = max(y + 30, int(ascii_height) + 40, 500)
 
             # ── Compose final SVG ─────────────────────────────────
-            right_x = self.left_panel_width + 20
+            right_x = self.left_panel_width + 15
 
             svg = f'''<svg xmlns="http://www.w3.org/2000/svg"
      viewBox="0 0 {self.width} {final_height}"
