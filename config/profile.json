@@ -1,22 +1,22 @@
 {
   "username": "EL-STRIX",
-  "name": "EL-STRIX",
+  "name": "Sujay Paul",
   "terminal_header": "sujay@EL-STRIX",
   "bio": "Automated GitHub Profile Engine",
   "location": "Kolkata, West Bengal, India",
   "company": "",
-  "website": "https://github.com/EL-STRIX",
+  "website": "",
   "email": "sujaypaul892@gmail.com",
   "linkedin": "Sujay Paul",
-  "portfolio": "Coming Soon",
+  "portfolio": "Target Release: September 2026",
   "tech_stack": [
     {
       "name": "OS",
-      "value": "Windows, Linux, Android"
+      "value": "Windows, Ubuntu"
     },
     {
       "name": "Tooling",
-      "value": "VS Code, ZBrains IDE"
+      "value": "VS Code, JetBrains IDEs"
     },
     {
       "name": "Programming",
@@ -32,7 +32,7 @@
     },
     {
       "name": "Database",
-      "value": "MySQL"
+      "value": "MySQL, MongoDB"
     },
     {
       "name": "DevOps",
@@ -50,19 +50,19 @@
   "featured_projects": [
     {
       "name": "C Games Collection",
-      "status": "Complete"
+      "status": "Released"
     },
     {
-      "name": "Finzo Banking System",
-      "status": "Development Phase"
+      "name": "Enterprise Banking Web Application",
+      "status": "Target Release: August 2026"
     },
     {
       "name": "Smart Parking System",
-      "status": "Development Phase"
+      "status": "Target Release: September 2026"
     },
     {
       "name": "Smart Doctor Appointment System",
-      "status": "Planning Phase"
+      "status": "Target Release: November 2026"
     }
   ]
 }
