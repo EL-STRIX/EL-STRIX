@@ -13,7 +13,7 @@ from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
-from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageStat
+from PIL import Image, ImageFilter, ImageOps, ImageStat
 
 class AvatarProcessingError(ELSTRIXError):
     """Exception raised for errors in the Avatar Processing Engine."""
