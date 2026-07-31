@@ -327,15 +327,17 @@ class DataEngine:
         loc_stats = {}
         if repos_file.exists():
             import json
+            from concurrent.futures import ThreadPoolExecutor, as_completed
+
             with open(repos_file, "r", encoding="utf-8") as f:
                 repos = json.load(f)
-                
-            for repo in repos:
+
+            def fetch_for_repo(repo):
                 # Skip forks to avoid taking credit for huge copied codebases
-                if repo.get("fork"): continue
+                if repo.get("fork"): return None
                 repo_name = repo.get("name")
                 owner = repo.get("owner", {}).get("login")
-                if not owner or not repo_name: continue
+                if not owner or not repo_name: return None
                 
                 # Fetch contributor stats
                 endpoint = f"/repos/{owner}/{repo_name}/stats/contributors"
@@ -347,14 +349,22 @@ class DataEngine:
                             if author.get("login") == self.username:
                                 weeks = contributor.get("weeks", [])
                                 total_lines = sum(w.get("a", 0) for w in weeks)
-                                loc_stats[repo_name] = {
+                                return repo_name, {
                                     "total_commits": contributor.get("total", 0),
                                     "total_lines": total_lines,
                                     "weeks": weeks
                                 }
-                                break
                 except Exception as e:
                     logger.warning(f"Could not fetch LOC for {repo_name}: {e}")
+                return None
+
+            with ThreadPoolExecutor() as executor:
+                futures = [executor.submit(fetch_for_repo, repo) for repo in repos]
+                for future in as_completed(futures):
+                    result = future.result()
+                    if result:
+                        repo_name, stats_data = result
+                        loc_stats[repo_name] = stats_data
                     
         save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
 
