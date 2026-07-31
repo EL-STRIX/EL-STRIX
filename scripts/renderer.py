@@ -110,16 +110,14 @@ class SVGRenderer:
     def _dots(key: str, val: str, total: int = 50) -> str:
         """Return a dot-padded string that right-aligns val at column total."""
         n = total - len(key) - len(val) - 5
-        if n < 2:
-            n = 2
+        n = max(n, 2)
         return "." * n
 
     @staticmethod
     def _dashes(title: str, total: int = 50) -> str:
         """Return dashes to fill the rest of a section header line."""
         n = total - len(title)
-        if n < 0:
-            n = 0
+        n = max(n, 0)
         return "\u2500" * n
 
     def render(self) -> None:
