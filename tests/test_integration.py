@@ -2,7 +2,6 @@
 
 import os
 import pytest
-from pathlib import Path
 import sys
 
 # Ensure scripts module path is accessible

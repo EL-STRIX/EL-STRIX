@@ -6,6 +6,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from exceptions import EnvironmentError
 from paths import PathManager
+from logger import logger
 
 
 class EnvManager:
@@ -77,7 +78,7 @@ class EnvManager:
                     uname = profile.get("username")
                     if uname:
                         return uname
-        except Exception:
-            pass
+        except Exception as e:
+            logger.warning(f"Failed to read username from profile.json: {e}")
         
         return "EL-STRIX"

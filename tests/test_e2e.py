@@ -3,12 +3,10 @@
 import sys
 import os
 import pytest
-from unittest.mock import MagicMock
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 import main
-from exceptions import ELSTRIXError
 
 def test_full_pipeline_execution(mocker):
     """Test the complete execution of EL-STRIX phases."""
