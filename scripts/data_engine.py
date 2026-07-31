@@ -225,17 +225,29 @@ class DataEngine:
         repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
         if repos_file.exists():
             import json
+            from concurrent.futures import ThreadPoolExecutor, as_completed
+
             with open(repos_file, "r", encoding="utf-8") as f:
                 repos = json.load(f)
-            for repo in repos:
+
+            def fetch_for_repo(repo):
                 repo_name = repo.get("name")
                 owner = repo.get("owner", {}).get("login")
                 if owner and repo_name:
-                    repo_prs = self.client.rest_request("GET", f"/repos/{owner}/{repo_name}/pulls?state=all&per_page=100", paginated=True)
-                    if isinstance(repo_prs, list):
-                        for pr in repo_prs:
-                            if isinstance(pr, dict):
-                                all_prs[pr.get("html_url")] = pr
+                    return self.client.rest_request("GET", f"/repos/{owner}/{repo_name}/pulls?state=all&per_page=100", paginated=True)
+                return None
+
+            with ThreadPoolExecutor() as executor:
+                futures = [executor.submit(fetch_for_repo, repo) for repo in repos]
+                for future in as_completed(futures):
+                    try:
+                        repo_prs = future.result()
+                        if isinstance(repo_prs, list):
+                            for pr in repo_prs:
+                                if isinstance(pr, dict):
+                                    all_prs[pr.get("html_url")] = pr
+                    except Exception as e:
+                        logger.error(f"Error fetching PRs for a repo: {e}")
 
         save_json(list(all_prs.values()), PathManager.GENERATED_JSON_DIR / "pull_requests.json")
 
