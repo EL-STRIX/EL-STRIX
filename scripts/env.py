@@ -5,8 +5,8 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from exceptions import EnvironmentError
-from paths import PathManager
 from logger import logger
+from paths import PathManager
 
 
 class EnvManager:

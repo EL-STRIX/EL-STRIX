@@ -81,12 +81,12 @@ class DataEngine:
                 profile_data = json.load(f)
                 created_at_str = profile_data.get("created_at")
                 
-        from datetime import datetime, UTC
+        from datetime import UTC, datetime
         if not created_at_str:
             created_at_str = datetime.now(UTC).isoformat()
             
         try:
-            created_date = datetime.fromisoformat(created_at_str.replace("Z", "+00:00"))
+            created_date = datetime.fromisoformat(created_at_str)
         except ValueError:
             created_date = datetime.now(UTC)
             

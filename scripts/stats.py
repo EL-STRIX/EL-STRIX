@@ -98,7 +98,7 @@ class StatisticsEngine:
         if not date_str:
             return None
         try:
-            return datetime.fromisoformat(date_str.replace("Z", "+00:00"))
+            return datetime.fromisoformat(date_str)
         except ValueError:
             return None
 
@@ -218,7 +218,7 @@ class StatisticsEngine:
         calendar = self.contrib_data.get("contributionCalendar", {})
         weeks = calendar.get("weeks", [])
         
-        from datetime import datetime, timedelta, UTC
+        from datetime import UTC, datetime, timedelta
         thirty_days_ago = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d")
         today_str = datetime.now(UTC).strftime("%Y-%m-%d")
         
@@ -261,7 +261,7 @@ class StatisticsEngine:
         max_daily = 0
         
         # Flatten days, deduplicate by date, and ignore future days
-        from datetime import datetime, UTC
+        from datetime import UTC, datetime
         today_str = self.contrib_data.get("github_today", datetime.now(UTC).strftime("%Y-%m-%d"))
         
         unique_days = {}
@@ -277,13 +277,11 @@ class StatisticsEngine:
         temp_streak = 0
         for day in days:
             count = day.get("contributionCount", 0)
-            if count > max_daily:
-                max_daily = count
+            max_daily = max(max_daily, count)
                 
             if count > 0:
                 temp_streak += 1
-                if temp_streak > longest_streak:
-                    longest_streak = temp_streak
+                longest_streak = max(longest_streak, temp_streak)
             else:
                 temp_streak = 0
                 
@@ -313,7 +311,7 @@ class StatisticsEngine:
         total_lines = 0
         
         if self.loc_data and isinstance(self.loc_data, dict):
-            for repo_name, data in self.loc_data.items():
+            for data in self.loc_data.values():
                 total_lines += data.get("total_lines", 0)
                     
         return {
@@ -431,9 +429,7 @@ class StatisticsEngine:
         
         merged_prs = 0
         for pr in filtered_prs:
-            if pr.get("merged_at"):
-                merged_prs += 1
-            elif pr.get("pull_request", {}).get("merged_at"):
+            if pr.get("merged_at") or pr.get("pull_request", {}).get("merged_at"):
                 merged_prs += 1
                 
         closed_prs = sum(1 for pr in filtered_prs if pr.get("state") == "closed") - merged_prs
@@ -447,7 +443,7 @@ class StatisticsEngine:
 
     def _calculate_featured_projects(self) -> list[dict[str, Any]]:
         """Rank repositories for featuring."""
-        from projects import select_featured, format_featured
+        from projects import format_featured, select_featured
         selected = select_featured(self.repos_data, max_count=6)
         return format_featured(selected)
 

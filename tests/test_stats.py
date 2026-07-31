@@ -1,12 +1,14 @@
 """Unit tests for Statistics Engine."""
 
-import sys
 import os
+import sys
+
 import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 from stats import StatisticsEngine
+
 
 @pytest.fixture
 def mock_engine(mocker):
