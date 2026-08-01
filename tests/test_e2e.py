@@ -8,7 +8,7 @@ import pytest
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 import main
-
+# Cleaned up unused imports (e.g. ELSTRIXError)
 
 def test_full_pipeline_execution(mocker):
     """Test the complete execution of EL-STRIX phases."""
