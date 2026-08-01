@@ -5,7 +5,7 @@ import os
 import time
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import requests
 from cache_manager import CacheManager
@@ -100,6 +100,11 @@ class GitHubClient:
         pages_fetched = 0
         
         while current_url and pages_fetched < max_pages:
+            parsed_url = urlparse(current_url)
+            base_parsed = urlparse(self.BASE_URL)
+            if parsed_url.netloc != base_parsed.netloc or parsed_url.scheme != base_parsed.scheme:
+                raise GitHubAPIError(f"Security violation: Attempted to send GitHub API token to external host: {current_url}")
+
             for attempt in range(1, self.max_retries + 1):
                 try:
                     response = self.session.request(
