@@ -7,7 +7,7 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
-from projects import select_featured
+from projects import format_featured, select_featured
 
 
 def test_select_featured_basic_sorting():
@@ -86,3 +86,74 @@ def test_select_featured_pinned_forks():
     assert featured[0]["name"] == "repo1" # Pinned fork included
     assert featured[1]["name"] == "repo3" # Unpinned non-fork included
     # repo2 is excluded because it's an unpinned fork
+
+def test_format_featured_basic():
+    repos = [
+        {
+            "name": "project-one",
+            "description": "A cool project",
+            "html_url": "https://github.com/user/project-one",
+            "language": "Python",
+            "stargazers_count": 42
+        },
+        {
+            "name": "project-two",
+            "description": "Another one",
+            "html_url": "https://github.com/user/project-two",
+            "language": "Rust",
+            "stargazers_count": 10
+        }
+    ]
+    formatted = format_featured(repos)
+    assert len(formatted) == 2
+    assert formatted[0] == {
+        "name": "project-one",
+        "description": "A cool project",
+        "url": "https://github.com/user/project-one",
+        "language": "Python",
+        "stars": "42"
+    }
+    assert formatted[1] == {
+        "name": "project-two",
+        "description": "Another one",
+        "url": "https://github.com/user/project-two",
+        "language": "Rust",
+        "stars": "10"
+    }
+
+def test_format_featured_missing_keys():
+    repos = [{}] # Empty dict
+    formatted = format_featured(repos)
+    assert len(formatted) == 1
+    assert formatted[0] == {
+        "name": "",
+        "description": "No description provided.",
+        "url": "",
+        "language": "N/A",
+        "stars": "0"
+    }
+
+def test_format_featured_none_values():
+    repos = [
+        {
+            "name": "null-values-repo",
+            "description": None,
+            "html_url": "https://github.com/user/null-values-repo",
+            "language": None,
+            "stargazers_count": 5
+        }
+    ]
+    formatted = format_featured(repos)
+    assert len(formatted) == 1
+    assert formatted[0] == {
+        "name": "null-values-repo",
+        "description": "No description provided.",
+        "url": "https://github.com/user/null-values-repo",
+        "language": "N/A",
+        "stars": "5"
+    }
+
+def test_format_featured_empty():
+    repos = []
+    formatted = format_featured(repos)
+    assert len(formatted) == 0
