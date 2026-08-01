@@ -53,5 +53,26 @@ def test_github_rest_request_failure(mock_token, mocker):
     assert "403" in str(exc.value)
 
 
+@patch("github.EnvManager.get_github_token", return_value="fake_token")
+def test_github_rest_request_external_url_security_violation(mock_token):
+    """Test REST API correctly blocks requests to external domains to prevent token leakage."""
+    client = GitHubClient()
+
+    with pytest.raises(GitHubAPIError) as exc:
+        client.rest_request("GET", "https://external-domain.com/api/data", use_cache=False)
+
+    assert "Security violation" in str(exc.value)
+    assert "Attempted to send GitHub API token to external host" in str(exc.value)
+
+@patch("github.EnvManager.get_github_token", return_value="fake_token")
+def test_github_rest_request_external_url_security_violation_bypass(mock_token):
+    """Test REST API correctly blocks requests to domains constructed to bypass startswith checks."""
+    client = GitHubClient()
+
+    with pytest.raises(GitHubAPIError) as exc:
+        client.rest_request("GET", "https://api.github.com.attacker.com/api/data", use_cache=False)
+
+    assert "Security violation" in str(exc.value)
+    assert "Attempted to send GitHub API token to external host" in str(exc.value)
 
 
