@@ -206,6 +206,14 @@ class GitHubClient:
 
     def download_avatar(self, url: str) -> Path:
         """Download and cache the user's avatar image."""
+        parsed_url = urlparse(url)
+        if parsed_url.scheme != "https":
+            raise GitHubAPIError("Security violation: Avatar URL must use HTTPS.")
+
+        # Validate host to prevent SSRF
+        if parsed_url.netloc != "avatars.githubusercontent.com" and not parsed_url.netloc.endswith(".githubusercontent.com"):
+            raise GitHubAPIError(f"Security violation: Attempted to download avatar from external host: {url}")
+
         ensure_dir(PathManager.ASSET_IMAGE_DIR)
         save_path = PathManager.ASSET_IMAGE_DIR / "avatar.png"
         
