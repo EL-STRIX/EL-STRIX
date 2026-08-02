@@ -75,6 +75,39 @@ class GitHubClient:
         except requests.JSONDecodeError:
             raise GitHubAPIError("Failed to parse JSON response from GitHub")
 
+    def _execute_request_with_retries(self, method: str, url: str, params: dict | None = None) -> tuple[requests.Response | None, Any | None]:
+        """Execute an HTTP request with automatic retries for rate limits, network errors, and 202 Accepted status."""
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                response = self.session.request(
+                    method=method.upper(),
+                    url=url,
+                    params=params,
+                    timeout=15
+                )
+                data = self._handle_response(response)
+
+                if response.status_code == 202:
+                    logger.warning(f"GitHub returned 202 Accepted (processing). Retrying attempt {attempt}/{self.max_retries}...")
+                    time.sleep(2 ** attempt)
+                    if attempt == self.max_retries:
+                        return None, None
+                    continue
+
+                return response, data
+
+            except RateLimitError:
+                if attempt == self.max_retries:
+                    raise GitHubAPIError("Max retries exceeded due to rate limiting.")
+                continue
+            except (requests.ConnectionError, requests.Timeout) as e:
+                logger.warning(f"Network error on attempt {attempt}/{self.max_retries}: {e}")
+                if attempt == self.max_retries:
+                    raise GitHubAPIError(f"Network error: {e}")
+                time.sleep(2 ** attempt)
+
+        return None, None
+
     def rest_request(self, method: str, endpoint: str, params: dict | None = None, paginated: bool = False, use_cache: bool = True) -> Any:
         """Execute a REST API request with automatic retries, pagination, and caching."""
         if not endpoint.startswith("http"):
@@ -100,52 +133,32 @@ class GitHubClient:
         pages_fetched = 0
         
         while current_url and pages_fetched < max_pages:
-            for attempt in range(1, self.max_retries + 1):
-                try:
-                    response = self.session.request(
-                        method=method.upper(),
-                        url=current_url,
-                        params=current_params if pages_fetched == 0 else None, # Params already in URL for next pages
-                        timeout=15
-                    )
-                    data = self._handle_response(response)
+            response, data = self._execute_request_with_retries(
+                method=method,
+                url=current_url,
+                params=current_params if pages_fetched == 0 else None # Params already in URL for next pages
+            )
+
+            if response is None:
+                results = None
+                current_url = None
+                break
+
+            if paginated:
+                if isinstance(data, list):
+                    results.extend(data)
+                else:
+                    results.append(data)
                     
-                    if response.status_code == 202:
-                        logger.warning(f"GitHub returned 202 Accepted (processing). Retrying attempt {attempt}/{self.max_retries}...")
-                        time.sleep(2 ** attempt)
-                        if attempt == self.max_retries:
-                            results = None
-                            current_url = None
-                            break
-                        continue
-                    
-                    if paginated:
-                        if isinstance(data, list):
-                            results.extend(data)
-                        else:
-                            results.append(data)
-                            
-                        # Check for next page in Link header
-                        if "next" in response.links:
-                            current_url = response.links["next"]["url"]
-                        else:
-                            current_url = None
-                    else:
-                        results = data
-                        current_url = None
-                        
-                    break # Success, break retry loop
-                    
-                except RateLimitError:
-                    if attempt == self.max_retries:
-                        raise GitHubAPIError("Max retries exceeded due to rate limiting.")
-                    continue
-                except (requests.ConnectionError, requests.Timeout) as e:
-                    logger.warning(f"Network error on attempt {attempt}/{self.max_retries}: {e}")
-                    if attempt == self.max_retries:
-                        raise GitHubAPIError(f"Network error: {e}")
-                    time.sleep(2 ** attempt)
-                    
+                # Check for next page in Link header
+                if "next" in response.links:
+                    current_url = response.links["next"]["url"]
+                else:
+                    current_url = None
+            else:
+                results = data
+                current_url = None
+
             pages_fetched += 1
             
         if use_cache and method.upper() == "GET":
