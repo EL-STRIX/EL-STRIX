@@ -13,8 +13,7 @@ from config_loader import ConfigLoader
 from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
-from PIL import Image, ImageFilter, ImageOps, ImageStat
-
+from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageStat
 
 class AvatarProcessingError(ELSTRIXError):
     """Exception raised for errors in the Avatar Processing Engine."""
@@ -282,12 +281,12 @@ class AvatarPipeline:
         self.svg_renderer = AvatarSvgRenderer(self.theme, self.settings)
         
     def _get_image_hash(self, image_path: Path) -> str:
-        """Calculate SHA-256 hash of the image for caching purposes."""
-        hash_sha256 = hashlib.sha256()
+        """Calculate MD5 hash of the image for caching purposes."""
+        hash_md5 = hashlib.md5()
         with open(image_path, "rb") as f:
             for chunk in iter(lambda: f.read(4096), b""):
-                hash_sha256.update(chunk)
-        return hash_sha256.hexdigest()
+                hash_md5.update(chunk)
+        return hash_md5.hexdigest()
 
     def run(self) -> None:
         """Execute the full avatar pipeline."""

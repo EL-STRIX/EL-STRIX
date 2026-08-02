@@ -2,6 +2,7 @@
 
 import json
 import os
+from datetime import UTC, datetime
 
 from config_loader import ConfigLoader
 from logger import logger
@@ -110,14 +111,16 @@ class SVGRenderer:
     def _dots(key: str, val: str, total: int = 50) -> str:
         """Return a dot-padded string that right-aligns val at column total."""
         n = total - len(key) - len(val) - 5
-        n = max(n, 2)
+        if n < 2:
+            n = 2
         return "." * n
 
     @staticmethod
     def _dashes(title: str, total: int = 50) -> str:
         """Return dashes to fill the rest of a section header line."""
         n = total - len(title)
-        n = max(n, 0)
+        if n < 0:
+            n = 0
         return "\u2500" * n
 
     def render(self) -> None:
@@ -133,12 +136,16 @@ class SVGRenderer:
                 text_main = "#c9d1d9"
                 text_dim = "#4d5566"
                 text_key = "#e3b341"
+                text_val = "#79c0ff"
+                text_green = "#7ee787"
                 ascii_color = text_main
             else:
                 bg = "#ffffff"
                 text_main = "#24292f"
                 text_dim = "#8b949e"
                 text_key = "#b08800"
+                text_val = "#0969da"
+                text_green = "#1a7f37"
                 ascii_color = text_main
 
             ascii_content, ascii_height = self._get_ascii_svg_content(mode)
@@ -147,6 +154,7 @@ class SVGRenderer:
             right_svg = ""
             y = 30
             lh = 46
+            DOT_WIDTH = 46
 
             # ── Header ────────────────────────────────────────────
             header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
@@ -241,7 +249,9 @@ class SVGRenderer:
             
             loc = f"{total_loc:,}"
             
+            color_red = "#f85149" if mode == "dark" else "#cf222e"
 
+            COL = 49
             d1 = max(25 - len(repo_cnt) - len(private_cnt), 2)
             d2 = max(33 - len(stars), 2)
             

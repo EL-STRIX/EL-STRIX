@@ -1,18 +1,17 @@
 """Integration and Configuration tests."""
 
 import os
-import sys
-
 import pytest
+from pathlib import Path
+import sys
 
 # Ensure scripts module path is accessible
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 from config_loader import ConfigLoader
-from env import EnvManager
-from exceptions import ConfigurationError
 from paths import PathManager
-
+from exceptions import ConfigurationError
+from env import EnvManager
 
 def test_path_manager_directories(tmp_path, monkeypatch):
     """Test PathManager creates directories securely."""

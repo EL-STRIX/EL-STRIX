@@ -5,7 +5,7 @@ import os
 import time
 from pathlib import Path
 from typing import Any
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin
 
 import requests
 from cache_manager import CacheManager
@@ -100,11 +100,6 @@ class GitHubClient:
         pages_fetched = 0
         
         while current_url and pages_fetched < max_pages:
-            parsed_url = urlparse(current_url)
-            base_parsed = urlparse(self.BASE_URL)
-            if parsed_url.netloc != base_parsed.netloc or parsed_url.scheme != base_parsed.scheme:
-                raise GitHubAPIError(f"Security violation: Attempted to send GitHub API token to external host: {current_url}")
-
             for attempt in range(1, self.max_retries + 1):
                 try:
                     response = self.session.request(
@@ -160,8 +155,8 @@ class GitHubClient:
 
     def graphql_request(self, query: str, variables: dict | None = None, use_cache: bool = True) -> dict[str, Any]:
         """Execute a GraphQL API query with caching and retries."""
-        query_hash = hashlib.sha256(query.encode('utf-8')).hexdigest()
-        var_hash = hashlib.sha256(str(variables).encode('utf-8')).hexdigest()
+        query_hash = hashlib.md5(query.encode('utf-8')).hexdigest()
+        var_hash = hashlib.md5(str(variables).encode('utf-8')).hexdigest()
         cache_key = f"graphql_{query_hash}_{var_hash}"
         if use_cache:
             cached = self.cache.get(cache_key)
@@ -206,14 +201,6 @@ class GitHubClient:
 
     def download_avatar(self, url: str) -> Path:
         """Download and cache the user's avatar image."""
-        parsed_url = urlparse(url)
-        if parsed_url.scheme != "https":
-            raise GitHubAPIError("Security violation: Avatar URL must use HTTPS.")
-
-        # Validate host to prevent SSRF
-        if parsed_url.netloc != "avatars.githubusercontent.com" and not parsed_url.netloc.endswith(".githubusercontent.com"):
-            raise GitHubAPIError(f"Security violation: Attempted to download avatar from external host: {url}")
-
         ensure_dir(PathManager.ASSET_IMAGE_DIR)
         save_path = PathManager.ASSET_IMAGE_DIR / "avatar.png"
         
