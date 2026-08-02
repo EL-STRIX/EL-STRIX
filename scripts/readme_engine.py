@@ -18,7 +18,7 @@ class ReadmeEngine:
         """Initialize the ReadmeEngine."""
         self.env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(str(PathManager.TEMPLATES_DIR)),
-            autoescape=True,
+            autoescape=False,
             trim_blocks=True,
             lstrip_blocks=True
         )
