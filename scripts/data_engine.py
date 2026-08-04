@@ -93,7 +93,7 @@ class DataEngine:
         current_year = datetime.now(UTC).year
         start_year = created_date.year
         
-        unified_contribs = {
+        unified_contribs: dict[str, Any] = {
             "contributionCalendar": {
                 "totalContributions": 0,
                 "weeks": []
