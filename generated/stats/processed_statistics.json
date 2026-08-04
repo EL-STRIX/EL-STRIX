@@ -104,29 +104,29 @@
     ]
   },
   "commits": {
-    "total_commits": 595,
+    "total_commits": 598,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
+      "Finzo": 949,
       "C-GAMES-COLLECTION": 156,
-      "Slotara": 100,
-      "Portfolio-V2.0": 8,
-      "LUMINA": 25,
       "Faculty-Subject-Allocation": 25,
-      "EL-STRIX": 149,
-      "Portfolio-V1.0": 19
+      "LUMINA": 25,
+      "Portfolio-V1.0": 19,
+      "Portfolio-V2.0": 8,
+      "Slotara": 100
     },
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 650,
+    "total_contributions": 653,
     "max_daily_contributions": 80,
     "current_streak": 13,
     "longest_streak": 13,
-    "yearly_contributions": 650
+    "yearly_contributions": 653
   },
   "loc": {
-    "total_lines": 271328
+    "total_lines": 571654
   },
   "languages": {
     "languages_used": 6,
@@ -174,7 +174,7 @@
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "Portfolio-V1.0",
+    "most_recently_updated_repository": "EL-STRIX",
     "recently_created_repository": "Portfolio-V1.0",
     "oldest_repository": "Portfolio-V2.0",
     "most_active_repository": null,
@@ -592,7 +592,7 @@
       },
       {
         "date": "2026-08-02",
-        "commits": 37
+        "commits": 40
       },
       {
         "date": "2026-08-09",
@@ -684,12 +684,12 @@
     "latest_commit": null,
     "latest_repository": "Portfolio-V1.0",
     "latest_release": null,
-    "latest_update": "Portfolio-V1.0"
+    "latest_update": "EL-STRIX"
   },
   "summary": {
     "repository_summary": "Creator of 8 repositories.",
     "language_summary": "Primary language is HTML.",
-    "activity_summary": "Most recently working on Portfolio-V1.0.",
+    "activity_summary": "Most recently working on EL-STRIX.",
     "community_summary": "Received 3 stars across all projects."
   }
 }
