@@ -36,7 +36,7 @@ class StatisticsEngine:
     def process_all(self) -> dict[str, Any]:
         """Execute the complete data processing pipeline."""
         logger.info("StatisticsEngine: Processing started.")
-        start_time = datetime.now()
+        start_time = datetime.now(UTC)
 
         # 1. Validation
         if not self._validate_data():
@@ -68,7 +68,7 @@ class StatisticsEngine:
         # 4. Output JSON
         self._save_output()
 
-        duration = (datetime.now() - start_time).total_seconds()
+        duration = (datetime.now(UTC) - start_time).total_seconds()
         logger.info(f"StatisticsEngine: Processing completed in {duration:.2f}s.")
         return self.stats
 

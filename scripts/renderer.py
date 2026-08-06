@@ -8,7 +8,7 @@ from config_loader import ConfigLoader
 from logger import logger
 from paths import PathManager
 from utils import ensure_dir
-
+from utils.json_helpers import load_json
 
 class SVGRenderer:
     """Complete SVG Profile Rendering Engine (Phase 05).
@@ -39,11 +39,8 @@ class SVGRenderer:
         # Stats are generated in Phase 03/02, available in generated/stats
         stats_file = PathManager.GENERATED_STATS_DIR / "processed_statistics.json"
         if stats_file.exists():
-            try:
-                with open(stats_file, "r", encoding="utf-8") as f:
-                    self.stats = json.load(f)
-            except json.JSONDecodeError as e:
-                logger.error(f"Failed to decode stats JSON: {e}")
+            self.stats = load_json(stats_file)
+            if not isinstance(self.stats, dict):
                 self.stats = {}
         else:
             logger.warning("Processed statistics not found. Rendering with empty stats.")

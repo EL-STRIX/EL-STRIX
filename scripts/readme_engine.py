@@ -36,6 +36,8 @@ class ReadmeEngine:
             # Load stats
             stats_path = PathManager.GENERATED_STATS_DIR / "processed_statistics.json"
             stats = load_json(stats_path)
+            if not isinstance(stats, dict):
+                stats = {}
             
             profile_stats = stats.get("profile", {})
             star_stats = stats.get("stars", {})

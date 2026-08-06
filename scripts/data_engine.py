@@ -6,7 +6,7 @@ from env import EnvManager
 from github import GitHubClient
 from logger import logger
 from paths import PathManager
-from utils.json_helpers import save_json
+from utils.json_helpers import load_json, save_json
 
 
 class DataEngine:
@@ -76,9 +76,8 @@ class DataEngine:
         profile_file = PathManager.GENERATED_JSON_DIR / "profile.json"
         created_at_str = None
         if profile_file.exists():
-            import json
-            with open(profile_file, "r", encoding="utf-8") as f:
-                profile_data = json.load(f)
+            profile_data = load_json(profile_file)
+            if isinstance(profile_data, dict):
                 created_at_str = profile_data.get("created_at")
                 
         from datetime import datetime, UTC
@@ -224,11 +223,10 @@ class DataEngine:
         # 2. Fetch all PRs (including dependabot/others) for all user's repositories
         repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
         if repos_file.exists():
-            import json
             from concurrent.futures import ThreadPoolExecutor, as_completed
-
-            with open(repos_file, "r", encoding="utf-8") as f:
-                repos = json.load(f)
+            repos = load_json(repos_file)
+            if not isinstance(repos, list):
+                repos = []
 
             def fetch_for_repo(repo):
                 repo_name = repo.get("name")
@@ -237,7 +235,7 @@ class DataEngine:
                     return self.client.rest_request("GET", f"/repos/{owner}/{repo_name}/pulls?state=all&per_page=100", paginated=True)
                 return None
 
-            with ThreadPoolExecutor() as executor:
+            with ThreadPoolExecutor(max_workers=5) as executor:
                 futures = [executor.submit(fetch_for_repo, repo) for repo in repos]
                 for future in as_completed(futures):
                     try:
@@ -326,11 +324,10 @@ class DataEngine:
         
         loc_stats = {}
         if repos_file.exists():
-            import json
             from concurrent.futures import ThreadPoolExecutor, as_completed
-
-            with open(repos_file, "r", encoding="utf-8") as f:
-                repos = json.load(f)
+            repos = load_json(repos_file)
+            if not isinstance(repos, list):
+                repos = []
 
             def fetch_for_repo(repo):
                 # Skip forks to avoid taking credit for huge copied codebases
@@ -358,7 +355,7 @@ class DataEngine:
                     logger.warning(f"Could not fetch LOC for {repo_name}: {e}")
                 return None
 
-            with ThreadPoolExecutor() as executor:
+            with ThreadPoolExecutor(max_workers=5) as executor:
                 futures = [executor.submit(fetch_for_repo, repo) for repo in repos]
                 for future in as_completed(futures):
                     result = future.result()
