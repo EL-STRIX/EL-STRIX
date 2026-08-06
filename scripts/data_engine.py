@@ -80,7 +80,7 @@ class DataEngine:
             if isinstance(profile_data, dict):
                 created_at_str = profile_data.get("created_at")
                 
-        from datetime import datetime, UTC
+        from datetime import datetime, timedelta, UTC
         if not created_at_str:
             created_at_str = datetime.now(UTC).isoformat()
             
@@ -129,8 +129,15 @@ class DataEngine:
             unified_contribs["github_today"] = datetime.now(UTC).strftime("%Y-%m-%d")
         
         for year in range(start_year, current_year + 1):
-            from_date = f"{year}-01-01T00:00:00Z"
-            to_date = f"{year}-12-31T23:59:59Z"
+            # Calculate GitHub UI week bounds (Sunday to Saturday) to match the yearly totals exactly
+            start_date = datetime(year, 1, 1)
+            start_date = start_date - timedelta(days=(start_date.weekday() + 1) % 7)
+            
+            end_date = datetime(year, 12, 31)
+            end_date = end_date + timedelta(days=(5 - end_date.weekday()) % 7)
+            
+            from_date = start_date.strftime("%Y-%m-%dT00:00:00Z")
+            to_date = end_date.strftime("%Y-%m-%dT23:59:59Z")
             
             query = """
             query($username: String!, $from: DateTime!, $to: DateTime!) {
