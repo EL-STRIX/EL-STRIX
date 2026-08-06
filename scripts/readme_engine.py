@@ -49,6 +49,7 @@ class ReadmeEngine:
             from datetime import timedelta
             ist_time = datetime.now(UTC) + timedelta(hours=5, minutes=30)
             last_updated = ist_time.strftime("%Y-%m-%d %H:%M:%S IST")
+            cache_bust = int(ist_time.timestamp())
 
             # Prepare context dictionary
             context = {
@@ -81,6 +82,7 @@ class ReadmeEngine:
                 
                 # Additional context
                 "last_updated": last_updated,
+                "cache_bust": cache_bust,
             }
             
             return context
