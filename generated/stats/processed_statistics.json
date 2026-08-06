@@ -104,73 +104,73 @@
     ]
   },
   "commits": {
-    "total_commits": 595,
+    "total_commits": 606,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
+      "LUMINA": 25,
+      "Faculty-Subject-Allocation": 25,
+      "Finzo": 949,
       "Portfolio-V1.0": 19,
       "Slotara": 100,
-      "EL-STRIX": 154,
-      "Faculty-Subject-Allocation": 25,
       "Portfolio-V2.0": 8,
-      "LUMINA": 25,
-      "C-GAMES-COLLECTION": 163,
-      "Finzo": 949
+      "EL-STRIX": 154,
+      "C-GAMES-COLLECTION": 169
     },
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 687,
+    "total_contributions": 700,
     "max_daily_contributions": 80,
-    "current_streak": 15,
-    "longest_streak": 15,
-    "yearly_contributions": 687
+    "current_streak": 16,
+    "longest_streak": 16,
+    "yearly_contributions": 700
   },
   "loc": {
-    "total_lines": 682637
+    "total_lines": 682865
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 46545920,
+    "total_bytes": 46798848,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 48.96,
-      "Dart": 21.76,
-      "JavaScript": 17.79,
-      "PHP": 5.01,
-      "C": 4.68,
-      "Python": 1.8
+      "HTML": 48.73,
+      "Dart": 21.64,
+      "JavaScript": 17.69,
+      "PHP": 4.98,
+      "C": 4.69,
+      "Python": 2.27
     },
     "language_ranking": [
       {
         "language": "HTML",
-        "bytes": 22787072,
-        "percentage": 48.96
+        "bytes": 22803456,
+        "percentage": 48.73
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 21.76
+        "percentage": 21.64
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 17.79
+        "percentage": 17.69
       },
       {
         "language": "PHP",
         "bytes": 2332672,
-        "percentage": 5.01
+        "percentage": 4.98
       },
       {
         "language": "C",
-        "bytes": 2180096,
-        "percentage": 4.68
+        "bytes": 2193408,
+        "percentage": 4.69
       },
       {
         "language": "Python",
-        "bytes": 839680,
-        "percentage": 1.8
+        "bytes": 1062912,
+        "percentage": 2.27
       }
     ]
   },
@@ -196,10 +196,10 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 78,
+    "total_pull_requests": 80,
     "open_pull_requests": 1,
     "closed_pull_requests": 19,
-    "merged_pull_requests": 58
+    "merged_pull_requests": 60
   },
   "featured_projects": [
     {
@@ -256,7 +256,7 @@
     "activity_trend": [],
     "commit_trend": [
       {
-        "date": "2025-01-01",
+        "date": "2024-12-29",
         "commits": 0
       },
       {
@@ -468,7 +468,7 @@
         "commits": 0
       },
       {
-        "date": "2026-01-01",
+        "date": "2025-12-28",
         "commits": 0
       },
       {
@@ -593,7 +593,7 @@
       },
       {
         "date": "2026-08-02",
-        "commits": 74
+        "commits": 87
       },
       {
         "date": "2026-08-09",
