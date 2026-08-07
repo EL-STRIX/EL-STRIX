@@ -104,29 +104,10 @@ class DataEngine:
             "restrictedContributionsCount": 0
         }
         
-        # Get GitHub's official 'today' date to ensure streak timezone accuracy
-        today_query = """
-        query($username: String!) {
-          user(login: $username) {
-            contributionsCollection {
-              contributionCalendar {
-                weeks {
-                  contributionDays {
-                    date
-                  }
-                }
-              }
-            }
-          }
-        }
-        """
-        try:
-            today_data = self.client.graphql_request(today_query, {"username": self.username})
-            today_str = today_data["user"]["contributionsCollection"]["contributionCalendar"]["weeks"][-1]["contributionDays"][-1]["date"]
-            unified_contribs["github_today"] = today_str
-        except Exception as e:
-            logger.warning(f"Failed to fetch github_today, falling back to local UTC: {e}")
-            unified_contribs["github_today"] = datetime.now(UTC).strftime("%Y-%m-%d")
+        # We calculate the true 'today' dynamically in stats.py to account for timezone differences
+        # between the local system and GitHub's servers, so we just set a baseline UTC date here.
+        from datetime import UTC
+        unified_contribs["github_today"] = datetime.now(UTC).strftime("%Y-%m-%d")
         
         for year in range(start_year, current_year + 1):
             # Calculate GitHub UI week bounds (Sunday to Saturday) to match the yearly totals exactly
