@@ -50,10 +50,17 @@ class DataEngine:
         logger.info("Data Engine pipeline completed successfully.")
 
     def fetch_profile(self) -> dict[str, Any]:
-        """Fetch base profile information using the authenticated endpoint."""
+        """Fetch base profile information."""
         logger.info("Fetching profile information...")
-        # Use /user (authenticated) to get private repo counts
+        # Try /user first for private repo counts
         profile = self.client.rest_request("GET", "/user")
+        
+        # If the token belongs to a bot (e.g. GitHub Actions default token) or another user,
+        # fallback to the target username's public profile to avoid breaking all stats.
+        if profile.get("login") != self.username:
+            logger.info(f"Authenticated as {profile.get('login')}, falling back to public profile for {self.username}")
+            profile = self.client.rest_request("GET", f"/users/{self.username}")
+            
         save_json(profile, PathManager.GENERATED_JSON_DIR / "profile.json")
         return profile
 
@@ -64,8 +71,15 @@ class DataEngine:
     def fetch_repositories(self) -> None:
         """Fetch all repositories for the user, including private ones if the token has access."""
         logger.info("Fetching repositories...")
-        # Use /user/repos instead of /users/{username}/repos to get private repositories for the authenticated user
-        repos = self.client.rest_request("GET", "/user/repos?type=owner&per_page=100", paginated=True)
+        # Check authentication identity
+        auth_user = self.client.rest_request("GET", "/user")
+        if auth_user.get("login") == self.username:
+            endpoint = "/user/repos?type=owner&per_page=100"
+        else:
+            logger.info(f"Token does not belong to {self.username}, fetching public repositories only.")
+            endpoint = f"/users/{self.username}/repos?type=owner&per_page=100"
+            
+        repos = self.client.rest_request("GET", endpoint, paginated=True)
         save_json(repos, PathManager.GENERATED_JSON_DIR / "repos.json")
 
     def fetch_contributions(self) -> None:
