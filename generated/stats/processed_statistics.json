@@ -1,6 +1,6 @@
 {
   "profile": {
-    "total_public_repositories": 6,
+    "total_public_repositories": 5,
     "total_followers": 8,
     "total_following": 13,
     "profile_creation_date": "2025-03-21T15:07:47Z",
@@ -9,8 +9,8 @@
   },
   "repositories": {
     "repository_count": 8,
-    "public_repository_count": 6,
-    "private_repository_count": 2,
+    "public_repository_count": 5,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 8,
@@ -104,17 +104,17 @@
     ]
   },
   "commits": {
-    "total_commits": 606,
+    "total_commits": 629,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
-      "C-GAMES-COLLECTION": 169,
-      "Finzo": 949,
-      "EL-STRIX": 154,
-      "LUMINA": 25,
-      "Portfolio-V2.0": 8,
       "Faculty-Subject-Allocation": 25,
+      "EL-STRIX": 154,
+      "Finzo": 949,
+      "C-GAMES-COLLECTION": 169,
+      "LUMINA": 25,
       "Portfolio-V1.0": 19,
+      "Portfolio-V2.0": 8,
       "Slotara": 100
     },
     "commit_timeline": []
@@ -131,26 +131,26 @@
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 46798848,
+    "total_bytes": 46816256,
     "most_used_language": "HTML",
     "percentage_per_language": {
-      "HTML": 48.73,
-      "Dart": 21.64,
+      "HTML": 48.71,
+      "Dart": 21.63,
       "JavaScript": 17.69,
       "PHP": 4.98,
       "C": 4.69,
-      "Python": 2.27
+      "Python": 2.31
     },
     "language_ranking": [
       {
         "language": "HTML",
         "bytes": 22803456,
-        "percentage": 48.73
+        "percentage": 48.71
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 21.64
+        "percentage": 21.63
       },
       {
         "language": "JavaScript",
@@ -169,8 +169,8 @@
       },
       {
         "language": "Python",
-        "bytes": 1062912,
-        "percentage": 2.27
+        "bytes": 1080320,
+        "percentage": 2.31
       }
     ]
   },
