@@ -166,7 +166,27 @@ class GitHubClient:
             
         return results
 
+
+    def batch_rest_requests(self, method: str, endpoints: list[str], max_workers: int = 15, **kwargs) -> dict[str, Any]:
+        """Execute multiple REST requests concurrently."""
+        results = {}
+        from concurrent.futures import ThreadPoolExecutor, as_completed
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            future_to_endpoint = {
+                executor.submit(self.rest_request, method, endpoint, **kwargs): endpoint
+                for endpoint in endpoints
+            }
+            for future in as_completed(future_to_endpoint):
+                endpoint = future_to_endpoint[future]
+                try:
+                    results[endpoint] = future.result()
+                except Exception as e:
+                    logger.warning(f"Batch request failed for {endpoint}: {e}")
+                    results[endpoint] = None
+        return results
+
     def graphql_request(self, query: str, variables: dict | None = None, use_cache: bool = True) -> dict[str, Any]:
+
         """Execute a GraphQL API query with caching and retries."""
         query_hash = hashlib.md5(query.encode('utf-8')).hexdigest()
         var_hash = hashlib.md5(str(variables).encode('utf-8')).hexdigest()

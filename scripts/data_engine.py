@@ -94,7 +94,7 @@ class DataEngine:
             if isinstance(profile_data, dict):
                 created_at_str = profile_data.get("created_at")
                 
-        from datetime import datetime, timedelta, UTC
+        from datetime import UTC, datetime, timedelta
         if not created_at_str:
             created_at_str = datetime.now(UTC).isoformat()
             
@@ -225,29 +225,24 @@ class DataEngine:
         # 2. Fetch all PRs (including dependabot/others) for all user's repositories
         repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
         if repos_file.exists():
-            from concurrent.futures import ThreadPoolExecutor, as_completed
             repos = load_json(repos_file)
             if not isinstance(repos, list):
                 repos = []
 
-            def fetch_for_repo(repo):
+            endpoints = []
+            for repo in repos:
                 repo_name = repo.get("name")
                 owner = repo.get("owner", {}).get("login")
                 if owner and repo_name:
-                    return self.client.rest_request("GET", f"/repos/{owner}/{repo_name}/pulls?state=all&per_page=100", paginated=True)
-                return None
+                    endpoints.append(f"/repos/{owner}/{repo_name}/pulls?state=all&per_page=100")
 
-            with ThreadPoolExecutor(max_workers=5) as executor:
-                futures = [executor.submit(fetch_for_repo, repo) for repo in repos]
-                for future in as_completed(futures):
-                    try:
-                        repo_prs = future.result()
-                        if isinstance(repo_prs, list):
-                            for pr in repo_prs:
-                                if isinstance(pr, dict):
-                                    all_prs[pr.get("html_url")] = pr
-                    except Exception as e:
-                        logger.error(f"Error fetching PRs for a repo: {e}")
+            if endpoints:
+                batch_results = self.client.batch_rest_requests("GET", endpoints, max_workers=15, paginated=True)
+                for endpoint, repo_prs in batch_results.items():
+                    if isinstance(repo_prs, list):
+                        for pr in repo_prs:
+                            if isinstance(pr, dict):
+                                all_prs[pr.get("html_url")] = pr
 
         save_json(list(all_prs.values()), PathManager.GENERATED_JSON_DIR / "pull_requests.json")
 
@@ -326,45 +321,37 @@ class DataEngine:
         
         loc_stats = {}
         if repos_file.exists():
-            from concurrent.futures import ThreadPoolExecutor, as_completed
             repos = load_json(repos_file)
             if not isinstance(repos, list):
                 repos = []
 
-            def fetch_for_repo(repo):
+            endpoints = {}
+            for repo in repos:
                 # Skip forks to avoid taking credit for huge copied codebases
-                if repo.get("fork"): return None
+                if repo.get("fork"): continue
                 repo_name = repo.get("name")
                 owner = repo.get("owner", {}).get("login")
-                if not owner or not repo_name: return None
-                
-                # Fetch contributor stats
-                endpoint = f"/repos/{owner}/{repo_name}/stats/contributors"
-                try:
-                    stats = self.client.rest_request("GET", endpoint, use_cache=True)
+                if owner and repo_name:
+                    endpoints[f"/repos/{owner}/{repo_name}/stats/contributors"] = repo_name
+
+            if endpoints:
+                batch_results = self.client.batch_rest_requests("GET", list(endpoints.keys()), max_workers=15, use_cache=True)
+                for endpoint, stats in batch_results.items():
+                    if not stats: continue
+                    repo_name = endpoints[endpoint]
                     if isinstance(stats, list):
                         for contributor in stats:
                             author = contributor.get("author") or {}
                             if author.get("login") == self.username:
                                 weeks = contributor.get("weeks", [])
                                 total_lines = sum(w.get("a", 0) for w in weeks)
-                                return repo_name, {
+                                loc_stats[repo_name] = {
                                     "total_commits": contributor.get("total", 0),
                                     "total_lines": total_lines,
                                     "weeks": weeks
                                 }
-                except Exception as e:
-                    logger.warning(f"Could not fetch LOC for {repo_name}: {e}")
-                return None
+                                break
 
-            with ThreadPoolExecutor(max_workers=5) as executor:
-                futures = [executor.submit(fetch_for_repo, repo) for repo in repos]
-                for future in as_completed(futures):
-                    result = future.result()
-                    if result:
-                        repo_name, stats_data = result
-                        loc_stats[repo_name] = stats_data
-                    
         save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
 
     def fetch_recent_activity(self) -> None:
