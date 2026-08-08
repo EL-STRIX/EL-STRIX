@@ -2,7 +2,6 @@
 
 import json
 import os
-from datetime import UTC, datetime
 
 from config_loader import ConfigLoader
 from logger import logger
