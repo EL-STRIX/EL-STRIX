@@ -1,6 +1,5 @@
 """SVG Banner renderer module for EL-STRIX."""
 
-import json
 import os
 
 from config_loader import ConfigLoader
