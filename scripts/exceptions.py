@@ -9,9 +9,6 @@ class ConfigurationError(ELSTRIXError):
 class EnvironmentError(ELSTRIXError):
     """Raised when required environment variables are missing or invalid."""
 
-class ValidationError(ELSTRIXError):
-    """Raised when data validation fails."""
-
 class CacheError(ELSTRIXError):
     """Raised when there is an issue interacting with the cache."""
 
