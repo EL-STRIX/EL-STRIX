@@ -1,5 +1,6 @@
 """Cache foundation architecture."""
 
+import hashlib
 import json
 import time
 from typing import Any
@@ -17,10 +18,10 @@ class CacheManager:
 
     def _get_path(self, key: str) -> str:
         """Get the file path for a cache key."""
-        # Sanitize key to avoid path traversal
-        safe_key = "".join(c for c in key if c.isalnum() or c in ("-", "_"))
-        if not safe_key:
+        if not key:
             raise CacheError("Invalid cache key")
+        # Hash key to avoid path traversal and length issues
+        safe_key = hashlib.sha256(key.encode("utf-8")).hexdigest()
         return str(self.cache_dir / f"{safe_key}.json")
 
     def get(self, key: str) -> Any | None:
