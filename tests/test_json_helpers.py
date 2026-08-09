@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 
 from utils.json_helpers import load_json, save_json
 
+
 def test_save_json_basic(tmp_path: Path) -> None:
     """Test saving a basic dictionary to a JSON file."""
     test_data = {"key": "value"}

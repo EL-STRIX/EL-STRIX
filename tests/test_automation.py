@@ -9,8 +9,9 @@ import pytest
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
-from exceptions import ELSTRIXError
 from automation import AutomationEngine
+from exceptions import ELSTRIXError
+
 
 @patch("automation.subprocess.run")
 def test_run_git_success(mock_run):

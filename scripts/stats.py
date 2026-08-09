@@ -434,14 +434,21 @@ class StatisticsEngine:
                 
         total = len(filtered_prs)
         
-        open_prs = sum(1 for pr in filtered_prs if pr.get("state") == "open")
-        
+        open_prs = 0
         merged_prs = 0
+        closed_prs = 0
+
         for pr in filtered_prs:
+            state = pr.get("state")
+            if state == "open":
+                open_prs += 1
+            elif state == "closed":
+                closed_prs += 1
+
             if pr.get("merged_at") or pr.get("pull_request", {}).get("merged_at"):
                 merged_prs += 1
                 
-        closed_prs = sum(1 for pr in filtered_prs if pr.get("state") == "closed") - merged_prs
+        closed_prs -= merged_prs
 
         return {
             "total_pull_requests": total,
