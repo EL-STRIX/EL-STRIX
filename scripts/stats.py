@@ -399,8 +399,14 @@ class StatisticsEngine:
         # Filter to ensure we only count actual issues, not PRs (Search API sometimes mixes them if not careful)
         # We explicitly searched `type:issue`, so they should all be issues.
         total_issues = len(self.issues_data)
-        open_issues = sum(1 for issue in self.issues_data if issue.get("state") == "open")
-        closed_issues = sum(1 for issue in self.issues_data if issue.get("state") == "closed")
+        open_issues = 0
+        closed_issues = 0
+        for issue in self.issues_data:
+            state = issue.get("state")
+            if state == "open":
+                open_issues += 1
+            elif state == "closed":
+                closed_issues += 1
         
         # If the search API limit was hit (1000), total might be capped.
         # Fallback to totalIssueContributions from GraphQL if it's larger.
