@@ -51,5 +51,50 @@ def test_github_rest_request_failure(mock_token, mocker):
     assert "403" in str(exc.value)
 
 
+@patch("github.EnvManager.get_github_token", return_value="fake_token")
+@patch("requests.get")
+def test_download_avatar_size_limit(mock_get, mock_token, tmp_path, mocker):
+    """Test downloading an avatar that exceeds the maximum size limit."""
+    mocker.patch("github.PathManager.ASSET_IMAGE_DIR", tmp_path)
+    client = GitHubClient()
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+
+    # Generate chunks that together exceed 5MB
+    # 5MB + 1 byte in 1MB chunks
+    def chunk_generator(*args, **kwargs):
+        for _ in range(6):
+            yield b"0" * (1024 * 1024)
+
+    mock_response.iter_content = chunk_generator
+    mock_get.return_value = mock_response
+
+    with pytest.raises(GitHubAPIError) as exc:
+        client.download_avatar("http://fake.url/avatar.png")
+
+    assert "exceeds maximum allowed size" in str(exc.value)
+
+
+@patch("github.EnvManager.get_github_token", return_value="fake_token")
+@patch("requests.get")
+def test_download_avatar_success(mock_get, mock_token, tmp_path, mocker):
+    """Test successfully downloading an avatar within the size limit."""
+    mocker.patch("github.PathManager.ASSET_IMAGE_DIR", tmp_path)
+    client = GitHubClient()
+    mock_response = MagicMock()
+    mock_response.status_code = 200
+
+    # Generate chunk under the 5MB limit
+    def chunk_generator(*args, **kwargs):
+        yield b"1" * 1024
+
+    mock_response.iter_content = chunk_generator
+    mock_get.return_value = mock_response
+
+    save_path = client.download_avatar("http://fake.url/avatar.png")
+
+    assert save_path == tmp_path / "avatar.png"
+    assert save_path.exists()
+    assert save_path.read_bytes() == b"1" * 1024
 
 
