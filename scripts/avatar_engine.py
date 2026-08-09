@@ -178,43 +178,37 @@ class AsciiEngine:
         mask_pixels = list(mask_resized.getdata())  # type: ignore
         edges_pixels = list(edges_resized.getdata())  # type: ignore
 
-        matrix = []
+        char_count_minus_1 = self.char_count - 1
+        charset = self.charset
 
-        for i in range(height):
-            row = []
-            for j in range(self.width):
-                idx = i * self.width + j
-                r, g, b = rgb_pixels[idx]
-                m = mask_pixels[idx]
-                e = edges_pixels[idx]
+        flat_chars = []
+        for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
+            if m < 128:
+                # Transparent Background -> Space (sparsest character)
+                char_idx = char_count_minus_1
+            else:
+                # Inlined perceptual luminance calculation for speed
+                lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2)
 
-                if m < 128:
-                    # Transparent Background -> Space (sparsest character)
-                    char_idx = self.char_count - 1
-                else:
-                    lum = self.get_perceptual_luminance(r, g, b)
+                # Normalize lum to 0-1
+                norm_lum = lum / 255.0
 
-                    # Normalize lum to 0-1
-                    norm_lum = lum / 255.0
-                    edge_w = e / 255.0
+                # Clean contrast curve to keep face recognizable and avoid noise
+                gamma_lum = norm_lum**0.8
+                final_density = (1.0 - gamma_lum) * 0.5 + (e / 255.0) * 0.5
 
-                    # Clean contrast curve to keep face recognizable and avoid noise
-                    gamma_lum = norm_lum**0.8
-                    base_density = 1.0 - gamma_lum
+                # Force eyes and dark hair to remain dense
+                if norm_lum < 0.25:
+                    final_density = max(final_density, 0.8)
 
-                    # Blend edge detection for clear facial features
-                    final_density = base_density * 0.5 + edge_w * 0.5
+                # Map to character index (0 is densest, char_count-1 is sparsest)
+                char_idx = int((1.0 - final_density) * char_count_minus_1)
+                char_idx = max(0, min(char_count_minus_1, char_idx))
 
-                    # Force eyes and dark hair to remain dense
-                    if norm_lum < 0.25:
-                        final_density = max(final_density, 0.8)
+            flat_chars.append(charset[char_idx])
 
-                    # Map to character index (0 is densest, char_count-1 is sparsest)
-                    char_idx = int((1.0 - final_density) * (self.char_count - 1))
-                    char_idx = max(0, min(self.char_count - 1, char_idx))
-
-                row.append(self.charset[char_idx])
-            matrix.append(row)
+        # Reform into 2D matrix
+        matrix = [flat_chars[i : i + self.width] for i in range(0, len(flat_chars), self.width)]
 
         return matrix
 
