@@ -2,12 +2,11 @@ import os
 import sys
 from pathlib import Path
 
-import pytest
-
 # Add scripts directory to path to allow importing modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scripts')))
 
 from utils.file_helpers import ensure_dir
+
 
 def test_ensure_dir_creates_new_directory(tmp_path: Path) -> None:
     """Test creating a new directory."""
