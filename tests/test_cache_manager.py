@@ -4,7 +4,7 @@ import sys
 
 import pytest
 
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scripts')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 from cache_manager import CacheManager
 from exceptions import CacheError
@@ -13,7 +13,7 @@ from paths import PathManager
 
 def test_cache_manager_path_hashing(mocker, tmp_path):
     """Test that the cache manager hashes keys correctly and generates safe paths."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     manager = CacheManager()
 
@@ -30,12 +30,12 @@ def test_cache_manager_path_hashing(mocker, tmp_path):
     expected_hash2 = hashlib.sha256(key2.encode("utf-8")).hexdigest()
     assert expected_hash2 in path2
     assert path2.endswith(".json")
-    assert ".." not in path2.split("/")[-1] # The filename itself should not have traversal
+    assert ".." not in path2.split("/")[-1]  # The filename itself should not have traversal
 
 
 def test_cache_manager_empty_key(mocker, tmp_path):
     """Test that the cache manager raises CacheError when given an empty key."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     manager = CacheManager()
 
@@ -51,7 +51,7 @@ def test_cache_manager_empty_key(mocker, tmp_path):
 
 def test_cache_manager_set_and_get(mocker, tmp_path):
     """Test that the cache manager can set and get a value."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     manager = CacheManager()
 
@@ -65,7 +65,7 @@ def test_cache_manager_set_and_get(mocker, tmp_path):
 
 def test_cache_manager_get_expired(mocker, tmp_path):
     """Test that the cache manager returns None for an expired key."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     # Mock time.time to control the timestamp
     mock_time = mocker.patch("time.time")
@@ -89,7 +89,7 @@ def test_cache_manager_get_expired(mocker, tmp_path):
 
 def test_cache_manager_get_file_not_found(mocker, tmp_path):
     """Test that the cache manager returns None when the file doesn't exist."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     manager = CacheManager()
 
@@ -100,7 +100,7 @@ def test_cache_manager_get_file_not_found(mocker, tmp_path):
 
 def test_cache_manager_get_invalid_json(mocker, tmp_path):
     """Test that the cache manager returns None when the cache file contains invalid JSON."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     manager = CacheManager()
 
@@ -117,7 +117,7 @@ def test_cache_manager_get_invalid_json(mocker, tmp_path):
 
 def test_cache_manager_set_os_error(mocker, tmp_path):
     """Test that the cache manager raises CacheError on OSError when setting a value."""
-    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+    mocker.patch.object(PathManager, "GENERATED_CACHE_DIR", tmp_path)
 
     # Mock open to raise OSError
     mocker.patch("builtins.open", side_effect=OSError("Permission denied"))

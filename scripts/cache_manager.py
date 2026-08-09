@@ -30,11 +30,11 @@ class CacheManager:
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 data = json.load(f)
-                
+
             timestamp = data.get("timestamp", 0)
             if time.time() - timestamp > self.ttl_seconds:
                 return None  # Expired
-                
+
             return data.get("payload")
         except (FileNotFoundError, json.JSONDecodeError, KeyError):
             return None
@@ -42,10 +42,7 @@ class CacheManager:
     def set(self, key: str, payload: Any) -> None:
         """Save a value to the cache with the current timestamp."""
         filepath = self._get_path(key)
-        data = {
-            "timestamp": time.time(),
-            "payload": payload
-        }
+        data = {"timestamp": time.time(), "payload": payload}
         try:
             with open(filepath, "w", encoding="utf-8") as f:
                 json.dump(data, f, ensure_ascii=False)

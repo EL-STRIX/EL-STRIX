@@ -4,7 +4,7 @@ import sys
 import pytest
 
 # Add scripts directory to path to allow importing modules
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scripts')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 from readme_engine import ReadmeEngine
 from paths import PathManager
@@ -19,16 +19,16 @@ def test_autoescape_enabled(mocker, tmp_path) -> None:
     template_file.write_text("Bio: {{ bio }}")
 
     # Mock PathManager to use our temporary directory
-    mocker.patch('readme_engine.PathManager.TEMPLATES_DIR', new=template_dir)
+    mocker.patch("readme_engine.PathManager.TEMPLATES_DIR", new=template_dir)
     # Also mock ROOT_DIR to avoid any file creation side effects in real path
-    mocker.patch('readme_engine.PathManager.ROOT_DIR', new=tmp_path)
+    mocker.patch("readme_engine.PathManager.ROOT_DIR", new=tmp_path)
 
     # Instantiate the engine
     engine = ReadmeEngine()
 
     # Mock _prepare_data to return a context with a malicious payload
     malicious_payload = "<script>alert(1)</script>"
-    mocker.patch.object(engine, '_prepare_data', return_value={'bio': malicious_payload})
+    mocker.patch.object(engine, "_prepare_data", return_value={"bio": malicious_payload})
 
     # Render the template
     content = engine.render()

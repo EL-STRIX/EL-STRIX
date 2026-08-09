@@ -20,6 +20,7 @@ def test_github_client_init(mock_token):
     assert client.headers["Accept"] == "application/vnd.github.v3+json"
     assert client.headers["User-Agent"] == "EL-STRIX-Profile-Engine"
 
+
 @patch("github.EnvManager.get_github_token", return_value="fake_token")
 def test_github_rest_request_success(mock_token, mocker):
     """Test a successful REST API request."""
@@ -27,11 +28,12 @@ def test_github_rest_request_success(mock_token, mocker):
     mock_response = MagicMock()
     mock_response.status_code = 200
     mock_response.json.return_value = {"login": "test_user"}
-    
+
     mocker.patch("requests.Session.request", return_value=mock_response)
-    
+
     data = client.rest_request("GET", "/user", use_cache=False)
     assert data["login"] == "test_user"
+
 
 @patch("github.EnvManager.get_github_token", return_value="fake_token")
 def test_github_rest_request_failure(mock_token, mocker):
@@ -40,16 +42,17 @@ def test_github_rest_request_failure(mock_token, mocker):
     mock_response = MagicMock()
     mock_response.status_code = 403
     mock_response.text = "Rate limited"
-    
+
     import requests
+
     mock_response.raise_for_status.side_effect = requests.HTTPError("403 Client Error")
-    
+
     mocker.patch("requests.Session.request", return_value=mock_response)
-    mocker.patch("time.sleep") # avoid actual sleeping in tests
-    
+    mocker.patch("time.sleep")  # avoid actual sleeping in tests
+
     with pytest.raises(GitHubAPIError) as exc:
         client.rest_request("GET", "/user", use_cache=False)
-    
+
     assert "403" in str(exc.value)
 
 
@@ -98,5 +101,3 @@ def test_download_avatar_success(mock_get, mock_token, tmp_path, mocker):
     assert save_path == tmp_path / "avatar.png"
     assert save_path.exists()
     assert save_path.read_bytes() == b"1" * 1024
-
-

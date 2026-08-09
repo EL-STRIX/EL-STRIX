@@ -31,7 +31,7 @@ class PathManager:
 
     # Important Files
     ENV_FILE: Path = ROOT_DIR / ".env"
-    
+
     @classmethod
     def get_config_file(cls, filename: str) -> Path:
         """Get the absolute path to a configuration file."""

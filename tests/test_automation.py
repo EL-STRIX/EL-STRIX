@@ -33,13 +33,12 @@ def test_run_git_success(mock_run):
         check=True,
     )
 
+
 @patch("automation.subprocess.run")
 def test_run_git_called_process_error(mock_run):
     """Test git command raising CalledProcessError."""
     mock_run.side_effect = subprocess.CalledProcessError(
-        returncode=1,
-        cmd=["git", "status"],
-        stderr="error\n"
+        returncode=1, cmd=["git", "status"], stderr="error\n"
     )
 
     engine = AutomationEngine()
@@ -54,6 +53,7 @@ def test_run_git_called_process_error(mock_run):
         text=True,
         check=True,
     )
+
 
 @patch("automation.subprocess.run")
 def test_run_git_file_not_found_error(mock_run):
