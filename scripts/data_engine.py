@@ -346,47 +346,60 @@ class DataEngine:
 
         save_json(all_releases, PathManager.GENERATED_JSON_DIR / "releases.json")
 
+    def _process_contributor_stats(self, stats: list) -> dict | None:
+        """Extract the current user's LOC stats from contributor stats."""
+        for contributor in stats:
+            author = contributor.get("author") or {}
+            if author.get("login") == self.username:
+                weeks = contributor.get("weeks", [])
+                total_lines = sum(w.get("a", 0) for w in weeks)
+                return {
+                    "total_commits": contributor.get("total", 0),
+                    "total_lines": total_lines,
+                    "weeks": weeks,
+                }
+        return None
+
     def fetch_loc_stats(self) -> None:
         """Fetch contributor stats for LOC calculation."""
         logger.info("Fetching Lines of Code (LOC) statistics...")
         repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
 
         loc_stats = {}
-        if repos_file.exists():
-            repos = load_json(repos_file)
-            if not isinstance(repos, list):
-                repos = []
+        if not repos_file.exists():
+            save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
+            return
 
-            endpoints = {}
-            for repo in repos:
-                # Skip forks to avoid taking credit for huge copied codebases
-                if repo.get("fork"):
-                    continue
-                repo_name = repo.get("name")
-                owner = repo.get("owner", {}).get("login")
-                if owner and repo_name:
-                    endpoints[f"/repos/{owner}/{repo_name}/stats/contributors"] = repo_name
+        repos = load_json(repos_file)
+        if not isinstance(repos, list):
+            repos = []
 
-            if endpoints:
-                batch_results = self.client.batch_rest_requests(
-                    "GET", list(endpoints.keys()), max_workers=15, use_cache=True
-                )
-                for endpoint, stats in batch_results.items():
-                    if not stats:
-                        continue
-                    repo_name = endpoints[endpoint]
-                    if isinstance(stats, list):
-                        for contributor in stats:
-                            author = contributor.get("author") or {}
-                            if author.get("login") == self.username:
-                                weeks = contributor.get("weeks", [])
-                                total_lines = sum(w.get("a", 0) for w in weeks)
-                                loc_stats[repo_name] = {
-                                    "total_commits": contributor.get("total", 0),
-                                    "total_lines": total_lines,
-                                    "weeks": weeks,
-                                }
-                                break
+        endpoints = {}
+        for repo in repos:
+            # Skip forks to avoid taking credit for huge copied codebases
+            if repo.get("fork"):
+                continue
+            repo_name = repo.get("name")
+            owner = repo.get("owner", {}).get("login")
+            if owner and repo_name:
+                endpoints[f"/repos/{owner}/{repo_name}/stats/contributors"] = repo_name
+
+        if not endpoints:
+            save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
+            return
+
+        batch_results = self.client.batch_rest_requests(
+            "GET", list(endpoints.keys()), max_workers=15, use_cache=True
+        )
+
+        for endpoint, stats in batch_results.items():
+            if not stats or not isinstance(stats, list):
+                continue
+
+            repo_name = endpoints[endpoint]
+            user_stats = self._process_contributor_stats(stats)
+            if user_stats:
+                loc_stats[repo_name] = user_stats
 
         save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
 
