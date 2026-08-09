@@ -242,8 +242,18 @@ class GitHubClient:
             response = requests.get(url, stream=True, timeout=15)
             response.raise_for_status()
             
+            downloaded_size = 0
+            max_size = 5 * 1024 * 1024  # 5 MB limit
+
             with open(save_path, "wb") as f:
-                f.writelines(response.iter_content(chunk_size=8192))
+                for chunk in response.iter_content(chunk_size=8192):
+                    downloaded_size += len(chunk)
+                    if downloaded_size > max_size:
+                        f.close()
+                        if save_path.exists():
+                            save_path.unlink()
+                        raise GitHubAPIError(f"Avatar file exceeds maximum allowed size ({max_size} bytes)")
+                    f.write(chunk)
                     
             logger.info("Avatar downloaded successfully.")
             return save_path
