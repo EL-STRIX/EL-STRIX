@@ -1,16 +1,16 @@
 {
   "profile": {
-    "total_public_repositories": 5,
+    "total_public_repositories": 6,
     "total_followers": 8,
-    "total_following": 13,
+    "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 503,
-    "account_age_years": 1.38
+    "days_since_account_creation": 506,
+    "account_age_years": 1.39
   },
   "repositories": {
     "repository_count": 8,
-    "public_repository_count": 5,
-    "private_repository_count": 3,
+    "public_repository_count": 6,
+    "private_repository_count": 2,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 8,
@@ -18,17 +18,21 @@
     "repository_growth": 8
   },
   "stars": {
-    "total_stars": 3,
-    "average_stars": 0.38,
-    "most_starred_repository": "Faculty-Subject-Allocation",
+    "total_stars": 5,
+    "average_stars": 0.62,
+    "most_starred_repository": "C-GAMES-COLLECTION",
     "least_starred_repository": "Slotara",
     "star_ranking": [
+      {
+        "repository": "C-GAMES-COLLECTION",
+        "stars": 2
+      },
       {
         "repository": "Faculty-Subject-Allocation",
         "stars": 2
       },
       {
-        "repository": "C-GAMES-COLLECTION",
+        "repository": "Portfolio-V1.0",
         "stars": 1
       },
       {
@@ -44,10 +48,6 @@
         "stars": 0
       },
       {
-        "repository": "Portfolio-V1.0",
-        "stars": 0
-      },
-      {
         "repository": "Portfolio-V2.0",
         "stars": 0
       },
@@ -57,8 +57,8 @@
       }
     ],
     "star_distribution": {
-      "0": 6,
-      "1-10": 2,
+      "0": 5,
+      "1-10": 3,
       "11-50": 0,
       "51-100": 0,
       "100+": 0
@@ -104,72 +104,72 @@
     ]
   },
   "commits": {
-    "total_commits": 629,
+    "total_commits": 827,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
-      "Faculty-Subject-Allocation": 25,
-      "EL-STRIX": 154,
-      "Finzo": 949,
-      "C-GAMES-COLLECTION": 169,
       "LUMINA": 25,
+      "Faculty-Subject-Allocation": 25,
       "Portfolio-V1.0": 19,
       "Portfolio-V2.0": 8,
-      "Slotara": 100
+      "Slotara": 100,
+      "EL-STRIX": 175,
+      "C-GAMES-COLLECTION": 190,
+      "Finzo": 1080
     },
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 700,
-    "max_daily_contributions": 80,
-    "current_streak": 16,
-    "longest_streak": 16,
-    "yearly_contributions": 700
+    "total_contributions": 959,
+    "max_daily_contributions": 89,
+    "current_streak": 19,
+    "longest_streak": 19,
+    "yearly_contributions": 959
   },
   "loc": {
-    "total_lines": 682865
+    "total_lines": 734525
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 46816256,
-    "most_used_language": "HTML",
+    "total_bytes": 47325184,
+    "most_used_language": "PHP",
     "percentage_per_language": {
-      "HTML": 48.71,
-      "Dart": 21.63,
-      "JavaScript": 17.69,
-      "PHP": 4.98,
-      "C": 4.69,
+      "PHP": 42.6,
+      "Dart": 21.4,
+      "JavaScript": 17.5,
+      "HTML": 11.39,
+      "C": 4.81,
       "Python": 2.31
     },
     "language_ranking": [
       {
-        "language": "HTML",
-        "bytes": 22803456,
-        "percentage": 48.71
+        "language": "PHP",
+        "bytes": 20159488,
+        "percentage": 42.6
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 21.63
+        "percentage": 21.4
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 17.69
+        "percentage": 17.5
       },
       {
-        "language": "PHP",
-        "bytes": 2332672,
-        "percentage": 4.98
+        "language": "HTML",
+        "bytes": 5390336,
+        "percentage": 11.39
       },
       {
         "language": "C",
-        "bytes": 2193408,
-        "percentage": 4.69
+        "bytes": 2277376,
+        "percentage": 4.81
       },
       {
         "language": "Python",
-        "bytes": 1080320,
+        "bytes": 1091584,
         "percentage": 2.31
       }
     ]
@@ -182,11 +182,11 @@
     "least_active_repository": null
   },
   "releases": {
-    "total_releases": 4,
-    "latest_release": "v3.0.0",
+    "total_releases": 6,
+    "latest_release": "v5.0.1",
     "release_frequency": 0.0,
     "repository_release_count": {
-      "C-GAMES-COLLECTION": 4
+      "C-GAMES-COLLECTION": 6
     }
   },
   "issues": {
@@ -196,12 +196,19 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 80,
-    "open_pull_requests": 1,
-    "closed_pull_requests": 19,
-    "merged_pull_requests": 60
+    "total_pull_requests": 119,
+    "open_pull_requests": 0,
+    "closed_pull_requests": 18,
+    "merged_pull_requests": 101
   },
   "featured_projects": [
+    {
+      "name": "C-GAMES-COLLECTION",
+      "description": "Modern GTK4 game collection built in C with a polished desktop experience.",
+      "url": "https://github.com/EL-STRIX/C-GAMES-COLLECTION",
+      "language": "C",
+      "stars": "2"
+    },
     {
       "name": "Faculty-Subject-Allocation",
       "description": "Subject Allocation System Academic Year 2025 – 2026  | ",
@@ -210,10 +217,10 @@
       "stars": "2"
     },
     {
-      "name": "C-GAMES-COLLECTION",
-      "description": "Modern GTK4 game collection built in C with a polished desktop experience.",
-      "url": "https://github.com/EL-STRIX/C-GAMES-COLLECTION",
-      "language": "C",
+      "name": "Portfolio-V1.0",
+      "description": "Cyber-inspired developer portfolio showcasing projects, skills, experience, and GitHub activity with a responsive brutalist design.",
+      "url": "https://github.com/EL-STRIX/Portfolio-V1.0",
+      "language": "HTML",
       "stars": "1"
     },
     {
@@ -227,20 +234,13 @@
       "name": "Finzo",
       "description": "A digital online banking system.",
       "url": "https://github.com/EL-STRIX/Finzo",
-      "language": "HTML",
+      "language": "PHP",
       "stars": "0"
     },
     {
       "name": "LUMINA",
       "description": "Discover Your Next Great Read. Demo Project.",
       "url": "https://github.com/EL-STRIX/LUMINA",
-      "language": "HTML",
-      "stars": "0"
-    },
-    {
-      "name": "Portfolio-V1.0",
-      "description": "Cyber-inspired developer portfolio showcasing projects, skills, experience, and GitHub activity with a responsive brutalist design.",
-      "url": "https://github.com/EL-STRIX/Portfolio-V1.0",
       "language": "HTML",
       "stars": "0"
     }
@@ -589,15 +589,15 @@
       },
       {
         "date": "2026-07-26",
-        "commits": 278
+        "commits": 280
       },
       {
         "date": "2026-08-02",
-        "commits": 87
+        "commits": 227
       },
       {
         "date": "2026-08-09",
-        "commits": 0
+        "commits": 117
       },
       {
         "date": "2026-08-16",
@@ -689,8 +689,8 @@
   },
   "summary": {
     "repository_summary": "Creator of 8 repositories.",
-    "language_summary": "Primary language is HTML.",
+    "language_summary": "Primary language is PHP.",
     "activity_summary": "Most recently working on EL-STRIX.",
-    "community_summary": "Received 3 stars across all projects."
+    "community_summary": "Received 5 stars across all projects."
   }
 }
