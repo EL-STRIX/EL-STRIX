@@ -82,3 +82,19 @@ def test_load_json_with_string_path(tmp_path: Path) -> None:
     loaded_data = load_json(str(test_file))
 
     assert loaded_data == test_data
+
+def test_load_json_invalid_json(tmp_path: Path) -> None:
+    """Test loading a file with invalid JSON content raises JSONDecodeError."""
+    test_file = tmp_path / "invalid.json"
+    test_file.write_text('{"key": "value"', encoding="utf-8")
+
+    with pytest.raises(json.JSONDecodeError):
+        load_json(test_file)
+
+def test_load_json_empty_file(tmp_path: Path) -> None:
+    """Test loading an empty file raises JSONDecodeError."""
+    test_file = tmp_path / "empty.json"
+    test_file.write_text('', encoding="utf-8")
+
+    with pytest.raises(json.JSONDecodeError):
+        load_json(test_file)
