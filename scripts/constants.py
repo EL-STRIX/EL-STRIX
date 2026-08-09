@@ -16,6 +16,4 @@ DEFAULT_CACHE_TTL_SECONDS = 3600
 DEFAULT_REQUEST_TIMEOUT = 15
 
 # Configuration Files
-CONFIG_FILES = [
-    "profile.json"
-]
+CONFIG_FILES = ["profile.json"]

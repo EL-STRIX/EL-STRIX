@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 
 # Add scripts directory to path to allow importing modules
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../scripts')))
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 from utils.json_helpers import load_json, save_json
 
@@ -21,6 +21,7 @@ def test_save_json_basic(tmp_path: Path) -> None:
     assert test_file.exists()
     assert json.loads(test_file.read_text(encoding="utf-8")) == test_data
 
+
 def test_save_json_with_string_path(tmp_path: Path) -> None:
     """Test saving to a JSON file when providing a string path."""
     test_data = {"key": "value"}
@@ -31,6 +32,7 @@ def test_save_json_with_string_path(tmp_path: Path) -> None:
     assert test_file.exists()
     assert json.loads(test_file.read_text(encoding="utf-8")) == test_data
 
+
 def test_save_json_creates_directories(tmp_path: Path) -> None:
     """Test saving to a JSON file creates intermediate directories."""
     test_data = {"key": "value"}
@@ -40,6 +42,7 @@ def test_save_json_creates_directories(tmp_path: Path) -> None:
 
     assert test_file.exists()
     assert json.loads(test_file.read_text(encoding="utf-8")) == test_data
+
 
 def test_save_json_non_ascii(tmp_path: Path) -> None:
     """Test saving dictionary with non-ASCII characters."""
@@ -56,6 +59,7 @@ def test_save_json_non_ascii(tmp_path: Path) -> None:
     assert "🚀" in content
     assert "こんにちは" in content
 
+
 def test_load_json_existing(tmp_path: Path) -> None:
     """Test loading an existing valid JSON file."""
     test_file = tmp_path / "test.json"
@@ -66,6 +70,7 @@ def test_load_json_existing(tmp_path: Path) -> None:
 
     assert loaded_data == test_data
 
+
 def test_load_json_non_existing(tmp_path: Path) -> None:
     """Test loading a non-existing file returns an empty dictionary."""
     test_file = tmp_path / "non_existing.json"
@@ -73,6 +78,7 @@ def test_load_json_non_existing(tmp_path: Path) -> None:
     loaded_data = load_json(test_file)
 
     assert loaded_data == {}
+
 
 def test_load_json_with_string_path(tmp_path: Path) -> None:
     """Test loading from a JSON file when providing a string path."""
@@ -84,6 +90,7 @@ def test_load_json_with_string_path(tmp_path: Path) -> None:
 
     assert loaded_data == test_data
 
+
 def test_load_json_invalid_json(tmp_path: Path) -> None:
     """Test loading a file with invalid JSON content raises JSONDecodeError."""
     test_file = tmp_path / "invalid.json"
@@ -92,10 +99,11 @@ def test_load_json_invalid_json(tmp_path: Path) -> None:
     with pytest.raises(json.JSONDecodeError):
         load_json(test_file)
 
+
 def test_load_json_empty_file(tmp_path: Path) -> None:
     """Test loading an empty file raises JSONDecodeError."""
     test_file = tmp_path / "empty.json"
-    test_file.write_text('', encoding="utf-8")
+    test_file.write_text("", encoding="utf-8")
 
     with pytest.raises(json.JSONDecodeError):
         load_json(test_file)

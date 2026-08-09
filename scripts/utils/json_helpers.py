@@ -14,6 +14,7 @@ def save_json(data: Any, filepath: str | Path) -> None:
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+
 def load_json(filepath: str | Path) -> Any:
     """Load JSON file content safely."""
     path = Path(filepath)
