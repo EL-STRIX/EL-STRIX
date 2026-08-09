@@ -47,3 +47,83 @@ def test_cache_manager_empty_key(mocker, tmp_path):
 
     with pytest.raises(CacheError, match="Invalid cache key"):
         manager.set("", {"some": "data"})
+
+
+def test_cache_manager_set_and_get(mocker, tmp_path):
+    """Test that the cache manager can set and get a value."""
+    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+
+    manager = CacheManager()
+
+    # Set a value
+    manager.set("my_key", {"data": 123})
+
+    # Get the value
+    result = manager.get("my_key")
+    assert result == {"data": 123}
+
+
+def test_cache_manager_get_expired(mocker, tmp_path):
+    """Test that the cache manager returns None for an expired key."""
+    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+
+    # Mock time.time to control the timestamp
+    mock_time = mocker.patch("time.time")
+
+    # Set initial time
+    mock_time.return_value = 1000.0
+
+    manager = CacheManager(ttl_seconds=3600)
+
+    # Set a value
+    manager.set("my_key", "my_value")
+
+    # Advance time to just before expiration
+    mock_time.return_value = 1000.0 + 3600.0
+    assert manager.get("my_key") == "my_value"
+
+    # Advance time to just after expiration
+    mock_time.return_value = 1000.0 + 3600.1
+    assert manager.get("my_key") is None
+
+
+def test_cache_manager_get_file_not_found(mocker, tmp_path):
+    """Test that the cache manager returns None when the file doesn't exist."""
+    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+
+    manager = CacheManager()
+
+    # Get a missing key
+    result = manager.get("missing_key")
+    assert result is None
+
+
+def test_cache_manager_get_invalid_json(mocker, tmp_path):
+    """Test that the cache manager returns None when the cache file contains invalid JSON."""
+    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+
+    manager = CacheManager()
+
+    # Create a mock file with invalid JSON
+    key = "invalid_json_key"
+    filepath = manager._get_path(key)
+    with open(filepath, "w") as f:
+        f.write("{invalid_json:")
+
+    # Attempt to get the value
+    result = manager.get(key)
+    assert result is None
+
+
+def test_cache_manager_set_os_error(mocker, tmp_path):
+    """Test that the cache manager raises CacheError on OSError when setting a value."""
+    mocker.patch.object(PathManager, 'GENERATED_CACHE_DIR', tmp_path)
+
+    # Mock open to raise OSError
+    mocker.patch("builtins.open", side_effect=OSError("Permission denied"))
+
+    manager = CacheManager()
+
+    # Attempt to set a value
+    with pytest.raises(CacheError, match="Failed to write cache for my_key: Permission denied"):
+        manager.set("my_key", "value")
