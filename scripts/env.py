@@ -5,6 +5,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 from exceptions import EnvironmentError
+from logger import logger
 from paths import PathManager
 
 
@@ -45,10 +46,23 @@ class EnvManager:
             return True
         normalized = token.strip()
         placeholder_values = {
-            "", "****", "******", "null", "none", "<token>", "<gh_token>", "<github_token>",
-            "token", "TOKEN", "YOUR_TOKEN_HERE"
+            "",
+            "****",
+            "******",
+            "null",
+            "none",
+            "<token>",
+            "<gh_token>",
+            "<github_token>",
+            "token",
+            "TOKEN",
+            "YOUR_TOKEN_HERE",
         }
-        return normalized in placeholder_values or normalized.startswith("<") or normalized.endswith(">")
+        return (
+            normalized in placeholder_values
+            or normalized.startswith("<")
+            or normalized.endswith(">")
+        )
 
     @classmethod
     def get_github_token(cls) -> str:
@@ -58,7 +72,7 @@ class EnvManager:
         if cls._is_placeholder_token(token):
             raise EnvironmentError("GitHub token is missing. Please set GH_TOKEN or GITHUB_TOKEN.")
         return token
-        
+
     @classmethod
     def get_github_username(cls) -> str:
         """Get the GitHub username from environment or config fallback."""
@@ -66,10 +80,11 @@ class EnvManager:
         username = os.getenv("GITHUB_USERNAME") or os.getenv("GITHUB_REPOSITORY_OWNER")
         if username:
             return username
-        
+
         # Fallback: try to read from config/profile.json
         try:
             import json
+
             config_path = Path(__file__).resolve().parent.parent / "config" / "profile.json"
             if config_path.exists():
                 with open(config_path, "r", encoding="utf-8") as f:
@@ -77,7 +92,7 @@ class EnvManager:
                     uname = profile.get("username")
                     if uname:
                         return uname
-        except Exception:
-            pass
-        
+        except Exception as e:
+            logger.warning(f"Failed to read username from profile.json fallback: {e}")
+
         return "EL-STRIX"

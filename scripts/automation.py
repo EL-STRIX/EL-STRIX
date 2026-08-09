@@ -33,7 +33,7 @@ class AutomationEngine:
             "generated/json/issues.json",
             "generated/json/releases.json",
             "generated/json/activity.json",
-            "generated/stats/processed_statistics.json"
+            "generated/stats/processed_statistics.json",
         ]
 
     def _run_git(self, args: list[str]) -> tuple[bool, str]:
@@ -65,18 +65,18 @@ class AutomationEngine:
             file_path = PathManager.ROOT_DIR / file
             if file_path.exists():
                 self._run_git(["add", file])
-        
+
         # Check what is staged
         success, stdout = self._run_git(["diff", "--cached", "--name-only"])
         if success and stdout:
-            changed_files = [f for f in stdout.split('\n') if f]
-            
+            changed_files = [f for f in stdout.split("\n") if f]
+
         return changed_files
 
     def _generate_commit_message(self, changed_files: list[str]) -> str:
         """Generate a meaningful commit message based on changed files."""
         timestamp = datetime.now(UTC).strftime("%Y-%m-%d %H:%M:%S UTC")
-        
+
         updates = []
         if "README.md" in changed_files:
             updates.append("Regenerate README")
@@ -86,12 +86,12 @@ class AutomationEngine:
             updates.append("Update Avatar ASCII")
         if any("json" in f or "stats" in f for f in changed_files):
             updates.append("Refresh GitHub Statistics")
-        
+
         if updates:
             action = ", ".join(updates)
         else:
             action = "Automated Profile Refresh"
-            
+
         return f"chore: {action} [{timestamp}]"
 
     def _configure_git(self) -> None:
@@ -103,43 +103,43 @@ class AutomationEngine:
     def run(self) -> None:
         """Execute the automation pipeline."""
         logger.info("--- PHASE 07: FULL AUTOMATION ENGINE ---")
-        
+
         try:
             self._configure_git()
-            
+
             # Detect changes
             logger.info("Detecting file changes...")
             changed_files = self._detect_changes()
-            
+
             if not changed_files:
                 logger.info("No changes detected. Workflow finished successfully.")
                 logger.info("--- PHASE 07 COMPLETED ---")
                 return
 
             logger.info(f"Detected changes in: {', '.join(changed_files)}")
-            
+
             # Commit
             commit_message = self._generate_commit_message(changed_files)
             logger.info(f"Creating commit: {commit_message}")
             success, output = self._run_git(["commit", "-m", commit_message])
-            
+
             if not success:
                 logger.error(f"Failed to create commit: {output}")
                 raise ELSTRIXError(f"Git commit failed: {output}")
-                
+
             # Push
             logger.info("Pushing changes to remote repository...")
-            
+
             # In GitHub actions, we push to origin main
             success, output = self._run_git(["push", "origin", f"HEAD:{self.branch}"])
-            
+
             if not success:
                 logger.error(f"Failed to push changes: {output}")
                 raise ELSTRIXError(f"Git push failed: {output}")
-                
+
             logger.info("Successfully pushed changes.")
             logger.info("--- PHASE 07 COMPLETED ---")
-            
+
         except ELSTRIXError:
             raise
         except Exception as e:

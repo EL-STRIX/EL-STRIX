@@ -26,11 +26,10 @@ def select_featured(
     """
     if pinned:
         pinned_set = {name.lower() for name in pinned}
-        pinned_repos = [
-            r for r in repos if r.get("name", "").lower() in pinned_set
-        ]
+        pinned_repos = [r for r in repos if r.get("name", "").lower() in pinned_set]
         remaining = [
-            r for r in repos
+            r
+            for r in repos
             if r.get("name", "").lower() not in pinned_set and not r.get("fork", False)
         ]
         remaining.sort(key=lambda r: r.get("stargazers_count", 0), reverse=True)
@@ -55,11 +54,13 @@ def format_featured(repos: list[dict[str, Any]]) -> list[dict[str, str]]:
     """
     formatted: list[dict[str, str]] = []
     for repo in repos:
-        formatted.append({
-            "name": repo.get("name", ""),
-            "description": repo.get("description", "") or "No description provided.",
-            "url": repo.get("html_url", ""),
-            "language": repo.get("language", "N/A") or "N/A",
-            "stars": str(repo.get("stargazers_count", 0)),
-        })
+        formatted.append(
+            {
+                "name": repo.get("name", ""),
+                "description": repo.get("description", "") or "No description provided.",
+                "url": repo.get("html_url", ""),
+                "language": repo.get("language", "N/A") or "N/A",
+                "stars": str(repo.get("stargazers_count", 0)),
+            }
+        )
     return formatted

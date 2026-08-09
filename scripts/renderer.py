@@ -1,14 +1,13 @@
 """SVG Banner renderer module for EL-STRIX."""
 
-import json
 import os
-from datetime import UTC, datetime
 
 from config_loader import ConfigLoader
 from logger import logger
 from paths import PathManager
 from utils import ensure_dir
 from utils.json_helpers import load_json
+
 
 class SVGRenderer:
     """Complete SVG Profile Rendering Engine (Phase 05).
@@ -58,6 +57,7 @@ class SVGRenderer:
                 content = f.read()
 
             import re
+
             match = re.search(r'height="([0-9.]+)"', content)
             height = float(match.group(1)) if match else 0.0
 
@@ -66,11 +66,11 @@ class SVGRenderer:
             if start_idx == -1:
                 return "", height
 
-            end_idx = content.find('</g>', start_idx)
+            end_idx = content.find("</g>", start_idx)
             if end_idx == -1:
                 return "", height
 
-            return content[start_idx + len(start_tag):end_idx], height
+            return content[start_idx + len(start_tag) : end_idx], height
         except Exception as e:
             logger.error(f"Error reading ASCII SVG content: {e}")
             return "", 0.0
@@ -81,7 +81,7 @@ class SVGRenderer:
         y: int,
         font_size: int = 32,
         right_align_index: int = -1,
-        right_x: int = 0
+        right_x: int = 0,
     ) -> str:
         """Render a single line of terminal text with multiple colored spans."""
         svg = ""
@@ -91,8 +91,8 @@ class SVGRenderer:
             for text, color in left_parts:
                 esc = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 svg += f'<tspan fill="{color}">{esc}</tspan>'
-            svg += '</text>\n'
-            
+            svg += "</text>\n"
+
         if right_align_index != -1 and right_x > 0:
             right_parts = parts[right_align_index:]
             svg += f'<text x="{right_x}" y="{y}" text-anchor="end" xml:space="preserve" font-size="{font_size}">'
@@ -100,24 +100,22 @@ class SVGRenderer:
                 text = text.rstrip()
                 esc = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
                 svg += f'<tspan fill="{color}">{esc}</tspan>'
-            svg += '</text>\n'
-            
+            svg += "</text>\n"
+
         return svg
 
     @staticmethod
     def _dots(key: str, val: str, total: int = 50) -> str:
         """Return a dot-padded string that right-aligns val at column total."""
         n = total - len(key) - len(val) - 5
-        if n < 2:
-            n = 2
+        n = max(n, 2)
         return "." * n
 
     @staticmethod
     def _dashes(title: str, total: int = 50) -> str:
         """Return dashes to fill the rest of a section header line."""
         n = total - len(title)
-        if n < 0:
-            n = 0
+        n = max(n, 0)
         return "\u2500" * n
 
     def render(self) -> None:
@@ -155,10 +153,13 @@ class SVGRenderer:
 
             # ── Header ────────────────────────────────────────────
             header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
-            right_svg += self._render_line([
-                (header_text, text_main),
-                (self._dashes(header_text, 58), text_dim),
-            ], y)
+            right_svg += self._render_line(
+                [
+                    (header_text, text_main),
+                    (self._dashes(header_text, 58), text_dim),
+                ],
+                y,
+            )
             y += lh
 
             # ── Tech Stack ────────────────────────────────────────
@@ -167,38 +168,46 @@ class SVGRenderer:
                 key = item.get("name", "")
                 val = item.get("value", "")
                 dots = self._dots(key, val, 58)
-                right_svg += self._render_line([
-                    (". ", text_dim),
-                    (f"{key}: ", text_key),
-                    (f"{dots} ", text_dim),
-                    (val, text_main),
-                ], y)
+                right_svg += self._render_line(
+                    [
+                        (". ", text_dim),
+                        (f"{key}: ", text_key),
+                        (f"{dots} ", text_dim),
+                        (val, text_main),
+                    ],
+                    y,
+                )
                 y += lh
 
-
             # ── Contact ───────────────────────────────────────────
-            right_svg += self._render_line([
-                ("- Contact ", text_main),
-                (self._dashes("- Contact ", 58), text_dim),
-            ], y)
+            right_svg += self._render_line(
+                [
+                    ("- Contact ", text_main),
+                    (self._dashes("- Contact ", 58), text_dim),
+                ],
+                y,
+            )
             y += lh
 
             contacts = [
                 ("Portfolio", self.profile.get("portfolio", "")),
-                ("LinkedIn",  self.profile.get("linkedin", "")),
-                ("GitHub",    self.profile.get("username", "")),
-                ("Email",     self.profile.get("email", "")),
-                ("Location",  self.profile.get("location", "")),
+                ("LinkedIn", self.profile.get("linkedin", "")),
+                ("GitHub", self.profile.get("username", "")),
+                ("Email", self.profile.get("email", "")),
+                ("Location", self.profile.get("location", "")),
             ]
 
             for key, val in contacts:
                 dots = self._dots(key, val, 58)
-                right_svg += self._render_line([
-                    (". ", text_dim),
-                    (f"{key}: ", text_key),
-                    (f"{dots} ", text_dim),
-                    (val, text_main),
-                ], y)
+                right_svg += self._render_line(
+                    [
+                        (". ", text_dim),
+                        (f"{key}: ", text_key),
+                        (f"{dots} ", text_dim),
+                        (val, text_main),
+                    ],
+                    y,
+                )
                 y += lh
 
             # Ensure Y coordinate is safely below the left ASCII avatar before full width panels
@@ -206,10 +215,13 @@ class SVGRenderer:
 
             # ── Featured Projects ─────────────────────────────────
             stats_svg = ""
-            stats_svg += self._render_line([
-                ("- Featured Projects ", text_main),
-                (self._dashes("- Featured Projects ", 98), text_dim),
-            ], y)
+            stats_svg += self._render_line(
+                [
+                    ("- Featured Projects ", text_main),
+                    (self._dashes("- Featured Projects ", 98), text_dim),
+                ],
+                y,
+            )
             y += lh
 
             projects = self.profile.get("featured_projects", [])
@@ -217,20 +229,25 @@ class SVGRenderer:
                 name = proj.get("name", "")
                 status = proj.get("status", "")
                 dots = self._dots(name, status, 98)
-                stats_svg += self._render_line([
-                    (". ", text_dim),
-                    (f"{name}: ", text_key),
-                    (f"{dots} ", text_dim),
-                    (status, text_main),
-                ], y)
+                stats_svg += self._render_line(
+                    [
+                        (". ", text_dim),
+                        (f"{name}: ", text_key),
+                        (f"{dots} ", text_dim),
+                        (status, text_main),
+                    ],
+                    y,
+                )
                 y += lh
 
-
             # ── GitHub Stats ──────────────────────────────────────
-            stats_svg += self._render_line([
-                ("- GitHub Stats ", text_main),
-                (self._dashes("- GitHub Stats ", 98), text_dim),
-            ], y)
+            stats_svg += self._render_line(
+                [
+                    ("- GitHub Stats ", text_main),
+                    (self._dashes("- GitHub Stats ", 98), text_dim),
+                ],
+                y,
+            )
             y += lh
 
             repo_cnt = str(self.stats.get("repositories", {}).get("repository_count", 0))
@@ -239,63 +256,72 @@ class SVGRenderer:
             commits = str(self.stats.get("commits", {}).get("total_commits", 0))
             contributions = str(self.stats.get("contributions", {}).get("total_contributions", 0))
             prs = str(self.stats.get("pull_requests", {}).get("total_pull_requests", 0))
-            
+
             # Retrieve and format LOC dynamically
             loc_stats = self.stats.get("loc", {})
             total_loc = loc_stats.get("total_lines", 0)
-            
+
             loc = f"{total_loc:,}"
-            
+
             color_red = "#f85149" if mode == "dark" else "#cf222e"
 
             COL = 49
             d1 = max(25 - len(repo_cnt) - len(private_cnt), 2)
             d2 = max(33 - len(stars), 2)
-            
-            stats_svg += self._render_line([
-                (". ", text_dim),
-                ("Repos: ", text_key),
-                ("." * d1 + " ", text_dim),
-                (f"{repo_cnt} ", text_main),
-                (f"{{Private: {private_cnt}}} ", text_key),
-                ("| ", text_dim),
-                ("Stars Earned: ", text_key),
-                ("." * d2 + " ", text_dim),
-                (stars, text_main),
-            ], y)
+
+            stats_svg += self._render_line(
+                [
+                    (". ", text_dim),
+                    ("Repos: ", text_key),
+                    ("." * d1 + " ", text_dim),
+                    (f"{repo_cnt} ", text_main),
+                    (f"{{Private: {private_cnt}}} ", text_key),
+                    ("| ", text_dim),
+                    ("Stars Earned: ", text_key),
+                    ("." * d2 + " ", text_dim),
+                    (stars, text_main),
+                ],
+                y,
+            )
             y += lh
 
             d1 = max(17 - len(commits) - len(contributions), 2)
             d2 = max(32 - len(prs), 2)
-            stats_svg += self._render_line([
-                (". ", text_dim),
-                ("Commits: ", text_key),
-                ("." * d1 + " ", text_dim),
-                (f"{commits} ", text_main),
-                (f"{{Contributions: {contributions}}} ", text_key),
-                ("| ", text_dim),
-                ("Pull Requests: ", text_key),
-                ("." * d2 + " ", text_dim),
-                (prs, text_main),
-            ], y)
+            stats_svg += self._render_line(
+                [
+                    (". ", text_dim),
+                    ("Commits: ", text_key),
+                    ("." * d1 + " ", text_dim),
+                    (f"{commits} ", text_main),
+                    (f"{{Contributions: {contributions}}} ", text_key),
+                    ("| ", text_dim),
+                    ("Pull Requests: ", text_key),
+                    ("." * d2 + " ", text_dim),
+                    (prs, text_main),
+                ],
+                y,
+            )
             y += lh
-            
+
             current_streak = str(self.stats.get("contributions", {}).get("current_streak", 0))
             longest_streak = str(self.stats.get("contributions", {}).get("longest_streak", 0))
-            
+
             d3 = max(16 - len(current_streak) - len(longest_streak), 2)
             d4 = max(32 - len(loc), 2)
-            stats_svg += self._render_line([
-                (". ", text_dim),
-                ("Current Streak: ", text_key),
-                ("." * d3 + " ", text_dim),
-                (f"{current_streak} ", text_main),
-                (f"{{Longest: {longest_streak}}} ", text_key),
-                ("| ", text_dim),
-                ("Lines of Code: ", text_key),
-                ("." * d4 + " ", text_dim),
-                (loc, text_main),
-            ], y)
+            stats_svg += self._render_line(
+                [
+                    (". ", text_dim),
+                    ("Current Streak: ", text_key),
+                    ("." * d3 + " ", text_dim),
+                    (f"{current_streak} ", text_main),
+                    (f"{{Longest: {longest_streak}}} ", text_key),
+                    ("| ", text_dim),
+                    ("Lines of Code: ", text_key),
+                    ("." * d4 + " ", text_dim),
+                    (loc, text_main),
+                ],
+                y,
+            )
             y += lh
 
             # (Removed footer)
