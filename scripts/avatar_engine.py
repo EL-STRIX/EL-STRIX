@@ -15,9 +15,6 @@ from logger import logger
 from paths import PathManager
 from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageStat
 
-class AvatarProcessingError(ELSTRIXError):
-    """Exception raised for errors in the Avatar Processing Engine."""
-
 class ImageValidator:
     """Validates the downloaded avatar image."""
     
