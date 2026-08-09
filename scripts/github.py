@@ -64,8 +64,8 @@ class GitHubClient:
         try:
             response.raise_for_status()
         except requests.HTTPError as e:
-            logger.error(f"HTTP Error: {response.status_code} - {response.text}")
-            raise GitHubAPIError(f"GitHub API Error: {response.status_code} - {response.text}") from e
+            logger.error(f"HTTP Error: {response.status_code} - {response.reason}")
+            raise GitHubAPIError(f"GitHub API Error: {response.status_code} - {response.reason}") from e
             
         if not response.content:
             return None
