@@ -1,14 +1,16 @@
 """Unit tests for GitHub API Client."""
 
-import sys
 import os
+import sys
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import patch, MagicMock
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
-from github import GitHubClient
 from exceptions import GitHubAPIError
+from github import GitHubClient
+
 
 @patch("github.EnvManager.get_github_token", return_value="fake_token")
 def test_github_client_init(mock_token):

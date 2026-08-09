@@ -188,8 +188,8 @@ class GitHubClient:
     def graphql_request(self, query: str, variables: dict | None = None, use_cache: bool = True) -> dict[str, Any]:
 
         """Execute a GraphQL API query with caching and retries."""
-        query_hash = hashlib.md5(query.encode('utf-8')).hexdigest()
-        var_hash = hashlib.md5(str(variables).encode('utf-8')).hexdigest()
+        query_hash = hashlib.sha256(query.encode('utf-8')).hexdigest()
+        var_hash = hashlib.sha256(str(variables).encode('utf-8')).hexdigest()
         cache_key = f"graphql_{query_hash}_{var_hash}"
         if use_cache:
             cached = self.cache.get(cache_key)

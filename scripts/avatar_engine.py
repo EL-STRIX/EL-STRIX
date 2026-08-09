@@ -10,10 +10,10 @@ from pathlib import Path
 from typing import Any, cast
 
 from config_loader import ConfigLoader
-from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
 from PIL import Image, ImageFilter, ImageOps, ImageStat
+
 
 class ImageValidator:
     """Validates the downloaded avatar image."""
@@ -278,12 +278,12 @@ class AvatarPipeline:
         self.svg_renderer = AvatarSvgRenderer(self.theme, self.settings)
         
     def _get_image_hash(self, image_path: Path) -> str:
-        """Calculate MD5 hash of the image for caching purposes."""
-        hash_md5 = hashlib.md5()
+        """Calculate SHA256 hash of the image for caching purposes."""
+        hash_sha256 = hashlib.sha256()
         with open(image_path, "rb") as f:
             for chunk in iter(lambda: f.read(4096), b""):
-                hash_md5.update(chunk)
-        return hash_md5.hexdigest()
+                hash_sha256.update(chunk)
+        return hash_sha256.hexdigest()
 
     def run(self) -> None:
         """Execute the full avatar pipeline."""
