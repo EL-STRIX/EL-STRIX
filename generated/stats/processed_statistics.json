@@ -4,7 +4,7 @@
     "total_followers": 8,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 507,
+    "days_since_account_creation": 508,
     "account_age_years": 1.39
   },
   "repositories": {
@@ -122,7 +122,7 @@
   "contributions": {
     "total_contributions": 959,
     "max_daily_contributions": 89,
-    "current_streak": 19,
+    "current_streak": 0,
     "longest_streak": 19,
     "yearly_contributions": 959
   },
