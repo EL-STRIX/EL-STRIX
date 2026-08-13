@@ -134,6 +134,18 @@ class AutomationEngine:
             success, output = self._run_git(["push", "origin", f"HEAD:{self.branch}"])
 
             if not success:
+                if "rejected" in output or "fetch first" in output or "non-fast-forward" in output:
+                    logger.warning("Remote contains newer changes. Attempting to pull and rebase...")
+                    rebase_success, rebase_out = self._run_git(["pull", "--rebase", "-X", "theirs", "origin", self.branch])
+                    if not rebase_success:
+                        logger.error(f"Failed to rebase: {rebase_out}")
+                        self._run_git(["rebase", "--abort"])
+                        raise ELSTRIXError(f"Git pull rebase failed: {rebase_out}")
+                    
+                    logger.info("Rebase successful. Retrying push...")
+                    success, output = self._run_git(["push", "origin", f"HEAD:{self.branch}"])
+
+            if not success:
                 logger.error(f"Failed to push changes: {output}")
                 raise ELSTRIXError(f"Git push failed: {output}")
 
