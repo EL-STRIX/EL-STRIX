@@ -95,16 +95,15 @@ class AutomationEngine:
         return f"chore: {action} [{timestamp}]"
 
     def _configure_git(self) -> None:
-        """Configure git user if running in CI."""
-        if os.environ.get("GITHUB_ACTIONS") == "true":
-            from config_loader import ConfigLoader
-            configs = ConfigLoader.load_all()
-            profile = configs.get("profile", {})
-            name = profile.get("name", "EL-STRIX")
-            email = profile.get("email", "sujaypaul892@gmail.com")
-            
-            self._run_git(["config", "user.name", name])
-            self._run_git(["config", "user.email", email])
+        """Configure git user if running in CI or locally."""
+        from config_loader import ConfigLoader
+        configs = ConfigLoader.load_all()
+        profile = configs.get("profile", {})
+        name = profile.get("name", "EL-STRIX")
+        email = profile.get("email", "sujaypaul892@gmail.com")
+        
+        self._run_git(["config", "user.name", name])
+        self._run_git(["config", "user.email", email])
 
     def run(self) -> None:
         """Execute the automation pipeline."""
