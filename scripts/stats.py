@@ -460,7 +460,7 @@ class StatisticsEngine:
             # but we can scale closed_issues to match the new total if we assume the fetched ones are a representative sample.
             # However, since we sorted by updated_desc, open issues are usually active/recent and fully fetched.
             # We will just pad closed_issues.
-            closed_issues = total_issues - open_issues
+            closed_issues = max(0, total_issues - open_issues)
 
         ratio = round((closed_issues / total_issues) * 100, 2) if total_issues > 0 else 0.0
 

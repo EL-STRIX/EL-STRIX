@@ -232,6 +232,10 @@ class AvatarSvgRenderer:
 
     def render(self, matrix: list[list[str]], mode: str, output_path: Path) -> bool:
         """Render matrix to SVG based on light or dark mode theme colors."""
+        if not matrix or not matrix[0]:
+            logger.warning("ASCII matrix is empty. Skipping SVG render.")
+            return False
+
         colors = self.theme.get(mode, {})
         # Optimize contrast for GitHub themes
         bg_color = colors.get("background", "#0d1117" if mode == "dark" else "#ffffff")

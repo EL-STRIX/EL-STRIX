@@ -52,7 +52,7 @@ class AutomationEngine:
             # We don't want to log error here for things like git diff which might return non-zero
             # Actually git diff returns 0 if no changes, 1 if changes (with --exit-code).
             # If we don't use --exit-code, it returns 0.
-            return False, e.stderr.strip()
+            return False, e.stderr.strip() if e.stderr else ""
         except FileNotFoundError:
             raise ELSTRIXError("Git is not installed or not found in system path.")
 

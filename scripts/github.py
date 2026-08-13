@@ -48,8 +48,11 @@ class GitHubClient:
     def _handle_response(self, response: requests.Response) -> Any:
         """Handle response status codes and rate limiting."""
         # Check rate limits first
-        remaining = int(response.headers.get("X-RateLimit-Remaining", 1))
-        reset = int(response.headers.get("X-RateLimit-Reset", 0))
+        try:
+            remaining = int(response.headers.get("X-RateLimit-Remaining", 1))
+            reset = int(response.headers.get("X-RateLimit-Reset", 0))
+        except ValueError:
+            remaining, reset = 1, 0
 
         if response.status_code == 403 and remaining == 0:
             self._wait_for_rate_limit(reset)
@@ -125,7 +128,8 @@ class GitHubClient:
         else:
             url = endpoint
 
-        cache_key = f"rest_{method}_{endpoint.replace('/', '_')}_{params!s}"
+        params_str = str(sorted(params.items())) if params else "None"
+        cache_key = f"rest_{method}_{endpoint.replace('/', '_')}_{params_str}"
         if use_cache and method.upper() == "GET":
             cached = self.cache.get(cache_key)
             if cached is not None:
@@ -258,17 +262,17 @@ class GitHubClient:
             downloaded_size = 0
             max_size = 5 * 1024 * 1024  # 5 MB limit
 
-            with open(save_path, "wb") as f:
-                for chunk in response.iter_content(chunk_size=8192):
-                    downloaded_size += len(chunk)
-                    if downloaded_size > max_size:
-                        f.close()
-                        if save_path.exists():
-                            save_path.unlink()
-                        raise GitHubAPIError(
-                            f"Avatar file exceeds maximum allowed size ({max_size} bytes)"
-                        )
-                    f.write(chunk)
+            try:
+                with open(save_path, "wb") as f:
+                    for chunk in response.iter_content(chunk_size=8192):
+                        downloaded_size += len(chunk)
+                        if downloaded_size > max_size:
+                            raise ValueError(f"Avatar file exceeds maximum allowed size ({max_size} bytes)")
+                        f.write(chunk)
+            except ValueError as e:
+                if save_path.exists():
+                    save_path.unlink()
+                raise GitHubAPIError(str(e))
 
             logger.info("Avatar downloaded successfully.")
             return save_path

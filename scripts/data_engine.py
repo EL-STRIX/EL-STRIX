@@ -68,6 +68,11 @@ class DataEngine:
 
     def download_avatar(self, avatar_url: str) -> None:
         """Download the user's avatar."""
+        import os
+        avatar_path = PathManager.ASSET_IMAGE_DIR / "avatar.png"
+        if os.environ.get("GITHUB_ACTIONS") != "true" and avatar_path.exists():
+            logger.info("Avatar already exists locally. Skipping download.")
+            return
         self.client.download_avatar(avatar_url)
 
     def fetch_repositories(self) -> None:
