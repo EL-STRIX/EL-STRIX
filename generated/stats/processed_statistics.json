@@ -1,16 +1,16 @@
 {
   "profile": {
-    "total_public_repositories": 6,
-    "total_followers": 8,
+    "total_public_repositories": 5,
+    "total_followers": 7,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 509,
-    "account_age_years": 1.39
+    "days_since_account_creation": 510,
+    "account_age_years": 1.4
   },
   "repositories": {
     "repository_count": 8,
-    "public_repository_count": 6,
-    "private_repository_count": 2,
+    "public_repository_count": 5,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 8,
@@ -18,18 +18,18 @@
     "repository_growth": 8
   },
   "stars": {
-    "total_stars": 5,
-    "average_stars": 0.62,
-    "most_starred_repository": "C-GAMES-COLLECTION",
+    "total_stars": 4,
+    "average_stars": 0.5,
+    "most_starred_repository": "Faculty-Subject-Allocation",
     "least_starred_repository": "Slotara",
     "star_ranking": [
       {
-        "repository": "C-GAMES-COLLECTION",
+        "repository": "Faculty-Subject-Allocation",
         "stars": 2
       },
       {
-        "repository": "Faculty-Subject-Allocation",
-        "stars": 2
+        "repository": "C-GAMES-COLLECTION",
+        "stars": 1
       },
       {
         "repository": "Portfolio-V1.0",
@@ -104,73 +104,73 @@
     ]
   },
   "commits": {
-    "total_commits": 827,
+    "total_commits": 851,
     "recent_commits": 0,
     "commit_frequency": 0.0,
     "commits_per_repository": {
-      "LUMINA": 25,
-      "Portfolio-V1.0": 19,
-      "C-GAMES-COLLECTION": 190,
-      "Portfolio-V2.0": 8,
-      "EL-STRIX": 175,
       "Faculty-Subject-Allocation": 25,
       "Finzo": 1080,
+      "C-GAMES-COLLECTION": 190,
+      "LUMINA": 25,
+      "EL-STRIX": 175,
+      "Portfolio-V2.0": 8,
+      "Portfolio-V1.0": 19,
       "Slotara": 100
     },
     "commit_timeline": []
   },
   "contributions": {
-    "total_contributions": 959,
+    "total_contributions": 961,
     "max_daily_contributions": 89,
     "current_streak": 0,
-    "longest_streak": 19,
-    "yearly_contributions": 959
+    "longest_streak": 20,
+    "yearly_contributions": 961
   },
   "loc": {
     "total_lines": 734525
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 47325184,
+    "total_bytes": 47236096,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 42.6,
-      "Dart": 21.4,
-      "JavaScript": 17.5,
-      "HTML": 11.39,
-      "C": 4.81,
-      "Python": 2.31
+      "PHP": 42.71,
+      "Dart": 21.44,
+      "JavaScript": 17.53,
+      "HTML": 11.41,
+      "C": 4.82,
+      "Python": 2.09
     },
     "language_ranking": [
       {
         "language": "PHP",
-        "bytes": 20159488,
-        "percentage": 42.6
+        "bytes": 20175872,
+        "percentage": 42.71
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 21.4
+        "percentage": 21.44
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 17.5
+        "percentage": 17.53
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 11.39
+        "percentage": 11.41
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 4.81
+        "percentage": 4.82
       },
       {
         "language": "Python",
-        "bytes": 1091584,
-        "percentage": 2.31
+        "bytes": 986112,
+        "percentage": 2.09
       }
     ]
   },
@@ -196,25 +196,25 @@
     "issue_ratio": 0.0
   },
   "pull_requests": {
-    "total_pull_requests": 119,
-    "open_pull_requests": 0,
+    "total_pull_requests": 121,
+    "open_pull_requests": 2,
     "closed_pull_requests": 18,
     "merged_pull_requests": 101
   },
   "featured_projects": [
-    {
-      "name": "C-GAMES-COLLECTION",
-      "description": "Modern GTK4 game collection built in C with a polished desktop experience.",
-      "url": "https://github.com/EL-STRIX/C-GAMES-COLLECTION",
-      "language": "C",
-      "stars": "2"
-    },
     {
       "name": "Faculty-Subject-Allocation",
       "description": "Subject Allocation System Academic Year 2025 – 2026  | ",
       "url": "https://github.com/EL-STRIX/Faculty-Subject-Allocation",
       "language": "PHP",
       "stars": "2"
+    },
+    {
+      "name": "C-GAMES-COLLECTION",
+      "description": "Modern GTK4 game collection built in C with a polished desktop experience.",
+      "url": "https://github.com/EL-STRIX/C-GAMES-COLLECTION",
+      "language": "C",
+      "stars": "1"
     },
     {
       "name": "Portfolio-V1.0",
@@ -597,7 +597,7 @@
       },
       {
         "date": "2026-08-09",
-        "commits": 117
+        "commits": 119
       },
       {
         "date": "2026-08-16",
@@ -691,6 +691,6 @@
     "repository_summary": "Creator of 8 repositories.",
     "language_summary": "Primary language is PHP.",
     "activity_summary": "Most recently working on EL-STRIX.",
-    "community_summary": "Received 5 stars across all projects."
+    "community_summary": "Received 4 stars across all projects."
   }
 }
