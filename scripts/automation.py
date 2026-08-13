@@ -100,8 +100,8 @@ class AutomationEngine:
             from config_loader import ConfigLoader
             configs = ConfigLoader.load_all()
             profile = configs.get("profile", {})
-            name = profile.get("name", "EL-STRIX Bot")
-            email = profile.get("email", "el-strix-bot@users.noreply.github.com")
+            name = profile.get("name", "EL-STRIX")
+            email = profile.get("email", "sujaypaul892@gmail.com")
             
             self._run_git(["config", "user.name", name])
             self._run_git(["config", "user.email", email])
