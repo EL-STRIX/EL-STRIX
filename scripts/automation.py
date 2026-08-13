@@ -97,8 +97,14 @@ class AutomationEngine:
     def _configure_git(self) -> None:
         """Configure git user if running in CI."""
         if os.environ.get("GITHUB_ACTIONS") == "true":
-            self._run_git(["config", "user.name", "EL-STRIX Bot"])
-            self._run_git(["config", "user.email", "el-strix-bot@users.noreply.github.com"])
+            from config_loader import ConfigLoader
+            configs = ConfigLoader.load_all()
+            profile = configs.get("profile", {})
+            name = profile.get("name", "EL-STRIX Bot")
+            email = profile.get("email", "el-strix-bot@users.noreply.github.com")
+            
+            self._run_git(["config", "user.name", name])
+            self._run_git(["config", "user.email", email])
 
     def run(self) -> None:
         """Execute the automation pipeline."""
