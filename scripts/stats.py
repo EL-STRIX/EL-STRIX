@@ -373,11 +373,17 @@ class StatisticsEngine:
 
         longest_streak = max(longest_streak, current_streak)
 
-        # Total contributions: sum unique days up to today + restricted private contributions
-        total_contributions = sum(
+        # Total contributions: use the GitHub API's authoritative calendar total.
+        # contributionCalendar.totalContributions already reflects the real number
+        # shown on the GitHub contribution graph (including private contributions
+        # when private activity sharing is enabled).
+        # Do NOT add restrictedContributionsCount on top — that causes double-counting.
+        api_calendar_total = calendar.get("totalContributions", 0)
+        public_sum = sum(
             count for d_str, count in unique_days.items()
             if d_str <= today_str
-        ) + self.contrib_data.get("restrictedContributionsCount", 0)
+        )
+        total_contributions = api_calendar_total if api_calendar_total > 0 else public_sum
 
         return {
             "total_contributions": total_contributions,
