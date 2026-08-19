@@ -1,6 +1,6 @@
 """GitHub Statistics Engine for EL-STRIX."""
 
-from datetime import UTC, datetime, timedelta
+from datetime import UTC, datetime, timedelta, timezone
 from typing import Any
 
 from logger import logger
@@ -287,7 +287,13 @@ class StatisticsEngine:
         }
 
     def _calculate_contribution_stats(self) -> dict[str, Any]:
-        """Calculate generalized contribution stats including streaks."""
+        """Calculate generalized contribution stats including streaks.
+
+        GitHub's contribution calendar assigns dates in the user's account timezone (IST, UTC+5:30).
+        We must use IST as 'today' so the streak matches what GitHub's graph shows.
+        At IST midnight (e.g., 00:45 IST = 19:15 UTC prev day), the UTC date is still yesterday —
+        using UTC would miss the current IST day and undercount the streak by 1.
+        """
         calendar = self.contrib_data.get("contributionCalendar", {})
         weeks = calendar.get("weeks", [])
 
@@ -308,13 +314,17 @@ class StatisticsEngine:
                 "yearly_contributions": 0,
             }
 
-        # Determine effective today (aligned with GitHub UTC timeline, allowing forward active dates)
-        github_today = datetime.now(UTC).date()
+        # Use IST (UTC+5:30) — GitHub assigns contribution dates in the user's local timezone.
+        # At IST midnight, UTC is still the previous day, so UTC-based 'today' misses IST today.
+        IST = timezone(timedelta(hours=5, minutes=30))
+        ist_today = datetime.now(IST).date()
+
+        # Allow forward active dates if the API returned a future date (edge case)
         active_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d, c in unique_days.items() if c > 0]
-        if active_dates and max(active_dates) > github_today:
+        if active_dates and max(active_dates) > ist_today:
             today = max(active_dates)
         else:
-            today = github_today
+            today = ist_today
 
         all_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d in unique_days.keys()]
         start_date = min(all_dates)
@@ -342,9 +352,9 @@ class StatisticsEngine:
             curr += timedelta(days=1)
 
         # Calculate current streak:
-        # 1. If today has contributions, streak is active ending today.
-        # 2. If today has 0 contributions, but yesterday had contributions, the streak is still active up through yesterday.
-        # 3. If both today and yesterday have 0 contributions, streak is 0.
+        # 1. If IST today has contributions → streak is active ending today.
+        # 2. If IST today has 0 contributions but IST yesterday did → streak still active up through yesterday.
+        # 3. If both IST today and IST yesterday have 0 → streak is 0.
         today_str = today.strftime("%Y-%m-%d")
         yesterday_str = (today - timedelta(days=1)).strftime("%Y-%m-%d")
 
