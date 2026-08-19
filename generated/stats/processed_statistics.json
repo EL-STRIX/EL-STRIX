@@ -108,14 +108,14 @@
     "recent_commits": 679,
     "commit_frequency": 22.63,
     "commits_per_repository": {
-      "Faculty-Subject-Allocation": 25,
-      "LUMINA": 25,
-      "Slotara": 100,
-      "Portfolio-V1.0": 19,
-      "Portfolio-V2.0": 8,
       "EL-STRIX": 192,
       "C-GAMES-COLLECTION": 190,
-      "Finzo": 1080
+      "Faculty-Subject-Allocation": 25,
+      "Finzo": 1080,
+      "LUMINA": 25,
+      "Portfolio-V1.0": 19,
+      "Slotara": 100,
+      "Portfolio-V2.0": 8
     },
     "commit_timeline": [
       {
@@ -245,11 +245,11 @@
     ]
   },
   "contributions": {
-    "total_contributions": 1303,
+    "total_contributions": 979,
     "max_daily_contributions": 90,
     "current_streak": 7,
     "longest_streak": 20,
-    "yearly_contributions": 1303
+    "yearly_contributions": 979
   },
   "loc": {
     "total_lines": 744772
