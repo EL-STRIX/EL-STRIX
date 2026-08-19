@@ -245,11 +245,11 @@
     ]
   },
   "contributions": {
-    "total_contributions": 979,
+    "total_contributions": 1303,
     "max_daily_contributions": 90,
     "current_streak": 7,
     "longest_streak": 20,
-    "yearly_contributions": 979
+    "yearly_contributions": 1303
   },
   "loc": {
     "total_lines": 744772
