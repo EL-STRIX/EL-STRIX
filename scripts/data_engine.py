@@ -57,7 +57,7 @@ class DataEngine:
 
         # If the token belongs to a bot (e.g. GitHub Actions default token) or another user,
         # fallback to the target username's public profile to avoid breaking all stats.
-        if profile.get("login") != self.username:
+        if (profile.get("login") or "").lower() != self.username.lower():
             logger.info(
                 f"Authenticated as {profile.get('login')}, falling back to public profile for {self.username}"
             )
@@ -80,7 +80,7 @@ class DataEngine:
         logger.info("Fetching repositories...")
         # Check authentication identity
         auth_user = self.client.rest_request("GET", "/user")
-        if auth_user.get("login") == self.username:
+        if (auth_user.get("login") or "").lower() == self.username.lower():
             endpoint = "/user/repos?type=owner&per_page=100"
         else:
             logger.info(
@@ -132,15 +132,8 @@ class DataEngine:
         unified_contribs["github_today"] = datetime.now(UTC).strftime("%Y-%m-%d")
 
         for year in range(start_year, current_year + 1):
-            # Calculate GitHub UI week bounds (Sunday to Saturday) to match the yearly totals exactly
-            start_date = datetime(year, 1, 1)
-            start_date = start_date - timedelta(days=(start_date.weekday() + 1) % 7)
-
-            end_date = datetime(year, 12, 31)
-            end_date = end_date + timedelta(days=(5 - end_date.weekday()) % 7)
-
-            from_date = start_date.strftime("%Y-%m-%dT00:00:00Z")
-            to_date = end_date.strftime("%Y-%m-%dT23:59:59Z")
+            from_date = f"{year}-01-01T00:00:00Z"
+            to_date = f"{year}-12-31T23:59:59Z"
 
             query = """
             query($username: String!, $from: DateTime!, $to: DateTime!) {
@@ -355,7 +348,7 @@ class DataEngine:
         """Extract the current user's LOC stats from contributor stats."""
         for contributor in stats:
             author = contributor.get("author") or {}
-            if author.get("login") == self.username:
+            if (author.get("login") or "").lower() == self.username.lower():
                 weeks = contributor.get("weeks", [])
                 total_lines = sum(w.get("a", 0) for w in weeks)
                 return {

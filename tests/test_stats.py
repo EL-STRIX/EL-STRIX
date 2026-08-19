@@ -87,3 +87,194 @@ def test_calculate_language_stats(mock_engine):
     stats = mock_engine._calculate_language_stats()
     assert stats["languages_used"] == 2
     assert stats["most_used_language"] == "JavaScript"  # repo3 (2048 * 1024) > repo1 (1024 * 1024)
+
+
+def test_calculate_contribution_stats_active_today(mock_engine):
+    from datetime import UTC, datetime, timedelta
+
+    today = datetime.now(UTC).date()
+    yesterday = today - timedelta(days=1)
+    day_before = today - timedelta(days=2)
+
+    mock_engine.contrib_data = {
+        "totalCommitContributions": 10,
+        "restrictedContributionsCount": 2,
+        "contributionCalendar": {
+            "weeks": [
+                {
+                    "contributionDays": [
+                        {"date": day_before.strftime("%Y-%m-%d"), "contributionCount": 3},
+                        {"date": yesterday.strftime("%Y-%m-%d"), "contributionCount": 2},
+                        {"date": today.strftime("%Y-%m-%d"), "contributionCount": 1},
+                    ]
+                }
+            ]
+        },
+    }
+
+    stats = mock_engine._calculate_contribution_stats()
+    assert stats["current_streak"] == 3
+    assert stats["longest_streak"] == 3
+    assert stats["max_daily_contributions"] == 3
+    assert stats["total_contributions"] == 6 + 2  # 6 public + 2 restricted
+
+
+def test_calculate_contribution_stats_active_yesterday(mock_engine):
+    from datetime import UTC, datetime, timedelta
+
+    today = datetime.now(UTC).date()
+    yesterday = today - timedelta(days=1)
+    day_before = today - timedelta(days=2)
+    gap_day = today - timedelta(days=3)
+
+    mock_engine.contrib_data = {
+        "totalCommitContributions": 5,
+        "restrictedContributionsCount": 0,
+        "contributionCalendar": {
+            "weeks": [
+                {
+                    "contributionDays": [
+                        {"date": gap_day.strftime("%Y-%m-%d"), "contributionCount": 0},
+                        {"date": day_before.strftime("%Y-%m-%d"), "contributionCount": 4},
+                        {"date": yesterday.strftime("%Y-%m-%d"), "contributionCount": 1},
+                        {"date": today.strftime("%Y-%m-%d"), "contributionCount": 0},
+                    ]
+                }
+            ]
+        },
+    }
+
+    stats = mock_engine._calculate_contribution_stats()
+    # Streak should be 2 because yesterday and day_before had contributions, even if today is 0 so far
+    assert stats["current_streak"] == 2
+    assert stats["longest_streak"] == 2
+
+
+def test_calculate_contribution_stats_broken_streak(mock_engine):
+    from datetime import UTC, datetime, timedelta
+
+    today = datetime.now(UTC).date()
+    yesterday = today - timedelta(days=1)
+    day_before = today - timedelta(days=2)
+
+    mock_engine.contrib_data = {
+        "totalCommitContributions": 5,
+        "restrictedContributionsCount": 0,
+        "contributionCalendar": {
+            "weeks": [
+                {
+                    "contributionDays": [
+                        {"date": day_before.strftime("%Y-%m-%d"), "contributionCount": 5},
+                        {"date": yesterday.strftime("%Y-%m-%d"), "contributionCount": 0},
+                        {"date": today.strftime("%Y-%m-%d"), "contributionCount": 0},
+                    ]
+                }
+            ]
+        },
+    }
+
+    stats = mock_engine._calculate_contribution_stats()
+    assert stats["current_streak"] == 0
+    assert stats["longest_streak"] == 1
+
+
+def test_calculate_commit_stats_timeline(mock_engine):
+    from datetime import UTC, datetime, timedelta
+
+    today = datetime.now(UTC).date()
+    yesterday = today - timedelta(days=1)
+
+    mock_engine.contrib_data = {
+        "totalCommitContributions": 100,
+        "restrictedContributionsCount": 0,
+        "contributionCalendar": {
+            "weeks": [
+                {
+                    "contributionDays": [
+                        {"date": yesterday.strftime("%Y-%m-%d"), "contributionCount": 5},
+                        {"date": today.strftime("%Y-%m-%d"), "contributionCount": 3},
+                    ]
+                }
+            ]
+        },
+    }
+    mock_engine.loc_data = {"repo1": {"total_commits": 50}}
+
+    stats = mock_engine._calculate_commit_stats()
+    assert stats["total_commits"] == 100
+    assert stats["recent_commits"] == 8
+    assert len(stats["commit_timeline"]) == 31  # 30 days ago to today inclusive
+    assert stats["commits_per_repository"] == {"repo1": 50}
+
+
+def test_calculate_contribution_stats_forward_active_date(mock_engine):
+    from datetime import UTC, datetime, timedelta
+
+    today = datetime.now(UTC).date()
+    tomorrow = today + timedelta(days=1)
+
+    mock_engine.contrib_data = {
+        "totalCommitContributions": 10,
+        "restrictedContributionsCount": 0,
+        "contributionCalendar": {
+            "weeks": [
+                {
+                    "contributionDays": [
+                        {"date": today.strftime("%Y-%m-%d"), "contributionCount": 2},
+                        {"date": tomorrow.strftime("%Y-%m-%d"), "contributionCount": 1},
+                    ]
+                }
+            ]
+        },
+    }
+
+    stats = mock_engine._calculate_contribution_stats()
+    assert stats["current_streak"] == 2
+    assert stats["longest_streak"] == 2
+
+
+def test_calculate_contribution_stats_year_boundary(mock_engine):
+    mock_engine.contrib_data = {
+        "totalCommitContributions": 4,
+        "restrictedContributionsCount": 0,
+        "contributionCalendar": {
+            "weeks": [
+                {
+                    "contributionDays": [
+                        {"date": "2025-12-30", "contributionCount": 1},
+                        {"date": "2025-12-31", "contributionCount": 1},
+                        {"date": "2026-01-01", "contributionCount": 1},
+                        {"date": "2026-01-02", "contributionCount": 1},
+                    ]
+                }
+            ]
+        },
+    }
+
+    stats = mock_engine._calculate_contribution_stats()
+    assert stats["longest_streak"] == 4
+
+
+def test_calculate_trends_deduplication(mock_engine):
+    mock_engine.repos_data = [
+        {"created_at": "2024-05-01T00:00:00Z"},
+        {"created_at": "2024-08-01T00:00:00Z"},
+        {"created_at": "2025-01-01T00:00:00Z"},
+    ]
+    mock_engine.contrib_data = {
+        "contributionCalendar": {
+            "weeks": [
+                {"contributionDays": [{"date": "2025-01-01", "contributionCount": 2}]},
+                {"contributionDays": [{"date": "2025-01-01", "contributionCount": 2}]},  # Duplicate week
+                {"contributionDays": [{"date": "2025-01-08", "contributionCount": 4}]},
+            ]
+        }
+    }
+
+    trends = mock_engine._calculate_trends()
+    assert len(trends["repository_growth"]) == 2  # 2024 (2), 2025 (1)
+    assert trends["repository_growth"][0] == {"year": "2024", "count": 2}
+    assert trends["repository_growth"][1] == {"year": "2025", "count": 1}
+    assert len(trends["commit_trend"]) == 2  # Deduplicated to 2 weeks
+
+

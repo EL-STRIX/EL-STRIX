@@ -1,6 +1,6 @@
 """GitHub Statistics Engine for EL-STRIX."""
 
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timedelta
 from typing import Any
 
 from logger import logger
@@ -236,25 +236,38 @@ class StatisticsEngine:
             "totalCommitContributions", 0
         ) + self.contrib_data.get("restrictedContributionsCount", 0)
 
-        # Calculate recent commits (last 30 days) from the contribution calendar
         calendar = self.contrib_data.get("contributionCalendar", {})
         weeks = calendar.get("weeks", [])
 
-        from datetime import UTC, datetime, timedelta
+        # Collect unique days with their commit counts
+        unique_days: dict[str, int] = {}
+        for week in weeks:
+            for day in week.get("contributionDays", []):
+                d = day.get("date", "")
+                if d:
+                    unique_days[d] = max(unique_days.get(d, 0), day.get("contributionCount", 0))
 
-        thirty_days_ago = (datetime.now(UTC) - timedelta(days=30)).strftime("%Y-%m-%d")
-        today_str = datetime.now(UTC).strftime("%Y-%m-%d")
+        # Determine effective today for GitHub data (aligned with UTC and active commit dates)
+        github_today = datetime.now(UTC).date()
+        active_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d, c in unique_days.items() if c > 0]
+        if active_dates and max(active_dates) > github_today:
+            today = max(active_dates)
+        else:
+            today = github_today
+
+        thirty_days_ago = today - timedelta(days=30)
+        today_str = today.strftime("%Y-%m-%d")
 
         recent_commits = 0
         timeline = []
 
-        for week in weeks[-6:]:  # Look at the last 6 weeks
-            for day in week.get("contributionDays", []):
-                date_str = day.get("date", "")
-                if date_str >= thirty_days_ago and date_str <= today_str:
-                    count = day.get("contributionCount", 0)
-                    recent_commits += count
-                    timeline.append({"date": date_str, "commits": count})
+        curr = thirty_days_ago
+        while curr <= today:
+            d_str = curr.strftime("%Y-%m-%d")
+            count = unique_days.get(d_str, 0)
+            recent_commits += count
+            timeline.append({"date": d_str, "commits": count})
+            curr += timedelta(days=1)
 
         frequency = round(recent_commits / 30, 2)
 
@@ -276,67 +289,102 @@ class StatisticsEngine:
     def _calculate_contribution_stats(self) -> dict[str, Any]:
         """Calculate generalized contribution stats including streaks."""
         calendar = self.contrib_data.get("contributionCalendar", {})
-        total = calendar.get("totalContributions", 0)
-
         weeks = calendar.get("weeks", [])
-        current_streak = 0
-        longest_streak = 0
-        max_daily = 0
 
-        # Flatten days, deduplicate by date
-        from datetime import UTC, datetime
-
-        system_today = datetime.now(UTC).strftime("%Y-%m-%d")
-
-        unique_days = {}
-        latest_commit_date = ""
+        # Flatten days, deduplicate by date keeping maximum count
+        unique_days: dict[str, int] = {}
         for week in weeks:
             for day in week.get("contributionDays", []):
                 d = day.get("date", "")
-                count = day.get("contributionCount", 0)
                 if d:
-                    # Keep the day if it's <= system_today OR if it has actual commits (handles timezones ahead of UTC)
-                    if d <= system_today or count > 0:
-                        unique_days[d] = day
-                        if count > 0 and d > latest_commit_date:
-                            latest_commit_date = d
+                    unique_days[d] = max(unique_days.get(d, 0), day.get("contributionCount", 0))
 
-        # The effective "today" for streak calculation is either the system today or the latest commit date if it's ahead
-        today_str = max(system_today, latest_commit_date) if latest_commit_date else system_today
+        if not unique_days:
+            return {
+                "total_contributions": 0,
+                "max_daily_contributions": 0,
+                "current_streak": 0,
+                "longest_streak": 0,
+                "yearly_contributions": 0,
+            }
 
-        # Sort chronologically
-        days = [unique_days[k] for k in sorted(unique_days.keys())]
+        # Determine effective today (aligned with GitHub UTC timeline, allowing forward active dates)
+        github_today = datetime.now(UTC).date()
+        active_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d, c in unique_days.items() if c > 0]
+        if active_dates and max(active_dates) > github_today:
+            today = max(active_dates)
+        else:
+            today = github_today
 
+        all_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d in unique_days.keys()]
+        start_date = min(all_dates)
+
+        # Build continuous daily contribution mapping from start_date to today
+        curr = start_date
         temp_streak = 0
-        for day in days:
-            count = day.get("contributionCount", 0)
+        longest_streak = 0
+        max_daily = 0
+        daily_counts: dict[str, int] = {}
+
+        while curr <= today:
+            d_str = curr.strftime("%Y-%m-%d")
+            count = unique_days.get(d_str, 0)
+            daily_counts[d_str] = count
             max_daily = max(max_daily, count)
 
             if count > 0:
                 temp_streak += 1
-                longest_streak = max(longest_streak, temp_streak)
+                if temp_streak > longest_streak:
+                    longest_streak = temp_streak
             else:
                 temp_streak = 0
 
-        # Current streak: calculate from the end
-        temp_current = 0
-        for day in reversed(days):
-            count = day.get("contributionCount", 0)
-            if count > 0:
-                temp_current += 1
-            else:
-                # If it's today and count is 0, we still might have a streak up to yesterday.
-                if day.get("date") >= system_today and count == 0:
-                    continue
-                break
-        current_streak = temp_current
+            curr += timedelta(days=1)
+
+        # Calculate current streak:
+        # 1. If today has contributions, streak is active ending today.
+        # 2. If today has 0 contributions, but yesterday had contributions, the streak is still active up through yesterday.
+        # 3. If both today and yesterday have 0 contributions, streak is 0.
+        today_str = today.strftime("%Y-%m-%d")
+        yesterday_str = (today - timedelta(days=1)).strftime("%Y-%m-%d")
+
+        today_count = daily_counts.get(today_str, 0)
+        yesterday_count = daily_counts.get(yesterday_str, 0)
+
+        current_streak = 0
+        if today_count > 0:
+            check_date = today
+            while True:
+                c_str = check_date.strftime("%Y-%m-%d")
+                if daily_counts.get(c_str, 0) > 0:
+                    current_streak += 1
+                    check_date -= timedelta(days=1)
+                else:
+                    break
+        elif yesterday_count > 0:
+            check_date = today - timedelta(days=1)
+            while True:
+                c_str = check_date.strftime("%Y-%m-%d")
+                if daily_counts.get(c_str, 0) > 0:
+                    current_streak += 1
+                    check_date -= timedelta(days=1)
+                else:
+                    break
+
+        longest_streak = max(longest_streak, current_streak)
+
+        # Total contributions: sum unique days up to today + restricted private contributions
+        total_contributions = sum(
+            count for d_str, count in unique_days.items()
+            if d_str <= today_str
+        ) + self.contrib_data.get("restrictedContributionsCount", 0)
 
         return {
-            "total_contributions": total,
+            "total_contributions": total_contributions,
             "max_daily_contributions": max_daily,
             "current_streak": current_streak,
             "longest_streak": longest_streak,
-            "yearly_contributions": total,
+            "yearly_contributions": total_contributions,
         }
 
     def _calculate_loc_stats(self) -> dict[str, Any]:
@@ -472,12 +520,12 @@ class StatisticsEngine:
         }
 
     def _calculate_pr_stats(self) -> dict[str, Any]:
-        username = self.profile_data.get("login")
+        username = (self.profile_data.get("login") or "").lower()
 
         # Filter PRs to only those authored by the user
         filtered_prs = []
         for pr in self.pr_data:
-            author = pr.get("user", {}).get("login")
+            author = (pr.get("user", {}).get("login") or "").lower()
             if author == username:
                 filtered_prs.append(pr)
 
@@ -527,11 +575,19 @@ class StatisticsEngine:
         # Commit trend from calendar
         commit_trend = []
         calendar = self.contrib_data.get("contributionCalendar", {})
+        seen_weeks = set()
+
+        today_str = datetime.now(UTC).strftime("%Y-%m-%d")
+
         for week in calendar.get("weeks", []):
-            if week.get("contributionDays"):
-                first_day = week["contributionDays"][0].get("date")
-                weekly_total = sum(d.get("contributionCount", 0) for d in week["contributionDays"])
-                commit_trend.append({"date": first_day, "commits": weekly_total})
+            days_list = week.get("contributionDays", [])
+            if days_list:
+                first_day = days_list[0].get("date")
+                if first_day and first_day not in seen_weeks:
+                    weekly_total = sum(d.get("contributionCount", 0) for d in days_list)
+                    if first_day <= today_str or weekly_total > 0:
+                        seen_weeks.add(first_day)
+                        commit_trend.append({"date": first_day, "commits": weekly_total})
 
         return {
             "repository_growth": repo_growth,
@@ -541,13 +597,26 @@ class StatisticsEngine:
         }
 
     def _generate_recent_activity(self) -> dict[str, Any]:
+        latest_commit_msg = None
+        activity_file = PathManager.GENERATED_JSON_DIR / "activity.json"
+        if activity_file.exists():
+            activity_data = load_json(activity_file)
+            if isinstance(activity_data, list):
+                for event in activity_data:
+                    if event.get("type") == "PushEvent":
+                        commits = event.get("payload", {}).get("commits", [])
+                        if commits and isinstance(commits, list):
+                            latest_commit_msg = commits[-1].get("message")
+                            break
+
+        release_stats = self._calculate_release_stats()
+        repo_activity = self._calculate_repo_activity()
+
         return {
-            "latest_commit": None,
-            "latest_repository": self._calculate_repo_activity().get("recently_created_repository"),
-            "latest_release": None,
-            "latest_update": self._calculate_repo_activity().get(
-                "most_recently_updated_repository"
-            ),
+            "latest_commit": latest_commit_msg,
+            "latest_repository": repo_activity.get("recently_created_repository"),
+            "latest_release": release_stats.get("latest_release"),
+            "latest_update": repo_activity.get("most_recently_updated_repository"),
         }
 
     def _generate_profile_summary(self) -> dict[str, Any]:
