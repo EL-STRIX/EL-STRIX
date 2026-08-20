@@ -1,13 +1,10 @@
 import os
 import sys
 
-import pytest
-
 # Add scripts directory to path to allow importing modules
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../scripts")))
 
 from readme_engine import ReadmeEngine
-from paths import PathManager
 
 
 def test_autoescape_enabled(mocker, tmp_path) -> None:

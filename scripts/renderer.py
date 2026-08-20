@@ -24,7 +24,6 @@ class SVGRenderer:
 
         # Terminal dimensions sized for maximum GitHub README width.
         self.width = 1780
-        self.left_panel_width = 740
         self.font_family = "Consolas, 'Courier New', monospace"
 
         try:
@@ -125,23 +124,20 @@ class SVGRenderer:
         for mode in ["light", "dark"]:
             logger.info(f"Generating {mode} theme layout...")
 
-            # Color palette
+            theme_colors = self.configs.get("theme", {}).get(mode, {})
+            # Color palette with theme configuration fallback
             if mode == "dark":
-                bg = "#0d1117"
-                text_main = "#c9d1d9"
-                text_dim = "#4d5566"
-                text_key = "#e3b341"
-                text_val = "#79c0ff"
-                text_green = "#7ee787"
-                ascii_color = text_main
+                bg = theme_colors.get("background", "#0d1117")
+                text_main = theme_colors.get("text_main", "#c9d1d9")
+                text_dim = theme_colors.get("text_dim", "#4d5566")
+                text_key = theme_colors.get("text_key", "#e3b341")
+                ascii_color = theme_colors.get("ascii", text_main)
             else:
-                bg = "#ffffff"
-                text_main = "#24292f"
-                text_dim = "#8b949e"
-                text_key = "#b08800"
-                text_val = "#0969da"
-                text_green = "#1a7f37"
-                ascii_color = text_main
+                bg = theme_colors.get("background", "#ffffff")
+                text_main = theme_colors.get("text_main", "#24292f")
+                text_dim = theme_colors.get("text_dim", "#8b949e")
+                text_key = theme_colors.get("text_key", "#b08800")
+                ascii_color = theme_colors.get("ascii", text_main)
 
             ascii_content, ascii_height = self._get_ascii_svg_content(mode)
 
@@ -149,7 +145,6 @@ class SVGRenderer:
             right_svg = ""
             y = 30
             lh = 46
-            DOT_WIDTH = 46
 
             # ── Header ────────────────────────────────────────────
             header_text = f"{self.profile.get('terminal_header', 'user@terminal')} "
@@ -263,9 +258,6 @@ class SVGRenderer:
 
             loc = f"{total_loc:,}"
 
-            color_red = "#f85149" if mode == "dark" else "#cf222e"
-
-            COL = 49
             d1 = max(25 - len(repo_cnt) - len(private_cnt), 2)
             d2 = max(33 - len(stars), 2)
 

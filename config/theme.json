@@ -1,0 +1,20 @@
+{
+  "dark": {
+    "background": "#0d1117",
+    "text_main": "#c9d1d9",
+    "text_dim": "#4d5566",
+    "text_key": "#e3b341",
+    "text_val": "#79c0ff",
+    "text_green": "#7ee787",
+    "ascii": "#c9d1d9"
+  },
+  "light": {
+    "background": "#ffffff",
+    "text_main": "#24292f",
+    "text_dim": "#8b949e",
+    "text_key": "#b08800",
+    "text_val": "#0969da",
+    "text_green": "#1a7f37",
+    "ascii": "#24292f"
+  }
+}

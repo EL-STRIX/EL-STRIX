@@ -3,6 +3,7 @@
 import json
 from typing import Any
 
+from constants import CONFIG_FILES
 from exceptions import ConfigurationError
 from paths import PathManager
 
@@ -33,4 +34,16 @@ class ConfigLoader:
     @classmethod
     def load_all(cls) -> dict[str, dict[str, Any]]:
         """Load all core configuration files."""
-        return {"profile": cls.load_json("profile.json")}
+        configs: dict[str, dict[str, Any]] = {}
+        for filename in CONFIG_FILES:
+            key = filename.replace(".json", "")
+            filepath = PathManager.get_config_file(filename)
+            if filepath.exists():
+                configs[key] = cls.load_json(filename)
+            elif filename == "profile.json":
+                # profile.json is strictly required
+                configs[key] = cls.load_json(filename)
+            else:
+                configs[key] = {}
+        return configs
+

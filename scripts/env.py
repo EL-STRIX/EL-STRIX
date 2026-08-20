@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
-from exceptions import EnvironmentError
+from exceptions import EnvironmentConfigError
 from logger import logger
 from paths import PathManager
 
@@ -36,7 +36,7 @@ class EnvManager:
         """Get a required environment variable or raise an error."""
         val = cls.get(key)
         if not val:
-            raise EnvironmentError(f"Required environment variable '{key}' is missing or empty.")
+            raise EnvironmentConfigError(f"Required environment variable '{key}' is missing or empty.")
         return val
 
     @classmethod
@@ -70,7 +70,7 @@ class EnvManager:
         cls.load()
         token = os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
         if cls._is_placeholder_token(token):
-            raise EnvironmentError("GitHub token is missing. Please set GH_TOKEN or GITHUB_TOKEN.")
+            raise EnvironmentConfigError("GitHub token is missing. Please set GH_TOKEN or GITHUB_TOKEN.")
         return token
 
     @classmethod

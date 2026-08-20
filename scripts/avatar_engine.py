@@ -60,10 +60,16 @@ class ImagePreprocessor:
         return img
 
     def _extract_subject_mask(self, img: Image.Image) -> Image.Image:
-        """Create a mask isolating the subject from the background using rembg."""
-        import rembg
+        """Create a mask isolating the subject from the background using rembg with fallback."""
+        try:
+            import rembg
 
-        return cast(Image.Image, rembg.remove(img, only_mask=True))
+            return cast(Image.Image, rembg.remove(img, only_mask=True))
+        except Exception as e:
+            logger.warning(f"rembg background removal unavailable ({e}). Using luminance mask fallback.")
+            if img.mode in ("RGBA", "LA") or (img.mode == "P" and "transparency" in img.info):
+                return img.convert("RGBA").split()[-1]
+            return Image.new("L", img.size, 255)
 
     def process(self, image_path: Path) -> dict[str, Image.Image] | None:
         try:
@@ -258,7 +264,7 @@ class AvatarSvgRenderer:
 
         try:
             with open(output_path, "w", encoding="utf-8") as f:
-                f.write("\\n".join(svg_content))
+                f.write("\n".join(svg_content))
             return True
         except OSError as e:
             logger.error(f"Failed to write SVG to {output_path}: {e}")

@@ -20,13 +20,13 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v7
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.EL_STRIX_TOKEN || secrets.GITHUB_TOKEN }}
 
       - name: Set up Python
-        uses: actions/setup-python@v7
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
@@ -36,6 +36,13 @@ jobs:
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
+      - name: Run Test Suite
+        env:
+          GH_TOKEN: "mock_token_for_ci_tests"
+          GITHUB_USERNAME: "EL-STRIX"
+        run: |
+          pytest
+
       - name: Execute Automation Engine (Phase 01-07)
         env:
           GH_TOKEN: ${{ secrets.EL_STRIX_TOKEN || secrets.GITHUB_TOKEN }}
@@ -43,3 +50,4 @@ jobs:
           GITHUB_ACTIONS: "true"
         run: |
           python scripts/main.py
+

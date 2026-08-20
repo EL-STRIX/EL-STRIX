@@ -9,8 +9,12 @@ class ConfigurationError(ELSTRIXError):
     """Raised when there is an issue with the configuration (JSON files)."""
 
 
-class EnvironmentError(ELSTRIXError):
+class EnvironmentConfigError(ELSTRIXError):
     """Raised when required environment variables are missing or invalid."""
+
+
+# Alias for backwards compatibility
+EnvironmentError = EnvironmentConfigError
 
 
 class CacheError(ELSTRIXError):

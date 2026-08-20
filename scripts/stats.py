@@ -114,6 +114,21 @@ class StatisticsEngine:
         except ValueError:
             return None
 
+    def _get_user_timezone(self) -> timezone:
+        """Resolve the user's timezone from profile configuration, environment, or default to IST/UTC."""
+        import os
+        from zoneinfo import ZoneInfo
+
+        tz_name = (
+            self.profile_data.get("timezone")
+            or os.environ.get("TZ")
+            or "Asia/Kolkata"
+        )
+        try:
+            return ZoneInfo(tz_name)
+        except Exception:
+            return timezone(timedelta(hours=5, minutes=30))
+
     def _calculate_profile_stats(self) -> dict[str, Any]:
         """Calculate profile-level statistics."""
         created_at_str = self.profile_data.get("created_at")
@@ -256,8 +271,6 @@ class StatisticsEngine:
             today = github_today
 
         thirty_days_ago = today - timedelta(days=30)
-        today_str = today.strftime("%Y-%m-%d")
-
         recent_commits = 0
         timeline = []
 
@@ -314,19 +327,19 @@ class StatisticsEngine:
                 "yearly_contributions": 0,
             }
 
-        # Use IST (UTC+5:30) — GitHub assigns contribution dates in the user's local timezone.
-        # At IST midnight, UTC is still the previous day, so UTC-based 'today' misses IST today.
-        IST = timezone(timedelta(hours=5, minutes=30))
-        ist_today = datetime.now(IST).date()
+        # GitHub assigns contribution dates in the user's account timezone.
+        # We resolve the configured timezone so the streak matches what GitHub's graph displays.
+        user_tz = self._get_user_timezone()
+        tz_today = datetime.now(user_tz).date()
 
         # Allow forward active dates if the API returned a future date (edge case)
         active_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d, c in unique_days.items() if c > 0]
-        if active_dates and max(active_dates) > ist_today:
+        if active_dates and max(active_dates) > tz_today:
             today = max(active_dates)
         else:
-            today = ist_today
+            today = tz_today
 
-        all_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d in unique_days.keys()]
+        all_dates = [datetime.strptime(d, "%Y-%m-%d").date() for d in unique_days]
         start_date = min(all_dates)
 
         # Build continuous daily contribution mapping from start_date to today
@@ -344,8 +357,7 @@ class StatisticsEngine:
 
             if count > 0:
                 temp_streak += 1
-                if temp_streak > longest_streak:
-                    longest_streak = temp_streak
+                longest_streak = max(longest_streak, temp_streak)
             else:
                 temp_streak = 0
 
@@ -406,13 +418,22 @@ class StatisticsEngine:
     def _calculate_loc_stats(self) -> dict[str, Any]:
         """Calculate lines of code stats based on actual physical file counts."""
         total_lines = 0
+        total_additions = 0
+        total_deletions = 0
+        total_net = 0
 
         if self.loc_data and isinstance(self.loc_data, dict):
-            for repo_name, data in self.loc_data.items():
+            for data in self.loc_data.values():
                 total_lines += data.get("total_lines", 0)
+                total_additions += data.get("additions", data.get("total_lines", 0))
+                total_deletions += data.get("deletions", 0)
+                total_net += data.get("net_lines", data.get("total_lines", 0))
 
         return {
             "total_lines": total_lines,
+            "additions": total_additions,
+            "deletions": total_deletions,
+            "net_lines": total_net,
         }
 
     def _calculate_language_stats(self) -> dict[str, Any]:

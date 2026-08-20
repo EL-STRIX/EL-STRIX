@@ -103,7 +103,7 @@ class DataEngine:
             if isinstance(profile_data, dict):
                 created_at_str = profile_data.get("created_at")
 
-        from datetime import UTC, datetime, timedelta
+        from datetime import UTC, datetime
 
         if not created_at_str:
             created_at_str = datetime.now(UTC).isoformat()
@@ -350,10 +350,14 @@ class DataEngine:
             author = contributor.get("author") or {}
             if (author.get("login") or "").lower() == self.username.lower():
                 weeks = contributor.get("weeks", [])
-                total_lines = sum(w.get("a", 0) for w in weeks)
+                additions = sum(w.get("a", 0) for w in weeks)
+                deletions = sum(w.get("d", 0) for w in weeks)
                 return {
                     "total_commits": contributor.get("total", 0),
-                    "total_lines": total_lines,
+                    "total_lines": additions,
+                    "additions": additions,
+                    "deletions": deletions,
+                    "net_lines": max(0, additions - deletions),
                     "weeks": weeks,
                 }
         return None

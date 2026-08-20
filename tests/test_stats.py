@@ -100,6 +100,7 @@ def test_calculate_contribution_stats_active_today(mock_engine):
         "totalCommitContributions": 10,
         "restrictedContributionsCount": 2,
         "contributionCalendar": {
+            "totalContributions": 8,
             "weeks": [
                 {
                     "contributionDays": [
@@ -108,7 +109,7 @@ def test_calculate_contribution_stats_active_today(mock_engine):
                         {"date": today.strftime("%Y-%m-%d"), "contributionCount": 1},
                     ]
                 }
-            ]
+            ],
         },
     }
 
@@ -116,7 +117,7 @@ def test_calculate_contribution_stats_active_today(mock_engine):
     assert stats["current_streak"] == 3
     assert stats["longest_streak"] == 3
     assert stats["max_daily_contributions"] == 3
-    assert stats["total_contributions"] == 6 + 2  # 6 public + 2 restricted
+    assert stats["total_contributions"] == 8
 
 
 def test_calculate_contribution_stats_active_yesterday(mock_engine):

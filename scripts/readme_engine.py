@@ -1,6 +1,6 @@
 """README Template Generation Engine."""
 
-from datetime import UTC, datetime
+from datetime import datetime
 from typing import Any
 
 import jinja2
@@ -47,12 +47,21 @@ class ReadmeEngine:
             # Load featured projects from stats payload (Pre-computed in Phase 03)
             featured_repos = stats.get("featured_projects", [])
 
-            # Timestamp in IST (UTC+5:30)
-            from datetime import timedelta
+            # Timestamp in user timezone (configured in profile.json or TZ environment variable)
+            import os
+            from datetime import timedelta, timezone
+            from zoneinfo import ZoneInfo
 
-            ist_time = datetime.now(UTC) + timedelta(hours=5, minutes=30)
-            last_updated = ist_time.strftime("%Y-%m-%d %H:%M:%S IST")
-            cache_bust = int(ist_time.timestamp())
+            tz_name = profile_cfg.get("timezone") or os.environ.get("TZ") or "Asia/Kolkata"
+            try:
+                user_tz = ZoneInfo(tz_name)
+            except Exception:
+                user_tz = timezone(timedelta(hours=5, minutes=30))
+
+            local_time = datetime.now(user_tz)
+            tz_abbr = local_time.strftime("%Z") or tz_name
+            last_updated = local_time.strftime(f"%Y-%m-%d %H:%M:%S {tz_abbr}")
+            cache_bust = int(local_time.timestamp())
 
             # Prepare context dictionary
             context = {

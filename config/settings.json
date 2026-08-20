@@ -1,0 +1,16 @@
+{
+  "debug_mode": false,
+  "avatar_preprocessing": {
+    "target_lum": 128
+  },
+  "ascii_engine": {
+    "width": 85,
+    "font_aspect_correction": 0.5
+  },
+  "svg_engine": {
+    "font_family": "Consolas, 'Courier New', monospace",
+    "font_size": 14,
+    "line_spacing": 1.2,
+    "char_spacing": 0.6
+  }
+}

@@ -1,6 +1,5 @@
 """Automation Engine for Git Operations and Change Detection."""
 
-import os
 import subprocess
 from datetime import UTC, datetime
 
@@ -65,6 +64,8 @@ class AutomationEngine:
             file_path = PathManager.ROOT_DIR / file
             if file_path.exists():
                 self._run_git(["add", file])
+            else:
+                self._run_git(["add", "-u", file])
 
         # Check what is staged
         success, stdout = self._run_git(["diff", "--cached", "--name-only"])
