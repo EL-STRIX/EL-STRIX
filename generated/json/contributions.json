@@ -1,6 +1,6 @@
 {
   "contributionCalendar": {
-    "totalContributions": 1006,
+    "totalContributions": 993,
     "weeks": [
       {
         "contributionDays": [
@@ -2733,7 +2733,7 @@
             "date": "2026-08-19"
           },
           {
-            "contributionCount": 21,
+            "contributionCount": 8,
             "date": "2026-08-20"
           },
           {
@@ -3348,7 +3348,7 @@
       }
     ]
   },
-  "totalCommitContributions": 572,
+  "totalCommitContributions": 559,
   "totalIssueContributions": 0,
   "totalPullRequestContributions": 98,
   "totalPullRequestReviewContributions": 1,
