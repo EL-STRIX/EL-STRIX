@@ -105,6 +105,8 @@
   },
   "commits": {
     "total_commits": 883,
+    "public_commits": 559,
+    "total_git_commits": 1655,
     "recent_commits": 692,
     "commit_frequency": 23.07,
     "commits_per_repository": {

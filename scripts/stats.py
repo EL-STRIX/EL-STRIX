@@ -291,8 +291,12 @@ class StatisticsEngine:
                 if c > 0:
                     commits_per_repo[repo] = c
 
+        total_git_commits = sum(commits_per_repo.values()) if commits_per_repo else total_commits
+
         return {
             "total_commits": total_commits,
+            "public_commits": self.contrib_data.get("totalCommitContributions", 0),
+            "total_git_commits": total_git_commits,
             "recent_commits": recent_commits,
             "commit_frequency": frequency,
             "commits_per_repository": commits_per_repo,
