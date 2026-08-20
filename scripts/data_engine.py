@@ -52,14 +52,17 @@ class DataEngine:
     def fetch_profile(self) -> dict[str, Any]:
         """Fetch base profile information."""
         logger.info("Fetching profile information...")
-        # Try /user first for private repo counts
-        profile = self.client.rest_request("GET", "/user")
+        profile = None
+        try:
+            profile = self.client.rest_request("GET", "/user")
+        except Exception as e:
+            logger.info(f"Could not fetch authenticated user (/user): {e}")
 
         # If the token belongs to a bot (e.g. GitHub Actions default token) or another user,
         # fallback to the target username's public profile to avoid breaking all stats.
-        if (profile.get("login") or "").lower() != self.username.lower():
+        if not isinstance(profile, dict) or (profile.get("login") or "").lower() != self.username.lower():
             logger.info(
-                f"Authenticated as {profile.get('login')}, falling back to public profile for {self.username}"
+                f"Falling back to public profile for {self.username}"
             )
             profile = self.client.rest_request("GET", f"/users/{self.username}")
 
@@ -78,9 +81,13 @@ class DataEngine:
     def fetch_repositories(self) -> None:
         """Fetch all repositories for the user, including private ones if the token has access."""
         logger.info("Fetching repositories...")
-        # Check authentication identity
-        auth_user = self.client.rest_request("GET", "/user")
-        if (auth_user.get("login") or "").lower() == self.username.lower():
+        auth_user = None
+        try:
+            auth_user = self.client.rest_request("GET", "/user")
+        except Exception:
+            auth_user = None
+
+        if isinstance(auth_user, dict) and (auth_user.get("login") or "").lower() == self.username.lower():
             endpoint = "/user/repos?type=owner&per_page=100"
         else:
             logger.info(

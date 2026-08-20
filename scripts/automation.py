@@ -96,15 +96,35 @@ class AutomationEngine:
         return f"chore: {action} [{timestamp}]"
 
     def _configure_git(self) -> None:
-        """Configure git user if running in CI or locally."""
+        """Configure git user and authenticated remote if running in CI or locally."""
         from config_loader import ConfigLoader
+        from env import EnvManager
+
         configs = ConfigLoader.load_all()
         profile = configs.get("profile", {})
         name = profile.get("name", "EL-STRIX")
         email = profile.get("email", "sujaypaul892@gmail.com")
-        
+
         self._run_git(["config", "user.name", name])
         self._run_git(["config", "user.email", email])
+
+        # If running in GitHub Actions, set remote url with token for authenticated push
+        if os.environ.get("GITHUB_ACTIONS") == "true":
+            token = (
+                os.environ.get("EL_STRIX_TOKEN")
+                or os.environ.get("GH_TOKEN")
+                or os.environ.get("GITHUB_TOKEN")
+            )
+            repo = os.environ.get("GITHUB_REPOSITORY")
+            if token and repo and not EnvManager._is_placeholder_token(token):
+                self._run_git(
+                    [
+                        "remote",
+                        "set-url",
+                        "origin",
+                        f"https://x-access-token:{token}@github.com/{repo}.git",
+                    ]
+                )
 
     def run(self) -> None:
         """Execute the automation pipeline."""
