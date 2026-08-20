@@ -110,12 +110,12 @@
     "recent_commits": 692,
     "commit_frequency": 23.07,
     "commits_per_repository": {
+      "Faculty-Subject-Allocation": 25,
       "LUMINA": 25,
+      "Finzo": 1080,
       "C-GAMES-COLLECTION": 190,
       "EL-STRIX": 208,
-      "Faculty-Subject-Allocation": 25,
       "Portfolio-V1.0": 19,
-      "Finzo": 1080,
       "Portfolio-V2.0": 8,
       "Slotara": 100
     },
