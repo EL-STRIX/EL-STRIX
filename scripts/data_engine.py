@@ -370,13 +370,18 @@ class DataEngine:
         return None
 
     def fetch_loc_stats(self) -> None:
-        """Fetch contributor stats for LOC calculation."""
+        """Fetch contributor stats for LOC calculation with fallback and retry."""
         logger.info("Fetching Lines of Code (LOC) statistics...")
         repos_file = PathManager.GENERATED_JSON_DIR / "repos.json"
+        loc_file = PathManager.GENERATED_JSON_DIR / "loc_stats.json"
 
-        loc_stats = {}
+        # Load existing loc_stats as fallback so transient API timeouts don't drop repos
+        loc_stats = load_json(loc_file) if loc_file.exists() else {}
+        if not isinstance(loc_stats, dict):
+            loc_stats = {}
+
         if not repos_file.exists():
-            save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
+            save_json(loc_stats, loc_file)
             return
 
         repos = load_json(repos_file)
@@ -394,7 +399,7 @@ class DataEngine:
                 endpoints[f"/repos/{owner}/{repo_name}/stats/contributors"] = repo_name
 
         if not endpoints:
-            save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
+            save_json(loc_stats, loc_file)
             return
 
         batch_results = self.client.batch_rest_requests(
@@ -402,15 +407,18 @@ class DataEngine:
         )
 
         for endpoint, stats in batch_results.items():
-            if not stats or not isinstance(stats, list):
-                continue
-
             repo_name = endpoints[endpoint]
-            user_stats = self._process_contributor_stats(stats)
-            if user_stats:
-                loc_stats[repo_name] = user_stats
+            if not stats or not isinstance(stats, list):
+                # If concurrent batch timed out or got 202, retry individually
+                logger.info(f"Retrying contributor stats fetch individually for {repo_name}...")
+                stats = self.client.rest_request("GET", endpoint, use_cache=False)
 
-        save_json(loc_stats, PathManager.GENERATED_JSON_DIR / "loc_stats.json")
+            if stats and isinstance(stats, list):
+                user_stats = self._process_contributor_stats(stats)
+                if user_stats:
+                    loc_stats[repo_name] = user_stats
+
+        save_json(loc_stats, loc_file)
 
     def fetch_recent_activity(self) -> None:
         """Fetch recent events from the user."""
