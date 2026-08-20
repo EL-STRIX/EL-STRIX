@@ -1,11 +1,11 @@
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/svg/dark.svg?v=1787240187" />
-  <source media="(prefers-color-scheme: light)" srcset="assets/svg/light.svg?v=1787240187" />
-  <img alt="EL-STRIX Profile Banner" src="assets/svg/dark.svg?v=1787240187" width="100%" />
+  <source media="(prefers-color-scheme: dark)" srcset="assets/svg/dark.svg?v=1787240213" />
+  <source media="(prefers-color-scheme: light)" srcset="assets/svg/light.svg?v=1787240213" />
+  <img alt="EL-STRIX Profile Banner" src="assets/svg/dark.svg?v=1787240213" width="100%" />
 </picture>
 
 <div align="center">
 
-Last updated: 2026-08-20 21:06:27 IST
+Last updated: 2026-08-20 21:06:53 IST
 
 </div>
