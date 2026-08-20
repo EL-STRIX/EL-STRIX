@@ -104,18 +104,18 @@
     ]
   },
   "commits": {
-    "total_commits": 935,
-    "public_commits": 611,
+    "total_commits": 936,
+    "public_commits": 612,
     "total_git_commits": 1447,
-    "recent_commits": 744,
-    "commit_frequency": 24.8,
+    "recent_commits": 745,
+    "commit_frequency": 24.83,
     "commits_per_repository": {
       "Portfolio-V1.0": 19,
-      "LUMINA": 25,
-      "Portfolio-V2.0": 8,
-      "Slotara": 100,
-      "Faculty-Subject-Allocation": 25,
       "Finzo": 1080,
+      "LUMINA": 25,
+      "Faculty-Subject-Allocation": 25,
+      "Slotara": 100,
+      "Portfolio-V2.0": 8,
       "C-GAMES-COLLECTION": 190
     },
     "commit_timeline": [
@@ -241,16 +241,16 @@
       },
       {
         "date": "2026-08-20",
-        "commits": 60
+        "commits": 61
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1045,
+    "total_contributions": 1046,
     "max_daily_contributions": 90,
     "current_streak": 8,
     "longest_streak": 20,
-    "yearly_contributions": 1045
+    "yearly_contributions": 1046
   },
   "loc": {
     "total_lines": 622404,
@@ -260,46 +260,46 @@
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 52050944,
+    "total_bytes": 47773696,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 38.76,
-      "Dart": 19.45,
-      "JavaScript": 15.91,
-      "Python": 11.14,
-      "HTML": 10.36,
-      "C": 4.38
+      "PHP": 42.23,
+      "Dart": 21.2,
+      "JavaScript": 17.33,
+      "HTML": 11.28,
+      "C": 4.77,
+      "Python": 3.19
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 20175872,
-        "percentage": 38.76
+        "percentage": 42.23
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 19.45
+        "percentage": 21.2
       },
       {
         "language": "JavaScript",
         "bytes": 8280064,
-        "percentage": 15.91
-      },
-      {
-        "language": "Python",
-        "bytes": 5800960,
-        "percentage": 11.14
+        "percentage": 17.33
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 10.36
+        "percentage": 11.28
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 4.38
+        "percentage": 4.77
+      },
+      {
+        "language": "Python",
+        "bytes": 1523712,
+        "percentage": 3.19
       }
     ]
   },
@@ -732,7 +732,7 @@
       },
       {
         "date": "2026-08-16",
-        "commits": 70
+        "commits": 71
       }
     ]
   },
