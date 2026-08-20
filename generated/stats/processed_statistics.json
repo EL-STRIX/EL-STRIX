@@ -111,12 +111,12 @@
     "commit_frequency": 23.5,
     "commits_per_repository": {
       "C-GAMES-COLLECTION": 190,
-      "Faculty-Subject-Allocation": 25,
       "LUMINA": 25,
       "Slotara": 100,
       "Portfolio-V2.0": 8,
       "Finzo": 1080,
-      "Portfolio-V1.0": 19
+      "Portfolio-V1.0": 19,
+      "Faculty-Subject-Allocation": 25
     },
     "commit_timeline": [
       {
@@ -253,10 +253,10 @@
     "yearly_contributions": 1006
   },
   "loc": {
-    "total_lines": 752611,
-    "additions": 752611,
-    "deletions": 578581,
-    "net_lines": 174030
+    "total_lines": 622404,
+    "additions": 622404,
+    "deletions": 488641,
+    "net_lines": 133763
   },
   "languages": {
     "languages_used": 6,
