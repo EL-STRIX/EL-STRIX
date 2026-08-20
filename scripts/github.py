@@ -92,11 +92,14 @@ class GitHubClient:
                 data = self._handle_response(response)
 
                 if response.status_code == 202:
+                    # 202 Accepted means GitHub is computing stats in background.
+                    # Poll up to 6 times with backoff.
+                    max_202 = 6
                     logger.warning(
-                        f"GitHub returned 202 Accepted (processing). Retrying attempt {attempt}/{self.max_retries}..."
+                        f"GitHub returned 202 Accepted (processing). Retrying attempt {attempt}/{max_202}..."
                     )
-                    time.sleep(2**attempt)
-                    if attempt == self.max_retries:
+                    time.sleep(min(2 * attempt, 8))
+                    if attempt >= max_202:
                         return None, None
                     continue
 
