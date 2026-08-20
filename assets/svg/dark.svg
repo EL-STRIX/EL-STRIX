@@ -13,7 +13,8 @@
     .ascii {
       font-family: Consolas, 'Courier New', monospace;
       font-size: 14px;
-      fill: #e6edf3;
+      font-weight: 700;
+      fill: #58a6ff;
       white-space: pre;
     }
   </style>
