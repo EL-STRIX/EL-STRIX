@@ -151,21 +151,31 @@ class ImagePreprocessor:
 
 
 class AsciiEngine:
-    """Professional ASCII Matrix Generation with structural edge-mapping."""
+    """Professional ASCII Matrix Generation with theme-calibrated structural edge-mapping."""
+
+    # Curated character ramps
+    LIGHT_CHARSET = "@%#*+=-:. "
+    DARK_CHARSET = " .:-=+*#%@"
 
     def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("ascii_engine", {})
-        # Clean, recognizable 10-character density ramp
-        self.charset = "@%#*+=-:. "
-        self.char_count = len(self.charset)
         self.width = self.config.get("width", 85)
 
     def get_perceptual_luminance(self, r: int, g: int, b: int) -> float:
         """Calculate human-perceptual luminance using weighted Euclidean distance."""
         return math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2)
 
-    def generate_matrix(self, processed_data: dict[str, Image.Image]) -> list[list[str]]:
-        """Generate ONE master ASCII matrix compatible with both Light and Dark modes."""
+    def generate_matrix(
+        self, processed_data: dict[str, Image.Image], mode: str = "light"
+    ) -> list[list[str]]:
+        """Generate a theme-calibrated ASCII matrix with high visual definition.
+
+        - Light Mode (dark text on white background): Dense characters represent shadows,
+          hair, and structural outlines; sparse characters represent skin and highlights.
+        - Dark Mode (light text on dark background): Luminous characters illuminate facial
+          features and highlights, with crisp structural edge contours and subtle texture
+          for hair/shadows so the subject pops with stunning clarity.
+        """
         rgb_img = processed_data["rgb"]
         mask_img = processed_data["mask"]
         edges_img = processed_data["edges"]
@@ -184,43 +194,59 @@ class AsciiEngine:
         mask_pixels = list(mask_resized.getdata())  # type: ignore
         edges_pixels = list(edges_resized.getdata())  # type: ignore
 
-        char_count_minus_1 = self.char_count - 1
-        charset = self.charset
-
         flat_chars = []
-        for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
-            if m < 128:
-                # Transparent Background -> Space (sparsest character)
-                char_idx = char_count_minus_1
-            else:
-                # Inlined perceptual luminance calculation for speed
-                lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2)
+        if mode == "dark":
+            charset = self.DARK_CHARSET
+            char_count_minus_1 = len(charset) - 1
 
-                # Normalize lum to 0-1
-                norm_lum = lum / 255.0
+            for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
+                if m < 100:
+                    # Transparent Background -> Space
+                    flat_chars.append(" ")
+                else:
+                    lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2) / 255.0
+                    edge_val = e / 255.0
 
-                # Clean contrast curve to keep face recognizable and avoid noise
-                gamma_lum = norm_lum**0.8
-                final_density = (1.0 - gamma_lum) * 0.5 + (e / 255.0) * 0.5
+                    # Luminous contrast curve for dark background
+                    lum_val = lum**0.88
+                    brightness = lum_val * 0.70 + edge_val * 0.30
 
-                # Force eyes and dark hair to remain dense
-                if norm_lum < 0.25:
-                    final_density = max(final_density, 0.8)
+                    # Hair, dark clothing & silhouette: preserve texture & crisp outline
+                    if lum < 0.30:
+                        brightness = max(brightness, 0.12 + edge_val * 0.58)
 
-                # Map to character index (0 is densest, char_count-1 is sparsest)
-                char_idx = int((1.0 - final_density) * char_count_minus_1)
-                char_idx = max(0, min(char_count_minus_1, char_idx))
+                    char_idx = int(brightness * char_count_minus_1)
+                    char_idx = max(0, min(char_count_minus_1, char_idx))
+                    flat_chars.append(charset[char_idx])
+        else:
+            charset = self.LIGHT_CHARSET
+            char_count_minus_1 = len(charset) - 1
 
-            flat_chars.append(charset[char_idx])
+            for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
+                if m < 100:
+                    # Transparent Background -> Space
+                    flat_chars.append(" ")
+                else:
+                    lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2) / 255.0
+                    edge_val = e / 255.0
+
+                    # Optical density curve for light background
+                    norm_lum = lum**0.85
+                    density = (1.0 - norm_lum) * 0.65 + edge_val * 0.35
+
+                    if lum < 0.25:
+                        density = max(density, 0.80)
+
+                    char_idx = int((1.0 - density) * char_count_minus_1)
+                    char_idx = max(0, min(char_count_minus_1, char_idx))
+                    flat_chars.append(charset[char_idx])
 
         # Reform into 2D matrix
-        matrix = [flat_chars[i : i + self.width] for i in range(0, len(flat_chars), self.width)]
-
-        return matrix
+        return [flat_chars[i : i + self.width] for i in range(0, len(flat_chars), self.width)]
 
 
 class AvatarSvgRenderer:
-    """Renders the single master ASCII matrix into an SVG file."""
+    """Renders the ASCII matrix into theme-aware SVG files."""
 
     def __init__(self, theme: dict[str, Any], settings: dict[str, Any]):
         self.theme = theme
@@ -230,8 +256,11 @@ class AvatarSvgRenderer:
         self.line_spacing = self.config.get("line_spacing", 1.2)
         self.char_spacing = self.config.get("char_spacing", 0.6)
 
-    def render(self, matrix: list[list[str]], mode: str, output_path: Path) -> bool:
+    def render(self, matrix: Any, mode: str, output_path: Path) -> bool:
         """Render matrix to SVG based on light or dark mode theme colors."""
+        if isinstance(matrix, dict):
+            matrix = matrix.get(mode, matrix.get("light", []))
+
         if not matrix or not matrix[0]:
             logger.warning("ASCII matrix is empty. Skipping SVG render.")
             return False
@@ -239,7 +268,7 @@ class AvatarSvgRenderer:
         colors = self.theme.get(mode, {})
         # Optimize contrast for GitHub themes
         bg_color = colors.get("background", "#0d1117" if mode == "dark" else "#ffffff")
-        text_color = colors.get("text", "#c9d1d9" if mode == "dark" else "#24292f")
+        text_color = colors.get("ascii", colors.get("text_main", "#e6edf3" if mode == "dark" else "#24292f"))
 
         height_px = len(matrix) * self.font_size * self.line_spacing
         width_px = len(matrix[0]) * self.font_size * self.char_spacing
@@ -322,14 +351,15 @@ class AvatarPipeline:
             logger.error("Avatar preprocessing failed.")
             return
 
-        # 2. Master Ascii Matrix
-        master_matrix = self.ascii_engine.generate_matrix(processed_data)
+        # 2. Master Light and Dark Ascii Matrices
+        light_matrix = self.ascii_engine.generate_matrix(processed_data, mode="light")
+        dark_matrix = self.ascii_engine.generate_matrix(processed_data, mode="dark")
 
         # Save matrix
         matrix_path = PathManager.ASSET_ASCII_DIR / "matrix.json"
         try:
             with open(matrix_path, "w", encoding="utf-8") as f:
-                json.dump(master_matrix, f)
+                json.dump({"light": light_matrix, "dark": dark_matrix}, f)
             logger.info(f"Master ASCII matrix saved to {matrix_path}")
         except Exception as e:
             logger.error(f"Failed to save ASCII matrix: {e}")
@@ -341,8 +371,8 @@ class AvatarPipeline:
         light_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_light.svg"
         dark_svg_path = PathManager.GENERATED_SVG_DIR / "avatar_dark.svg"
 
-        success_light = self.svg_renderer.render(master_matrix, "light", light_svg_path)
-        success_dark = self.svg_renderer.render(master_matrix, "dark", dark_svg_path)
+        success_light = self.svg_renderer.render(light_matrix, "light", light_svg_path)
+        success_dark = self.svg_renderer.render(dark_matrix, "dark", dark_svg_path)
 
         if success_light and success_dark:
             logger.info("Avatar SVGs generated successfully.")
