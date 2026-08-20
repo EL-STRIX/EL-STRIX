@@ -104,20 +104,19 @@
     ]
   },
   "commits": {
-    "total_commits": 883,
-    "public_commits": 559,
-    "total_git_commits": 1655,
-    "recent_commits": 692,
-    "commit_frequency": 23.07,
+    "total_commits": 896,
+    "public_commits": 572,
+    "total_git_commits": 1447,
+    "recent_commits": 705,
+    "commit_frequency": 23.5,
     "commits_per_repository": {
-      "C-GAMES-COLLECTION": 190,
-      "Faculty-Subject-Allocation": 25,
-      "EL-STRIX": 208,
-      "Finzo": 1080,
-      "Portfolio-V2.0": 8,
+      "Portfolio-V1.0": 19,
       "Slotara": 100,
+      "Portfolio-V2.0": 8,
       "LUMINA": 25,
-      "Portfolio-V1.0": 19
+      "C-GAMES-COLLECTION": 190,
+      "Finzo": 1080,
+      "Faculty-Subject-Allocation": 25
     },
     "commit_timeline": [
       {
@@ -242,16 +241,16 @@
       },
       {
         "date": "2026-08-20",
-        "commits": 8
+        "commits": 21
       }
     ]
   },
   "contributions": {
-    "total_contributions": 993,
+    "total_contributions": 1006,
     "max_daily_contributions": 90,
     "current_streak": 8,
     "longest_streak": 20,
-    "yearly_contributions": 993
+    "yearly_contributions": 1006
   },
   "loc": {
     "total_lines": 752611,
@@ -733,7 +732,7 @@
       },
       {
         "date": "2026-08-16",
-        "commits": 18
+        "commits": 31
       }
     ]
   },
