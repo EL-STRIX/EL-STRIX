@@ -4,8 +4,8 @@
     "total_followers": 7,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 516,
-    "account_age_years": 1.41
+    "days_since_account_creation": 517,
+    "account_age_years": 1.42
   },
   "repositories": {
     "repository_count": 8,
@@ -110,14 +110,14 @@
     "recent_commits": 692,
     "commit_frequency": 23.07,
     "commits_per_repository": {
-      "LUMINA": 25,
-      "Portfolio-V2.0": 8,
       "C-GAMES-COLLECTION": 190,
-      "Portfolio-V1.0": 19,
+      "EL-STRIX": 208,
       "Faculty-Subject-Allocation": 25,
-      "Slotara": 100,
       "Finzo": 1080,
-      "EL-STRIX": 208
+      "LUMINA": 25,
+      "Portfolio-V1.0": 19,
+      "Portfolio-V2.0": 8,
+      "Slotara": 100
     },
     "commit_timeline": [
       {
