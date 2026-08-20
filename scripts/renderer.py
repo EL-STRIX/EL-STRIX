@@ -337,6 +337,7 @@ class SVGRenderer:
     .ascii {{
       font-family: {self.font_family};
       font-size: 14px;
+      font-weight: 700;
       fill: {ascii_color};
       white-space: pre;
     }}

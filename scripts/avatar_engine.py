@@ -151,15 +151,11 @@ class ImagePreprocessor:
 
 
 class AsciiEngine:
-    """Professional ASCII Matrix Generation with theme-calibrated structural edge-mapping."""
-
-    # Curated character ramps
-    LIGHT_CHARSET = "@%#*+=-:. "
-    DARK_CHARSET = " .:-=+*#%@"
+    """Professional CLI-style ASCII Matrix Generation with bold, minimalist terminal symbols."""
 
     def __init__(self, settings: dict[str, Any]):
         self.config = settings.get("ascii_engine", {})
-        self.width = self.config.get("width", 85)
+        self.width = self.config.get("width", 80)
 
     def get_perceptual_luminance(self, r: int, g: int, b: int) -> float:
         """Calculate human-perceptual luminance using weighted Euclidean distance."""
@@ -168,13 +164,14 @@ class AsciiEngine:
     def generate_matrix(
         self, processed_data: dict[str, Image.Image], mode: str = "light"
     ) -> list[list[str]]:
-        """Generate a theme-calibrated ASCII matrix with high visual definition.
+        """Generate a bold, minimalist CLI ASCII matrix with high visual clarity.
 
-        - Light Mode (dark text on white background): Dense characters represent shadows,
-          hair, and structural outlines; sparse characters represent skin and highlights.
-        - Dark Mode (light text on dark background): Luminous characters illuminate facial
-          features and highlights, with crisp structural edge contours and subtle texture
-          for hair/shadows so the subject pops with stunning clarity.
+        Uses a minimalist 4-symbol terminal palette (@, #, +, -) to produce clean,
+        bold UNIX terminal art with distinct facial contours and silhouettes:
+        - Light Mode: Bold dark characters (@, #) for hair, eyes, and contours against
+          open spaces for facial skin on white background.
+        - Dark Mode: Illuminated highlights (+, #) with sharp structural edge cuts (@, #)
+          and clean silhouette on dark background.
         """
         rgb_img = processed_data["rgb"]
         mask_img = processed_data["mask"]
@@ -194,52 +191,50 @@ class AsciiEngine:
         mask_pixels = list(mask_resized.getdata())  # type: ignore
         edges_pixels = list(edges_resized.getdata())  # type: ignore
 
+        is_dark = (mode == "dark")
         flat_chars = []
-        if mode == "dark":
-            charset = self.DARK_CHARSET
-            char_count_minus_1 = len(charset) - 1
 
-            for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
-                if m < 100:
-                    # Transparent Background -> Space
-                    flat_chars.append(" ")
+        for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
+            if m < 90:
+                # Transparent Background -> Space
+                flat_chars.append(" ")
+                continue
+
+            lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2) / 255.0
+            edge_norm = min(1.0, e / 180.0)
+
+            if is_dark:
+                # Dark Mode: Luminous CLI art on dark background
+                if lum < 0.28:
+                    # Dark hair & deep shadow contours
+                    if edge_norm > 0.40:
+                        char = "@" if edge_norm > 0.70 else "#"
+                    else:
+                        char = "-" if lum > 0.15 else " "
                 else:
-                    lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2) / 255.0
-                    edge_val = e / 255.0
-
-                    # Luminous contrast curve for dark background
-                    lum_val = lum**0.88
-                    brightness = lum_val * 0.70 + edge_val * 0.30
-
-                    # Hair, dark clothing & silhouette: preserve texture & crisp outline
-                    if lum < 0.30:
-                        brightness = max(brightness, 0.12 + edge_val * 0.58)
-
-                    char_idx = int(brightness * char_count_minus_1)
-                    char_idx = max(0, min(char_count_minus_1, char_idx))
-                    flat_chars.append(charset[char_idx])
-        else:
-            charset = self.LIGHT_CHARSET
-            char_count_minus_1 = len(charset) - 1
-
-            for (r, g, b), m, e in zip(rgb_pixels, mask_pixels, edges_pixels):
-                if m < 100:
-                    # Transparent Background -> Space
-                    flat_chars.append(" ")
+                    # Illuminated face & skin features
+                    if edge_norm > 0.50:
+                        char = "@"
+                    elif lum > 0.65:
+                        char = "#"
+                    elif lum > 0.45:
+                        char = "+"
+                    else:
+                        char = "-"
+            else:
+                # Light Mode: Bold dark CLI art on white background
+                if lum < 0.28:
+                    char = "@" if lum < 0.18 else "#"
+                elif edge_norm > 0.45:
+                    char = "#"
+                elif lum < 0.50:
+                    char = "+"
+                elif lum < 0.75:
+                    char = "-"
                 else:
-                    lum = math.sqrt(0.299 * r**2 + 0.587 * g**2 + 0.114 * b**2) / 255.0
-                    edge_val = e / 255.0
+                    char = " "
 
-                    # Optical density curve for light background
-                    norm_lum = lum**0.85
-                    density = (1.0 - norm_lum) * 0.65 + edge_val * 0.35
-
-                    if lum < 0.25:
-                        density = max(density, 0.80)
-
-                    char_idx = int((1.0 - density) * char_count_minus_1)
-                    char_idx = max(0, min(char_count_minus_1, char_idx))
-                    flat_chars.append(charset[char_idx])
+            flat_chars.append(char)
 
         # Reform into 2D matrix
         return [flat_chars[i : i + self.width] for i in range(0, len(flat_chars), self.width)]
@@ -268,7 +263,7 @@ class AvatarSvgRenderer:
         colors = self.theme.get(mode, {})
         # Optimize contrast for GitHub themes
         bg_color = colors.get("background", "#0d1117" if mode == "dark" else "#ffffff")
-        text_color = colors.get("ascii", colors.get("text_main", "#e6edf3" if mode == "dark" else "#24292f"))
+        text_color = colors.get("ascii", colors.get("text_main", "#58a6ff" if mode == "dark" else "#24292f"))
 
         height_px = len(matrix) * self.font_size * self.line_spacing
         width_px = len(matrix[0]) * self.font_size * self.char_spacing
@@ -277,7 +272,7 @@ class AvatarSvgRenderer:
             f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width_px} {height_px}" width="{width_px}" height="{height_px}">',
             f'<rect width="100%" height="100%" fill="{bg_color}" rx="8"/>',
             "<style>",
-            f"  .ascii-text {{ font-family: {self.font_family}; font-size: {self.font_size}px; fill: {text_color}; white-space: pre; }}",
+            f"  .ascii-text {{ font-family: {self.font_family}; font-size: {self.font_size}px; font-weight: 700; fill: {text_color}; white-space: pre; }}",
             "</style>",
             '<g class="ascii-text">',
         ]
