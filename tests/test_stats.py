@@ -15,7 +15,7 @@ def mock_engine(mocker):
     mocker.patch(
         "stats.load_json",
         side_effect=[
-            {"public_repos": 10, "followers": 50, "created_at": "2020-01-01T00:00:00Z"},
+            {"public_repos": 10, "followers": 50, "created_at": "2020-01-01T00:00:00Z", "timezone": "UTC"},
             [
                 {
                     "name": "repo1",
@@ -277,5 +277,19 @@ def test_calculate_trends_deduplication(mock_engine):
     assert trends["repository_growth"][0] == {"year": "2024", "count": 2}
     assert trends["repository_growth"][1] == {"year": "2025", "count": 1}
     assert len(trends["commit_trend"]) == 2  # Deduplicated to 2 weeks
+
+
+def test_get_user_timezone(mock_engine, monkeypatch):
+    from datetime import timezone
+
+    mock_engine.profile_data = {"timezone": "UTC"}
+    tz = mock_engine._get_user_timezone()
+    assert tz == timezone.utc
+
+    mock_engine.profile_data = {}
+    monkeypatch.delenv("TZ", raising=False)
+    tz_default = mock_engine._get_user_timezone()
+    assert tz_default is not None
+
 
 

@@ -124,6 +124,9 @@ class StatisticsEngine:
             or os.environ.get("TZ")
             or "Asia/Kolkata"
         )
+        if str(tz_name).upper() in ("UTC", "Z", "GMT"):
+            return timezone.utc
+
         try:
             return ZoneInfo(tz_name)
         except Exception:
