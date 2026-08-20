@@ -1,5 +1,6 @@
 """Automation Engine for Git Operations and Change Detection."""
 
+import os
 import subprocess
 from datetime import UTC, datetime
 

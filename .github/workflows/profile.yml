@@ -23,7 +23,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.EL_STRIX_TOKEN || secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.EL_STRIX_TOKEN || secrets.GH_TOKEN || github.token }}
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -45,9 +45,7 @@ jobs:
 
       - name: Execute Automation Engine (Phase 01-07)
         env:
-          EL_STRIX_TOKEN: ${{ secrets.EL_STRIX_TOKEN }}
-          GH_TOKEN: ${{ secrets.EL_STRIX_TOKEN || secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.EL_STRIX_TOKEN || secrets.GH_TOKEN || github.token }}
           GITHUB_USERNAME: ${{ github.repository_owner }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GITHUB_ACTIONS: "true"
