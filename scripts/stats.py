@@ -587,12 +587,15 @@ class StatisticsEngine:
                 merged_prs += 1
 
         closed_prs -= merged_prs
+        merge_rate = round((merged_prs / total) * 100, 2) if total > 0 else 0.0
 
         return {
             "total_pull_requests": total,
+            "public_pull_requests": self.contrib_data.get("totalPullRequestContributions", 0),
             "open_pull_requests": open_prs,
             "closed_pull_requests": max(0, closed_prs),
             "merged_pull_requests": merged_prs,
+            "merge_rate_percentage": merge_rate,
         }
 
     def _calculate_featured_projects(self) -> list[dict[str, Any]]:

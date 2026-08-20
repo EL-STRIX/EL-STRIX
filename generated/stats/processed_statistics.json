@@ -327,9 +327,11 @@
   },
   "pull_requests": {
     "total_pull_requests": 121,
+    "public_pull_requests": 98,
     "open_pull_requests": 0,
     "closed_pull_requests": 18,
-    "merged_pull_requests": 103
+    "merged_pull_requests": 103,
+    "merge_rate_percentage": 85.12
   },
   "featured_projects": [
     {
