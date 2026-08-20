@@ -69,7 +69,7 @@ class EnvManager:
         """Get the GitHub token from standard environment variables."""
         cls.load()
         token = os.getenv("EL_STRIX_TOKEN") or os.getenv("GH_TOKEN") or os.getenv("GITHUB_TOKEN")
-        if cls._is_placeholder_token(token):
+        if not token or cls._is_placeholder_token(token):
             raise EnvironmentConfigError(
                 "GitHub token is missing. Please set EL_STRIX_TOKEN, GH_TOKEN, or GITHUB_TOKEN."
             )
