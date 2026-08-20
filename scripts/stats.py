@@ -1,6 +1,6 @@
 """GitHub Statistics Engine for EL-STRIX."""
 
-from datetime import UTC, datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta, timezone, tzinfo
 from typing import Any
 
 from logger import logger
@@ -114,7 +114,7 @@ class StatisticsEngine:
         except ValueError:
             return None
 
-    def _get_user_timezone(self) -> timezone:
+    def _get_user_timezone(self) -> tzinfo:
         """Resolve the user's timezone from profile configuration, environment, or default to IST/UTC."""
         import os
         from zoneinfo import ZoneInfo
