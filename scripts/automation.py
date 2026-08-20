@@ -94,7 +94,7 @@ class AutomationEngine:
         else:
             action = "Automated Profile Refresh"
 
-        return f"chore: {action} [{timestamp}]"
+        return f"chore: {action} [{timestamp}] [skip ci]"
 
     def _configure_git(self) -> None:
         """Configure git user and authenticated remote if running in CI or locally."""

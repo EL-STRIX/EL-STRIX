@@ -10,6 +10,13 @@ on:
     paths-ignore:
       - 'README.md'
       - 'docs/**'
+      - 'assets/**'
+      - 'generated/**'
+
+# Prevent multiple concurrent workflow runs
+concurrency:
+  group: profile-update
+  cancel-in-progress: true
 
 jobs:
   automation-engine:
@@ -51,5 +58,3 @@ jobs:
           GITHUB_ACTIONS: "true"
         run: |
           python scripts/main.py
-
-
