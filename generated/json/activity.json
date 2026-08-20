@@ -1,5 +1,31 @@
 [
   {
+    "id": "18292409876",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 40624011303,
+      "ref": "refs/heads/main",
+      "head": "1410a04a172027e084ff8d13a9c59f9aa11a2374",
+      "before": "2f25462fa4a9ac1637351fa121adc881b91e1f75"
+    },
+    "public": true,
+    "created_at": "2026-08-20T15:28:06Z"
+  },
+  {
     "id": "18200423206",
     "type": "PushEvent",
     "actor": {
@@ -3025,51 +3051,5 @@
     },
     "public": true,
     "created_at": "2026-08-09T19:18:46Z"
-  },
-  {
-    "id": "13009633332",
-    "type": "PullRequestEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "action": "merged",
-      "number": 40,
-      "pull_request": {
-        "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX/pulls/40",
-        "id": 4239850663,
-        "number": 40,
-        "head": {
-          "ref": "test-improvement/cache-manager-6915142911849700331",
-          "sha": "a1dd45630556a442611dee183c5f10d7f3593f76",
-          "repo": {
-            "id": 1312717179,
-            "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX",
-            "name": "EL-STRIX"
-          }
-        },
-        "base": {
-          "ref": "main",
-          "sha": "9359392808333dd0cc3e1f96a369ee8f56a51c79",
-          "repo": {
-            "id": 1312717179,
-            "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX",
-            "name": "EL-STRIX"
-          }
-        }
-      }
-    },
-    "public": true,
-    "created_at": "2026-08-09T19:18:45Z"
   }
 ]
