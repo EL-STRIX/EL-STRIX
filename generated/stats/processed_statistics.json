@@ -104,11 +104,11 @@
     ]
   },
   "commits": {
-    "total_commits": 969,
-    "public_commits": 645,
-    "total_git_commits": 1447,
-    "recent_commits": 778,
-    "commit_frequency": 25.93,
+    "total_commits": 960,
+    "public_commits": 636,
+    "total_git_commits": 1799,
+    "recent_commits": 769,
+    "commit_frequency": 25.63,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -117,7 +117,7 @@
       "Finzo": 1080,
       "Slotara": 100,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 338
+      "EL-STRIX": 352
     },
     "commit_timeline": [
       {
@@ -242,22 +242,22 @@
       },
       {
         "date": "2026-08-20",
-        "commits": 94
+        "commits": 85
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1079,
-    "max_daily_contributions": 94,
+    "total_contributions": 1070,
+    "max_daily_contributions": 90,
     "current_streak": 8,
     "longest_streak": 20,
-    "yearly_contributions": 1079
+    "yearly_contributions": 1070
   },
   "loc": {
-    "total_lines": 622404,
-    "additions": 622404,
-    "deletions": 488641,
-    "net_lines": 133763
+    "total_lines": 1022261,
+    "additions": 1022261,
+    "deletions": 844675,
+    "net_lines": 177586
   },
   "languages": {
     "languages_used": 6,
@@ -733,7 +733,7 @@
       },
       {
         "date": "2026-08-16",
-        "commits": 104
+        "commits": 95
       }
     ]
   },
