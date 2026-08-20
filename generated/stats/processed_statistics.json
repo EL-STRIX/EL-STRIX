@@ -104,11 +104,11 @@
     ]
   },
   "commits": {
-    "total_commits": 965,
-    "public_commits": 641,
-    "total_git_commits": 1447,
-    "recent_commits": 774,
-    "commit_frequency": 25.8,
+    "total_commits": 960,
+    "public_commits": 636,
+    "total_git_commits": 1785,
+    "recent_commits": 769,
+    "commit_frequency": 25.63,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -116,7 +116,8 @@
       "Faculty-Subject-Allocation": 25,
       "Finzo": 1080,
       "Slotara": 100,
-      "Portfolio-V1.0": 19
+      "Portfolio-V1.0": 19,
+      "EL-STRIX": 338
     },
     "commit_timeline": [
       {
@@ -241,16 +242,16 @@
       },
       {
         "date": "2026-08-20",
-        "commits": 90
+        "commits": 85
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1075,
+    "total_contributions": 1070,
     "max_daily_contributions": 90,
     "current_streak": 8,
     "longest_streak": 20,
-    "yearly_contributions": 1075
+    "yearly_contributions": 1070
   },
   "loc": {
     "total_lines": 997886,
@@ -732,7 +733,7 @@
       },
       {
         "date": "2026-08-16",
-        "commits": 100
+        "commits": 95
       }
     ]
   },
