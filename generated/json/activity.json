@@ -1,5 +1,31 @@
 [
   {
+    "id": "18297140581",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 40624420411,
+      "ref": "refs/heads/main",
+      "head": "3e6395315bcb8587a6dc06a5f7f4fd5b72ff7335",
+      "before": "d033bc5fb309bee9d5f24c7c728f4221853b4731"
+    },
+    "public": true,
+    "created_at": "2026-08-20T15:32:06Z"
+  },
+  {
     "id": "18296414886",
     "type": "PushEvent",
     "actor": {
@@ -2942,32 +2968,5 @@
     },
     "public": true,
     "created_at": "2026-08-09T19:42:03Z"
-  },
-  {
-    "id": "17222255904",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "ref": "test/add-pathmanager-error-test-16898302270878821126",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/test/add-pathmanager-error-test-16898302270878821126",
-      "master_branch": "main",
-      "description": null,
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2026-08-09T19:42:01Z"
   }
 ]
