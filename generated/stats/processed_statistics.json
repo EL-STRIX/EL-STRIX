@@ -4,22 +4,22 @@
     "total_followers": 7,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 517,
+    "days_since_account_creation": 518,
     "account_age_years": 1.42
   },
   "repositories": {
-    "repository_count": 8,
+    "repository_count": 9,
     "public_repository_count": 5,
-    "private_repository_count": 3,
+    "private_repository_count": 4,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 8,
-    "active_repository_count": 8,
-    "repository_growth": 8
+    "original_repository_count": 9,
+    "active_repository_count": 9,
+    "repository_growth": 9
   },
   "stars": {
     "total_stars": 4,
-    "average_stars": 0.5,
+    "average_stars": 0.44,
     "most_starred_repository": "Faculty-Subject-Allocation",
     "least_starred_repository": "Slotara",
     "star_ranking": [
@@ -34,6 +34,10 @@
       {
         "repository": "Portfolio-V1.0",
         "stars": 1
+      },
+      {
+        "repository": "CampusPlus",
+        "stars": 0
       },
       {
         "repository": "EL-STRIX",
@@ -57,7 +61,7 @@
       }
     ],
     "star_distribution": {
-      "0": 5,
+      "0": 6,
       "1-10": 3,
       "11-50": 0,
       "51-100": 0,
@@ -66,7 +70,7 @@
   },
   "forks": {
     "total_forks": 2,
-    "average_forks": 0.25,
+    "average_forks": 0.22,
     "most_forked_repository": "Faculty-Subject-Allocation",
     "repository_fork_rankings": [
       {
@@ -75,6 +79,10 @@
       },
       {
         "repository": "C-GAMES-COLLECTION",
+        "forks": 0
+      },
+      {
+        "repository": "CampusPlus",
         "forks": 0
       },
       {
@@ -104,11 +112,11 @@
     ]
   },
   "commits": {
-    "total_commits": 978,
-    "public_commits": 654,
-    "total_git_commits": 1805,
-    "recent_commits": 783,
-    "commit_frequency": 26.1,
+    "total_commits": 996,
+    "public_commits": 655,
+    "total_git_commits": 1822,
+    "recent_commits": 801,
+    "commit_frequency": 26.7,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -117,13 +125,10 @@
       "Finzo": 1080,
       "Slotara": 100,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 358
+      "EL-STRIX": 359,
+      "CampusPlus": 16
     },
     "commit_timeline": [
-      {
-        "date": "2026-07-22",
-        "commits": 0
-      },
       {
         "date": "2026-07-23",
         "commits": 4
@@ -242,71 +247,75 @@
       },
       {
         "date": "2026-08-21",
-        "commits": 8
+        "commits": 10
+      },
+      {
+        "date": "2026-08-22",
+        "commits": 16
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1088,
+    "total_contributions": 1106,
     "max_daily_contributions": 95,
-    "current_streak": 9,
+    "current_streak": 10,
     "longest_streak": 20,
-    "yearly_contributions": 1088
+    "yearly_contributions": 1106
   },
   "loc": {
-    "total_lines": 1034561,
-    "additions": 1034561,
-    "deletions": 860740,
-    "net_lines": 173821
+    "total_lines": 1083512,
+    "additions": 1083512,
+    "deletions": 863500,
+    "net_lines": 220012
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 50611200,
+    "total_bytes": 51201024,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 39.86,
-      "Dart": 20.01,
-      "JavaScript": 16.36,
-      "HTML": 10.65,
-      "Python": 8.62,
-      "C": 4.5
+      "PHP": 39.41,
+      "Dart": 19.78,
+      "JavaScript": 16.68,
+      "HTML": 10.53,
+      "Python": 9.16,
+      "C": 4.45
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 20175872,
-        "percentage": 39.86
+        "percentage": 39.41
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 20.01
+        "percentage": 19.78
       },
       {
         "language": "JavaScript",
-        "bytes": 8280064,
-        "percentage": 16.36
+        "bytes": 8540160,
+        "percentage": 16.68
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 10.65
+        "percentage": 10.53
       },
       {
         "language": "Python",
-        "bytes": 4361216,
-        "percentage": 8.62
+        "bytes": 4690944,
+        "percentage": 9.16
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 4.5
+        "percentage": 4.45
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
-    "recently_created_repository": "Portfolio-V1.0",
+    "most_recently_updated_repository": "CampusPlus",
+    "recently_created_repository": "CampusPlus",
     "oldest_repository": "Portfolio-V2.0",
     "most_active_repository": null,
     "least_active_repository": null
@@ -356,6 +365,13 @@
       "stars": "1"
     },
     {
+      "name": "CampusPlus",
+      "description": "Anonymous campus lab equipment fault reporting system with smart duplicate detection and admin triage.",
+      "url": "https://github.com/EL-STRIX/CampusPlus",
+      "language": "JavaScript",
+      "stars": "0"
+    },
+    {
       "name": "EL-STRIX",
       "description": "No description provided.",
       "url": "https://github.com/EL-STRIX/EL-STRIX",
@@ -368,20 +384,13 @@
       "url": "https://github.com/EL-STRIX/Finzo",
       "language": "PHP",
       "stars": "0"
-    },
-    {
-      "name": "LUMINA",
-      "description": "Discover Your Next Great Read. Demo Project.",
-      "url": "https://github.com/EL-STRIX/LUMINA",
-      "language": "HTML",
-      "stars": "0"
     }
   ],
   "trends": {
     "repository_growth": [
       {
         "year": "2026",
-        "count": 8
+        "count": 9
       }
     ],
     "star_growth": [],
@@ -733,20 +742,20 @@
       },
       {
         "date": "2026-08-16",
-        "commits": 113
+        "commits": 131
       }
     ]
   },
   "recent_activity": {
     "latest_commit": null,
-    "latest_repository": "Portfolio-V1.0",
+    "latest_repository": "CampusPlus",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "CampusPlus"
   },
   "summary": {
-    "repository_summary": "Creator of 8 repositories.",
+    "repository_summary": "Creator of 9 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on CampusPlus.",
     "community_summary": "Received 4 stars across all projects."
   }
 }
