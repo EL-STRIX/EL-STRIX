@@ -879,11 +879,11 @@
     ]
   },
   "EL-STRIX": {
-    "total_commits": 359,
-    "total_lines": 414630,
-    "additions": 414630,
-    "deletions": 374556,
-    "net_lines": 40074,
+    "total_commits": 360,
+    "total_lines": 418440,
+    "additions": 418440,
+    "deletions": 378208,
+    "net_lines": 40232,
     "weeks": [
       {
         "w": 1785024000,
@@ -905,24 +905,24 @@
       },
       {
         "w": 1786838400,
-        "a": 292292,
-        "d": 292301,
-        "c": 171
+        "a": 296102,
+        "d": 295953,
+        "c": 172
       }
     ]
   },
   "CampusPlus": {
-    "total_commits": 16,
-    "total_lines": 46478,
-    "additions": 46478,
-    "deletions": 303,
-    "net_lines": 46175,
+    "total_commits": 61,
+    "total_lines": 54697,
+    "additions": 54697,
+    "deletions": 3692,
+    "net_lines": 51005,
     "weeks": [
       {
         "w": 1786838400,
-        "a": 46478,
-        "d": 303,
-        "c": 16
+        "a": 54697,
+        "d": 3692,
+        "c": 61
       }
     ]
   }

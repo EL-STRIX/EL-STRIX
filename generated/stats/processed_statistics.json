@@ -1,16 +1,16 @@
 {
   "profile": {
-    "total_public_repositories": 5,
+    "total_public_repositories": 6,
     "total_followers": 7,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 518,
+    "days_since_account_creation": 519,
     "account_age_years": 1.42
   },
   "repositories": {
     "repository_count": 9,
-    "public_repository_count": 5,
-    "private_repository_count": 4,
+    "public_repository_count": 6,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 9,
@@ -112,11 +112,11 @@
     ]
   },
   "commits": {
-    "total_commits": 996,
-    "public_commits": 655,
-    "total_git_commits": 1822,
-    "recent_commits": 801,
-    "commit_frequency": 26.7,
+    "total_commits": 1039,
+    "public_commits": 717,
+    "total_git_commits": 1868,
+    "recent_commits": 847,
+    "commit_frequency": 28.23,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -125,8 +125,8 @@
       "Finzo": 1080,
       "Slotara": 100,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 359,
-      "CampusPlus": 16
+      "EL-STRIX": 360,
+      "CampusPlus": 61
     },
     "commit_timeline": [
       {
@@ -251,65 +251,65 @@
       },
       {
         "date": "2026-08-22",
-        "commits": 16
+        "commits": 62
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1106,
+    "total_contributions": 1150,
     "max_daily_contributions": 95,
     "current_streak": 10,
     "longest_streak": 20,
-    "yearly_contributions": 1106
+    "yearly_contributions": 1150
   },
   "loc": {
-    "total_lines": 1083512,
-    "additions": 1083512,
-    "deletions": 863500,
-    "net_lines": 220012
+    "total_lines": 1095541,
+    "additions": 1095541,
+    "deletions": 870541,
+    "net_lines": 225000
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 51201024,
+    "total_bytes": 53242880,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 39.41,
-      "Dart": 19.78,
-      "JavaScript": 16.68,
-      "HTML": 10.53,
-      "Python": 9.16,
-      "C": 4.45
+      "PHP": 37.89,
+      "JavaScript": 19.87,
+      "Dart": 19.02,
+      "HTML": 10.12,
+      "Python": 8.82,
+      "C": 4.28
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 20175872,
-        "percentage": 39.41
+        "percentage": 37.89
+      },
+      {
+        "language": "JavaScript",
+        "bytes": 10576896,
+        "percentage": 19.87
       },
       {
         "language": "Dart",
         "bytes": 10126336,
-        "percentage": 19.78
-      },
-      {
-        "language": "JavaScript",
-        "bytes": 8540160,
-        "percentage": 16.68
+        "percentage": 19.02
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 10.53
+        "percentage": 10.12
       },
       {
         "language": "Python",
-        "bytes": 4690944,
-        "percentage": 9.16
+        "bytes": 4696064,
+        "percentage": 8.82
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 4.45
+        "percentage": 4.28
       }
     ]
   },
@@ -634,7 +634,7 @@
       },
       {
         "date": "2026-02-08",
-        "commits": 2
+        "commits": 0
       },
       {
         "date": "2026-02-15",
@@ -742,7 +742,7 @@
       },
       {
         "date": "2026-08-16",
-        "commits": 131
+        "commits": 177
       }
     ]
   },
