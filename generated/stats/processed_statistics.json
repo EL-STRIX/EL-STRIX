@@ -1,11 +1,11 @@
 {
   "profile": {
     "total_public_repositories": 6,
-    "total_followers": 7,
+    "total_followers": 8,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 520,
-    "account_age_years": 1.42
+    "days_since_account_creation": 521,
+    "account_age_years": 1.43
   },
   "repositories": {
     "repository_count": 10,
@@ -120,20 +120,20 @@
     ]
   },
   "commits": {
-    "total_commits": 1313,
-    "public_commits": 719,
-    "total_git_commits": 2137,
-    "recent_commits": 1114,
-    "commit_frequency": 37.13,
+    "total_commits": 1383,
+    "public_commits": 720,
+    "total_git_commits": 2107,
+    "recent_commits": 1184,
+    "commit_frequency": 39.47,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
       "C-GAMES-COLLECTION": 190,
       "Faculty-Subject-Allocation": 25,
       "Finzo": 1317,
-      "Slotara": 100,
+      "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 362,
+      "EL-STRIX": 363,
       "CampusPlus": 61,
       "SHIPYAED": 30
     },
@@ -260,76 +260,70 @@
       },
       {
         "date": "2026-08-24",
-        "commits": 0
+        "commits": 70
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1424,
+    "total_contributions": 1494,
     "max_daily_contributions": 104,
-    "current_streak": 11,
+    "current_streak": 12,
     "longest_streak": 20,
-    "yearly_contributions": 1424
+    "yearly_contributions": 1494
   },
   "loc": {
-    "total_lines": 1287993,
-    "additions": 1287993,
-    "deletions": 1008334,
-    "net_lines": 279659
+    "total_lines": 1292961,
+    "additions": 1292961,
+    "deletions": 996928,
+    "net_lines": 296033
   },
   "languages": {
-    "languages_used": 7,
-    "total_bytes": 54364160,
+    "languages_used": 6,
+    "total_bytes": 44924928,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 43.17,
-      "JavaScript": 19.58,
-      "Dart": 18.63,
-      "HTML": 9.92,
-      "C": 4.19,
-      "Python": 3.75,
-      "TypeScript": 0.77
+      "PHP": 52.24,
+      "JavaScript": 25.21,
+      "HTML": 12.0,
+      "C": 5.07,
+      "Python": 4.55,
+      "TypeScript": 0.93
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 23469056,
-        "percentage": 43.17
+        "percentage": 52.24
       },
       {
         "language": "JavaScript",
-        "bytes": 10643456,
-        "percentage": 19.58
-      },
-      {
-        "language": "Dart",
-        "bytes": 10126336,
-        "percentage": 18.63
+        "bytes": 11326464,
+        "percentage": 25.21
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 9.92
+        "percentage": 12.0
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 4.19
+        "percentage": 5.07
       },
       {
         "language": "Python",
-        "bytes": 2040832,
-        "percentage": 3.75
+        "bytes": 2044928,
+        "percentage": 4.55
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 0.77
+        "percentage": 0.93
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
+    "most_recently_updated_repository": "Slotara",
     "recently_created_repository": "SHIPYAED",
     "oldest_repository": "Portfolio-V2.0",
     "most_active_repository": null,
@@ -761,7 +755,7 @@
       },
       {
         "date": "2026-08-23",
-        "commits": 45
+        "commits": 115
       }
     ]
   },
@@ -769,12 +763,12 @@
     "latest_commit": null,
     "latest_repository": "SHIPYAED",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "Slotara"
   },
   "summary": {
     "repository_summary": "Creator of 10 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on Slotara.",
     "community_summary": "Received 4 stars across all projects."
   }
 }
