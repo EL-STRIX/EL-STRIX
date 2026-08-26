@@ -4,7 +4,7 @@
     "total_followers": 8,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 521,
+    "days_since_account_creation": 522,
     "account_age_years": 1.43
   },
   "repositories": {
@@ -120,11 +120,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1387,
-    "public_commits": 724,
-    "total_git_commits": 2109,
-    "recent_commits": 1166,
-    "commit_frequency": 38.87,
+    "total_commits": 1388,
+    "public_commits": 725,
+    "total_git_commits": 2110,
+    "recent_commits": 1087,
+    "commit_frequency": 36.23,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -133,15 +133,11 @@
       "Finzo": 1317,
       "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 365,
+      "EL-STRIX": 366,
       "CampusPlus": 61,
       "SHIPYAED": 30
     },
     "commit_timeline": [
-      {
-        "date": "2026-07-26",
-        "commits": 80
-      },
       {
         "date": "2026-07-27",
         "commits": 40
@@ -260,65 +256,69 @@
       },
       {
         "date": "2026-08-25",
+        "commits": 1
+      },
+      {
+        "date": "2026-08-26",
         "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1499,
+    "total_contributions": 1500,
     "max_daily_contributions": 104,
-    "current_streak": 12,
+    "current_streak": 13,
     "longest_streak": 20,
-    "yearly_contributions": 1499
+    "yearly_contributions": 1500
   },
   "loc": {
-    "total_lines": 1300860,
-    "additions": 1300860,
-    "deletions": 1004900,
-    "net_lines": 295960
+    "total_lines": 1304566,
+    "additions": 1304566,
+    "deletions": 1008614,
+    "net_lines": 295952
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 44939264,
+    "total_bytes": 45276160,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 52.22,
-      "JavaScript": 25.2,
-      "HTML": 11.99,
-      "C": 5.07,
-      "Python": 4.58,
-      "TypeScript": 0.93
+      "PHP": 51.84,
+      "JavaScript": 25.02,
+      "HTML": 11.91,
+      "Python": 5.29,
+      "C": 5.03,
+      "TypeScript": 0.92
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 23469056,
-        "percentage": 52.22
+        "percentage": 51.84
       },
       {
         "language": "JavaScript",
         "bytes": 11326464,
-        "percentage": 25.2
+        "percentage": 25.02
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 11.99
+        "percentage": 11.91
+      },
+      {
+        "language": "Python",
+        "bytes": 2396160,
+        "percentage": 5.29
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 5.07
-      },
-      {
-        "language": "Python",
-        "bytes": 2059264,
-        "percentage": 4.58
+        "percentage": 5.03
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 0.93
+        "percentage": 0.92
       }
     ]
   },
@@ -755,7 +755,7 @@
       },
       {
         "date": "2026-08-23",
-        "commits": 120
+        "commits": 121
       }
     ]
   },
