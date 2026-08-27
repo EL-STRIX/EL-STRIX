@@ -4,22 +4,22 @@
     "total_followers": 8,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 522,
+    "days_since_account_creation": 523,
     "account_age_years": 1.43
   },
   "repositories": {
-    "repository_count": 10,
+    "repository_count": 9,
     "public_repository_count": 6,
-    "private_repository_count": 4,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 10,
-    "active_repository_count": 10,
-    "repository_growth": 10
+    "original_repository_count": 9,
+    "active_repository_count": 9,
+    "repository_growth": 9
   },
   "stars": {
     "total_stars": 4,
-    "average_stars": 0.4,
+    "average_stars": 0.44,
     "most_starred_repository": "Faculty-Subject-Allocation",
     "least_starred_repository": "Slotara",
     "star_ranking": [
@@ -52,10 +52,6 @@
         "stars": 0
       },
       {
-        "repository": "Portfolio-V2.0",
-        "stars": 0
-      },
-      {
         "repository": "SHIPYAED",
         "stars": 0
       },
@@ -65,7 +61,7 @@
       }
     ],
     "star_distribution": {
-      "0": 7,
+      "0": 6,
       "1-10": 3,
       "11-50": 0,
       "51-100": 0,
@@ -74,7 +70,7 @@
   },
   "forks": {
     "total_forks": 2,
-    "average_forks": 0.2,
+    "average_forks": 0.22,
     "most_forked_repository": "Faculty-Subject-Allocation",
     "repository_fork_rankings": [
       {
@@ -106,10 +102,6 @@
         "forks": 0
       },
       {
-        "repository": "Portfolio-V2.0",
-        "forks": 0
-      },
-      {
         "repository": "SHIPYAED",
         "forks": 0
       },
@@ -120,11 +112,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1388,
-    "public_commits": 725,
-    "total_git_commits": 2110,
-    "recent_commits": 1087,
-    "commit_frequency": 36.23,
+    "total_commits": 1380,
+    "public_commits": 726,
+    "total_git_commits": 2111,
+    "recent_commits": 1047,
+    "commit_frequency": 34.9,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -133,22 +125,18 @@
       "Finzo": 1317,
       "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 366,
+      "EL-STRIX": 367,
       "CampusPlus": 61,
       "SHIPYAED": 30
     },
     "commit_timeline": [
-      {
-        "date": "2026-07-27",
-        "commits": 40
-      },
       {
         "date": "2026-07-28",
         "commits": 3
       },
       {
         "date": "2026-07-29",
-        "commits": 58
+        "commits": 57
       },
       {
         "date": "2026-07-30",
@@ -260,72 +248,76 @@
       },
       {
         "date": "2026-08-26",
+        "commits": 1
+      },
+      {
+        "date": "2026-08-27",
         "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1500,
+    "total_contributions": 1492,
     "max_daily_contributions": 104,
-    "current_streak": 13,
+    "current_streak": 14,
     "longest_streak": 20,
-    "yearly_contributions": 1500
+    "yearly_contributions": 1492
   },
   "loc": {
-    "total_lines": 1304566,
-    "additions": 1304566,
-    "deletions": 1008614,
+    "total_lines": 1308217,
+    "additions": 1308217,
+    "deletions": 1012265,
     "net_lines": 295952
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 45276160,
+    "total_bytes": 37334016,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 51.84,
-      "JavaScript": 25.02,
-      "HTML": 11.91,
-      "Python": 5.29,
-      "C": 5.03,
-      "TypeScript": 0.92
+      "PHP": 62.86,
+      "HTML": 14.44,
+      "JavaScript": 8.16,
+      "Python": 7.32,
+      "C": 6.1,
+      "TypeScript": 1.12
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 23469056,
-        "percentage": 51.84
-      },
-      {
-        "language": "JavaScript",
-        "bytes": 11326464,
-        "percentage": 25.02
+        "percentage": 62.86
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 11.91
+        "percentage": 14.44
+      },
+      {
+        "language": "JavaScript",
+        "bytes": 3046400,
+        "percentage": 8.16
       },
       {
         "language": "Python",
-        "bytes": 2396160,
-        "percentage": 5.29
+        "bytes": 2734080,
+        "percentage": 7.32
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 5.03
+        "percentage": 6.1
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 0.92
+        "percentage": 1.12
       }
     ]
   },
   "activity": {
     "most_recently_updated_repository": "EL-STRIX",
     "recently_created_repository": "SHIPYAED",
-    "oldest_repository": "Portfolio-V2.0",
+    "oldest_repository": "Finzo",
     "most_active_repository": null,
     "least_active_repository": null
   },
@@ -399,7 +391,7 @@
     "repository_growth": [
       {
         "year": "2026",
-        "count": 10
+        "count": 9
       }
     ],
     "star_growth": [],
@@ -663,7 +655,7 @@
       },
       {
         "date": "2026-03-15",
-        "commits": 8
+        "commits": 0
       },
       {
         "date": "2026-03-22",
@@ -739,7 +731,7 @@
       },
       {
         "date": "2026-07-26",
-        "commits": 280
+        "commits": 279
       },
       {
         "date": "2026-08-02",
@@ -755,7 +747,7 @@
       },
       {
         "date": "2026-08-23",
-        "commits": 121
+        "commits": 122
       }
     ]
   },
@@ -766,7 +758,7 @@
     "latest_update": "EL-STRIX"
   },
   "summary": {
-    "repository_summary": "Creator of 10 repositories.",
+    "repository_summary": "Creator of 9 repositories.",
     "language_summary": "Primary language is PHP.",
     "activity_summary": "Most recently working on EL-STRIX.",
     "community_summary": "Received 4 stars across all projects."
