@@ -4,7 +4,7 @@
     "total_followers": 8,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 525,
+    "days_since_account_creation": 526,
     "account_age_years": 1.44
   },
   "repositories": {
@@ -69,8 +69,8 @@
     }
   },
   "forks": {
-    "total_forks": 2,
-    "average_forks": 0.22,
+    "total_forks": 3,
+    "average_forks": 0.33,
     "most_forked_repository": "Faculty-Subject-Allocation",
     "repository_fork_rankings": [
       {
@@ -78,11 +78,11 @@
         "forks": 2
       },
       {
-        "repository": "C-GAMES-COLLECTION",
-        "forks": 0
+        "repository": "CampusPlus",
+        "forks": 1
       },
       {
-        "repository": "CampusPlus",
+        "repository": "C-GAMES-COLLECTION",
         "forks": 0
       },
       {
@@ -112,11 +112,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1382,
-    "public_commits": 728,
-    "total_git_commits": 2113,
-    "recent_commits": 989,
-    "commit_frequency": 32.97,
+    "total_commits": 1385,
+    "public_commits": 731,
+    "total_git_commits": 2116,
+    "recent_commits": 953,
+    "commit_frequency": 31.77,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -125,15 +125,11 @@
       "Finzo": 1317,
       "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 369,
-      "CampusPlus": 61,
+      "EL-STRIX": 370,
+      "CampusPlus": 63,
       "SHIPYAED": 30
     },
     "commit_timeline": [
-      {
-        "date": "2026-07-30",
-        "commits": 39
-      },
       {
         "date": "2026-07-31",
         "commits": 38
@@ -252,32 +248,36 @@
       },
       {
         "date": "2026-08-29",
+        "commits": 3
+      },
+      {
+        "date": "2026-08-30",
         "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1494,
+    "total_contributions": 1497,
     "max_daily_contributions": 104,
-    "current_streak": 16,
+    "current_streak": 17,
     "longest_streak": 20,
-    "yearly_contributions": 1494
+    "yearly_contributions": 1497
   },
   "loc": {
-    "total_lines": 1309054,
-    "additions": 1309054,
-    "deletions": 1013214,
-    "net_lines": 295840
+    "total_lines": 1309586,
+    "additions": 1309586,
+    "deletions": 1013729,
+    "net_lines": 295857
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 37673984,
+    "total_bytes": 37688320,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 62.3,
-      "HTML": 14.31,
+      "PHP": 62.27,
+      "HTML": 14.3,
       "Python": 8.16,
-      "JavaScript": 8.09,
+      "JavaScript": 8.11,
       "C": 6.04,
       "TypeScript": 1.11
     },
@@ -285,22 +285,22 @@
       {
         "language": "PHP",
         "bytes": 23469056,
-        "percentage": 62.3
+        "percentage": 62.27
       },
       {
         "language": "HTML",
         "bytes": 5390336,
-        "percentage": 14.31
+        "percentage": 14.3
       },
       {
         "language": "Python",
-        "bytes": 3074048,
+        "bytes": 3077120,
         "percentage": 8.16
       },
       {
         "language": "JavaScript",
-        "bytes": 3046400,
-        "percentage": 8.09
+        "bytes": 3057664,
+        "percentage": 8.11
       },
       {
         "language": "C",
@@ -315,7 +315,7 @@
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
+    "most_recently_updated_repository": "CampusPlus",
     "recently_created_repository": "SHIPYAED",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
@@ -747,7 +747,11 @@
       },
       {
         "date": "2026-08-23",
-        "commits": 124
+        "commits": 127
+      },
+      {
+        "date": "2026-08-30",
+        "commits": 0
       }
     ]
   },
@@ -755,12 +759,12 @@
     "latest_commit": null,
     "latest_repository": "SHIPYAED",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "CampusPlus"
   },
   "summary": {
     "repository_summary": "Creator of 9 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on CampusPlus.",
     "community_summary": "Received 4 stars across all projects."
   }
 }
