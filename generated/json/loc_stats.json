@@ -636,11 +636,11 @@
     ]
   },
   "Finzo": {
-    "total_commits": 1503,
-    "total_lines": 596367,
-    "additions": 596367,
-    "deletions": 508089,
-    "net_lines": 88278,
+    "total_commits": 1556,
+    "total_lines": 605660,
+    "additions": 605660,
+    "deletions": 519155,
+    "net_lines": 86505,
     "weeks": [
       {
         "w": 1775347200,
@@ -782,9 +782,9 @@
       },
       {
         "w": 1789257600,
-        "a": 9762,
-        "d": 8493,
-        "c": 56
+        "a": 19055,
+        "d": 19559,
+        "c": 109
       }
     ]
   },
@@ -867,11 +867,11 @@
     ]
   },
   "EL-STRIX": {
-    "total_commits": 387,
-    "total_lines": 493150,
-    "additions": 493150,
-    "deletions": 450248,
-    "net_lines": 42902,
+    "total_commits": 388,
+    "total_lines": 497164,
+    "additions": 497164,
+    "deletions": 454250,
+    "net_lines": 42914,
     "weeks": [
       {
         "w": 1785024000,
@@ -917,9 +917,9 @@
       },
       {
         "w": 1789257600,
-        "a": 19418,
-        "d": 18283,
-        "c": 3
+        "a": 23432,
+        "d": 22285,
+        "c": 4
       }
     ]
   },
