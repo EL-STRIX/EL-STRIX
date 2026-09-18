@@ -3,6 +3,7 @@
 import os
 
 from config_loader import ConfigLoader
+from exceptions import ELSTRIXError
 from logger import logger
 from paths import PathManager
 from utils import ensure_dir
@@ -367,8 +368,10 @@ class SVGRenderer:
                     f.write(svg)
                 logger.info(f"Rendered dynamic SVG layout: {output_path}")
             except Exception as e:
+                logger.error(f"Failed to write SVG {mode}: {e}")
+                raise ELSTRIXError(f"Failed to write SVG {mode}: {e}") from e
+
         logger.info("--- PHASE 05 COMPLETED ---")
-        return True
 
 
 if __name__ == "__main__":
