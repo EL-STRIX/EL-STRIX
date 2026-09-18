@@ -367,6 +367,12 @@ class SVGRenderer:
                     f.write(svg)
                 logger.info(f"Rendered dynamic SVG layout: {output_path}")
             except Exception as e:
-                logger.error(f"Failed to write SVG {mode}: {e}")
-
         logger.info("--- PHASE 05 COMPLETED ---")
+        return True
+
+
+if __name__ == "__main__":
+    PathManager.ensure_directories()
+    renderer = SVGRenderer()
+    renderer.render()
+

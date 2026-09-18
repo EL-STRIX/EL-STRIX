@@ -316,7 +316,7 @@ class AvatarPipeline:
                 hash_sha256.update(chunk)
         return hash_sha256.hexdigest()
 
-    def run(self) -> None:
+    def run(self, force: bool = False) -> None:
         """Execute the full avatar pipeline."""
         logger.info("--- PHASE 04: AVATAR PROCESSING PIPELINE ---")
 
@@ -330,7 +330,7 @@ class AvatarPipeline:
         cache_file = PathManager.GENERATED_CACHE_DIR / "avatar_hash.txt"
         current_hash = self._get_image_hash(avatar_path)
 
-        if cache_file.exists():
+        if not force and cache_file.exists():
             with open(cache_file, "r") as f:
                 cached_hash = f.read().strip()
             if cached_hash == current_hash:
@@ -338,7 +338,7 @@ class AvatarPipeline:
                 logger.info("--- PHASE 04 COMPLETED ---")
                 return
 
-        logger.info("Avatar changes detected. Processing new avatar with advanced CV pipeline...")
+        logger.info("Avatar changes detected or force generation requested. Processing avatar with advanced CV pipeline...")
 
         # 1. Professional Preprocess
         processed_data = self.preprocessor.process(avatar_path)
@@ -377,3 +377,20 @@ class AvatarPipeline:
             logger.error("Failed to generate avatar SVGs.")
 
         logger.info("--- PHASE 04 COMPLETED ---")
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="EL-STRIX Avatar & ASCII Matrix Engine")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Force re-generation of ASCII matrix and SVGs even if image hash is unchanged",
+    )
+    args = parser.parse_args()
+
+    PathManager.ensure_directories()
+    pipeline = AvatarPipeline()
+    pipeline.run(force=args.force)
+
