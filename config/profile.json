@@ -59,15 +59,15 @@
     },
     {
       "name": "Enterprise Banking Web Application",
-      "status": "Target Release: August 2026"
-    },
-    {
-      "name": "Smart Parking System",
-      "status": "Target Release: September 2026"
+      "status": "Released"
     },
     {
       "name": "Smart Doctor Appointment System",
-      "status": "Target Release: November 2026"
+      "status": "Target Release: October 2026"
+    },
+    {
+      "name": "Smart Parking System",
+      "status": "Target Release: December 2026"
     }
   ]
 }
