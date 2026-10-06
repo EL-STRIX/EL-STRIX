@@ -1,5 +1,31 @@
 [
   {
+    "id": "23021647048",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 45463226855,
+      "ref": "refs/heads/main",
+      "head": "8590993af151fd747a1bba969b11c1449a698154",
+      "before": "c093ed533f031055ad8cc1be7514ce9067012e42"
+    },
+    "public": true,
+    "created_at": "2026-10-05T03:13:40Z"
+  },
+  {
     "id": "22935606781",
     "type": "PushEvent",
     "actor": {
@@ -972,27 +998,5 @@
     },
     "public": true,
     "created_at": "2026-09-04T02:11:15Z"
-  },
-  {
-    "id": "14490744077",
-    "type": "WatchEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1207088446,
-      "name": "EL-STRIX/Faculty-Subject-Allocation",
-      "url": "https://api.github.com/repos/EL-STRIX/Faculty-Subject-Allocation"
-    },
-    "payload": {
-      "action": "started"
-    },
-    "public": true,
-    "created_at": "2026-09-05T17:15:39Z"
   }
 ]
