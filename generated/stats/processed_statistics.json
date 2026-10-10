@@ -1,25 +1,25 @@
 {
   "profile": {
-    "total_public_repositories": 7,
+    "total_public_repositories": 9,
     "total_followers": 10,
     "total_following": 17,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 566,
+    "days_since_account_creation": 567,
     "account_age_years": 1.55
   },
   "repositories": {
-    "repository_count": 9,
-    "public_repository_count": 7,
+    "repository_count": 11,
+    "public_repository_count": 9,
     "private_repository_count": 2,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 9,
-    "active_repository_count": 9,
-    "repository_growth": 9
+    "original_repository_count": 11,
+    "active_repository_count": 11,
+    "repository_growth": 11
   },
   "stars": {
     "total_stars": 13,
-    "average_stars": 1.44,
+    "average_stars": 1.18,
     "most_starred_repository": "C-GAMES-COLLECTION",
     "least_starred_repository": "Slotara",
     "star_ranking": [
@@ -48,7 +48,15 @@
         "stars": 1
       },
       {
-        "repository": "LUMINA",
+        "repository": "Gameonix_Esports_Lumina",
+        "stars": 0
+      },
+      {
+        "repository": "ShadowFox_Aura_Skincare",
+        "stars": 0
+      },
+      {
+        "repository": "ShadowFox_Personal_Portfolio",
         "stars": 0
       },
       {
@@ -61,7 +69,7 @@
       }
     ],
     "star_distribution": {
-      "0": 3,
+      "0": 5,
       "1-10": 6,
       "11-50": 0,
       "51-100": 0,
@@ -70,7 +78,7 @@
   },
   "forks": {
     "total_forks": 4,
-    "average_forks": 0.44,
+    "average_forks": 0.36,
     "most_forked_repository": "CampusPlus",
     "repository_fork_rankings": [
       {
@@ -94,11 +102,19 @@
         "forks": 0
       },
       {
-        "repository": "LUMINA",
+        "repository": "Gameonix_Esports_Lumina",
         "forks": 0
       },
       {
         "repository": "Portfolio-V1.0",
+        "forks": 0
+      },
+      {
+        "repository": "ShadowFox_Aura_Skincare",
+        "forks": 0
+      },
+      {
+        "repository": "ShadowFox_Personal_Portfolio",
         "forks": 0
       },
       {
@@ -112,11 +128,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1684,
-    "public_commits": 1439,
-    "total_git_commits": 2401,
-    "recent_commits": 166,
-    "commit_frequency": 5.53,
+    "total_commits": 1693,
+    "public_commits": 1448,
+    "total_git_commits": 2435,
+    "recent_commits": 176,
+    "commit_frequency": 5.87,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -125,15 +141,14 @@
       "Finzo": 1556,
       "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 415,
+      "EL-STRIX": 416,
       "CampusPlus": 64,
-      "SHIPYAED": 30
+      "SHIPYAED": 30,
+      "ShadowFox_Aura_Skincare": 5,
+      "Gameonix_Esports_Lumina": 26,
+      "ShadowFox_Personal_Portfolio": 2
     },
     "commit_timeline": [
-      {
-        "date": "2026-09-09",
-        "commits": 1
-      },
       {
         "date": "2026-09-10",
         "commits": 1
@@ -248,75 +263,79 @@
       },
       {
         "date": "2026-10-08",
-        "commits": 1
+        "commits": 5
       },
       {
         "date": "2026-10-09",
-        "commits": 0
+        "commits": 1
+      },
+      {
+        "date": "2026-10-10",
+        "commits": 6
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1826,
+    "total_contributions": 1837,
     "max_daily_contributions": 104,
-    "current_streak": 57,
-    "longest_streak": 57,
-    "yearly_contributions": 1826
+    "current_streak": 59,
+    "longest_streak": 59,
+    "yearly_contributions": 1837
   },
   "loc": {
-    "total_lines": 1453379,
-    "additions": 1453379,
-    "deletions": 1177106,
-    "net_lines": 276273
+    "total_lines": 1467813,
+    "additions": 1467813,
+    "deletions": 1182336,
+    "net_lines": 285477
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 38138880,
+    "total_bytes": 46105600,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 64.41,
-      "HTML": 14.13,
-      "JavaScript": 8.07,
-      "Python": 6.33,
-      "C": 5.97,
-      "TypeScript": 1.09
+      "PHP": 53.28,
+      "HTML": 28.96,
+      "JavaScript": 6.67,
+      "Python": 5.24,
+      "C": 4.94,
+      "TypeScript": 0.9
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 24563712,
-        "percentage": 64.41
+        "percentage": 53.28
       },
       {
         "language": "HTML",
-        "bytes": 5390336,
-        "percentage": 14.13
+        "bytes": 13353984,
+        "percentage": 28.96
       },
       {
         "language": "JavaScript",
         "bytes": 3077120,
-        "percentage": 8.07
+        "percentage": 6.67
       },
       {
         "language": "Python",
-        "bytes": 2413568,
-        "percentage": 6.33
+        "bytes": 2416640,
+        "percentage": 5.24
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 5.97
+        "percentage": 4.94
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 1.09
+        "percentage": 0.9
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
-    "recently_created_repository": "SHIPYAED",
+    "most_recently_updated_repository": "ShadowFox_Aura_Skincare",
+    "recently_created_repository": "ShadowFox_Aura_Skincare",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
     "least_active_repository": null
@@ -381,7 +400,7 @@
     },
     {
       "name": "Faculty-Subject-Allocation",
-      "description": "Subject Allocation System Academic Year 2025 – 2026  | ",
+      "description": "Subject Allocation System Academic Year 2025 – 2026  |  For Brainware University CSS department faculty only.",
       "url": "https://github.com/EL-STRIX/Faculty-Subject-Allocation",
       "language": "PHP",
       "stars": "1"
@@ -391,7 +410,7 @@
     "repository_growth": [
       {
         "year": "2026",
-        "count": 9
+        "count": 11
       }
     ],
     "star_growth": [],
@@ -771,20 +790,20 @@
       },
       {
         "date": "2026-10-04",
-        "commits": 5
+        "commits": 16
       }
     ]
   },
   "recent_activity": {
     "latest_commit": null,
-    "latest_repository": "SHIPYAED",
+    "latest_repository": "ShadowFox_Aura_Skincare",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "ShadowFox_Aura_Skincare"
   },
   "summary": {
-    "repository_summary": "Creator of 9 repositories.",
+    "repository_summary": "Creator of 11 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on ShadowFox_Aura_Skincare.",
     "community_summary": "Received 13 stars across all projects."
   }
 }
