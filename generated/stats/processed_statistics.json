@@ -1,25 +1,25 @@
 {
   "profile": {
-    "total_public_repositories": 9,
+    "total_public_repositories": 13,
     "total_followers": 10,
     "total_following": 17,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 586,
-    "account_age_years": 1.6
+    "days_since_account_creation": 587,
+    "account_age_years": 1.61
   },
   "repositories": {
-    "repository_count": 11,
-    "public_repository_count": 9,
+    "repository_count": 15,
+    "public_repository_count": 13,
     "private_repository_count": 2,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 11,
-    "active_repository_count": 10,
-    "repository_growth": 11
+    "original_repository_count": 15,
+    "active_repository_count": 14,
+    "repository_growth": 15
   },
   "stars": {
     "total_stars": 13,
-    "average_stars": 1.18,
+    "average_stars": 0.87,
     "most_starred_repository": "C-GAMES-COLLECTION",
     "least_starred_repository": "Slotara",
     "star_ranking": [
@@ -48,11 +48,27 @@
         "stars": 1
       },
       {
-        "repository": "Gameonix_Esports_Lumina",
+        "repository": "CodeAlpha_C_Programming",
+        "stars": 0
+      },
+      {
+        "repository": "Cognifyz_C_Programing",
+        "stars": 0
+      },
+      {
+        "repository": "Gameonix_Esports_Frontend_Development",
+        "stars": 0
+      },
+      {
+        "repository": "Pinnacle_Labs_CPP_Programming",
         "stars": 0
       },
       {
         "repository": "ShadowFox_Aura_Skincare",
+        "stars": 0
+      },
+      {
+        "repository": "ShadowFox_Frontend_Development",
         "stars": 0
       },
       {
@@ -69,7 +85,7 @@
       }
     ],
     "star_distribution": {
-      "0": 5,
+      "0": 9,
       "1-10": 6,
       "11-50": 0,
       "51-100": 0,
@@ -78,7 +94,7 @@
   },
   "forks": {
     "total_forks": 4,
-    "average_forks": 0.36,
+    "average_forks": 0.27,
     "most_forked_repository": "CampusPlus",
     "repository_fork_rankings": [
       {
@@ -94,6 +110,14 @@
         "forks": 0
       },
       {
+        "repository": "CodeAlpha_C_Programming",
+        "forks": 0
+      },
+      {
+        "repository": "Cognifyz_C_Programing",
+        "forks": 0
+      },
+      {
         "repository": "EL-STRIX",
         "forks": 0
       },
@@ -102,7 +126,11 @@
         "forks": 0
       },
       {
-        "repository": "Gameonix_Esports_Lumina",
+        "repository": "Gameonix_Esports_Frontend_Development",
+        "forks": 0
+      },
+      {
+        "repository": "Pinnacle_Labs_CPP_Programming",
         "forks": 0
       },
       {
@@ -111,6 +139,10 @@
       },
       {
         "repository": "ShadowFox_Aura_Skincare",
+        "forks": 0
+      },
+      {
+        "repository": "ShadowFox_Frontend_Development",
         "forks": 0
       },
       {
@@ -128,11 +160,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1712,
-    "public_commits": 1467,
-    "total_git_commits": 2454,
-    "recent_commits": 43,
-    "commit_frequency": 1.43,
+    "total_commits": 1746,
+    "public_commits": 1501,
+    "total_git_commits": 2514,
+    "recent_commits": 80,
+    "commit_frequency": 2.67,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -141,18 +173,19 @@
       "Finzo": 1556,
       "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 435,
+      "EL-STRIX": 436,
       "CampusPlus": 64,
       "SHIPYAED": 30,
       "ShadowFox_Aura_Skincare": 5,
       "Gameonix_Esports_Lumina": 26,
-      "ShadowFox_Personal_Portfolio": 2
+      "ShadowFox_Personal_Portfolio": 2,
+      "Gameonix_Esports_Frontend_Development": 26,
+      "Pinnacle_Labs_CPP_Programming": 9,
+      "Cognifyz_C_Programing": 14,
+      "CodeAlpha_C_Programming": 5,
+      "ShadowFox_Frontend_Development": 5
     },
     "commit_timeline": [
-      {
-        "date": "2026-09-29",
-        "commits": 1
-      },
       {
         "date": "2026-09-30",
         "commits": 1
@@ -171,23 +204,23 @@
       },
       {
         "date": "2026-10-04",
-        "commits": 1
+        "commits": 11
       },
       {
         "date": "2026-10-05",
-        "commits": 1
+        "commits": 3
       },
       {
         "date": "2026-10-06",
-        "commits": 1
+        "commits": 3
       },
       {
         "date": "2026-10-07",
-        "commits": 1
+        "commits": 7
       },
       {
         "date": "2026-10-08",
-        "commits": 5
+        "commits": 6
       },
       {
         "date": "2026-10-09",
@@ -195,19 +228,19 @@
       },
       {
         "date": "2026-10-10",
-        "commits": 7
+        "commits": 9
       },
       {
         "date": "2026-10-11",
-        "commits": 1
+        "commits": 3
       },
       {
         "date": "2026-10-12",
-        "commits": 1
+        "commits": 3
       },
       {
         "date": "2026-10-13",
-        "commits": 1
+        "commits": 2
       },
       {
         "date": "2026-10-14",
@@ -271,71 +304,81 @@
       },
       {
         "date": "2026-10-29",
-        "commits": 0
+        "commits": 4
+      },
+      {
+        "date": "2026-10-30",
+        "commits": 6
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1856,
+    "total_contributions": 1894,
     "max_daily_contributions": 104,
-    "current_streak": 77,
-    "longest_streak": 77,
-    "yearly_contributions": 1856
+    "current_streak": 79,
+    "longest_streak": 79,
+    "yearly_contributions": 1894
   },
   "loc": {
-    "total_lines": 1505617,
-    "additions": 1505617,
-    "deletions": 1219632,
-    "net_lines": 285985
+    "total_lines": 1524311,
+    "additions": 1524311,
+    "deletions": 1225985,
+    "net_lines": 298326
   },
   "languages": {
-    "languages_used": 6,
-    "total_bytes": 46516224,
+    "languages_used": 7,
+    "total_bytes": 54561792,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 52.81,
-      "HTML": 28.71,
-      "JavaScript": 6.62,
-      "Python": 6.08,
-      "C": 4.9,
-      "TypeScript": 0.9
+      "PHP": 45.02,
+      "HTML": 39.06,
+      "JavaScript": 5.64,
+      "Python": 5.19,
+      "C": 4.3,
+      "TypeScript": 0.76,
+      "C++": 0.03
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 24563712,
-        "percentage": 52.81
+        "percentage": 45.02
       },
       {
         "language": "HTML",
-        "bytes": 13353984,
-        "percentage": 28.71
+        "bytes": 21314560,
+        "percentage": 39.06
       },
       {
         "language": "JavaScript",
         "bytes": 3077120,
-        "percentage": 6.62
+        "percentage": 5.64
       },
       {
         "language": "Python",
-        "bytes": 2827264,
-        "percentage": 6.08
+        "bytes": 2830336,
+        "percentage": 5.19
       },
       {
         "language": "C",
-        "bytes": 2277376,
-        "percentage": 4.9
+        "bytes": 2343936,
+        "percentage": 4.3
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 0.9
+        "percentage": 0.76
+      },
+      {
+        "language": "C++",
+        "bytes": 15360,
+        "percentage": 0.03
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
-    "recently_created_repository": "ShadowFox_Aura_Skincare",
+    "most_recently_updated_repository": "ShadowFox_Frontend_Development",
+    "recently_created_repository": "Pinnacle_Labs_CPP_Programming",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
     "least_active_repository": null
@@ -410,7 +453,7 @@
     "repository_growth": [
       {
         "year": "2026",
-        "count": 11
+        "count": 15
       }
     ],
     "star_growth": [],
@@ -790,11 +833,11 @@
       },
       {
         "date": "2026-10-04",
-        "commits": 17
+        "commits": 40
       },
       {
         "date": "2026-10-11",
-        "commits": 7
+        "commits": 12
       },
       {
         "date": "2026-10-18",
@@ -802,20 +845,20 @@
       },
       {
         "date": "2026-10-25",
-        "commits": 4
+        "commits": 14
       }
     ]
   },
   "recent_activity": {
     "latest_commit": null,
-    "latest_repository": "ShadowFox_Aura_Skincare",
+    "latest_repository": "Pinnacle_Labs_CPP_Programming",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "ShadowFox_Frontend_Development"
   },
   "summary": {
-    "repository_summary": "Creator of 11 repositories.",
+    "repository_summary": "Creator of 15 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on ShadowFox_Frontend_Development.",
     "community_summary": "Received 13 stars across all projects."
   }
 }

@@ -558,8 +558,8 @@
     },
     "repo": {
       "id": 1297432460,
-      "name": "EL-STRIX/Gameonix_Esports_Lumina",
-      "url": "https://api.github.com/repos/EL-STRIX/Gameonix_Esports_Lumina"
+      "name": "EL-STRIX/Gameonix_Esports_Frontend_Development",
+      "url": "https://api.github.com/repos/EL-STRIX/Gameonix_Esports_Frontend_Development"
     },
     "payload": {
       "repository_id": 1297432460,
@@ -884,31 +884,5 @@
     },
     "public": true,
     "created_at": "2026-09-30T03:11:16Z"
-  },
-  {
-    "id": "22464755941",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "repository_id": 1312717179,
-      "push_id": 44877698054,
-      "ref": "refs/heads/main",
-      "head": "5470fb391677b7b488fb97d0225df3b667302dd9",
-      "before": "2058828e9ee053f5ab75a7a82eaa46feebd82bb6"
-    },
-    "public": true,
-    "created_at": "2026-09-29T03:27:58Z"
   }
 ]
