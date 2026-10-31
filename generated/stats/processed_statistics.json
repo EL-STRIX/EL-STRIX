@@ -1,16 +1,16 @@
 {
   "profile": {
-    "total_public_repositories": 13,
+    "total_public_repositories": 12,
     "total_followers": 10,
     "total_following": 17,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 587,
+    "days_since_account_creation": 588,
     "account_age_years": 1.61
   },
   "repositories": {
     "repository_count": 15,
-    "public_repository_count": 13,
-    "private_repository_count": 2,
+    "public_repository_count": 12,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 15,
@@ -160,9 +160,9 @@
     ]
   },
   "commits": {
-    "total_commits": 1746,
-    "public_commits": 1501,
-    "total_git_commits": 2514,
+    "total_commits": 1748,
+    "public_commits": 1497,
+    "total_git_commits": 2515,
     "recent_commits": 80,
     "commit_frequency": 2.67,
     "commits_per_repository": {
@@ -173,7 +173,7 @@
       "Finzo": 1556,
       "Slotara": 69,
       "Portfolio-V1.0": 19,
-      "EL-STRIX": 436,
+      "EL-STRIX": 437,
       "CampusPlus": 64,
       "SHIPYAED": 30,
       "ShadowFox_Aura_Skincare": 5,
@@ -186,10 +186,6 @@
       "ShadowFox_Frontend_Development": 5
     },
     "commit_timeline": [
-      {
-        "date": "2026-09-30",
-        "commits": 1
-      },
       {
         "date": "2026-10-01",
         "commits": 4
@@ -308,33 +304,37 @@
       },
       {
         "date": "2026-10-30",
-        "commits": 6
+        "commits": 7
+      },
+      {
+        "date": "2026-10-31",
+        "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1894,
+    "total_contributions": 1895,
     "max_daily_contributions": 104,
     "current_streak": 79,
     "longest_streak": 79,
-    "yearly_contributions": 1894
+    "yearly_contributions": 1895
   },
   "loc": {
-    "total_lines": 1524311,
-    "additions": 1524311,
-    "deletions": 1225985,
-    "net_lines": 298326
+    "total_lines": 1525496,
+    "additions": 1525496,
+    "deletions": 1226488,
+    "net_lines": 299008
   },
   "languages": {
     "languages_used": 7,
-    "total_bytes": 54561792,
+    "total_bytes": 54914048,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 45.02,
-      "HTML": 39.06,
-      "JavaScript": 5.64,
-      "Python": 5.19,
-      "C": 4.3,
+      "PHP": 44.73,
+      "HTML": 38.81,
+      "Python": 5.8,
+      "JavaScript": 5.6,
+      "C": 4.27,
       "TypeScript": 0.76,
       "C++": 0.03
     },
@@ -342,27 +342,27 @@
       {
         "language": "PHP",
         "bytes": 24563712,
-        "percentage": 45.02
+        "percentage": 44.73
       },
       {
         "language": "HTML",
         "bytes": 21314560,
-        "percentage": 39.06
+        "percentage": 38.81
+      },
+      {
+        "language": "Python",
+        "bytes": 3182592,
+        "percentage": 5.8
       },
       {
         "language": "JavaScript",
         "bytes": 3077120,
-        "percentage": 5.64
-      },
-      {
-        "language": "Python",
-        "bytes": 2830336,
-        "percentage": 5.19
+        "percentage": 5.6
       },
       {
         "language": "C",
         "bytes": 2343936,
-        "percentage": 4.3
+        "percentage": 4.27
       },
       {
         "language": "TypeScript",
@@ -377,7 +377,7 @@
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "ShadowFox_Frontend_Development",
+    "most_recently_updated_repository": "EL-STRIX",
     "recently_created_repository": "Pinnacle_Labs_CPP_Programming",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
@@ -845,7 +845,7 @@
       },
       {
         "date": "2026-10-25",
-        "commits": 14
+        "commits": 15
       }
     ]
   },
@@ -853,12 +853,12 @@
     "latest_commit": null,
     "latest_repository": "Pinnacle_Labs_CPP_Programming",
     "latest_release": "v5.0.1",
-    "latest_update": "ShadowFox_Frontend_Development"
+    "latest_update": "EL-STRIX"
   },
   "summary": {
     "repository_summary": "Creator of 15 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on ShadowFox_Frontend_Development.",
+    "activity_summary": "Most recently working on EL-STRIX.",
     "community_summary": "Received 13 stars across all projects."
   }
 }
