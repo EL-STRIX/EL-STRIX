@@ -1,6 +1,6 @@
 [
   {
-    "id": "25681731062",
+    "id": "25752053509",
     "type": "PushEvent",
     "actor": {
       "id": 204368226,
@@ -11,73 +11,19 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
     },
     "repo": {
-      "id": 1438680362,
-      "name": "EL-STRIX/ShadowFox_Frontend_Development",
-      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Frontend_Development"
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
     },
     "payload": {
-      "repository_id": 1438680362,
-      "push_id": 48274249281,
+      "repository_id": 1312717179,
+      "push_id": 48317739556,
       "ref": "refs/heads/main",
-      "head": "124e3d5ba82aff536544b1d565fc6e11b30c8398",
-      "before": "fb7bbcf0401c03b7d81483cb51f2ae821fe06469"
-    },
-    "public": false,
-    "created_at": "2026-10-29T19:08:16Z"
-  },
-  {
-    "id": "25678114100",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1438819830,
-      "name": "EL-STRIX/Pinnacle_Labs_CPP_Programming",
-      "url": "https://api.github.com/repos/EL-STRIX/Pinnacle_Labs_CPP_Programming"
-    },
-    "payload": {
-      "ref": "main",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/main",
-      "master_branch": "main",
-      "description": "C++ programming tasks and projects completed during my one-month internship at Pinnacle Labs.",
-      "pusher_type": "user"
+      "head": "351eefe44713233f4ef147a9dec23844a7007977",
+      "before": "e4a347e27b69be3f33ab9796b5eb0a12809ccdb2"
     },
     "public": true,
-    "created_at": "2026-10-29T18:39:44Z"
-  },
-  {
-    "id": "25673944948",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1438674986,
-      "name": "EL-STRIX/CodeAlpha_C_Programming",
-      "url": "https://api.github.com/repos/EL-STRIX/CodeAlpha_C_Programming"
-    },
-    "payload": {
-      "ref": "main",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/main",
-      "master_branch": "main",
-      "description": "C programming tasks and projects completed during my one-month internship at CodeAlpha.",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2026-10-29T17:57:10Z"
+    "created_at": "2026-10-30T03:42:50Z"
   },
   {
     "id": "25619290563",
@@ -507,9 +453,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
     },
     "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+      "id": 1412298047,
+      "name": "EL-STRIX/ShadowFox_Personal_Portfolio",
+      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Personal_Portfolio"
     },
     "payload": {
       "repository_id": 1312717179,
@@ -611,9 +557,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
     },
     "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+      "id": 1297432460,
+      "name": "EL-STRIX/Gameonix_Esports_Frontend_Development",
+      "url": "https://api.github.com/repos/EL-STRIX/Gameonix_Esports_Frontend_Development"
     },
     "payload": {
       "repository_id": 1312717179,
@@ -637,9 +583,9 @@
       "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
     },
     "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+      "id": 1412302568,
+      "name": "EL-STRIX/ShadowFox_Aura_Skincare",
+      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Aura_Skincare"
     },
     "payload": {
       "repository_id": 1312717179,
@@ -650,32 +596,6 @@
     },
     "public": true,
     "created_at": "2026-10-10T03:33:02Z"
-  },
-  {
-    "id": "23592277366",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1297432460,
-      "name": "EL-STRIX/Gameonix_Esports_Frontend_Development",
-      "url": "https://api.github.com/repos/EL-STRIX/Gameonix_Esports_Frontend_Development"
-    },
-    "payload": {
-      "repository_id": 1297432460,
-      "push_id": 45995039145,
-      "ref": "refs/heads/main",
-      "head": "0c117e095ed31f15491c9c36957e09c751752e1b",
-      "before": "b1e6a401f320d719ca8344adec1d9d48194d457c"
-    },
-    "public": true,
-    "created_at": "2026-10-09T19:00:06Z"
   },
   {
     "id": "23535512490",
@@ -938,31 +858,5 @@
     },
     "public": true,
     "created_at": "2026-10-02T03:18:50Z"
-  },
-  {
-    "id": "22680046789",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "repository_id": 1312717179,
-      "push_id": 45101919294,
-      "ref": "refs/heads/main",
-      "head": "5b705622e6b8b090f8b463fb8a51c7e205b74ae7",
-      "before": "e8b65888c54fcdb5cbb2aec4fbf4fd9bd9ae18ae"
-    },
-    "public": true,
-    "created_at": "2026-10-01T03:18:10Z"
   }
 ]
