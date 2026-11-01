@@ -110,18 +110,6 @@
         "forks": 0
       },
       {
-        "repository": "ShadowFox_Aura_Skincare",
-        "forks": 0
-      },
-      {
-        "repository": "ShadowFox_Frontend_Development",
-        "forks": 0
-      },
-      {
-        "repository": "ShadowFox_Personal_Portfolio",
-        "forks": 0
-      },
-      {
         "repository": "SHIPYAED",
         "forks": 0
       },
@@ -132,11 +120,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1725,
-    "public_commits": 1480,
-    "total_git_commits": 2456,
-    "recent_commits": 50,
-    "commit_frequency": 1.67,
+    "total_commits": 1726,
+    "public_commits": 1481,
+    "total_git_commits": 2457,
+    "recent_commits": 51,
+    "commit_frequency": 1.7,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -145,7 +133,7 @@
       "Finzo": 1556,
       "Slotara": 69,
       "Portfolio-V1.0": 20,
-      "EL-STRIX": 438,
+      "EL-STRIX": 439,
       "CampusPlus": 66,
       "SHIPYAED": 30,
       "ShadowFox_Personal_Portfolio": 2,
@@ -275,158 +263,70 @@
       },
       {
         "date": "2026-11-01",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-10",
-        "commits": 9
-      },
-      {
-        "date": "2026-10-11",
-        "commits": 3
-      },
-      {
-        "date": "2026-10-12",
-        "commits": 3
-      },
-      {
-        "date": "2026-10-13",
         "commits": 2
-      },
-      {
-        "date": "2026-10-14",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-15",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-16",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-17",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-18",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-19",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-20",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-21",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-22",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-23",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-24",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-25",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-26",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-27",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-28",
-        "commits": 1
-      },
-      {
-        "date": "2026-10-29",
-        "commits": 4
-      },
-      {
-        "date": "2026-10-30",
-        "commits": 7
-      },
-      {
-        "date": "2026-10-31",
-        "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1867,
+    "total_contributions": 1868,
     "max_daily_contributions": 104,
     "current_streak": 81,
     "longest_streak": 81,
-    "yearly_contributions": 1867
+    "yearly_contributions": 1868
   },
   "loc": {
-    "total_lines": 1638185,
-    "additions": 1638185,
-    "deletions": 1298319,
-    "net_lines": 339866
+    "total_lines": 1642622,
+    "additions": 1642622,
+    "deletions": 1304709,
+    "net_lines": 337913
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 57850880,
+    "total_bytes": 60695552,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 38.43,
-      "JavaScript": 33.08,
-      "HTML": 18.32,
-      "Python": 5.51,
-      "C": 3.94,
-      "TypeScript": 0.72
+      "PHP": 36.63,
+      "JavaScript": 31.53,
+      "HTML": 22.14,
+      "Python": 5.26,
+      "C": 3.75,
+      "TypeScript": 0.69
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 22231040,
-        "percentage": 38.43
+        "percentage": 36.63
       },
       {
         "language": "JavaScript",
         "bytes": 19139584,
-        "percentage": 33.08
+        "percentage": 31.53
       },
       {
         "language": "HTML",
-        "bytes": 10599424,
-        "percentage": 18.32
+        "bytes": 13435904,
+        "percentage": 22.14
       },
       {
         "language": "Python",
-        "bytes": 3186688,
-        "percentage": 5.51
+        "bytes": 3194880,
+        "percentage": 5.26
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 3.94
+        "percentage": 3.75
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 0.72
+        "percentage": 0.69
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "Portfolio-V1.0",
+    "most_recently_updated_repository": "EL-STRIX",
     "recently_created_repository": "Docyra",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
@@ -898,7 +798,7 @@
       },
       {
         "date": "2026-11-01",
-        "commits": 1
+        "commits": 2
       }
     ]
   },
@@ -906,12 +806,12 @@
     "latest_commit": null,
     "latest_repository": "Docyra",
     "latest_release": "v5.0.1",
-    "latest_update": "Portfolio-V1.0"
+    "latest_update": "EL-STRIX"
   },
   "summary": {
     "repository_summary": "Creator of 10 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on Portfolio-V1.0.",
+    "activity_summary": "Most recently working on EL-STRIX.",
     "community_summary": "Received 12 stars across all projects."
   }
 }
