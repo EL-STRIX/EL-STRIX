@@ -1,5 +1,84 @@
 [
   {
+    "id": "25889939809",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1342121859,
+      "name": "EL-STRIX/CampusPlus",
+      "url": "https://api.github.com/repos/EL-STRIX/CampusPlus"
+    },
+    "payload": {
+      "repository_id": 1342121859,
+      "push_id": 48489411644,
+      "ref": "refs/heads/main",
+      "head": "b167000c75e79ecdb8c66f21116ceff9bea0af35",
+      "before": "7ffac90eef94adfe930ec622f5a0c500ef65e9a8"
+    },
+    "public": true,
+    "created_at": "2026-10-31T15:31:58Z"
+  },
+  {
+    "id": "25875394538",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1440488322,
+      "name": "EL-STRIX/Docyra",
+      "url": "https://api.github.com/repos/EL-STRIX/Docyra"
+    },
+    "payload": {
+      "ref": "main",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/main",
+      "master_branch": "main",
+      "description": null,
+      "pusher_type": "user"
+    },
+    "public": false,
+    "created_at": "2026-10-31T04:14:22Z"
+  },
+  {
+    "id": "25839444999",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 48443097081,
+      "ref": "refs/heads/main",
+      "head": "2ab23dcc1a7294f1576762af734e906ea57d952f",
+      "before": "351eefe44713233f4ef147a9dec23844a7007977"
+    },
+    "public": true,
+    "created_at": "2026-10-31T03:27:48Z"
+  },
+  {
     "id": "25752053509",
     "type": "PushEvent",
     "actor": {
@@ -494,32 +573,6 @@
     "created_at": "2026-10-12T03:29:17Z"
   },
   {
-    "id": "23695002124",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1412298047,
-      "name": "EL-STRIX/ShadowFox_Personal_Portfolio",
-      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Personal_Portfolio"
-    },
-    "payload": {
-      "repository_id": 1412298047,
-      "push_id": 45995238832,
-      "ref": "refs/heads/main",
-      "head": "a3c7cd24b1fab70d0ceab466af9f8aae84904304",
-      "before": "6a343aa6747a2e241ebd6c22b933796332e5b8f2"
-    },
-    "public": true,
-    "created_at": "2026-10-09T19:02:19Z"
-  },
-  {
     "id": "23680419027",
     "type": "PushEvent",
     "actor": {
@@ -596,86 +649,6 @@
     },
     "public": true,
     "created_at": "2026-10-10T03:33:02Z"
-  },
-  {
-    "id": "23535512490",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1412302568,
-      "name": "EL-STRIX/ShadowFox_Aura_Skincare",
-      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Aura_Skincare"
-    },
-    "payload": {
-      "repository_id": 1412302568,
-      "push_id": 45995521684,
-      "ref": "refs/heads/main",
-      "head": "ae1a50a9974aa65adb2f0c47ed596b9b82305a1a",
-      "before": "e21cd69d5024cbad9374abbcea335539c2db28d9"
-    },
-    "public": true,
-    "created_at": "2026-10-09T19:05:41Z"
-  },
-  {
-    "id": "23522706954",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1412302568,
-      "name": "EL-STRIX/ShadowFox_Aura_Skincare",
-      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Aura_Skincare"
-    },
-    "payload": {
-      "ref": "main",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/main",
-      "master_branch": "main",
-      "description": "A modern skincare brand website build under Frontend development internship on ShadowFox company.",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2026-10-09T18:40:00Z"
-  },
-  {
-    "id": "23520772845",
-    "type": "CreateEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1412298047,
-      "name": "EL-STRIX/ShadowFox_Personal_Portfolio",
-      "url": "https://api.github.com/repos/EL-STRIX/ShadowFox_Personal_Portfolio"
-    },
-    "payload": {
-      "ref": "main",
-      "ref_type": "branch",
-      "full_ref": "refs/heads/main",
-      "master_branch": "main",
-      "description": "Personal Portfolio under Frontend development internship on ShadowFox company.",
-      "pusher_type": "user"
-    },
-    "public": true,
-    "created_at": "2026-10-09T18:36:19Z"
   },
   {
     "id": "23339959139",
@@ -832,31 +805,5 @@
     },
     "public": true,
     "created_at": "2026-10-03T03:04:51Z"
-  },
-  {
-    "id": "22752901533",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "repository_id": 1312717179,
-      "push_id": 45213583892,
-      "ref": "refs/heads/main",
-      "head": "1de560e87c13654878702da8388f662e77d87080",
-      "before": "5b705622e6b8b090f8b463fb8a51c7e205b74ae7"
-    },
-    "public": true,
-    "created_at": "2026-10-02T03:18:50Z"
   }
 ]

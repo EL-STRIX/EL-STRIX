@@ -1,25 +1,25 @@
 {
   "profile": {
-    "total_public_repositories": 8,
+    "total_public_repositories": 5,
     "total_followers": 10,
     "total_following": 17,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 589,
-    "account_age_years": 1.61
+    "days_since_account_creation": 590,
+    "account_age_years": 1.62
   },
   "repositories": {
-    "repository_count": 10,
-    "public_repository_count": 8,
-    "private_repository_count": 2,
+    "repository_count": 8,
+    "public_repository_count": 5,
+    "private_repository_count": 3,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 10,
-    "active_repository_count": 10,
-    "repository_growth": 10
+    "original_repository_count": 8,
+    "active_repository_count": 8,
+    "repository_growth": 8
   },
   "stars": {
     "total_stars": 12,
-    "average_stars": 1.2,
+    "average_stars": 1.5,
     "most_starred_repository": "C-GAMES-COLLECTION",
     "least_starred_repository": "Slotara",
     "star_ranking": [
@@ -48,14 +48,6 @@
         "stars": 0
       },
       {
-        "repository": "ShadowFox_Aura_Skincare",
-        "stars": 0
-      },
-      {
-        "repository": "ShadowFox_Personal_Portfolio",
-        "stars": 0
-      },
-      {
         "repository": "SHIPYAED",
         "stars": 0
       },
@@ -65,7 +57,7 @@
       }
     ],
     "star_distribution": {
-      "0": 5,
+      "0": 3,
       "1-10": 5,
       "11-50": 0,
       "51-100": 0,
@@ -74,7 +66,7 @@
   },
   "forks": {
     "total_forks": 2,
-    "average_forks": 0.2,
+    "average_forks": 0.25,
     "most_forked_repository": "CampusPlus",
     "repository_fork_rankings": [
       {
@@ -102,14 +94,6 @@
         "forks": 0
       },
       {
-        "repository": "ShadowFox_Aura_Skincare",
-        "forks": 0
-      },
-      {
-        "repository": "ShadowFox_Personal_Portfolio",
-        "forks": 0
-      },
-      {
         "repository": "SHIPYAED",
         "forks": 0
       },
@@ -120,11 +104,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1726,
-    "public_commits": 1481,
-    "total_git_commits": 2457,
-    "recent_commits": 51,
-    "commit_frequency": 1.7,
+    "total_commits": 1721,
+    "public_commits": 1453,
+    "total_git_commits": 2458,
+    "recent_commits": 42,
+    "commit_frequency": 1.4,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -133,7 +117,7 @@
       "Finzo": 1556,
       "Slotara": 69,
       "Portfolio-V1.0": 20,
-      "EL-STRIX": 439,
+      "EL-STRIX": 440,
       "CampusPlus": 66,
       "SHIPYAED": 30,
       "ShadowFox_Personal_Portfolio": 2,
@@ -141,10 +125,6 @@
       "Docyra": 22
     },
     "commit_timeline": [
-      {
-        "date": "2026-10-02",
-        "commits": 1
-      },
       {
         "date": "2026-10-03",
         "commits": 1
@@ -167,7 +147,7 @@
       },
       {
         "date": "2026-10-08",
-        "commits": 5
+        "commits": 1
       },
       {
         "date": "2026-10-09",
@@ -175,7 +155,7 @@
       },
       {
         "date": "2026-10-10",
-        "commits": 6
+        "commits": 1
       },
       {
         "date": "2026-10-11",
@@ -263,65 +243,69 @@
       },
       {
         "date": "2026-11-01",
-        "commits": 2
+        "commits": 3
+      },
+      {
+        "date": "2026-11-02",
+        "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1868,
+    "total_contributions": 1860,
     "max_daily_contributions": 104,
     "current_streak": 81,
     "longest_streak": 81,
-    "yearly_contributions": 1868
+    "yearly_contributions": 1860
   },
   "loc": {
-    "total_lines": 1642622,
-    "additions": 1642622,
-    "deletions": 1304709,
-    "net_lines": 337913
+    "total_lines": 1643098,
+    "additions": 1643098,
+    "deletions": 1305267,
+    "net_lines": 337831
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 60695552,
+    "total_bytes": 53451776,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 36.63,
-      "JavaScript": 31.53,
-      "HTML": 22.14,
-      "Python": 5.26,
-      "C": 3.75,
-      "TypeScript": 0.69
+      "PHP": 41.59,
+      "JavaScript": 35.81,
+      "HTML": 10.25,
+      "Python": 7.31,
+      "C": 4.26,
+      "TypeScript": 0.78
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 22231040,
-        "percentage": 36.63
+        "percentage": 41.59
       },
       {
         "language": "JavaScript",
         "bytes": 19139584,
-        "percentage": 31.53
+        "percentage": 35.81
       },
       {
         "language": "HTML",
-        "bytes": 13435904,
-        "percentage": 22.14
+        "bytes": 5477376,
+        "percentage": 10.25
       },
       {
         "language": "Python",
-        "bytes": 3194880,
-        "percentage": 5.26
+        "bytes": 3909632,
+        "percentage": 7.31
       },
       {
         "language": "C",
         "bytes": 2277376,
-        "percentage": 3.75
+        "percentage": 4.26
       },
       {
         "language": "TypeScript",
         "bytes": 416768,
-        "percentage": 0.69
+        "percentage": 0.78
       }
     ]
   },
@@ -402,7 +386,7 @@
     "repository_growth": [
       {
         "year": "2026",
-        "count": 10
+        "count": 8
       }
     ],
     "star_growth": [],
@@ -782,7 +766,7 @@
       },
       {
         "date": "2026-10-04",
-        "commits": 16
+        "commits": 7
       },
       {
         "date": "2026-10-11",
@@ -798,7 +782,7 @@
       },
       {
         "date": "2026-11-01",
-        "commits": 2
+        "commits": 3
       }
     ]
   },
@@ -809,7 +793,7 @@
     "latest_update": "EL-STRIX"
   },
   "summary": {
-    "repository_summary": "Creator of 10 repositories.",
+    "repository_summary": "Creator of 8 repositories.",
     "language_summary": "Primary language is PHP.",
     "activity_summary": "Most recently working on EL-STRIX.",
     "community_summary": "Received 12 stars across all projects."
