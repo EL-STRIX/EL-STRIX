@@ -1,20 +1,20 @@
 {
   "profile": {
-    "total_public_repositories": 5,
+    "total_public_repositories": 6,
     "total_followers": 12,
-    "total_following": 17,
+    "total_following": 16,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 601,
+    "days_since_account_creation": 602,
     "account_age_years": 1.65
   },
   "repositories": {
     "repository_count": 8,
-    "public_repository_count": 5,
-    "private_repository_count": 3,
+    "public_repository_count": 6,
+    "private_repository_count": 2,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 8,
-    "active_repository_count": 7,
+    "active_repository_count": 8,
     "repository_growth": 8
   },
   "stars": {
@@ -104,31 +104,27 @@
     ]
   },
   "commits": {
-    "total_commits": 1737,
-    "public_commits": 1464,
-    "total_git_commits": 2469,
-    "recent_commits": 50,
-    "commit_frequency": 1.67,
+    "total_commits": 1785,
+    "public_commits": 1535,
+    "total_git_commits": 2518,
+    "recent_commits": 98,
+    "commit_frequency": 3.27,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
-      "C-GAMES-COLLECTION": 190,
+      "C-GAMES-COLLECTION": 192,
       "Faculty-Subject-Allocation": 25,
-      "Finzo": 1556,
+      "Finzo": 1558,
       "Slotara": 69,
       "Portfolio-V1.0": 20,
-      "EL-STRIX": 451,
-      "CampusPlus": 66,
+      "EL-STRIX": 452,
+      "CampusPlus": 68,
       "SHIPYAED": 30,
       "ShadowFox_Personal_Portfolio": 2,
       "ShadowFox_Aura_Skincare": 5,
-      "Docyra": 22
+      "Docyra": 64
     },
     "commit_timeline": [
-      {
-        "date": "2026-10-14",
-        "commits": 1
-      },
       {
         "date": "2026-10-15",
         "commits": 1
@@ -203,7 +199,7 @@
       },
       {
         "date": "2026-11-02",
-        "commits": 1
+        "commits": 7
       },
       {
         "date": "2026-11-03",
@@ -247,60 +243,64 @@
       },
       {
         "date": "2026-11-13",
-        "commits": 0
+        "commits": 14
+      },
+      {
+        "date": "2026-11-14",
+        "commits": 29
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1876,
+    "total_contributions": 1925,
     "max_daily_contributions": 104,
-    "current_streak": 92,
-    "longest_streak": 92,
-    "yearly_contributions": 1876
+    "current_streak": 94,
+    "longest_streak": 94,
+    "yearly_contributions": 1925
   },
   "loc": {
-    "total_lines": 1655686,
-    "additions": 1655686,
-    "deletions": 1318027,
-    "net_lines": 337659
+    "total_lines": 1670659,
+    "additions": 1670659,
+    "deletions": 1320264,
+    "net_lines": 350395
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 54853632,
+    "total_bytes": 55156736,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 40.53,
-      "JavaScript": 34.89,
-      "HTML": 9.99,
-      "Python": 9.68,
-      "C": 4.15,
+      "PHP": 40.34,
+      "JavaScript": 35.18,
+      "HTML": 9.93,
+      "Python": 9.64,
+      "C": 4.16,
       "TypeScript": 0.76
     },
     "language_ranking": [
       {
         "language": "PHP",
-        "bytes": 22231040,
-        "percentage": 40.53
+        "bytes": 22248448,
+        "percentage": 40.34
       },
       {
         "language": "JavaScript",
-        "bytes": 19139584,
-        "percentage": 34.89
+        "bytes": 19405824,
+        "percentage": 35.18
       },
       {
         "language": "HTML",
         "bytes": 5477376,
-        "percentage": 9.99
+        "percentage": 9.93
       },
       {
         "language": "Python",
-        "bytes": 5311488,
-        "percentage": 9.68
+        "bytes": 5314560,
+        "percentage": 9.64
       },
       {
         "language": "C",
-        "bytes": 2277376,
-        "percentage": 4.15
+        "bytes": 2293760,
+        "percentage": 4.16
       },
       {
         "language": "TypeScript",
@@ -310,7 +310,7 @@
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
+    "most_recently_updated_repository": "Docyra",
     "recently_created_repository": "Docyra",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
@@ -376,7 +376,7 @@
     },
     {
       "name": "Docyra",
-      "description": "No description provided.",
+      "description": "A modern healthcare platform for booking doctor appointments and managing partner clinics with live scheduling.",
       "url": "https://github.com/EL-STRIX/Docyra",
       "language": "JavaScript",
       "stars": "0"
@@ -782,11 +782,11 @@
       },
       {
         "date": "2026-11-01",
-        "commits": 17
+        "commits": 23
       },
       {
         "date": "2026-11-08",
-        "commits": 5
+        "commits": 48
       }
     ]
   },
@@ -794,12 +794,12 @@
     "latest_commit": null,
     "latest_repository": "Docyra",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "Docyra"
   },
   "summary": {
     "repository_summary": "Creator of 8 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on Docyra.",
     "community_summary": "Received 16 stars across all projects."
   }
 }

@@ -240,11 +240,11 @@
     ]
   },
   "C-GAMES-COLLECTION": {
-    "total_commits": 190,
-    "total_lines": 111432,
-    "additions": 111432,
-    "deletions": 106591,
-    "net_lines": 4841,
+    "total_commits": 192,
+    "total_lines": 112106,
+    "additions": 112106,
+    "deletions": 106612,
+    "net_lines": 5494,
     "weeks": [
       {
         "w": 1763856000,
@@ -545,6 +545,12 @@
         "a": 0,
         "d": 0,
         "c": 0
+      },
+      {
+        "w": 1794096000,
+        "a": 674,
+        "d": 21,
+        "c": 2
       }
     ]
   },
@@ -738,11 +744,11 @@
     ]
   },
   "Finzo": {
-    "total_commits": 1556,
-    "total_lines": 605660,
-    "additions": 605660,
-    "deletions": 519155,
-    "net_lines": 86505,
+    "total_commits": 1558,
+    "total_lines": 606334,
+    "additions": 606334,
+    "deletions": 519176,
+    "net_lines": 87158,
     "weeks": [
       {
         "w": 1775347200,
@@ -929,6 +935,12 @@
         "a": 0,
         "d": 0,
         "c": 0
+      },
+      {
+        "w": 1794096000,
+        "a": 674,
+        "d": 21,
+        "c": 2
       }
     ]
   },
@@ -1113,11 +1125,11 @@
     ]
   },
   "EL-STRIX": {
-    "total_commits": 451,
-    "total_lines": 610853,
-    "additions": 610853,
-    "deletions": 569626,
-    "net_lines": 41227,
+    "total_commits": 452,
+    "total_lines": 611247,
+    "additions": 611247,
+    "deletions": 569994,
+    "net_lines": 41253,
     "weeks": [
       {
         "w": 1785024000,
@@ -1211,18 +1223,18 @@
       },
       {
         "w": 1794096000,
-        "a": 9162,
-        "d": 9130,
-        "c": 5
+        "a": 9556,
+        "d": 9498,
+        "c": 6
       }
     ]
   },
   "CampusPlus": {
-    "total_commits": 66,
-    "total_lines": 55349,
-    "additions": 55349,
-    "deletions": 10019,
-    "net_lines": 45330,
+    "total_commits": 68,
+    "total_lines": 56023,
+    "additions": 56023,
+    "deletions": 10040,
+    "net_lines": 45983,
     "weeks": [
       {
         "w": 1786838400,
@@ -1298,9 +1310,9 @@
       },
       {
         "w": 1794096000,
-        "a": 0,
-        "d": 0,
-        "c": 0
+        "a": 674,
+        "d": 21,
+        "c": 2
       }
     ]
   },
@@ -1464,11 +1476,11 @@
     ]
   },
   "Docyra": {
-    "total_commits": 22,
-    "total_lines": 134971,
-    "additions": 134971,
-    "deletions": 72317,
-    "net_lines": 62654,
+    "total_commits": 64,
+    "total_lines": 147528,
+    "additions": 147528,
+    "deletions": 74123,
+    "net_lines": 73405,
     "weeks": [
       {
         "w": 1789257600,
@@ -1514,15 +1526,15 @@
       },
       {
         "w": 1793491200,
-        "a": 0,
-        "d": 0,
-        "c": 0
+        "a": 509,
+        "d": 163,
+        "c": 6
       },
       {
         "w": 1794096000,
-        "a": 0,
-        "d": 0,
-        "c": 0
+        "a": 12048,
+        "d": 1643,
+        "c": 36
       }
     ]
   }
