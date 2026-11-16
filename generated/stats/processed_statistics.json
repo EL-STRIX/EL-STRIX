@@ -4,7 +4,7 @@
     "total_followers": 14,
     "total_following": 16,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 603,
+    "days_since_account_creation": 604,
     "account_age_years": 1.65
   },
   "repositories": {
@@ -104,11 +104,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1811,
-    "public_commits": 1561,
-    "total_git_commits": 2544,
-    "recent_commits": 123,
-    "commit_frequency": 4.1,
+    "total_commits": 1847,
+    "public_commits": 1596,
+    "total_git_commits": 2579,
+    "recent_commits": 158,
+    "commit_frequency": 5.27,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -117,18 +117,14 @@
       "Finzo": 1558,
       "Slotara": 69,
       "Portfolio-V1.0": 20,
-      "EL-STRIX": 453,
+      "EL-STRIX": 454,
       "CampusPlus": 68,
       "SHIPYAED": 30,
       "ShadowFox_Personal_Portfolio": 2,
       "ShadowFox_Aura_Skincare": 5,
-      "Docyra": 89
+      "Docyra": 123
     },
     "commit_timeline": [
-      {
-        "date": "2026-10-16",
-        "commits": 1
-      },
       {
         "date": "2026-10-17",
         "commits": 1
@@ -243,36 +239,40 @@
       },
       {
         "date": "2026-11-14",
-        "commits": 38
+        "commits": 36
       },
       {
         "date": "2026-11-15",
-        "commits": 19
+        "commits": 34
+      },
+      {
+        "date": "2026-11-16",
+        "commits": 23
       }
     ]
   },
   "contributions": {
-    "total_contributions": 1951,
+    "total_contributions": 1987,
     "max_daily_contributions": 104,
-    "current_streak": 95,
-    "longest_streak": 95,
-    "yearly_contributions": 1951
+    "current_streak": 96,
+    "longest_streak": 96,
+    "yearly_contributions": 1987
   },
   "loc": {
-    "total_lines": 1687484,
-    "additions": 1687484,
-    "deletions": 1328430,
-    "net_lines": 359054
+    "total_lines": 1698179,
+    "additions": 1698179,
+    "deletions": 1335420,
+    "net_lines": 362759
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 55793664,
+    "total_bytes": 55741440,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 39.88,
-      "JavaScript": 35.31,
-      "Python": 10.14,
-      "HTML": 9.82,
+      "PHP": 39.91,
+      "JavaScript": 35.23,
+      "Python": 10.16,
+      "HTML": 9.83,
       "C": 4.11,
       "TypeScript": 0.75
     },
@@ -280,22 +280,22 @@
       {
         "language": "PHP",
         "bytes": 22248448,
-        "percentage": 39.88
+        "percentage": 39.91
       },
       {
         "language": "JavaScript",
-        "bytes": 19698688,
-        "percentage": 35.31
+        "bytes": 19640320,
+        "percentage": 35.23
       },
       {
         "language": "Python",
-        "bytes": 5658624,
-        "percentage": 10.14
+        "bytes": 5664768,
+        "percentage": 10.16
       },
       {
         "language": "HTML",
         "bytes": 5477376,
-        "percentage": 9.82
+        "percentage": 9.83
       },
       {
         "language": "C",
@@ -786,11 +786,11 @@
       },
       {
         "date": "2026-11-08",
-        "commits": 57
+        "commits": 55
       },
       {
         "date": "2026-11-15",
-        "commits": 19
+        "commits": 57
       }
     ]
   },

@@ -1131,11 +1131,11 @@
     ]
   },
   "EL-STRIX": {
-    "total_commits": 453,
-    "total_lines": 616537,
-    "additions": 616537,
-    "deletions": 575246,
-    "net_lines": 41291,
+    "total_commits": 454,
+    "total_lines": 621498,
+    "additions": 621498,
+    "deletions": 580159,
+    "net_lines": 41339,
     "weeks": [
       {
         "w": 1785024000,
@@ -1235,9 +1235,9 @@
       },
       {
         "w": 1794700800,
-        "a": 0,
-        "d": 0,
-        "c": 0
+        "a": 4961,
+        "d": 4913,
+        "c": 1
       }
     ]
   },
@@ -1488,11 +1488,11 @@
     ]
   },
   "Docyra": {
-    "total_commits": 89,
-    "total_lines": 159063,
-    "additions": 159063,
-    "deletions": 77037,
-    "net_lines": 82026,
+    "total_commits": 123,
+    "total_lines": 164797,
+    "additions": 164797,
+    "deletions": 79114,
+    "net_lines": 85683,
     "weeks": [
       {
         "w": 1789257600,
@@ -1550,9 +1550,9 @@
       },
       {
         "w": 1794700800,
-        "a": 7848,
-        "d": 2152,
-        "c": 19
+        "a": 13582,
+        "d": 4229,
+        "c": 53
       }
     ]
   }
