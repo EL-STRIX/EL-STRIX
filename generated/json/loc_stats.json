@@ -1131,11 +1131,11 @@
     ]
   },
   "EL-STRIX": {
-    "total_commits": 454,
-    "total_lines": 621498,
-    "additions": 621498,
-    "deletions": 580159,
-    "net_lines": 41339,
+    "total_commits": 455,
+    "total_lines": 622222,
+    "additions": 622222,
+    "deletions": 580445,
+    "net_lines": 41777,
     "weeks": [
       {
         "w": 1785024000,
@@ -1235,9 +1235,9 @@
       },
       {
         "w": 1794700800,
-        "a": 4961,
-        "d": 4913,
-        "c": 1
+        "a": 5685,
+        "d": 5199,
+        "c": 2
       }
     ]
   },
