@@ -1,25 +1,25 @@
 {
   "profile": {
-    "total_public_repositories": 7,
+    "total_public_repositories": 8,
     "total_followers": 14,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 610,
+    "days_since_account_creation": 611,
     "account_age_years": 1.67
   },
   "repositories": {
-    "repository_count": 9,
-    "public_repository_count": 7,
+    "repository_count": 10,
+    "public_repository_count": 8,
     "private_repository_count": 2,
     "archived_repository_count": 0,
     "forked_repository_count": 0,
-    "original_repository_count": 9,
+    "original_repository_count": 10,
     "active_repository_count": 9,
-    "repository_growth": 9
+    "repository_growth": 10
   },
   "stars": {
     "total_stars": 23,
-    "average_stars": 2.56,
+    "average_stars": 2.3,
     "most_starred_repository": "C-GAMES-COLLECTION",
     "least_starred_repository": "Vibe-Check",
     "star_ranking": [
@@ -48,6 +48,10 @@
         "stars": 2
       },
       {
+        "repository": "IMDB-Clone",
+        "stars": 0
+      },
+      {
         "repository": "SHIPYAED",
         "stars": 0
       },
@@ -61,7 +65,7 @@
       }
     ],
     "star_distribution": {
-      "0": 3,
+      "0": 4,
       "1-10": 6,
       "11-50": 0,
       "51-100": 0,
@@ -70,7 +74,7 @@
   },
   "forks": {
     "total_forks": 5,
-    "average_forks": 0.56,
+    "average_forks": 0.5,
     "most_forked_repository": "Docyra",
     "repository_fork_rankings": [
       {
@@ -94,6 +98,10 @@
         "forks": 0
       },
       {
+        "repository": "IMDB-Clone",
+        "forks": 0
+      },
+      {
         "repository": "Portfolio-V1.0",
         "forks": 0
       },
@@ -112,11 +120,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1883,
-    "public_commits": 1632,
-    "total_git_commits": 2615,
-    "recent_commits": 189,
-    "commit_frequency": 6.3,
+    "total_commits": 1952,
+    "public_commits": 1701,
+    "total_git_commits": 2683,
+    "recent_commits": 258,
+    "commit_frequency": 8.6,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -125,19 +133,16 @@
       "Finzo": 1558,
       "Slotara": 69,
       "Portfolio-V1.0": 20,
-      "EL-STRIX": 462,
+      "EL-STRIX": 463,
       "CampusPlus": 68,
       "SHIPYAED": 30,
       "ShadowFox_Personal_Portfolio": 2,
       "ShadowFox_Aura_Skincare": 5,
       "Docyra": 123,
-      "Vibe-Check": 28
+      "Vibe-Check": 28,
+      "IMDB-Clone": 67
     },
     "commit_timeline": [
-      {
-        "date": "2026-10-23",
-        "commits": 1
-      },
       {
         "date": "2026-10-24",
         "commits": 1
@@ -196,7 +201,7 @@
       },
       {
         "date": "2026-11-07",
-        "commits": 1
+        "commits": 4
       },
       {
         "date": "2026-11-08",
@@ -256,71 +261,75 @@
       },
       {
         "date": "2026-11-22",
-        "commits": 0
+        "commits": 42
+      },
+      {
+        "date": "2026-11-23",
+        "commits": 25
       }
     ]
   },
   "contributions": {
-    "total_contributions": 2024,
+    "total_contributions": 2094,
     "max_daily_contributions": 104,
-    "current_streak": 101,
-    "longest_streak": 101,
-    "yearly_contributions": 2024
+    "current_streak": 103,
+    "longest_streak": 103,
+    "yearly_contributions": 2094
   },
   "loc": {
-    "total_lines": 1708434,
-    "additions": 1708434,
-    "deletions": 1339609,
-    "net_lines": 368825
+    "total_lines": 1736705,
+    "additions": 1736705,
+    "deletions": 1343205,
+    "net_lines": 393500
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 56536064,
+    "total_bytes": 56890368,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 39.35,
-      "JavaScript": 34.89,
-      "Python": 11.27,
-      "HTML": 9.69,
-      "C": 4.06,
-      "TypeScript": 0.74
+      "PHP": 39.11,
+      "JavaScript": 34.68,
+      "Python": 11.21,
+      "HTML": 9.63,
+      "C": 4.03,
+      "TypeScript": 1.35
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 22248448,
-        "percentage": 39.35
+        "percentage": 39.11
       },
       {
         "language": "JavaScript",
         "bytes": 19727360,
-        "percentage": 34.89
+        "percentage": 34.68
       },
       {
         "language": "Python",
-        "bytes": 6372352,
-        "percentage": 11.27
+        "bytes": 6375424,
+        "percentage": 11.21
       },
       {
         "language": "HTML",
         "bytes": 5477376,
-        "percentage": 9.69
+        "percentage": 9.63
       },
       {
         "language": "C",
         "bytes": 2293760,
-        "percentage": 4.06
+        "percentage": 4.03
       },
       {
         "language": "TypeScript",
-        "bytes": 416768,
-        "percentage": 0.74
+        "bytes": 768000,
+        "percentage": 1.35
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "EL-STRIX",
-    "recently_created_repository": "Vibe-Check",
+    "most_recently_updated_repository": "IMDB-Clone",
+    "recently_created_repository": "IMDB-Clone",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
     "least_active_repository": null
@@ -395,7 +404,7 @@
     "repository_growth": [
       {
         "year": "2026",
-        "count": 9
+        "count": 10
       }
     ],
     "star_growth": [],
@@ -791,7 +800,7 @@
       },
       {
         "date": "2026-11-01",
-        "commits": 21
+        "commits": 24
       },
       {
         "date": "2026-11-08",
@@ -803,20 +812,20 @@
       },
       {
         "date": "2026-11-22",
-        "commits": 0
+        "commits": 67
       }
     ]
   },
   "recent_activity": {
     "latest_commit": null,
-    "latest_repository": "Vibe-Check",
+    "latest_repository": "IMDB-Clone",
     "latest_release": "v5.0.1",
-    "latest_update": "EL-STRIX"
+    "latest_update": "IMDB-Clone"
   },
   "summary": {
-    "repository_summary": "Creator of 9 repositories.",
+    "repository_summary": "Creator of 10 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on EL-STRIX.",
+    "activity_summary": "Most recently working on IMDB-Clone.",
     "community_summary": "Received 23 stars across all projects."
   }
 }
