@@ -4,8 +4,8 @@
     "total_followers": 14,
     "total_following": 14,
     "profile_creation_date": "2025-03-21T15:07:47Z",
-    "days_since_account_creation": 611,
-    "account_age_years": 1.67
+    "days_since_account_creation": 612,
+    "account_age_years": 1.68
   },
   "repositories": {
     "repository_count": 10,
@@ -14,7 +14,7 @@
     "archived_repository_count": 0,
     "forked_repository_count": 0,
     "original_repository_count": 10,
-    "active_repository_count": 9,
+    "active_repository_count": 8,
     "repository_growth": 10
   },
   "stars": {
@@ -120,11 +120,11 @@
     ]
   },
   "commits": {
-    "total_commits": 1952,
-    "public_commits": 1701,
-    "total_git_commits": 2683,
-    "recent_commits": 258,
-    "commit_frequency": 8.6,
+    "total_commits": 1976,
+    "public_commits": 1725,
+    "total_git_commits": 2707,
+    "recent_commits": 281,
+    "commit_frequency": 9.37,
     "commits_per_repository": {
       "LUMINA": 25,
       "Portfolio-V2.0": 8,
@@ -133,20 +133,16 @@
       "Finzo": 1558,
       "Slotara": 69,
       "Portfolio-V1.0": 20,
-      "EL-STRIX": 463,
+      "EL-STRIX": 464,
       "CampusPlus": 68,
       "SHIPYAED": 30,
       "ShadowFox_Personal_Portfolio": 2,
       "ShadowFox_Aura_Skincare": 5,
-      "Docyra": 123,
+      "Docyra": 146,
       "Vibe-Check": 28,
       "IMDB-Clone": 67
     },
     "commit_timeline": [
-      {
-        "date": "2026-10-24",
-        "commits": 1
-      },
       {
         "date": "2026-10-25",
         "commits": 1
@@ -265,70 +261,74 @@
       },
       {
         "date": "2026-11-23",
-        "commits": 25
+        "commits": 49
+      },
+      {
+        "date": "2026-11-24",
+        "commits": 0
       }
     ]
   },
   "contributions": {
-    "total_contributions": 2094,
+    "total_contributions": 2118,
     "max_daily_contributions": 104,
     "current_streak": 103,
     "longest_streak": 103,
-    "yearly_contributions": 2094
+    "yearly_contributions": 2118
   },
   "loc": {
-    "total_lines": 1736705,
-    "additions": 1736705,
-    "deletions": 1343205,
-    "net_lines": 393500
+    "total_lines": 1746845,
+    "additions": 1746845,
+    "deletions": 1348421,
+    "net_lines": 398424
   },
   "languages": {
     "languages_used": 6,
-    "total_bytes": 56890368,
+    "total_bytes": 57399296,
     "most_used_language": "PHP",
     "percentage_per_language": {
-      "PHP": 39.11,
-      "JavaScript": 34.68,
-      "Python": 11.21,
-      "HTML": 9.63,
-      "C": 4.03,
-      "TypeScript": 1.35
+      "PHP": 38.76,
+      "JavaScript": 34.66,
+      "Python": 11.71,
+      "HTML": 9.54,
+      "C": 4.0,
+      "TypeScript": 1.34
     },
     "language_ranking": [
       {
         "language": "PHP",
         "bytes": 22248448,
-        "percentage": 39.11
+        "percentage": 38.76
       },
       {
         "language": "JavaScript",
-        "bytes": 19727360,
-        "percentage": 34.68
+        "bytes": 19892224,
+        "percentage": 34.66
       },
       {
         "language": "Python",
-        "bytes": 6375424,
-        "percentage": 11.21
+        "bytes": 6719488,
+        "percentage": 11.71
       },
       {
         "language": "HTML",
         "bytes": 5477376,
-        "percentage": 9.63
+        "percentage": 9.54
       },
       {
         "language": "C",
         "bytes": 2293760,
-        "percentage": 4.03
+        "percentage": 4.0
       },
       {
         "language": "TypeScript",
         "bytes": 768000,
-        "percentage": 1.35
+        "percentage": 1.34
       }
     ]
   },
   "activity": {
-    "most_recently_updated_repository": "IMDB-Clone",
+    "most_recently_updated_repository": "Docyra",
     "recently_created_repository": "IMDB-Clone",
     "oldest_repository": "Finzo",
     "most_active_repository": null,
@@ -812,7 +812,7 @@
       },
       {
         "date": "2026-11-22",
-        "commits": 67
+        "commits": 91
       }
     ]
   },
@@ -820,12 +820,12 @@
     "latest_commit": null,
     "latest_repository": "IMDB-Clone",
     "latest_release": "v5.0.1",
-    "latest_update": "IMDB-Clone"
+    "latest_update": "Docyra"
   },
   "summary": {
     "repository_summary": "Creator of 10 repositories.",
     "language_summary": "Primary language is PHP.",
-    "activity_summary": "Most recently working on IMDB-Clone.",
+    "activity_summary": "Most recently working on Docyra.",
     "community_summary": "Received 23 stars across all projects."
   }
 }

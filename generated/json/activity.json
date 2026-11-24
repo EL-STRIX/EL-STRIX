@@ -1,5 +1,110 @@
 [
   {
+    "id": "28092702089",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1440488322,
+      "name": "EL-STRIX/Docyra",
+      "url": "https://api.github.com/repos/EL-STRIX/Docyra"
+    },
+    "payload": {
+      "repository_id": 1440488322,
+      "push_id": 51544484345,
+      "ref": "refs/heads/main",
+      "head": "d46dcf7bf14899de3a93622ed4213eb0eb8be7a1",
+      "before": "d04a8bfaa3cafd78b9ed0a458b177981ea606f52"
+    },
+    "public": true,
+    "created_at": "2026-11-23T17:55:05Z"
+  },
+  {
+    "id": "28078913431",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1440488322,
+      "name": "EL-STRIX/Docyra",
+      "url": "https://api.github.com/repos/EL-STRIX/Docyra"
+    },
+    "payload": {
+      "repository_id": 1440488322,
+      "push_id": 51543450831,
+      "ref": "refs/heads/main",
+      "head": "d04a8bfaa3cafd78b9ed0a458b177981ea606f52",
+      "before": "7eb46fe4e07f34a4e0a6bcab173cd148e9ffbcb5"
+    },
+    "public": true,
+    "created_at": "2026-11-23T17:46:31Z"
+  },
+  {
+    "id": "28045313800",
+    "type": "CreateEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1467983171,
+      "name": "EL-STRIX/IMDB-Clone",
+      "url": "https://api.github.com/repos/EL-STRIX/IMDB-Clone"
+    },
+    "payload": {
+      "ref": "main",
+      "ref_type": "branch",
+      "full_ref": "refs/heads/main",
+      "master_branch": "main",
+      "description": "This is a Front-end based project of IMDB clone.",
+      "pusher_type": "user"
+    },
+    "public": true,
+    "created_at": "2026-11-22T20:58:33Z"
+  },
+  {
+    "id": "28004027248",
+    "type": "PushEvent",
+    "actor": {
+      "id": 204368226,
+      "login": "EL-STRIX",
+      "display_login": "EL-STRIX",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/EL-STRIX",
+      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
+    },
+    "repo": {
+      "id": 1312717179,
+      "name": "EL-STRIX/EL-STRIX",
+      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
+    },
+    "payload": {
+      "repository_id": 1312717179,
+      "push_id": 51455895170,
+      "ref": "refs/heads/main",
+      "head": "5bfe32b2c93af0c65951574be8a243692fe60154",
+      "before": "7bb1627f1684cd8316035a30b1406ca5feb99c53"
+    },
+    "public": true,
+    "created_at": "2026-11-23T04:55:33Z"
+  },
+  {
     "id": "27973465824",
     "type": "PushEvent",
     "actor": {
@@ -1780,31 +1885,5 @@
     },
     "public": true,
     "created_at": "2026-10-25T02:28:51Z"
-  },
-  {
-    "id": "24985125259",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "repository_id": 1312717179,
-      "push_id": 47590243730,
-      "ref": "refs/heads/main",
-      "head": "4f98cdd4c4952210829cee441a55909c2600154d",
-      "before": "e930a10523d719c709c7c1af458e163f40aaa7ae"
-    },
-    "public": true,
-    "created_at": "2026-10-24T02:40:06Z"
   }
 ]
