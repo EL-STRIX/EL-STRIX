@@ -1859,31 +1859,5 @@
     },
     "public": true,
     "created_at": "2026-10-27T03:03:56Z"
-  },
-  {
-    "id": "25186001851",
-    "type": "PushEvent",
-    "actor": {
-      "id": 204368226,
-      "login": "EL-STRIX",
-      "display_login": "EL-STRIX",
-      "gravatar_id": "",
-      "url": "https://api.github.com/users/EL-STRIX",
-      "avatar_url": "https://avatars.githubusercontent.com/u/204368226?"
-    },
-    "repo": {
-      "id": 1312717179,
-      "name": "EL-STRIX/EL-STRIX",
-      "url": "https://api.github.com/repos/EL-STRIX/EL-STRIX"
-    },
-    "payload": {
-      "repository_id": 1312717179,
-      "push_id": 47772434076,
-      "ref": "refs/heads/main",
-      "head": "de6510dc2ce7cb988bbae2a5d928ac95e43f6847",
-      "before": "5946869b6e0303acb047394926c5a0d83da1fc31"
-    },
-    "public": true,
-    "created_at": "2026-10-26T02:28:19Z"
   }
 ]
