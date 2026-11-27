@@ -1161,11 +1161,11 @@
     ]
   },
   "EL-STRIX": {
-    "total_commits": 466,
-    "total_lines": 626268,
-    "additions": 626268,
-    "deletions": 583545,
-    "net_lines": 42723,
+    "total_commits": 467,
+    "total_lines": 626540,
+    "additions": 626540,
+    "deletions": 583831,
+    "net_lines": 42709,
     "weeks": [
       {
         "w": 1785024000,
@@ -1271,9 +1271,9 @@
       },
       {
         "w": 1795305600,
-        "a": 1581,
-        "d": 1212,
-        "c": 4
+        "a": 1853,
+        "d": 1498,
+        "c": 5
       }
     ]
   },
@@ -1542,11 +1542,11 @@
     ]
   },
   "Docyra": {
-    "total_commits": 146,
-    "total_lines": 174346,
-    "additions": 174346,
-    "deletions": 84007,
-    "net_lines": 90339,
+    "total_commits": 150,
+    "total_lines": 174419,
+    "additions": 174419,
+    "deletions": 84073,
+    "net_lines": 90346,
     "weeks": [
       {
         "w": 1789257600,
@@ -1610,9 +1610,9 @@
       },
       {
         "w": 1795305600,
-        "a": 9549,
-        "d": 4893,
-        "c": 23
+        "a": 9622,
+        "d": 4959,
+        "c": 27
       }
     ]
   },
@@ -1667,6 +1667,36 @@
         "a": 19969,
         "d": 3234,
         "c": 64
+      }
+    ]
+  },
+  "Automated-Resume-Parser": {
+    "total_commits": 14,
+    "total_lines": 1608,
+    "additions": 1608,
+    "deletions": 242,
+    "net_lines": 1366,
+    "weeks": [
+      {
+        "w": 1795305600,
+        "a": 1608,
+        "d": 242,
+        "c": 14
+      }
+    ]
+  },
+  "Resume-Job-Matching": {
+    "total_commits": 18,
+    "total_lines": 966,
+    "additions": 966,
+    "deletions": 158,
+    "net_lines": 808,
+    "weeks": [
+      {
+        "w": 1795305600,
+        "a": 966,
+        "d": 158,
+        "c": 18
       }
     ]
   }
